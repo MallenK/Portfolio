@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Sergi Mallén López | Web Developer / Full-Stack</title>
+  <meta name="description" content="Portfolio de Sergi Mallén López, Web Developer / Full-Stack en Colònia Güell (Barcelona). Proyectos, servicios, CV y contacto." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sergi Mallén López — Web Developer / Full-Stack" />
+  <meta property="og:description" content="Proyectos, servicios, CV y contacto. Desarrollo web frontend y backend con foco en rendimiento y calidad." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon (subir archivo y descomentar) -->
+  <!-- <link rel="icon" href="favicon.ico" sizes="any"> -->
+  <!-- <link rel="icon" href="icon.svg" type="image/svg+xml"> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Devicon (icons for skills) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"/>
+
+  <style>
+    :root{
+      --bg:#000;
+      --card:#111;
+      --text:#f1f1f1;
+      --muted:#bdbdbd;
+      --accent:#FFD200;
+      --border:#1c1c1c;
+      --focus:#FFD200;
+      --radius:14px;
+      --shadow:0 1px 0 rgba(255,255,255,0.04) inset, 0 10px 30px rgba(0,0,0,0.35);
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit}
+    .container{max-width:var(--container); margin-inline:auto; padding:0 18px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(0,0,0,0.75);
+      backdrop-filter:saturate(120%) blur(8px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+    }
+    .avatar{
+      width:38px;height:38px; border-radius:50%;
+      display:grid;place-items:center; font-weight:800; font-size:14px;
+      background:
+        radial-gradient(60% 90% at 30% 20%, #333 0 60%, transparent 60%),
+        linear-gradient(135deg, #1a1a1a, #0a0a0a);
+      color:var(--accent); border:1px solid #222;
+      box-shadow:var(--shadow);
+      user-select:none;
+    }
+    .brand .meta{line-height:1}
+    .brand .name{font-weight:800; letter-spacing:.2px}
+    .brand .role{font-size:.85rem; color:var(--muted)}
+    nav ul{display:flex; gap:14px; list-style:none; margin:0; padding:0}
+    nav a{
+      text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:600; font-size:.95rem;
+      border:1px solid transparent;
+    }
+    nav a:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+    nav a:hover{border-color:#222; background:#0b0b0b}
+
+    /* Hero */
+    .hero{padding:72px 0 36px}
+    .hero .title{font-size:clamp(1.9rem,4vw,3.2rem); line-height:1.1; font-weight:800; letter-spacing:.2px}
+    .hero .kicker{color:var(--muted); margin:8px 0 16px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding:12px 16px; border-radius:12px; font-weight:800; letter-spacing:.2px;
+      transition:transform .06s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+      box-shadow:var(--shadow);
+      text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn:focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+    .btn-primary{background:var(--accent); color:#000}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-outline{background:transparent; color:var(--accent); border:1.5px solid var(--accent)}
+    .btn-outline:hover{background:#14120a}
+
+    /* Sections */
+    section{padding:36px 0}
+    section + section{padding-top:18px}
+    .section-head{display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:16px}
+    h2{
+      font-size:clamp(1.2rem,2.6vw,1.6rem);
+      margin:0 0 4px; letter-spacing:.3px
+    }
+    .muted{color:var(--muted); font-size:.95rem}
+
+    /* Cards and grids */
+    .card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:18px; box-shadow:var(--shadow);
+    }
+    .grid{
+      display:grid; gap:16px;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .tag{display:inline-block; font-size:.8rem; color:#000; background:var(--accent); border-radius:999px; padding:4px 10px; font-weight:800}
+
+    /* Skills */
+    .skills-group h3{margin:0 0 10px; font-size:1.05rem}
+    .icons{display:flex; flex-wrap:wrap; gap:14px}
+    .icon{
+      display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border);
+      border-radius:10px; background:#0a0a0a; font-size:.95rem;
+    }
+    .icon i{font-size:22px}
+    .icon span{font-weight:600}
+
+    /* Projects */
+    .project h3{margin:0 0 6px}
+    .project p{margin:0 0 12px; color:var(--muted)}
+    .card-actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Services */
+    .service h3{margin:0 0 8px}
+    .price{font-weight:800; color:var(--accent)}
+
+    /* CV */
+    .timeline{display:grid; gap:12px}
+    .timeline-item{display:grid; gap:4px; padding:14px; border-radius:12px; border:1px solid var(--border); background:#0a0a0a}
+    .edu.grid .card h4{margin:0 0 6px}
+
+    /* Blog */
+    .note{margin-top:8px; color:var(--muted); font-size:.95rem}
+
+    /* Contact */
+    .contact-list{display:flex; flex-wrap:wrap; gap:12px; margin:0 0 16px; padding:0}
+    .contact-list li{list-style:none}
+    form .row{display:grid; gap:10px}
+    input, textarea{
+      width:100%; background:#0a0a0a; color:var(--text); border:1px solid var(--border); border-radius:10px;
+      padding:12px 12px; font:inherit;
+    }
+    input::placeholder, textarea::placeholder{color:#8b8b8b}
+    input:focus, textarea:focus{outline:2px solid var(--focus); outline-offset:2px}
+
+    /* Footer */
+    footer{padding:28px 0; border-top:1px solid var(--border); color:var(--muted); font-size:.95rem}
+
+    /* Skip link */
+    .skip-link{
+      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+    }
+    .skip-link:focus{
+      position:fixed; left:16px; top:16px; width:auto; height:auto; z-index:1000;
+      background:var(--accent); color:#000; padding:10px 12px; border-radius:10px; outline:none; box-shadow:var(--shadow);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header role="banner">
+    <div class="container nav" aria-label="Cabecera del sitio">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <div class="avatar" aria-hidden="true">SM</div>
+        <div class="meta">
+          <div class="name">Sergi Mallén López</div>
+          <div class="role">Web Developer / Full-Stack · Colònia Güell, Barcelona</div>
+        </div>
+      </a>
+      <nav role="navigation" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero container" id="top" aria-labelledby="hero-title">
+      <p class="tag" aria-hidden="true">Identidad</p>
+      <h1 id="hero-title" class="title">Sergi Mallén López — Web Developer / Full-Stack en Colònia Güell, Barcelona</h1>
+      <p class="kicker">Desarrollo frontend y backend con foco en rendimiento, accesibilidad y mantenimiento a largo plazo.</p>
+      <div class="cta" role="group" aria-label="Acciones principales">
+        <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
+        <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
+      </div>
+    </section>
+
+    <!-- Sobre mí -->
+    <section class="container" id="sobre-mi" aria-labelledby="sobre-title">
+      <div class="section-head">
+        <h2 id="sobre-title">Sobre mí</h2>
+      </div>
+      <div class="card" role="article">
+        <p>Desarrollador web con más de dos años de experiencia en la creación de sitios corporativos y aplicaciones web funcionales. Experto en HTML, CSS, JavaScript, PHP y MySQL, con un sólido conocimiento tanto del desarrollo frontend como backend. Me involucro plenamente en cada proyecto, priorizando un código limpio, una estructura lógica y la eficiencia. Actualmente trabajo como desarrollador full-stack desde hace dos años y busco seguir creciendo profesionalmente, asumir nuevos retos técnicos y aportar valor real al equipo y al producto.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="container" id="skills" aria-labelledby="skills-title">
+      <div class="section-head">
+        <h2 id="skills-title">Skills</h2>
+        <p class="muted">Grupos: Frontend, Backend y Otros.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card skills-group" aria-labelledby="frontend-title">
+          <h3 id="frontend-title">Frontend</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+            <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+            <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+            <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
+            <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
+            <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
+          </div>
+        </div>
+
+        <div class="card skills-group" aria-labelledby="backend-title">
+          <h3 id="backend-title">Backend</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
+            <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
+            <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
+            <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
+            <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
+            <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
+            <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
+          </div>
+        </div>
+
+        <div class="card skills-group" aria-labelledby="otros-title">
+          <h3 id="otros-title">Otros</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+            <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
+            <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
+            <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
+            <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="container" id="proyectos" aria-labelledby="proyectos-title">
+      <div class="section-head">
+        <h2 id="proyectos-title">Proyectos</h2>
+        <p class="muted">Grid responsive de tarjetas.</p>
+      </div>
+      <div class="grid" role="list">
+        <article class="card project" role="listitem" aria-labelledby="p1-title">
+          <h3 id="p1-title">Ateneu Unió Restaurant</h3>
+          <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
+          </div>
+        </article>
+
+        <article class="card project" role="listitem" aria-labelledby="p2-title">
+          <h3 id="p2-title">Peluquería Aura — Demo</h3>
+          <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+          </div>
+        </article>
+
+        <article class="card project" role="listitem" aria-labelledby="p3-title">
+          <h3 id="p3-title">Mapamundi — Juego</h3>
+          <p>Mini-juego educativo en web. Interacción simple y reto progresivo.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://mallenk.github.io/Mapamundi/" target="_blank" rel="noopener noreferrer">Jugar</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="container" id="servicios" aria-labelledby="servicios-title">
+      <div class="section-head">
+        <h2 id="servicios-title">Servicios</h2>
+        <p class="muted">Tarjetas limpias con precios.</p>
+      </div>
+      <div class="grid" role="list">
+        <div class="card service" role="listitem">
+          <h3>Creación de páginas web</h3>
+          <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
+          <p class="price">150 €+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Rediseño de webs</h3>
+          <p class="muted">Mejora visual, UX y rendimiento.</p>
+          <p class="price">120 €+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Consultoría web</h3>
+          <p class="muted">Auditoría y plan de mejoras.</p>
+          <p class="price">30 €/h</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Gestión de e-commerce</h3>
+          <p class="muted">Soporte y contenidos mensuales.</p>
+          <p class="price">75 €/mes+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Clases de programación</h3>
+          <p class="muted">Sesiones 1:1 prácticas.</p>
+          <p class="price">20 €/h</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Currículum -->
+    <section class="container" id="cv" aria-labelledby="cv-title">
+      <div class="section-head">
+        <h2 id="cv-title">Currículum</h2>
+        <a class="btn btn-outline" href="CV%20Sergi%20Mall%C3%A9n.pdf" download>Descargar CV</a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Experiencia</h3>
+          <div class="timeline" role="list">
+            <div class="timeline-item" role="listitem">
+              <strong>Desarrollador Full Stack</strong>
+              <span class="muted">Feb 2023 – Actualidad</span>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <strong>Desarrollador Backend — Tenea</strong>
+              <span class="muted">Oct 2023 – Ene 2024</span>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <strong>Prácticas — Desarrollo Web (Vilax)</strong>
+              <span class="muted">Ene – Sep 2023</span>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <strong>Prácticas — Operaciones Digitales</strong>
+              <span class="muted">Ene – Jun 2022</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Formación</h3>
+          <div class="edu grid" role="list">
+            <div class="card" role="listitem">
+              <h4>Curso Superior Full Stack — FGUSAL</h4>
+              <p class="muted">2025</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Programación JS, MySQL y PHP — FGUSAL</h4>
+              <p class="muted">2024</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Certificado PHP — OpenBootcamp</h4>
+              <p class="muted">2023</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Certificado JavaScript — OpenBootcamp</h4>
+              <p class="muted">2022</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>GS Gráfica Interactiva — La Llotja</h4>
+              <p class="muted">2019–2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="container" id="blog" aria-labelledby="blog-title">
+      <div class="section-head">
+        <h2 id="blog-title">Blog</h2>
+        <p class="muted">Sección preparada</p>
+      </div>
+      <div class="grid" role="list">
+        <article class="card" role="listitem" aria-labelledby="b1">
+          <h3 id="b1">Cómo estructuro un proyecto PHP + MySQL</h3>
+          <p class="muted">Leer pronto</p>
+        </article>
+        <article class="card" role="listitem" aria-labelledby="b2">
+          <h3 id="b2">Checklist de rendimiento para webs en producción</h3>
+          <p class="muted">Leer pronto</p>
+        </article>
+        <article class="card" role="listitem" aria-labelledby="b3">
+          <h3 id="b3">API REST: buenas prácticas desde el backend</h3>
+          <p class="muted">Leer pronto</p>
+        </article>
+      </div>
+      <p class="note">Alojado en GitHub Pages. Migrable a Jekyll/Hugo.</p>
+    </section>
+
+    <!-- Contacto -->
+    <section class="container" id="contacto" aria-labelledby="contacto-title">
+      <div class="section-head">
+        <h2 id="contacto-title">Contacto</h2>
+        <p class="muted">Formulario funcional con Formspree</p>
+      </div>
+
+      <ul class="contact-list" aria-label="Datos de contacto">
+        <li><strong>Email:</strong> <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></li>
+        <li><strong>Tel:</strong> <a href="tel:+34670248461">+34 670 24 84 61</a></li>
+      </ul>
+
+      <form class="card" action="https://formspree.io/f/XXXXXXXX" method="POST" aria-labelledby="form-title">
+        <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
+        <div class="row">
+          <label class="sr-only" for="name">Tu nombre</label>
+          <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
+          <label class="sr-only" for="email">Tu email</label>
+          <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email">
+          <label class="sr-only" for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="5" placeholder="Cuéntame brevemente tu proyecto" required aria-required="true"></textarea>
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div>© <span id="year"></span> Sergi Mallén López. Alojado en GitHub Pages.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Accesibilidad: desplazamiento suave si no hay "prefers-reduced-motion"
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(!prefersReduced){
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+          a.addEventListener('click', e=>{
+            const id = a.getAttribute('href').slice(1);
+            if(!id) return;
+            const el = document.getElementById(id);
+            if(el){
+              e.preventDefault();
+              el.scrollIntoView({behavior:'smooth', block:'start'});
+              history.pushState(null, '', '#'+id);
+              el.setAttribute('tabindex','-1');
+              el.focus({preventScroll:true});
+              setTimeout(()=>el.removeAttribute('tabindex'), 500);
+            }
+          }, {passive:true});
+        });
+      }
+      // Año en el footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
