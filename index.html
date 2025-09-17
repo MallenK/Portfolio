@@ -34,13 +34,13 @@
     --radius:14px;
     --container:1100px;
 
-    /* Sombras y transiciones */
-    --shadow: 0 1px 0 rgba(255,255,255,0.04) inset,
-              0 8px 24px rgba(0,0,0,0.45),
-              0 16px 40px rgba(0,0,0,0.35);
-    --shadow-hover: 0 1px 0 rgba(255,255,255,0.04) inset,
-                    0 16px 40px rgba(0,0,0,0.55),
-                    0 28px 60px rgba(0,0,0,0.45);
+    /* Sombras más luminosas */
+    --shadow: 0 1px 0 rgba(255,255,255,0.06) inset,
+              0 6px 18px rgba(255,255,255,0.08),
+              0 10px 24px rgba(255,210,0,0.18);
+    --shadow-hover: 0 1px 0 rgba(255,255,255,0.06) inset,
+                    0 10px 28px rgba(255,255,255,0.12),
+                    0 16px 36px rgba(255,210,0,0.25);
   }
 
   *{box-sizing:border-box}
@@ -69,9 +69,7 @@
     display:flex; align-items:center; justify-content:space-between; gap:12px;
     padding:14px 0;
   }
-  .brand{
-    display:flex; align-items:center; gap:12px; text-decoration:none;
-  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
   .avatar{
     width:38px;height:38px; border-radius:50%;
     display:grid;place-items:center; font-weight:800; font-size:14px;
@@ -114,7 +112,7 @@
     border:1px solid transparent;
     transition: background .2s ease, border-color .2s ease, color .2s ease, transform .1s ease, box-shadow .25s ease;
   }
-  .menu a:hover{ border-color:#222; background:#111; transform:translateY(-1px); }
+  .menu a:hover{ border-color:#222; background:#111; transform:translateY(-1px); box-shadow:var(--shadow-hover);}
   .menu a:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
 
   .menu.is-open{
@@ -125,10 +123,7 @@
 
   @media (min-width:900px){
     .menu-toggle{ display:none; }
-    .menu{
-      position:static; background:transparent; border:none; box-shadow:none;
-      transform:none; opacity:1; visibility:visible;
-    }
+    .menu{ position:static; background:transparent; border:none; box-shadow:none; transform:none; opacity:1; visibility:visible; }
     .menu ul{ flex-direction:row; gap:14px; margin:0; padding:0; }
   }
 
@@ -153,14 +148,9 @@
   h2{ font-size:clamp(1.2rem,2.6vw,1.6rem); margin:0 0 4px; letter-spacing:.3px }
   .muted{ color:var(--muted); font-size:.95rem }
 
-  /* Hero con padding fluido mejorado */
-  .hero{
-    padding: clamp(44px, 6vw, 72px) 0 clamp(24px, 4vw, 36px);
-  }
-  .hero .title{
-    font-size:clamp(1.9rem,4vw,3.2rem);
-    line-height:1.1; font-weight:800; letter-spacing:.2px; margin:6px 0 0;
-  }
+  /* Hero */
+  .hero{ padding:clamp(44px, 6vw, 72px) 0 clamp(24px, 4vw, 36px); }
+  .hero .title{ font-size:clamp(1.9rem,4vw,3.2rem); line-height:1.1; font-weight:800; letter-spacing:.2px; margin:6px 0 0; }
   .hero .kicker{ color:var(--muted); margin:8px 0 16px }
   .hero .cta{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px }
 
@@ -172,10 +162,7 @@
   }
   .card:hover{ box-shadow:var(--shadow-hover); transform:translateY(-2px) }
 
-  .grid{
-    display:grid; gap:16px;
-    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  }
+  .grid{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
   .tag{ display:inline-block; font-size:.8rem; color:#000; background:var(--accent); border-radius:999px; padding:4px 10px; font-weight:800 }
 
   /* Skills */
@@ -214,7 +201,6 @@
   /* Contacto */
   .contact-list{ display:flex; flex-wrap:wrap; gap:12px; margin:0 0 16px; padding:0 }
   .contact-list li{ list-style:none }
-
   form .row{ display:grid; gap:10px }
   input, textarea{
     width:100%; background:#0a0a0a; color:var(--text); border:1px solid var(--border); border-radius:10px;
@@ -223,29 +209,24 @@
   input::placeholder, textarea::placeholder{ color:#8b8b8b }
   input:focus, textarea:focus{ outline:2px solid var(--focus); outline-offset:2px }
 
-  /* Layout específico Contacto responsive (unifica estilos inline previos) */
+  /* Layout Contacto */
   #contacto .contact-wrap{ display:grid; gap:16px }
   #contacto form .row{ grid-template-columns:1fr }
   #contacto form .row .full{ grid-column:1 / -1 }
-  @media (min-width:640px){
-    #contacto form .row{ grid-template-columns:1fr 1fr }
-  }
-  @media (min-width:960px){
-    #contacto .contact-wrap{ grid-template-columns:1.1fr 1fr }
-  }
+  @media (min-width:640px){ #contacto form .row{ grid-template-columns:1fr 1fr } }
+  @media (min-width:960px){ #contacto .contact-wrap{ grid-template-columns:1.1fr 1fr } }
 
   /* Footer */
   footer{ padding:28px 0; border-top:1px solid var(--border); color:var(--muted); font-size:.95rem }
 
   /* Skip link */
-  .skip-link{
-    position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
-  }
+  .skip-link{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
   .skip-link:focus{
     position:fixed; left:16px; top:16px; width:auto; height:auto; z-index:1000;
     background:var(--accent); color:#000; padding:10px 12px; border-radius:10px; outline:none; box-shadow:var(--shadow);
   }
 </style>
+
 
 </head>
 <body>
