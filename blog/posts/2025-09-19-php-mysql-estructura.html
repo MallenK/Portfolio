@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cómo estructuro un proyecto PHP + MySQL — Blog Sergi Mallén</title>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+</head>
+<body>
+<header class="container nav"><a class="brand" href="../..">Sergi Mallén</a></header>
+
+<main class="container">
+  <article class="card">
+    <h1>Cómo estructuro un proyecto PHP + MySQL</h1>
+    <p class="muted">Publicado: 19/09/2025 · Lectura: 5 min</p>
+    <h2>Carpetas</h2>
+    <pre><code>app/
+ ├─ Controllers/
+ ├─ Models/
+ ├─ Views/
+ └─ Config/</code></pre>
+    <h2>Claves</h2>
+    <ul>
+      <li>Separar lógica en controladores.</li>
+      <li>Modelos solo para queries y reglas de datos.</li>
+      <li>Views limpias sin lógica pesada.</li>
+    </ul>
+  </article>
+</main>
+
+<footer class="container">© <span id="year"></span> Sergi Mallén</footer>
+<script defer src="../../assets/js/app.js"></script>
+</body>
+</html>
