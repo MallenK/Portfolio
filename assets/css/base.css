@@ -2,15 +2,21 @@
 
 /* ===== base.css ===== */
 :root{
-  --bg:#000; --card:#111; --text:#f1f1f1; --muted:#bdbdbd;
-  --accent:#FFD200; --border:#1c1c1c; --focus:#FFD200;
-  --radius:14px; --container:1100px;
+  --bg:#1a1a1a;      /* antes #000 → gris oscuro */
+  --card:#222;       /* antes #111 → un tono más claro */
+  --text:#f1f1f1;    /* igual, buen contraste */
+  --muted:#cfcfcf;   /* un poco más claro que #bdbdbd */
+  --accent:#FFD200;  /* se mantiene */
+  --border:#333;     /* antes #1c1c1c → un gris intermedio */
+  --focus:#FFD200;
+  --radius:14px;
+  --container:1100px;
 
-  /* Sombras claras y ligeras */
-  --shadow: 0 1px 4px rgba(255,255,255,0.08),
-            0 4px 10px rgba(255,255,255,0.06);
-  --shadow-hover: 0 2px 6px rgba(255,255,255,0.10),
-                  0 6px 14px rgba(255,255,255,0.08);
+  /* Sombras ajustadas a fondo más claro */
+  --shadow: 0 1px 3px rgba(0,0,0,0.20),
+            0 4px 8px rgba(0,0,0,0.15);
+  --shadow-hover: 0 2px 6px rgba(0,0,0,0.25),
+                  0 6px 12px rgba(0,0,0,0.20);
 
   /* Espaciado vertical */
   --section-y: clamp(48px, 8vw, 96px);
@@ -19,6 +25,7 @@
   --grid-gap: clamp(16px, 3vw, 32px);
   --card-pad: clamp(18px, 2.6vw, 28px);
 }
+
 
 *{box-sizing:border-box}
 html,body{height:100%}
