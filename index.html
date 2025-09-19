@@ -38,6 +38,7 @@
         </div>
       </a>
 
+
       <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
         <span class="sr-only">Abrir menú</span> ☰
       </button>
@@ -58,15 +59,24 @@
 
   <main id="main">
     <!-- Hero -->
-    <section class="hero container" id="top" aria-labelledby="hero-title">
+    <section class="hero container pb-5" id="top" aria-labelledby="hero-title">
       <p class="tag" aria-hidden="true">Identidad</p>
-      <h1 id="hero-title" class="title">Sergi Mallén López — Web Developer / Full-Stack en Colònia Güell, Barcelona</h1>
-      <p class="kicker">Desarrollo frontend y backend con foco en rendimiento, accesibilidad y mantenimiento a largo plazo.</p>
+      <h1 id="hero-title" class="title">Desarrollo de webs rápidas, accesibles y mantenibles</h1>
+      <p class="kicker">
+        Full-Stack con foco en rendimiento, accesibilidad y mantenimiento. Construyo sitios y APIs que escalan y se entienden.
+      </p>
       <div class="cta" role="group" aria-label="Acciones principales">
         <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
         <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
       </div>
+    
+      <!-- Imagen hero (stock) -->
+      <figure class="mt-5" style="margin:0">
+        <img src="assets/img/stock/desk-dev.jpg" alt="Puesto de trabajo de desarrollo web con portátil y código en pantalla" style="width:100%;border-radius:12px">
+        <figcaption class="sr-only">Imagen ilustrativa de entorno de trabajo de desarrollo</figcaption>
+      </figure>
     </section>
+
 
     <!-- Sobre mí -->
     <section class="container" id="sobre-mi" aria-labelledby="sobre-title">
@@ -74,12 +84,13 @@
         <h2 id="sobre-title">Sobre mí</h2>
       </div>
       <div class="card" role="article">
+        
         <p>Desarrollador web con más de dos años de experiencia en la creación de sitios corporativos y aplicaciones web funcionales. Experto en HTML, CSS, JavaScript, PHP y MySQL, con un sólido conocimiento tanto del desarrollo frontend como backend. Me involucro plenamente en cada proyecto, priorizando un código limpio, una estructura lógica y la eficiencia. Actualmente trabajo como desarrollador full-stack desde hace dos años y busco seguir creciendo profesionalmente, asumir nuevos retos técnicos y aportar valor real al equipo y al producto.</p>
       </div>
     </section>
 
     <!-- Skills -->
-    <section class="container" id="skills" aria-labelledby="skills-title">
+    <section class="container my-5" id="skills" aria-labelledby="skills-title">
       <div class="section-head">
         <h2 id="skills-title">Skills</h2>
       </div>
@@ -124,39 +135,49 @@
     </section>
 
     <!-- Proyectos -->
-    <section class="container" id="proyectos" aria-labelledby="proyectos-title">
+    <section class="container my-5" id="proyectos" aria-labelledby="proyectos-title">
       <div class="section-head">
         <h2 id="proyectos-title">Proyectos</h2>
       </div>
       <div class="grid" role="list">
         <article class="card project" role="listitem" aria-labelledby="p1-title">
+          <figure style="margin:0 0 12px">
+            <img src="assets/img/proyectos/ateneu-unio-cover.jpg" alt="Portada del sitio Ateneu Unió Restaurant" style="width:100%;border-radius:10px">
+          </figure>
           <h3 id="p1-title">Ateneu Unió Restaurant</h3>
           <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
           <div class="card-actions">
             <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
           </div>
         </article>
-
+        
         <article class="card project" role="listitem" aria-labelledby="p2-title">
+          <figure style="margin:0 0 12px">
+            <img src="assets/img/proyectos/peluqueria-aura-cover.jpg" alt="Portada demo Peluquería Aura" style="width:100%;border-radius:10px">
+          </figure>
           <h3 id="p2-title">Peluquería Aura — Demo</h3>
           <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
           <div class="card-actions">
             <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
           </div>
         </article>
-
+        
         <article class="card project" role="listitem" aria-labelledby="p3-title">
+          <figure style="margin:0 0 12px">
+            <img src="assets/img/proyectos/mapamundi-cover.jpg" alt="Portada del mini-juego Mapamundi" style="width:100%;border-radius:10px">
+          </figure>
           <h3 id="p3-title">Mapamundi — Juego</h3>
           <p>Mini-juego educativo en web. Interacción simple y reto progresivo.</p>
           <div class="card-actions">
             <a class="btn btn-primary" href="https://mallenk.github.io/Mapamundi/" target="_blank" rel="noopener noreferrer">Jugar</a>
           </div>
         </article>
+
       </div>
     </section>
 
     <!-- Servicios -->
-    <section class="container" id="servicios" aria-labelledby="servicios-title">
+    <section class="container my-5" id="servicios" aria-labelledby="servicios-title">
       <div class="section-head">
         <h2 id="servicios-title">Servicios</h2>
       </div>
@@ -190,7 +211,7 @@
     </section>
 
     <!-- Currículum -->
-    <section class="container" id="cv" aria-labelledby="cv-title">
+    <section class="container my-5" id="cv" aria-labelledby="cv-title">
       <div class="section-head">
         <h2 id="cv-title">Currículum</h2>
         <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>Descargar CV</a>
@@ -248,7 +269,7 @@
     </section>
 
     <!-- Blog -->
-    <section class="container" id="blog" aria-labelledby="blog-title">
+    <section class="container my-5" id="blog" aria-labelledby="blog-title">
       <div class="section-head">
         <h2 id="blog-title">Blog</h2>
         <a class="btn btn-outline" href="blog/">Ver todos</a>
@@ -285,7 +306,7 @@
 
 
     <!-- Contacto -->
-    <section class="container" id="contacto" aria-labelledby="contacto-title">
+    <section class="container my-5" id="contacto" aria-labelledby="contacto-title">
       <div class="section-head">
         <h2 id="contacto-title">Contacto</h2>
       </div>
