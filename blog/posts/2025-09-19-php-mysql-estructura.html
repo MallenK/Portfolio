@@ -1,34 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Cómo estructuro un proyecto PHP + MySQL — Blog Sergi Mallén</title>
-  <link rel="stylesheet" href="../../assets/css/base.css">
+  <meta name="description" content="Guía paso a paso para definir carpetas, capas y convenciones en proyectos PHP + MySQL listos para crecer." />
+  <!-- SEO: canonical para la entrada -->
+  <link rel="canonical" href="https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-php-mysql-estructura.html" />
+  <meta property="og:title" content="Cómo estructuro un proyecto PHP + MySQL" />
+  <meta property="og:description" content="Arquitectura MVC, organización de carpetas, estándares de código y despliegues para proyectos PHP + MySQL." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-php-mysql-estructura.html" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?q=80&w=1600&auto=format&fit=crop" />
+  <meta property="article:published_time" content="2025-09-19" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Cómo estructuro un proyecto PHP + MySQL" />
+  <meta name="twitter:description" content="Patrones de arquitectura, convenciones y checklist de despliegue para tus proyectos PHP." />
+
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+
+  <!-- SEO: datos estructurados del artículo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Cómo estructuro un proyecto PHP + MySQL",
+    "datePublished": "2025-09-19",
+    "dateModified": "2025-09-19",
+    "author": {
+      "@type": "Person",
+      "name": "Sergi Mallén López"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Sergi Mallén López"
+    },
+    "image": "https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?q=80&w=1600&auto=format&fit=crop",
+    "description": "Guía para organizar carpetas, capas y convenciones en proyectos PHP + MySQL.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-php-mysql-estructura.html"
+    }
+  }
+  </script>
 </head>
-<body>
-<header class="container nav"><a class="brand" href="../..">Sergi Mallén</a></header>
+<body data-base="../../">
+  <a class="skip-link" href="#articulo">Saltar al contenido</a>
 
-<main class="container">
-  <article class="card">
-    <h1>Cómo estructuro un proyecto PHP + MySQL</h1>
-    <p class="muted">Publicado: 19/09/2025 · Lectura: 5 min</p>
-    <h2>Carpetas</h2>
-    <pre><code>app/
- ├─ Controllers/
- ├─ Models/
- ├─ Views/
- └─ Config/</code></pre>
-    <h2>Claves</h2>
-    <ul>
-      <li>Separar lógica en controladores.</li>
-      <li>Modelos solo para queries y reglas de datos.</li>
-      <li>Views limpias sin lógica pesada.</li>
-    </ul>
-  </article>
-</main>
+  <header role="banner">
+    <div class="container nav" aria-label="Cabecera de la entrada">
+      <a class="brand" href="../../" aria-label="Volver al inicio">
+        <div class="avatar" aria-hidden="true">SM</div>
+        <div class="meta">
+          <div class="name">Sergi Mallén López</div>
+          <div class="role">Blog técnico &amp; Portfolio</div>
+        </div>
+      </a>
+      <nav class="blog-nav" aria-label="Navegación del blog">
+        <ul>
+          <li><a href="../">Blog</a></li>
+          <li><a href="../../#servicios">Servicios</a></li>
+          <li><a href="../../#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<footer class="container">© <span id="year"></span> Sergi Mallén</footer>
-<script defer src="../../assets/js/app.js"></script>
+  <main id="articulo" class="container" role="main">
+    <nav aria-label="Migas de pan" class="section-head">
+      <div>
+        <ol class="breadcrumbs">
+          <li><a href="../../">Inicio</a></li>
+          <li><a href="../">Blog</a></li>
+          <li>Cómo estructuro un proyecto PHP + MySQL</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="card neo-depth" itemscope itemtype="https://schema.org/Article">
+      <header>
+        <h1 itemprop="headline">Cómo estructuro un proyecto PHP + MySQL</h1>
+        <p class="blog-meta">
+          <time datetime="2025-09-19" itemprop="datePublished">19 septiembre 2025</time>
+          · <span itemprop="timeRequired">Lectura: 5 min</span>
+        </p>
+        <p class="muted">Esta guía resume cómo organizo un stack PHP + MySQL en capas claras para facilitar el mantenimiento, las pruebas y los despliegues continuos.</p>
+      </header>
+
+      <section>
+        <h2>Estructura base del proyecto</h2>
+        <p>Parto de una organización MVC ampliada con carpetas para pruebas y tooling. Cada paquete tiene una responsabilidad única y una convención de nombres clara.</p>
+<pre><code>app/
+├─ Console/         # comandos CLI y cronjobs
+├─ Controllers/    # coordinación de casos de uso
+├─ Domain/         # entidades + lógica de negocio
+├─ Infrastructure/ # servicios externos, gateways
+├─ Http/           # middlewares y requests
+├─ Providers/      # contenedores de dependencias
+└─ Resources/
+   ├─ views/
+   └─ lang/
+config/
+public/
+resources/
+routes/
+tests/
+</code></pre>
+        <p>Separar <code>Domain</code> de <code>Infrastructure</code> permite probar reglas sin tocar la base de datos y sustituir adaptadores sin romper el corazón del sistema.</p>
+      </section>
+
+      <section>
+        <h2>Convenciones imprescindibles</h2>
+        <ul>
+          <li><strong>Controladores finos:</strong> delegan en servicios de aplicación y devuelven respuestas delgadas.</li>
+          <li><strong>Repositorios específicos:</strong> cada agregado tiene su repositorio con interfaces documentadas.</li>
+          <li><strong>Servicios de dominio:</strong> encapsulan reglas que viven más allá de una entidad.</li>
+          <li><strong>DTOs y Requests:</strong> tipan la entrada y la salida, evitando arrays sueltos.</li>
+          <li><strong>Rutas versionadas:</strong> <code>/api/v1/...</code> para convivir con releases anteriores.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Checklist de calidad antes de desplegar</h2>
+        <ol>
+          <li>Ejecutar <code>phpstan</code> / <code>psalm</code> a nivel máximo posible.</li>
+          <li>Validar migrations en una base temporal y ejecutar <code>phpunit</code> con coverage.</li>
+          <li>Revisar logs de <code>monolog</code> y activar alertas en canales críticos.</li>
+          <li>Generar assets minificados y versiones para busting (<code>mix --production</code> o <code>vite build</code>).</li>
+          <li>Actualizar documentación en README y en Postman/Swagger.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Buenas prácticas para MySQL</h2>
+        <p>Además de normalizar tablas, defino índices compuestos únicamente cuando mejoran lecturas clave. Uso migraciones idempotentes y seeds específicos por entorno.</p>
+        <ul>
+          <li>Columnas auditables con <code>created_at</code> y <code>updated_at</code> automáticas.</li>
+          <li>Constraints explícitos para claves foráneas y enumeraciones críticas.</li>
+          <li>Procedimientos almacenados solo cuando mejoran el rendimiento sin ocultar lógica.</li>
+          <li>Backups diarios automatizados + restauraciones de smoke test en staging.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Checklist rápida de archivos clave</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Archivo</th>
+              <th>Responsabilidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>app/Console/Kernel.php</code></td>
+              <td>Planifica tareas programadas y comandos personalizados.</td>
+            </tr>
+            <tr>
+              <td><code>app/Domain/</code></td>
+              <td>Modelos ricos con reglas de negocio y eventos de dominio.</td>
+            </tr>
+            <tr>
+              <td><code>routes/api.php</code></td>
+              <td>Registra endpoints versionados y middlewares de autenticación.</td>
+            </tr>
+            <tr>
+              <td><code>tests/Feature/</code></td>
+              <td>Escenarios end-to-end para validar flujos críticos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="note">
+        Última revisión: 19/09/2025. ¿Tienes dudas o quieres que audite tu proyecto? Escríbeme vía <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a>.
+      </footer>
+    </article>
+
+    <aside aria-labelledby="relacionados" class="card neo-depth" style="margin-top:40px;">
+      <h2 id="relacionados">También puede interesarte</h2>
+      <ul data-dynamic="related-posts" data-current-slug="blog/posts/2025-09-19-php-mysql-estructura.html"></ul>
+    </aside>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">© <span id="year"></span> Sergi Mallén López</div>
+  </footer>
+
+  <script defer src="../../assets/js/app.js" data-root="../.."></script>
 </body>
 </html>

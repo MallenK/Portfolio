@@ -1,29 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Checklist de rendimiento — Blog Sergi Mallén</title>
-  <link rel="stylesheet" href="../../assets/css/base.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Checklist de rendimiento para webs en producción — Blog Sergi Mallén</title>
+  <meta name="description" content="Lista accionable para auditar rendimiento web en producción: Core Web Vitals, optimización de recursos y monitorización." />
+  <!-- SEO: canonical para la entrada -->
+  <link rel="canonical" href="https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-checklist-rendimiento.html" />
+  <meta property="og:title" content="Checklist de rendimiento para webs en producción" />
+  <meta property="og:description" content="Pasos clave para acelerar tu sitio: imágenes optimizadas, lazy loading, presupuestos de rendimiento y monitorización continua." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-checklist-rendimiento.html" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop" />
+  <meta property="article:published_time" content="2025-09-19" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Checklist de rendimiento para webs en producción" />
+  <meta name="twitter:description" content="Checklist práctica para auditar el rendimiento real de tu sitio antes de lanzar." />
+
+  <link rel="stylesheet" href="../../assets/css/base.css" />
+
+  <!-- SEO: datos estructurados del artículo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Checklist de rendimiento para webs en producción",
+    "datePublished": "2025-09-19",
+    "dateModified": "2025-09-19",
+    "author": {
+      "@type": "Person",
+      "name": "Sergi Mallén López"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Sergi Mallén López"
+    },
+    "image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1600&auto=format&fit=crop",
+    "description": "Checklist para auditar rendimiento web en producción.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://mallenk.github.io/Portfolio/blog/posts/2025-09-19-checklist-rendimiento.html"
+    }
+  }
+  </script>
 </head>
-<body>
-<header class="container nav"><a class="brand" href="../..">Sergi Mallén</a></header>
+<body data-base="../../">
+  <a class="skip-link" href="#articulo">Saltar al contenido</a>
 
-<main class="container">
-  <article class="card">
-    <h1>Checklist de rendimiento para webs en producción</h1>
-    <p class="muted">Publicado: 19/09/2025 · Lectura: 3 min</p>
-    <ul>
-      <li>Optimizar imágenes (WebP, tamaños correctos).</li>
-      <li>Minificar CSS/JS.</li>
-      <li>Lazy-loading en imágenes y vídeos.</li>
-      <li>Comprobar Core Web Vitals.</li>
-      <li>Cache headers correctos.</li>
-    </ul>
-  </article>
-</main>
+  <header role="banner">
+    <div class="container nav" aria-label="Cabecera de la entrada">
+      <a class="brand" href="../../" aria-label="Volver al inicio">
+        <div class="avatar" aria-hidden="true">SM</div>
+        <div class="meta">
+          <div class="name">Sergi Mallén López</div>
+          <div class="role">Blog técnico &amp; Portfolio</div>
+        </div>
+      </a>
+      <nav class="blog-nav" aria-label="Navegación del blog">
+        <ul>
+          <li><a href="../">Blog</a></li>
+          <li><a href="../../#proyectos">Proyectos</a></li>
+          <li><a href="../../#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<footer class="container">© <span id="year"></span> Sergi Mallén</footer>
-<script defer src="../../assets/js/app.js"></script>
+  <main id="articulo" class="container" role="main">
+    <nav aria-label="Migas de pan" class="section-head">
+      <div>
+        <ol class="breadcrumbs">
+          <li><a href="../../">Inicio</a></li>
+          <li><a href="../">Blog</a></li>
+          <li>Checklist de rendimiento para webs en producción</li>
+        </ol>
+      </div>
+    </nav>
+
+    <article class="card neo-depth" itemscope itemtype="https://schema.org/Article">
+      <header>
+        <h1 itemprop="headline">Checklist de rendimiento para webs en producción</h1>
+        <p class="blog-meta">
+          <time datetime="2025-09-19" itemprop="datePublished">19 septiembre 2025</time>
+          · <span itemprop="timeRequired">Lectura: 3 min</span>
+        </p>
+        <p class="muted">Este checklist resume los pasos que sigo antes de lanzar o optimizar un sitio en producción. Enfócate en métricas reales, automatiza auditorías y documenta cada ajuste.</p>
+      </header>
+
+      <section>
+        <h2>1. Audita Core Web Vitals en contexto real</h2>
+        <ul>
+          <li>Analiza datos de <strong>CrUX</strong> o de <strong>PageSpeed Insights</strong> filtrando por país y dispositivo.</li>
+          <li>Configura <em>performance budgets</em> para <code>LCP</code>, <code>FID</code> y <code>CLS</code>.</li>
+          <li>Usa <strong>Lighthouse CI</strong> en cada PR y compara tendencias con <strong>WebPageTest</strong>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. Optimiza recursos críticos</h2>
+        <p>El objetivo es entregar lo mínimo imprescindible para pintar el <abbr title="Largest Contentful Paint">LCP</abbr>. El resto debe cargarse diferido.</p>
+        <ul>
+          <li>Prioriza CSS crítico inline y retrasa librerías pesadas (<code>media="print" onload="this.media='all'"</code>).</li>
+          <li>Convierte imágenes a <strong>WebP/AVIF</strong> con múltiples tamaños y <code>srcset</code>.</li>
+          <li>Habilita <code>loading="lazy"</code> en iframes e imágenes no críticas.</li>
+          <li>Activa HTTP/2 push o <code>preload</code> selectivo para fuentes y scripts esenciales.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. Minimiza JavaScript y controla el main thread</h2>
+        <ol>
+          <li>Divide bundles con <code>code-splitting</code> y carga condicional según rutas.</li>
+          <li>Reduce dependencias: revisa paquetes con <code>npm ls</code> y elimina polyfills innecesarios.</li>
+          <li>Monitoriza el <em>thread</em> principal con <strong>Performance API</strong> y registra trazas en Analytics.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>4. Cache y backend alineados</h2>
+        <ul>
+          <li>Define headers <code>Cache-Control</code> y <code>ETag</code> consistentes para estáticos y HTML.</li>
+          <li>Implementa CDN con <strong>stale-while-revalidate</strong> y <strong>edge functions</strong> para personalización ligera.</li>
+          <li>Revisa consultas lentas en MySQL/PostgreSQL con <code>EXPLAIN</code> y añade índices concretos.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Monitorización continua</h2>
+        <p>El rendimiento se degrada con el tiempo. Programa revisiones mensuales con datos reales.</p>
+        <ul>
+          <li>Instala <strong>Real User Monitoring</strong> (New Relic, Datadog, Sentry) y define alertas.</li>
+          <li>Documenta ajustes en un changelog de rendimiento.</li>
+          <li>Incluye KPIs de velocidad en los OKR del producto.</li>
+        </ul>
+      </section>
+
+      <footer class="note">
+        Pon en marcha esta checklist con tu equipo y medirás mejoras reales en tus conversiones. Escríbeme si necesitas una auditoría personalizada.
+      </footer>
+    </article>
+
+    <aside aria-labelledby="relacionados" class="card neo-depth" style="margin-top:40px;">
+      <h2 id="relacionados">También puede interesarte</h2>
+      <ul data-dynamic="related-posts" data-current-slug="blog/posts/2025-09-19-checklist-rendimiento.html"></ul>
+    </aside>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">© <span id="year"></span> Sergi Mallén López</div>
+  </footer>
+
+  <script defer src="../../assets/js/app.js" data-root="../.."></script>
 </body>
 </html>

@@ -1,63 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Blog — Sergi Mallén López</title>
-  <meta name="description" content="Artículos técnicos sobre desarrollo web: PHP, MySQL, APIs REST, rendimiento y buenas prácticas.">
-  <link rel="stylesheet" href="../assets/css/base.css">
-  <script defer src="../assets/js/app.js"></script>
-  <a class="brand" href="../">Sergi Mallén López</a> <!-- regreso a la home -->
-</head>
-<body>
-  <!-- en blog/index.html -->
-  <nav>
-    <a href="../#sobre-mi">Sobre mí</a>
-    <a href="../#skills">Skills</a>
-    <a href="../#proyectos">Proyectos</a>
-    <a href="../#servicios">Servicios</a>
-    <a href="../#cv">CV</a>
-    <a href="../#contacto">Contacto</a>
-  </nav>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Blog técnico — Sergi Mallén López</title>
+  <meta name="description" content="Artículos sobre desarrollo web, APIs REST, rendimiento y arquitectura full-stack redactados por Sergi Mallén López." />
+  <!-- SEO: canonical para evitar duplicados en listados -->
+  <link rel="canonical" href="https://mallenk.github.io/Portfolio/blog/" />
+  <!-- SEO: metadatos sociales para el blog -->
+  <meta property="og:title" content="Blog técnico de Sergi Mallén López" />
+  <meta property="og:description" content="Consejos y guías prácticas de PHP, MySQL, APIs REST y optimización web." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mallenk.github.io/Portfolio/blog/" />
+  <meta property="og:image" content="../assets/img/og/portfolio-og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog técnico — Sergi Mallén López" />
+  <meta name="twitter:description" content="Checklist de rendimiento, buenas prácticas API y arquitectura PHP + MySQL." />
 
-  
-  <header class="container nav">
-    <a class="brand" href="../">
-      <div class="avatar" aria-hidden="true">SM</div>
-      <div class="meta">
-        <div class="name">Sergi Mallén López</div>
-        <div class="role">Web Developer / Full-Stack</div>
-      </div>
-    </a>
+  <link rel="stylesheet" href="../assets/css/base.css" />
+
+  <!-- SEO: datos estructurados de BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://mallenk.github.io/Portfolio/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://mallenk.github.io/Portfolio/blog/"
+      }
+    ]
+  }
+  </script>
+</head>
+<body data-base="../">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header role="banner">
+    <div class="container nav" aria-label="Cabecera del blog">
+      <a class="brand" href="../" aria-label="Volver al inicio">
+        <div class="avatar" aria-hidden="true">SM</div>
+        <div class="meta">
+          <div class="name">Sergi Mallén López</div>
+          <div class="role">Blog técnico &amp; Portfolio</div>
+        </div>
+      </a>
+      <nav class="blog-nav" aria-label="Enlaces principales">
+        <ul>
+          <li><a href="../#proyectos">Proyectos</a></li>
+          <li><a href="../#servicios">Servicios</a></li>
+          <li><a href="../#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <section class="section-head">
-      <h2>Blog</h2>
+  <main id="contenido" class="container" role="main">
+    <header class="section-head" aria-labelledby="blog-heading">
+      <div>
+        <h1 id="blog-heading">Blog técnico</h1>
+        <p>Lecturas prácticas sobre código limpio, APIs, rendimiento y SEO técnico.</p>
+      </div>
+      <nav aria-label="Migas de pan">
+        <ol class="breadcrumbs">
+          <li><a href="../">Inicio</a></li>
+          <li>Blog</li>
+        </ol>
+      </nav>
+    </header>
+
+    <section aria-labelledby="articulos">
+      <h2 id="articulos" class="sr-only">Listado de artículos</h2>
+      <div class="grid" role="list" data-dynamic="blog-index"></div>
+      <noscript>
+        <!-- SEO: fallback de listado sin JavaScript -->
+        <p>Activa JavaScript para ver los artículos disponibles.</p>
+      </noscript>
     </section>
-
-    <div class="grid" role="list">
-      <article class="card" role="listitem">
-        <h3><a href="posts/2025-09-19-php-mysql-estructura.html">Cómo estructuro un proyecto PHP + MySQL</a></h3>
-        <p class="muted">Mi forma de organizar carpetas, controladores y modelos.</p>
-      </article>
-
-      <article class="card" role="listitem">
-        <h3><a href="posts/2025-09-19-checklist-rendimiento.html">Checklist de rendimiento para webs en producción</a></h3>
-        <p class="muted">Puntos rápidos para comprobar velocidad y optimización.</p>
-      </article>
-
-      <article class="card" role="listitem">
-        <h3><a href="posts/2025-09-19-api-rest-buenas-practicas.html">API REST: buenas prácticas desde el backend</a></h3>
-        <p class="muted">Versionado, códigos HTTP y consistencia en endpoints.</p>
-      </article>
-    </div>
   </main>
 
-  <footer class="container">
-    © <span id="year"></span> Sergi Mallén López
+  <footer role="contentinfo">
+    <div class="container">© <span id="year"></span> Sergi Mallén López</div>
   </footer>
 
-  <script defer src="../assets/js/app.js"></script>
+  <script defer src="../assets/js/app.js" data-root=".."></script>
 </body>
 </html>
