@@ -103,10 +103,24 @@ h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .muted{color:var(--muted);font-size:1rem}
 
 /* Hero */
-.hero{padding: clamp(56px, 9vw, 110px) 0 clamp(36px, 6vw, 64px)}
+.hero{position:relative;overflow:hidden;padding: clamp(56px, 9vw, 110px) 0 clamp(36px, 6vw, 64px)}
+.hero-body{position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(12px,2vw,18px)}
 .hero .title{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.1;font-weight:800;letter-spacing:.2px;margin:10px 0 0}
 .hero .kicker{color:var(--muted);margin:12px 0 20px}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+.hero-parallax{position:absolute;inset:-35% -25% -10%;pointer-events:none;z-index:0;transform:translateZ(0);opacity:0;transition:opacity .8s ease}
+.hero-layer{position:absolute;border-radius:50%;filter:blur(0);opacity:.35;transform:translateZ(0);box-shadow:0 0 120px rgba(255,210,0,0.16)}
+.hero-layer.layer-1{width:320px;height:320px;top:6%;left:-120px;background:radial-gradient(circle at 30% 30%, rgba(255,210,0,0.8), rgba(255,210,0,0))}
+.hero-layer.layer-2{width:380px;height:380px;bottom:-140px;right:-120px;background:radial-gradient(circle at 70% 70%, rgba(255,255,255,0.18), rgba(255,210,0,0))}
+.hero-layer.layer-3{width:260px;height:260px;top:-120px;right:25%;background:radial-gradient(circle at 40% 40%, rgba(255,210,0,0.65), rgba(255,210,0,0))}
+.hero[data-animate].is-visible .hero-parallax{opacity:1}
+
+/* Animaciones por scroll */
+.js [data-animate]{opacity:0;transform:translateY(32px) scale(.98);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
+.js [data-animate].is-visible{opacity:1;transform:none}
+.js [data-animate-group]{position:relative}
+.js [data-animate-group] > *{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;transition-delay:var(--delay,0ms);will-change:opacity,transform}
+.js [data-animate-group] > *.is-visible{opacity:1;transform:none}
 
 /* Tarjetas y grillas */
 .card{
@@ -168,6 +182,12 @@ input:focus,textarea:focus{outline:2px solid var(--focus);outline-offset:2px}
 #contacto form .row .full{grid-column:1 / -1}
 @media (min-width:640px){#contacto form .row{grid-template-columns:1fr 1fr}}
 @media (min-width:960px){#contacto .contact-wrap{grid-template-columns:1.1fr 1fr}}
+
+@media (prefers-reduced-motion: reduce){
+  .js [data-animate],
+  .js [data-animate-group] > *{opacity:1 !important;transform:none !important;transition:none !important}
+  .hero-parallax{display:none}
+}
 
 /* Footer */
 footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font-size:1rem}

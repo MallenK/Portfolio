@@ -1,6 +1,10 @@
 // assets/js/app.js
 
 (function(){
+  document.documentElement.classList.add('js');
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const prefersReduced = motionQuery.matches;
+
   // Menú móvil
   const menuBtn = document.getElementById('menuBtn');
   const navMenu = document.getElementById('navMenu');
@@ -23,7 +27,6 @@
   }
 
   // Scroll suave accesible
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!prefersReduced){
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', e=>{
@@ -40,6 +43,46 @@
         }
       }, {passive:true});
     });
+  }
+
+  // Animaciones y parallax
+  if(!prefersReduced){
+    const heroScene = document.getElementById('heroParallax');
+    if(heroScene && typeof Parallax !== 'undefined'){
+      new Parallax(heroScene);
+    }
+  }
+
+  const animatedElements = document.querySelectorAll('[data-animate], [data-animate-group]');
+  if(animatedElements.length){
+    if(prefersReduced){
+      animatedElements.forEach(el=>{
+        if(el.hasAttribute('data-animate')) el.classList.add('is-visible');
+        if(el.hasAttribute('data-animate-group')){
+          el.classList.add('is-visible');
+          Array.from(el.children).forEach(child=>child.classList.add('is-visible'));
+        }
+      });
+    } else {
+      const observer = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(entry=>{
+          if(!entry.isIntersecting) return;
+          const el = entry.target;
+          if(el.hasAttribute('data-animate')) el.classList.add('is-visible');
+          if(el.hasAttribute('data-animate-group')){
+            el.classList.add('is-visible');
+            const children = Array.from(el.children);
+            children.forEach((child, index)=>{
+              child.style.setProperty('--delay', `${index * 70}ms`);
+              requestAnimationFrame(()=>child.classList.add('is-visible'));
+            });
+          }
+          obs.unobserve(el);
+        });
+      }, {threshold:0.18, rootMargin:'0px 0px -10% 0px'});
+
+      animatedElements.forEach(el=>observer.observe(el));
+    }
   }
 
   // Año footer
