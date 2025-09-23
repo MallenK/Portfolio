@@ -1,0 +1,141 @@
+{
+  "hero": {
+    "title": "Desarrollo de webs rápidas, accesibles y mantenibles",
+    "kicker": "Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.",
+    "ctaPrimary": {
+      "label": "Ver proyectos",
+      "href": "#proyectos"
+    },
+    "ctaSecondary": {
+      "label": "Pedir presupuesto",
+      "href": "#contacto"
+    }
+  },
+  "projects": [
+    {
+      "title": "Ateneu Unió Restaurant",
+      "summary": "Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.",
+      "url": "https://ateneuuniorestaurant.com",
+      "cta": "Visitar",
+      "image": "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop",
+      "imageAlt": "Interior de restaurante moderno"
+    },
+    {
+      "title": "Peluquería Aura — Demo",
+      "summary": "Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.",
+      "url": "https://mallenk.github.io/PeluqueriaAura/",
+      "cta": "Ver demo",
+      "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop",
+      "imageAlt": "Salón de peluquería con estilo"
+    },
+    {
+      "title": "Mapamundi — Juego",
+      "summary": "Mini-juego educativo en web. Interacción simple y reto progresivo.",
+      "url": "https://mallenk.github.io/Mapamundi/",
+      "cta": "Jugar",
+      "image": "https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=1600&auto=format&fit=crop",
+      "imageAlt": "Mapa del mundo sobre mesa"
+    }
+  ],
+  "services": [
+    {
+      "title": "Creación de páginas web",
+      "tagline": "Webs rápidas, seguras y fáciles de gestionar.",
+      "price": "150 €+"
+    },
+    {
+      "title": "Rediseño de webs",
+      "tagline": "Mejora visual, UX y rendimiento.",
+      "price": "120 €+"
+    },
+    {
+      "title": "Consultoría web",
+      "tagline": "Auditoría y plan de mejoras.",
+      "price": "30 €/h"
+    },
+    {
+      "title": "Gestión de e-commerce",
+      "tagline": "Soporte y contenidos mensuales.",
+      "price": "75 €/mes+"
+    },
+    {
+      "title": "Clases de programación",
+      "tagline": "Sesiones 1:1 prácticas.",
+      "price": "20 €/h"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Desarrollador Full Stack",
+      "company": "Freelance",
+      "period": "Feb 2023 – Actualidad",
+      "description": "Desarrollo de sitios corporativos, landings y APIs a medida con foco en rendimiento y SEO técnico."
+    },
+    {
+      "role": "Desarrollador Backend",
+      "company": "Tenea",
+      "period": "Oct 2023 – Ene 2024",
+      "description": "Implementación de servicios REST en Symfony, refactor de procesos y optimización de bases de datos."
+    },
+    {
+      "role": "Prácticas — Desarrollo Web",
+      "company": "Vilax",
+      "period": "Ene – Sep 2023",
+      "description": "Maquetación, integraciones con CMS y automatización de despliegues."
+    },
+    {
+      "role": "Prácticas — Operaciones Digitales",
+      "company": "Agencia de Marketing",
+      "period": "Ene – Jun 2022",
+      "description": "Soporte técnico en campañas digitales, analítica y reporting."
+    }
+  ],
+  "education": [
+    {
+      "title": "Curso Superior Full Stack — FGUSAL",
+      "year": "2025"
+    },
+    {
+      "title": "Programación JS, MySQL y PHP — FGUSAL",
+      "year": "2024"
+    },
+    {
+      "title": "Certificado PHP — OpenBootcamp",
+      "year": "2023"
+    },
+    {
+      "title": "Certificado JavaScript — OpenBootcamp",
+      "year": "2022"
+    },
+    {
+      "title": "GS Gráfica Interactiva — La Llotja",
+      "year": "2019–2022"
+    }
+  ],
+  "blogPosts": [
+    {
+      "slug": "blog/posts/2025-09-19-php-mysql-estructura.html",
+      "title": "Cómo estructuro un proyecto PHP + MySQL",
+      "excerpt": "Mi forma de organizar carpetas, controladores y modelos.",
+      "date": "2025-09-19",
+      "readingTime": "5 min",
+      "tags": ["PHP", "MySQL", "Arquitectura"]
+    },
+    {
+      "slug": "blog/posts/2025-09-19-checklist-rendimiento.html",
+      "title": "Checklist de rendimiento para webs en producción",
+      "excerpt": "Puntos rápidos para comprobar velocidad y optimización.",
+      "date": "2025-09-19",
+      "readingTime": "3 min",
+      "tags": ["Rendimiento", "Core Web Vitals"]
+    },
+    {
+      "slug": "blog/posts/2025-09-19-api-rest-buenas-practicas.html",
+      "title": "API REST: buenas prácticas desde el backend",
+      "excerpt": "Versionado, códigos HTTP y consistencia en endpoints.",
+      "date": "2025-09-19",
+      "readingTime": "4 min",
+      "tags": ["API", "Backend", "Buenas prácticas"]
+    }
+  ]
+}
