@@ -108,8 +108,29 @@
           <h2 id="sobre-title">Sobre mí</h2>
         </div>
         <div class="card neoglass" role="article" data-animate-group>
-          <p>Desarrollador web con más de dos años de experiencia en la creación de sitios corporativos y aplicaciones web funcionales. Experto en HTML, CSS, JavaScript, PHP y MySQL, con un sólido conocimiento tanto del desarrollo frontend como backend. Me involucro plenamente en cada proyecto, priorizando un código limpio, una estructura lógica y la eficiencia. Actualmente trabajo como desarrollador full-stack y busco seguir creciendo profesionalmente, asumir nuevos retos técnicos y aportar valor real al equipo y al producto.</p>
-
+        <h2 id="about-title">Sobre mí</h2>
+            <p>
+              Soy Sergi Mallén, desarrollador web full-stack. Construyo sitios rápidos, claros y fáciles de mantener.
+              Me muevo cómodo en HTML, CSS y JavaScript, y trabajo backend con PHP y MySQL cuando el proyecto lo pide.
+            </p>
+            <p>
+              Disfruto convirtiendo ideas en productos: defino el alcance, maqueto, desarrollo y despliego con CI/CD.
+              Me obsesionan dos cosas: rendimiento real (Core Web Vitals) y una UX que explique sin fricción.
+            </p>
+            <p>
+              He creado proyectos propios como un juego tipo GeoGuessr por España, un tracker de inversiones
+              y una app de recetas. En freelance, ayudo a negocios locales a lanzar o mejorar su web con
+              resultados medibles.
+            </p>
+            <ul class="bullets">
+              <li>Stack: HTML/CSS/JS, PHP, MySQL, GitHub Actions.</li>
+              <li>Front: componentes accesibles, imágenes optimizadas, animaciones con control de movimiento.</li>
+              <li>Ops: Pages/Netlify, automatización de builds y fetchs de datos.</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn" href="#projects">Ver proyectos</a>
+              <a class="btn outline" href="#contact">Contactar</a>
+            </div>
           <figure class="mt-5" style="margin:0">
             <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop" alt="Cuaderno con notas técnicas y portátil" style="width:100%;border-radius:10px">
           </figure>
@@ -207,16 +228,78 @@
             </div>
           </article>
 
-          <article class="card neoglass project" role="listitem" aria-labelledby="p3-title" data-effect="fade">
-            <figure style="margin:0 0 12px">
-              <img src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=1600&auto=format&fit=crop" alt="Mapa del mundo sobre mesa" style="width:100%;border-radius:10px">
-            </figure>
-            <h3 id="p3-title">Mapamundi — Juego</h3>
-            <p>Mini-juego educativo en web. Interacción simple y reto progresivo.</p>
-            <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://mallenk.github.io/Mapamundi/" target="_blank" rel="noopener noreferrer">Jugar</a>
+          <article class="project-card">
+            <a href="https://mallenk.github.io/mapamundi" class="project-link" aria-label="Abrir Mapamundi — Juego">
+              <picture>
+                <source type="image/avif" srcset="assets/img/projects/mapamundi.avif">
+                <source type="image/webp" srcset="assets/img/projects/mapamundi.webp">
+                <img src="assets/img/projects/mapamundi.jpg"
+                     alt="Captura del juego tipo GeoGuessr por España"
+                     width="1280" height="720" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <div class="project-meta">
+              <h3>Mapamundi — Juego</h3>
+              <p>Drop aleatorio en España y adivina la ubicación con Google Maps. En cola: rachas, ranking y modos temáticos.</p>
+              <ul class="tags"><li>JS</li><li>Maps</li><li>Juego</li></ul>
             </div>
           </article>
+
+          <!-- AppDinero — Seguimiento de inversiones -->
+          <article class="project-card">
+            <a href="https://mallenk.github.io/AppDinero" class="project-link" aria-label="Abrir AppDinero">
+              <picture>
+                <source type="image/avif" srcset="assets/img/projects/appdinero.avif">
+                <source type="image/webp" srcset="assets/img/projects/appdinero.webp">
+                <img src="assets/img/projects/appdinero.jpg"
+                     alt="Dashboard de inversiones con gráficos y cotizaciones"
+                     width="1280" height="720" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <div class="project-meta">
+              <h3>AppDinero</h3>
+              <p>Tracker simple para acciones y fondos. Histórico, alertas ligeras y presupuestos personales.</p>
+              <ul class="tags"><li>JS</li><li>Charts</li><li>Static</li></ul>
+            </div>
+          </article>
+          
+          <!-- Fútbol App — Bundesliga -->
+          <article class="project-card">
+            <a href="https://mallenk.github.io/futbol-app" class="project-link" aria-label="Abrir Fútbol App">
+              <picture>
+                <source type="image/avif" srcset="assets/img/projects/futbol-app.avif">
+                <source type="image/webp" srcset="assets/img/projects/futbol-app.webp">
+                <img src="assets/img/projects/futbol-app.jpg"
+                     alt="Resultados y datos de la Bundesliga"
+                     width="1280" height="720" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <div class="project-meta">
+              <h3>Fútbol App</h3>
+              <p>Resultados y jornadas de la Bundesliga con data fetch automatizado y logos optimizados.</p>
+              <ul class="tags"><li>JS</li><li>APIs</li><li>Actions</li></ul>
+            </div>
+          </article>
+          
+          <!-- Receptes — Sergi i Gina -->
+          <article class="project-card">
+            <a href="https://mallenk.github.io/recipes" class="project-link" aria-label="Obrir Receptes — Sergi i Gina">
+              <picture>
+                <source type="image/avif" srcset="assets/img/projects/receptes.avif">
+                <source type="image/webp" srcset="assets/img/projects/receptes.webp">
+                <img src="assets/img/projects/receptes.jpg"
+                     alt="Llistat de receptes amb filtres i favorits"
+                     width="1280" height="720" loading="lazy" decoding="async">
+              </picture>
+            </a>
+            <div class="project-meta">
+              <h3>Receptes — Sergi i Gina</h3>
+              <p>Mini app estàtica en català amb cerca, filtres i favorits. Preparada per GitHub Pages.</p>
+              <ul class="tags"><li>HTML</li><li>CSS</li><li>JS</li></ul>
+            </div>
+          </article>
+
+
         </div>
       </div>
     </section>
