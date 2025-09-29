@@ -16,22 +16,18 @@
   <!-- Fonts + Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="assets/fonts/Montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"/>
 
   <!-- Favicon -->
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-  <!-- Bootstrap utilities solo para espaciados -->
+  <!-- Bootstrap utilities -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css">
 
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/base.css">
-  <!-- Preload hero para mejorar LCP -->
-  <link rel="preload" as="image" href="assets/img/hero/desk-hero.avif" imagesrcset="assets/img/hero/desk-hero.avif" fetchpriority="high">
 </head>
-
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
@@ -39,15 +35,9 @@
     <div class="container nav" aria-label="Cabecera del sitio">
       <a class="brand" href="#top" aria-label="Inicio">
         <div class="avatar" aria-hidden="true">SM</div>
-        <div class="meta">
-          <div class="name">Sergi Mallén López</div>
-        </div>
+        <div class="meta"><div class="name">Sergi Mallén López</div></div>
       </a>
-  
-      <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
-        <span class="sr-only">Abrir menú</span> ☰
-      </button>
-  
+      <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">☰</button>
       <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
         <ul>
           <li><a href="#sobre-mi">Sobre mí</a></li>
@@ -62,96 +52,58 @@
     </div>
   </header>
 
-
   <main id="main">
-    <!-- ========================= Hero ========================= -->
+    <!-- HERO -->
     <section class="hero parallax-wrap pb-5" id="top" aria-labelledby="hero-title" data-animate data-effect="fade">
       <div class="section-bg" aria-hidden="true"></div>
       <div class="section-grid" aria-hidden="true"></div>
-    
       <div class="scene" id="heroParallax" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="14">
         <span class="layer blob" data-depth="0.12" style="left:10%;top:12%"></span>
         <span class="layer blob small" data-depth="0.28" style="right:12%;bottom:10%"></span>
-    
-        <!-- capas decorativas, vacías -->
-        <img class="layer" data-depth="0.38" src="assets/img/hero/decor-1.webp" alt="" width="520" height="340" style="left:8%;bottom:8%;border-radius:14px;opacity:.85" loading="lazy" decoding="async">
-        <img class="layer" data-depth="0.50" src="assets/img/hero/decor-2.webp" alt="" width="420" height="300" style="right:6%;top:10%;border-radius:14px;opacity:.8" loading="lazy" decoding="async">
+        <img class="layer" data-depth="0.38" src="https://images.unsplash.com/photo-1526378722438-2afe5b01088d?q=80&w=1200&auto=format&fit=crop" alt="" width="520" height="340" style="left:8%;bottom:8%;border-radius:14px;opacity:.85" loading="lazy" decoding="async">
+        <img class="layer" data-depth="0.50" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="" width="420" height="300" style="right:6%;top:10%;border-radius:14px;opacity:.8" loading="lazy" decoding="async">
       </div>
-    
       <div class="container parallax-slot">
         <div class="hero-body neoglass p-5" data-animate-group>        
           <h1 id="hero-title" class="title">Desarrollo de webs rápidas, accesibles y mantenibles</h1>
-          <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
-          <div class="cta" role="group" aria-label="Acciones principales" data-animate-group>
-            <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
-            <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
+          <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo.</p>
+          <div class="cta" role="group" data-animate-group>
+            <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+            <a class="btn btn-outline" href="#contacto">Pedir presupuesto</a>
           </div>
-    
-          <!-- Imagen hero principal con picture -->
           <figure class="mt-5" style="margin:0">
-            <picture>
-              <source type="image/avif" srcset="assets/img/hero/desk-hero.avif">
-              <source type="image/webp" srcset="assets/img/hero/desk-hero.webp">
-              <img src="assets/img/hero/desk-hero.jpg"
-                   alt="Puesto de trabajo con código en pantalla"
-                   width="1600" height="900"
-                   style="width:100%;border-radius:12px"
-                   fetchpriority="high" decoding="async">
-            </picture>
-            <figcaption class="sr-only">Entorno de trabajo de desarrollo</figcaption>
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Puesto de trabajo con código en pantalla" width="1600" height="900" style="width:100%;border-radius:12px" fetchpriority="high" decoding="async">
           </figure>
         </div>
       </div>
     </section>
 
-
-    <!-- ========================= Sobre mí ========================= -->
+    <!-- SOBRE MÍ -->
     <section class="parallax-wrap mt-5 pb-5" id="sobre-mi" aria-labelledby="sobre-title" data-animate data-effect="up">
       <div class="section-bg" aria-hidden="true"></div>
       <div class="section-grid" aria-hidden="true"></div>
-    
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="10" data-scalar-y="10">
-        <span class="layer blob small" data-depth="0.16" style="left:6%;top:18%"></span>
-      </div>
-    
       <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="sobre-title">Sobre mí</h2>
-        </div>
-    
-        <div class="card neoglass" role="article" data-animate-group>
-          <p>
-            Soy Sergi Mallén, desarrollador full-stack. Diseño y programo webs rápidas, claras y fáciles de mantener.
-            Trabajo frontend con HTML, CSS y JavaScript y, cuando hace falta, backend con PHP y MySQL.
-          </p>
-          <p>
-            Me enfoco en dos palancas: rendimiento medible (Core Web Vitals) y UX que explica sin fricción.
-            Defino alcance, maqueto, desarrollo y despliego con CI/CD para entregas estables.
-          </p>
-          <p>
-            Proyectos propios: juego tipo GeoGuessr por España, tracker de inversiones y app de recetas.
-            También ayudo a negocios locales a lanzar o mejorar su web con resultados concretos.
-          </p>
+        <div class="section-head neoglass" style="padding:16px"><h2 id="sobre-title">Sobre mí</h2></div>
+        <div class="card neoglass">
+          <p>Soy Sergi Mallén, desarrollador full-stack. Diseño y programo webs rápidas, claras y fáciles de mantener.</p>
+          <p>Me enfoco en rendimiento medible (Core Web Vitals) y UX sin fricción. Trabajo frontend y backend.</p>
+          <p>He creado proyectos propios como un juego tipo GeoGuessr, un tracker de inversiones y una app de recetas.</p>
           <ul class="bullets">
             <li>Stack: HTML/CSS/JS, PHP, MySQL, GitHub Actions.</li>
-            <li>Front: accesibilidad real, imágenes optimizadas, animaciones con control de movimiento.</li>
-            <li>Ops: GitHub Pages/Netlify, automatización de builds y fetch de datos.</li>
+            <li>Front: accesibilidad, imágenes optimizadas, animaciones controladas.</li>
+            <li>Ops: GitHub Pages/Netlify, builds automáticas.</li>
           </ul>
           <div class="cta-row">
             <a class="btn" href="#proyectos">Ver proyectos</a>
             <a class="btn outline" href="#contacto">Contactar</a>
           </div>
-    
-          <figure class="mt-5" style="margin:0">
-            <picture>
-              <source type="image/avif" srcset="assets/img/about/notebook.avif">
-              <source type="image/webp" srcset="assets/img/about/notebook.webp">
-              <img src="assets/img/about/notebook.jpg" alt="Cuaderno con notas técnicas y portátil" width="1600" height="900" style="width:100%;border-radius:10px" loading="lazy" decoding="async">
-            </picture>
+          <figure class="mt-5">
+            <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop" alt="Cuaderno con notas técnicas y portátil" width="1600" height="900" style="width:100%;border-radius:10px" loading="lazy" decoding="async">
           </figure>
         </div>
       </div>
     </section>
+
     
     <!-- ========================= Skills ========================= -->
     <section class="parallax-wrap mt-5 pb-5" id="skills" aria-labelledby="skills-title" data-animate data-effect="blackout">
@@ -225,9 +177,7 @@
         <div class="grid" role="list" data-animate-group>
           <article class="card neoglass project" role="listitem" aria-labelledby="p1-title" data-effect="fade">
             <figure style="margin:0 0 12px">
-              <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop"
-                   alt="Interior de restaurante moderno" width="1280" height="720"
-                   style="width:100%;border-radius:10px" loading="lazy" decoding="async">
+              <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop" alt="Interior de restaurante moderno" width="1280" height="720" style="width:100%;border-radius:10px" loading="lazy">
             </figure>
             <h3 id="p1-title">Ateneu Unió Restaurant</h3>
             <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
