@@ -1,283 +1,361 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-        <title>Portfolio — Sergi Mallén López | Web Developer / Full-Stack</title>
-        <meta name="description" content="Portfolio de Sergi Mallén López, Web Developer / Full-Stack en Colònia Güell (Barcelona). Proyectos, servicios, CV y contacto." />
-        <!-- Open Graph -->
-        <meta property="og:title" content="Sergi Mallén López — Web Developer / Full-Stack" />
-        <meta property="og:description" content="Proyectos, servicios, CV y contacto. Desarrollo web frontend y backend con foco en rendimiento y calidad." />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="assets/img/og/portfolio-og.jpg" />
-        <!-- Fonts + Icons -->
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
-        <!-- Favicon -->
-        <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-        <!-- Bootstrap utilities solo para espaciados (mt-5, pb-5, etc.) -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css" />
-        <!-- Styles -->
-        <link rel="stylesheet" href="assets/css/base.css" />
-    </head>
-    <body>
-        <a class="skip-link" href="#main">Saltar al contenido</a>
-        <header role="banner">
-            <div class="container nav" aria-label="Cabecera del sitio">
-                <a class="brand" href="#top" aria-label="Inicio">
-                    <div class="avatar" aria-hidden="true">SM</div>
-                    <div class="meta"><div class="name">Sergi Mallén López</div></div>
-                </a>
-                <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú"><span class="sr-only">Abrir menú</span> ☰</button>
-                <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
-                    <ul>
-                        <li><a href="#sobre-mi">Sobre mí</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#proyectos">Proyectos</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
-                        <li><a href="#cv">CV</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#contacto">Contacto</a></li>
-                    </ul>
-                </nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Portfolio — Sergi Mallén López | Web Developer / Full-Stack</title>
+  <meta name="description" content="Portfolio de Sergi Mallén López, Web Developer / Full-Stack en Colònia Güell (Barcelona). Proyectos, servicios, CV y contacto." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sergi Mallén López — Web Developer / Full-Stack" />
+  <meta property="og:description" content="Proyectos, servicios, CV y contacto. Desarrollo web frontend y backend con foco en rendimiento y calidad." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/og/portfolio-og.jpg">
+
+  <!-- Fonts + Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"/>
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Bootstrap utilities solo para espaciados (mt-5, pb-5, etc.) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/base.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header role="banner">
+    <div class="container nav" aria-label="Cabecera del sitio">
+      <a class="brand" href="#top" aria-label="Inicio">
+        <div class="avatar" aria-hidden="true">SM</div>
+        <div class="meta">
+          <div class="name">Sergi Mallén López</div>
+        </div>
+      </a>
+
+      <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+        <span class="sr-only">Abrir menú</span> ☰
+      </button>
+
+      <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
+        <ul>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#cv">CV</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero container pb-5" id="top" aria-labelledby="hero-title">
+      <p class="tag" aria-hidden="true">Identidad</p>
+      <h1 id="hero-title" class="title">Desarrollo de webs rápidas, accesibles y mantenibles</h1>
+      <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
+      <div class="cta" role="group" aria-label="Acciones principales">
+        <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
+        <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
+      </div>
+
+      <figure class="mt-5" style="margin:0">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Puesto de trabajo con código en pantalla" style="width:100%;border-radius:12px">
+        <figcaption class="sr-only">Entorno de trabajo de desarrollo</figcaption>
+      </figure>
+    </section>
+
+    <!-- Sobre mí -->
+    <section class="container mt-5 pb-5" id="sobre-mi" aria-labelledby="sobre-title">
+      <div class="section-head">
+        <h2 id="sobre-title">Sobre mí</h2>
+      </div>
+      <div class="card" role="article">
+        <p>Desarrollador web con más de dos años de experiencia en la creación de sitios corporativos y aplicaciones web funcionales. Experto en HTML, CSS, JavaScript, PHP y MySQL, con un sólido conocimiento tanto del desarrollo frontend como backend. Me involucro plenamente en cada proyecto, priorizando un código limpio, una estructura lógica y la eficiencia. Actualmente trabajo como desarrollador full-stack y busco seguir creciendo profesionalmente, asumir nuevos retos técnicos y aportar valor real al equipo y al producto.</p>
+
+        <figure class="mt-5" style="margin:0">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop" alt="Cuaderno con notas técnicas y portátil" style="width:100%;border-radius:10px">
+        </figure>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="container mt-5 pb-5" id="skills" aria-labelledby="skills-title">
+      <div class="section-head">
+        <h2 id="skills-title">Skills</h2>
+      </div>
+
+      <div class="grid">
+        <div class="card skills-group" aria-labelledby="frontend-title">
+          <h3 id="frontend-title">Frontend</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+            <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+            <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+            <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
+            <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
+            <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
+          </div>
+        </div>
+
+        <div class="card skills-group" aria-labelledby="backend-title">
+          <h3 id="backend-title">Backend</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
+            <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
+            <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
+            <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
+            <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
+            <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
+            <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
+          </div>
+        </div>
+
+        <div class="card skills-group" aria-labelledby="otros-title">
+          <h3 id="otros-title">Otros</h3>
+          <div class="icons" role="list">
+            <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+            <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
+            <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
+            <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
+            <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="container mt-5 pb-5" id="proyectos" aria-labelledby="proyectos-title">
+      <div class="section-head">
+        <h2 id="proyectos-title">Proyectos</h2>
+      </div>
+      <div class="grid" role="list">
+        <article class="card project" role="listitem" aria-labelledby="p1-title">
+          <figure style="margin:0 0 12px">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop" alt="Interior de restaurante moderno" style="width:100%;border-radius:10px">
+          </figure>
+          <h3 id="p1-title">Ateneu Unió Restaurant</h3>
+          <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
+          </div>
+        </article>
+
+        <article class="card project" role="listitem" aria-labelledby="p2-title">
+          <figure style="margin:0 0 12px">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop" alt="Salón de peluquería con estilo" style="width:100%;border-radius:10px">
+          </figure>
+          <h3 id="p2-title">Peluquería Aura — Demo</h3>
+          <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+          </div>
+        </article>
+
+        <article class="card project" role="listitem" aria-labelledby="p3-title">
+          <figure style="margin:0 0 12px">
+            <img src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=1600&auto=format&fit=crop" alt="Mapa del mundo sobre mesa" style="width:100%;border-radius:10px">
+          </figure>
+          <h3 id="p3-title">Mapamundi — Juego</h3>
+          <p>Mini-juego educativo en web. Interacción simple y reto progresivo.</p>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="https://mallenk.github.io/Mapamundi/" target="_blank" rel="noopener noreferrer">Jugar</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="container mt-5 pb-5" id="servicios" aria-labelledby="servicios-title">
+      <div class="section-head">
+        <h2 id="servicios-title">Servicios</h2>
+      </div>
+      <div class="grid" role="list">
+        <div class="card service" role="listitem">
+          <h3>Creación de páginas web</h3>
+          <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
+          <p class="price">150 €+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Rediseño de webs</h3>
+          <p class="muted">Mejora visual, UX y rendimiento.</p>
+          <p class="price">120 €+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Consultoría web</h3>
+          <p class="muted">Auditoría y plan de mejoras.</p>
+          <p class="price">30 €/h</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Gestión de e-commerce</h3>
+          <p class="muted">Soporte y contenidos mensuales.</p>
+          <p class="price">75 €/mes+</p>
+        </div>
+        <div class="card service" role="listitem">
+          <h3>Clases de programación</h3>
+          <p class="muted">Sesiones 1:1 prácticas.</p>
+          <p class="price">20 €/h</p>
+        </div>
+      </div>
+
+      <figure class="mt-5" style="margin:0">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" alt="Panel de analítica y rendimiento web" style="width:100%;border-radius:12px">
+      </figure>
+    </section>
+
+    <!-- Currículum -->
+    <section class="container mt-5 pb-5" id="cv" aria-labelledby="cv-title">
+      <div class="section-head" style="display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
+        <h2 id="cv-title" style="margin:0">Currículum</h2>
+        <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>Descargar CV</a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Experiencia</h3>
+          <div class="timeline" role="list">
+            <div class="timeline-item" role="listitem">
+              <strong>Desarrollador Full Stack</strong>
+              <span class="muted">Feb 2023 – Actualidad</span>
             </div>
-        </header>
-        <main id="main">
-            <!-- Hero -->
-            <section class="hero container pb-5" id="top" aria-labelledby="hero-title" data-animate>
-                <div class="hero-parallax" id="heroParallax" aria-hidden="true">
-                    <span class="hero-layer layer-1" data-depth="0.12"></span> <span class="hero-layer layer-2" data-depth="0.35"></span> <span class="hero-layer layer-3" data-depth="0.65"></span>
-                </div>
-                <div class="hero-body" data-animate-group>
-                    <p class="tag" aria-hidden="true">Identidad</p>
-                    <h1 id="hero-title" class="title">Desarrollo de webs rápidas, accesibles y mantenibles</h1>
-                    <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
-                    <div class="cta" role="group" aria-label="Acciones principales" data-animate-group>
-                        <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a> <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
-                    </div>
-                    <!-- Imagen hero (stock por URL) -->
-                    <figure class="mt-5" style="margin: 0;">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Puesto de trabajo con código en pantalla" style="width: 100%; border-radius: 12px;" />
-                        <figcaption class="sr-only">Entorno de trabajo de desarrollo</figcaption>
-                    </figure>
-                </div>
-            </section>
-            <!-- Sobre mí -->
-            <section class="container mt-5 pb-5" id="sobre-mi" aria-labelledby="sobre-title" data-animate>
-                <div class="section-head" data-animate-group><h2 id="sobre-title">Sobre mí</h2></div>
-                <div class="card" role="article" data-animate-group>
-                    <p>
-                        Desarrollador web con más de dos años de experiencia en la creación de sitios corporativos y aplicaciones web funcionales. Experto en HTML, CSS, JavaScript, PHP y MySQL, con un sólido conocimiento tanto del
-                        desarrollo frontend como backend. Me involucro plenamente en cada proyecto, priorizando un código limpio, una estructura lógica y la eficiencia. Actualmente trabajo como desarrollador full-stack y busco seguir
-                        creciendo profesionalmente, asumir nuevos retos técnicos y aportar valor real al equipo y al producto.
-                    </p>
-                    <figure class="mt-5" style="margin: 0;">
-                        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop" alt="Cuaderno con notas técnicas y portátil" style="width: 100%; border-radius: 10px;" />
-                    </figure>
-                </div>
-            </section>
-            <!-- Skills -->
-            <section class="container mt-5 pb-5" id="skills" aria-labelledby="skills-title" data-animate>
-                <div class="section-head" data-animate-group><h2 id="skills-title">Skills</h2></div>
-                <div class="grid" data-animate-group>
-                    <div class="card skills-group" aria-labelledby="frontend-title" data-animate-group>
-                        <h3 id="frontend-title">Frontend</h3>
-                        <div class="icons" role="list" data-animate-group>
-                            <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
-                        </div>
-                    </div>
-                    <div class="card skills-group" aria-labelledby="backend-title" data-animate-group>
-                        <h3 id="backend-title">Backend</h3>
-                        <div class="icons" role="list" data-animate-group>
-                            <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
-                        </div>
-                    </div>
-                    <div class="card skills-group" aria-labelledby="otros-title" data-animate-group>
-                        <h3 id="otros-title">Otros</h3>
-                        <div class="icons" role="list" data-animate-group>
-                            <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
-                            <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Proyectos -->
-            <section class="container mt-5 pb-5" id="proyectos" aria-labelledby="proyectos-title" data-animate>
-                <div class="section-head" data-animate-group><h2 id="proyectos-title">Proyectos</h2></div>
-                <div class="grid" role="list" data-animate-group>
-                    <article class="card project" role="listitem" aria-labelledby="p1-title">
-                        <figure style="margin: 0 0 12px;">
-                            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1600&auto=format&fit=crop" alt="Interior de restaurante moderno" style="width: 100%; border-radius: 10px;" />
-                        </figure>
-                        <h3 id="p1-title">Ateneu Unió Restaurant</h3>
-                        <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
-                        <div class="card-actions" data-animate-group><a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a></div>
-                    </article>
-                    <article class="card project" role="listitem" aria-labelledby="p2-title">
-                        <figure style="margin: 0 0 12px;">
-                            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop" alt="Salón de peluquería con estilo" style="width: 100%; border-radius: 10px;" />
-                        </figure>
-                        <h3 id="p2-title">Peluquería Aura — Demo</h3>
-                        <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
-                        <div class="card-actions" data-animate-group><a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a></div>
-                    </article>
-                    <article class="card project" role="listitem" aria-labelledby="p3-title">
-                        <figure style="margin: 0 0 12px;">
-                            <img src="https://images.unsplash.com/photo-1502920917128-1aa500764ce7?q=80&w=1600&auto=format&fit=crop" alt="Mapa del mundo sobre mesa" style="width: 100%; border-radius: 10px;" />
-                        </figure>
-                        <h3 id="p3-title">Mapamundi — Juego</h3>
-                        <p>Mini-juego educativo en web. Interacción simple y reto progresivo.</p>
-                        <div class="card-actions" data-animate-group><a class="btn btn-primary" href="https://mallenk.github.io/Mapamundi/" target="_blank" rel="noopener noreferrer">Jugar</a></div>
-                    </article>
-                </div>
-            </section>
-            <!-- Servicios -->
-            <section class="container mt-5 pb-5" id="servicios" aria-labelledby="servicios-title" data-animate>
-                <div class="section-head" data-animate-group><h2 id="servicios-title">Servicios</h2></div>
-                <div class="grid" role="list" data-animate-group>
-                    <div class="card service" role="listitem">
-                        <h3>Creación de páginas web</h3>
-                        <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
-                        <p class="price">150 €+</p>
-                    </div>
-                    <div class="card service" role="listitem">
-                        <h3>Rediseño de webs</h3>
-                        <p class="muted">Mejora visual, UX y rendimiento.</p>
-                        <p class="price">120 €+</p>
-                    </div>
-                    <div class="card service" role="listitem">
-                        <h3>Consultoría web</h3>
-                        <p class="muted">Auditoría y plan de mejoras.</p>
-                        <p class="price">30 €/h</p>
-                    </div>
-                    <div class="card service" role="listitem">
-                        <h3>Gestión de e-commerce</h3>
-                        <p class="muted">Soporte y contenidos mensuales.</p>
-                        <p class="price">75 €/mes+</p>
-                    </div>
-                    <div class="card service" role="listitem">
-                        <h3>Clases de programación</h3>
-                        <p class="muted">Sesiones 1:1 prácticas.</p>
-                        <p class="price">20 €/h</p>
-                    </div>
-                </div>
-                <figure class="mt-5" style="margin: 0;">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop" alt="Panel de analítica y rendimiento web" style="width: 100%; border-radius: 12px;" />
-                </figure>
-            </section>
-            <!-- Currículum -->
-            <section class="container mt-5 pb-5" id="cv" aria-labelledby="cv-title" data-animate>
-                <div class="section-head" data-animate-group>
-                    <h2 id="cv-title">Currículum</h2>
-                    <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>Descargar CV</a>
-                </div>
-                <div class="grid">
-                    <div class="card" data-animate-group>
-                        <h3>Experiencia</h3>
-                        <div class="timeline" role="list" data-animate-group>
-                            <div class="timeline-item" role="listitem"><strong>Desarrollador Full Stack</strong> <span class="muted">Feb 2023 – Actualidad</span></div>
-                            <div class="timeline-item" role="listitem"><strong>Desarrollador Backend — Tenea</strong> <span class="muted">Oct 2023 – Ene 2024</span></div>
-                            <div class="timeline-item" role="listitem"><strong>Prácticas — Desarrollo Web (Vilax)</strong> <span class="muted">Ene – Sep 2023</span></div>
-                            <div class="timeline-item" role="listitem"><strong>Prácticas — Operaciones Digitales</strong> <span class="muted">Ene – Jun 2022</span></div>
-                        </div>
-                    </div>
-                    <div class="card" data-animate-group>
-                        <h3>Formación</h3>
-                        <div class="edu grid" role="list" data-animate-group>
-                            <div class="card" role="listitem">
-                                <h4>Curso Superior Full Stack — FGUSAL</h4>
-                                <p class="muted">2025</p>
-                            </div>
-                            <div class="card" role="listitem">
-                                <h4>Programación JS, MySQL y PHP — FGUSAL</h4>
-                                <p class="muted">2024</p>
-                            </div>
-                            <div class="card" role="listitem">
-                                <h4>Certificado PHP — OpenBootcamp</h4>
-                                <p class="muted">2023</p>
-                            </div>
-                            <div class="card" role="listitem">
-                                <h4>Certificado JavaScript — OpenBootcamp</h4>
-                                <p class="muted">2022</p>
-                            </div>
-                            <div class="card" role="listitem">
-                                <h4>GS Gráfica Interactiva — La Llotja</h4>
-                                <p class="muted">2019–2022</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Blog -->
-            <section class="container mt-5 pb-5" id="blog" aria-labelledby="blog-title" data-animate>
-                <div class="section-head" data-animate-group>
-                    <h2 id="blog-title">Blog</h2>
-                    <a class="btn btn-outline" href="blog/">Ver todos</a>
-                </div>
-                <div class="grid" role="list" data-animate-group>
-                    <article class="card" role="listitem" aria-labelledby="b1">
-                        <h3 id="b1"><a href="blog/posts/2025-09-19-php-mysql-estructura.html"> Cómo estructuro un proyecto PHP + MySQL </a></h3>
-                        <p class="muted">Mi forma de organizar carpetas, controladores y modelos.</p>
-                    </article>
-                    <article class="card" role="listitem" aria-labelledby="b2">
-                        <h3 id="b2"><a href="blog/posts/2025-09-19-checklist-rendimiento.html"> Checklist de rendimiento para webs en producción </a></h3>
-                        <p class="muted">Puntos rápidos para comprobar velocidad y optimización.</p>
-                    </article>
-                    <article class="card" role="listitem" aria-labelledby="b3">
-                        <h3 id="b3"><a href="blog/posts/2025-09-19-api-rest-buenas-practicas.html"> API REST: buenas prácticas desde el backend </a></h3>
-                        <p class="muted">Versionado, códigos HTTP y consistencia en endpoints.</p>
-                    </article>
-                </div>
-            </section>
-            <!-- Contacto -->
-            <section class="container mt-5 pb-5" id="contacto" aria-labelledby="contacto-title" data-animate>
-                <div class="section-head" data-animate-group><h2 id="contacto-title">Contacto</h2></div>
-                <div class="contact-wrap" data-animate-group>
-                    <div class="card" role="region" aria-labelledby="datos-contacto" data-animate-group>
-                        <h3 id="datos-contacto">Datos de contacto</h3>
-                        <ul class="contact-list" aria-label="Datos de contacto" data-animate-group>
-                            <li><strong>Email:</strong> <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></li>
-                            <li><strong>Tel:</strong> <a href="tel:+34670248461">+34 670 24 84 61</a></li>
-                        </ul>
-                        <p class="muted">Tiempo de respuesta habitual: 24–48 h laborables.</p>
-                        <figure class="mt-5" style="margin: 0;">
-                            <img src="https://images.unsplash.com/photo-1529336953121-ad5a0d43d0ee?q=80&w=1600&auto=format&fit=crop" alt="Mesa de trabajo lista para reunión" style="width: 100%; border-radius: 12px;" />
-                        </figure>
-                    </div>
-                    <form class="card" action="https://formspree.io/f/XXXXXXXX" method="POST" aria-labelledby="form-title" data-animate-group>
-                        <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
-                        <div class="row" data-animate-group>
-                            <div><label class="sr-only" for="name">Tu nombre</label> <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name" /></div>
-                            <div><label class="sr-only" for="email">Tu email</label> <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email" /></div>
-                            <div class="full"><label class="sr-only" for="message">Mensaje</label> <textarea id="message" name="message" rows="6" placeholder="Cuéntame brevemente tu proyecto" required aria-required="true"></textarea></div>
-                            <div class="full"><button class="btn btn-primary" type="submit">Enviar</button></div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </main>
-        <footer role="contentinfo" data-animate>
-            <div class="container">
-                <div>© <span id="year"></span> Sergi Mallén López. Alojado en GitHub Pages.</div>
+            <div class="timeline-item" role="listitem">
+              <strong>Desarrollador Backend — Tenea</strong>
+              <span class="muted">Oct 2023 – Ene 2024</span>
             </div>
-        </footer>
-        <!-- Scripts -->
-        <script defer src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
-        <script defer src="assets/js/app.js"></script>
-    </body>
+            <div class="timeline-item" role="listitem">
+              <strong>Prácticas — Desarrollo Web (Vilax)</strong>
+              <span class="muted">Ene – Sep 2023</span>
+            </div>
+            <div class="timeline-item" role="listitem">
+              <strong>Operaciones Digitales</strong>
+              <span class="muted">Ene – Jun 2022</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Formación</h3>
+          <div class="edu grid" role="list">
+            <div class="card" role="listitem">
+              <h4>Curso Superior Full Stack — FGUSAL</h4>
+              <p class="muted">2025</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Programación JS, MySQL y PHP — FGUSAL</h4>
+              <p class="muted">2024</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Certificado PHP — OpenBootcamp</h4>
+              <p class="muted">2023</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Certificado JavaScript — OpenBootcamp</h4>
+              <p class="muted">2022</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>GS Gráfica Interactiva — La Llotja</h4>
+              <p class="muted">2019–2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="container mt-5 pb-5" id="blog" aria-labelledby="blog-title">
+      <div class="section-head" style="display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
+        <h2 id="blog-title" style="margin:0">Blog</h2>
+        <a class="btn btn-outline" href="blog/">Ver todos</a>
+      </div>
+      <div class="grid" role="list">
+        <article class="card" role="listitem" aria-labelledby="b1">
+          <h3 id="b1">
+            <a href="blog/posts/2025-09-19-php-mysql-estructura.html">
+              Cómo estructuro un proyecto PHP + MySQL
+            </a>
+          </h3>
+          <p class="muted">Organización de carpetas, controladores y modelos.</p>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="b2">
+          <h3 id="b2">
+            <a href="blog/posts/2025-09-19-checklist-rendimiento.html">
+              Checklist de rendimiento para producción
+            </a>
+          </h3>
+          <p class="muted">Verificaciones rápidas de velocidad y optimización.</p>
+        </article>
+
+        <article class="card" role="listitem" aria-labelledby="b3">
+          <h3 id="b3">
+            <a href="blog/posts/2025-09-19-api-rest-buenas-practicas.html">
+              API REST: buenas prácticas desde backend
+            </a>
+          </h3>
+          <p class="muted">Versionado, códigos HTTP y consistencia.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="container mt-5 pb-5" id="contacto" aria-labelledby="contacto-title">
+      <div class="section-head">
+        <h2 id="contacto-title">Contacto</h2>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="card" role="region" aria-labelledby="datos-contacto">
+          <h3 id="datos-contacto">Datos de contacto</h3>
+          <ul class="contact-list" aria-label="Datos de contacto">
+            <li><strong>Email:</strong> <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></li>
+            <li><strong>Tel:</strong> <a href="tel:+34670248461">+34 670 24 84 61</a></li>
+          </ul>
+          <p class="muted">Tiempo de respuesta habitual: 24–48 h laborables.</p>
+
+          <figure class="mt-5" style="margin:0">
+            <img src="https://images.unsplash.com/photo-1529336953121-ad5a0d43d0ee?q=80&w=1600&auto=format&fit=crop" alt="Mesa de trabajo lista para reunión" style="width:100%;border-radius:12px">
+          </figure>
+        </div>
+
+        <form class="card" action="https://formspree.io/f/XXXXXXXX" method="POST" aria-labelledby="form-title">
+          <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
+          <div class="row">
+            <div>
+              <label class="sr-only" for="name">Tu nombre</label>
+              <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
+            </div>
+            <div>
+              <label class="sr-only" for="email">Tu email</label>
+              <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email">
+            </div>
+            <div class="full">
+              <label class="sr-only" for="message">Mensaje</label>
+              <textarea id="message" name="message" rows="6" placeholder="Cuéntame brevemente tu proyecto" required aria-required="true"></textarea>
+            </div>
+            <div class="full">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" style="padding:40px 0 60px">
+    <div class="container">
+      <div>© <span id="year"></span> Sergi Mallén López. Alojado en GitHub Pages.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script defer src="assets/js/app.js"></script>
+</body>
 </html>
