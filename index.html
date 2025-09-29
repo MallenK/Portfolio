@@ -428,65 +428,38 @@
 
     <!-- ========================= Contacto ========================= -->
     <section class="parallax-wrap mt-5 pb-5" id="contacto" aria-labelledby="contacto-title" data-animate data-effect="down">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="12" data-scalar-y="12">
-        <img class="layer" data-depth="0.18"
-             src="https://images.unsplash.com/photo-1529336953121-ad5a0d43d0ee?q=80&w=1600&auto=format&fit=crop"
-             alt="" style="width:420px; left:6%; bottom:8%; border-radius:14px; opacity:.85;">
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="contacto-title" style="margin:0">Contacto</h2>
+        <div class="section-bg" aria-hidden="true"></div>
+        <div class="section-grid" aria-hidden="true"></div>
+        <div class="scene" data-parallax aria-hidden="true" data-scalar-x="12" data-scalar-y="12">
+            <img class="layer" data-depth="0.18" src="https://images.unsplash.com/photo-1529336953121-ad5a0d43d0ee?q=80&w=1600&auto=format&fit=crop" alt="" style="width: 420px; left: 6%; bottom: 8%; border-radius: 14px; opacity: 0.85;" />
         </div>
-
-        <div class="contact-wrap grid" data-animate-group>
-          <div class="card neoglass" role="region" aria-labelledby="datos-contacto" data-animate data-effect="fade">
-            <h3 id="datos-contacto">Datos de contacto</h3>
-            <ul class="contact-list" aria-label="Datos de contacto" data-animate-group>
-              <li><strong>Email:</strong> <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></li>
-              <li><strong>Tel:</strong> <a href="tel:+34670248461">+34 670 24 84 61</a></li>
-            </ul>
-            <p class="muted">Tiempo de respuesta habitual: 24–48 h laborables.</p>
-
-            <figure class="mt-5" style="margin:0">
-              <picture>
-                <source type="image/avif" srcset="assets/img/contact/meeting.avif">
-                <source type="image/webp" srcset="assets/img/contact/meeting.webp">
-                <img src="assets/img/contact/meeting.jpg" alt="Mesa de trabajo lista para reunión" width="1600" height="900" style="width:100%;border-radius:12px" loading="lazy" decoding="async">
-              </picture>
-            </figure>
-          </div>
-
-          <form class="card neoglass" action="https://formspree.io/f/XXXXXXXX" method="POST" aria-labelledby="form-title" data-animate data-effect="up">
-            <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
-          
-            <!-- Honeypot -->
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-10000px;opacity:0" aria-hidden="true">
-          
-            <div class="row" data-animate-group aria-live="polite">
-              <div>
-                <label class="sr-only" for="name">Tu nombre</label>
-                <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
-              </div>
-              <div>
-                <label class="sr-only" for="email">Tu email</label>
-                <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email" inputmode="email">
-              </div>
-              <div class="full">
-                <label class="sr-only" for="message">Mensaje</label>
-                <textarea id="message" name="message" rows="6" placeholder="Cuéntame brevemente tu proyecto" required aria-required="true"></textarea>
-              </div>
-              <div class="full">
-                <button class="btn btn-primary" type="submit">Enviar</button>
-              </div>
+        <div class="container parallax-slot">
+            <div class="section-head neoglass" data-animate-group style="padding: 16px;"><h2 id="contacto-title" style="margin: 0;">Contacto</h2></div>
+            <div class="contact-wrap grid" data-animate-group>
+                <div class="card neoglass" role="region" aria-labelledby="datos-contacto" data-animate data-effect="fade">
+                    <h3 id="datos-contacto">Datos de contacto</h3>
+                    <ul class="contact-list" aria-label="Datos de contacto" data-animate-group>
+                        <li><strong>Email:</strong> <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></li>
+                        <li><strong>Tel:</strong> <a href="tel:+34670248461">+34 670 24 84 61</a></li>
+                    </ul>
+                    <p class="muted">Tiempo de respuesta habitual: 24–48 h laborables.</p>
+                    <figure class="mt-5" style="margin: 0;">
+                        <img src="https://images.unsplash.com/photo-1529336953121-ad5a0d43d0ee?q=80&w=1600&auto=format&fit=crop" alt="Mesa de trabajo lista para reunión" style="width: 100%; border-radius: 12px;" />
+                    </figure>
+                </div>
+                <form class="card neoglass" action="https://formspree.io/f/XXXXXXXX" method="POST" aria-labelledby="form-title" data-animate data-effect="up">
+                    <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
+                    <div class="row" data-animate-group>
+                        <div><label class="sr-only" for="name">Tu nombre</label> <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name" /></div>
+                        <div><label class="sr-only" for="email">Tu email</label> <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email" /></div>
+                        <div class="full"><label class="sr-only" for="message">Mensaje</label> <textarea id="message" name="message" rows="6" placeholder="Cuéntame brevemente tu proyecto" required aria-required="true"></textarea></div>
+                        <div class="full"><button class="btn btn-primary" type="submit">Enviar</button></div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-      </div>
     </section>
+
 
     <!-- ========================= Footer ========================= -->
     <footer class="parallax-wrap" role="contentinfo" data-animate data-effect="fade" style="padding:40px 0 60px">
