@@ -22,7 +22,8 @@
   --section-y: clamp(48px, 8vw, 96px);
   --section-y-tight: clamp(28px, 4vw, 48px);
   --block-gap: clamp(16px, 2.8vw, 28px);
-  --grid-gap: clamp(16px, 3vw, 32px);
+  --grid-gap: 0px;
+    /*--grid-gap: clamp(16px, 3vw, 32px);*/
   --card-pad: clamp(18px, 2.6vw, 28px);
 }
 
