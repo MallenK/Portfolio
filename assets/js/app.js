@@ -50,7 +50,7 @@
       el.classList.add('is-visible');
       const children = Array.from(el.children);
       children.forEach((child, i)=>{
-        child.style.setProperty('--delay', `${i * 80}ms`);
+        child.style.setProperty('--delay', `${i * 0}ms`);
         child.classList.add('is-visible');
       });
     }
