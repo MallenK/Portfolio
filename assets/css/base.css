@@ -211,6 +211,29 @@ input,textarea{
 input::placeholder,textarea::placeholder{color:#8b8b8b}
 input:focus,textarea:focus{outline:2px solid var(--focus);outline-offset:2px}
 
+/* Imagen de programando */
+figure.mt-5 {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+figure.mt-5 img {
+  width: 100%;
+  height: auto;
+  max-width: 1600px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  figure.mt-5 img {
+    border-radius: 8px;
+  }
+}
+
+
 /* Contacto layout */
 #contacto .contact-wrap{display:grid;gap:var(--grid-gap)}
 #contacto form .row{grid-template-columns:1fr}
