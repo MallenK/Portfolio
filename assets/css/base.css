@@ -21,8 +21,7 @@
   /* Espaciado vertical */
   --section-y: clamp(48px, 8vw, 96px);
   --section-y-tight: clamp(28px, 4vw, 48px);
-  --block-gap: 0px;
-  /*--block-gap: clamp(16px, 2.8vw, 28px);*/
+  --block-gap: clamp(16px, 2.8vw, 28px);
   --grid-gap: clamp(16px, 3vw, 32px);
   --card-pad: clamp(18px, 2.6vw, 28px);
 }
@@ -129,7 +128,8 @@ h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
   padding:var(--card-pad);box-shadow:var(--shadow);
   transition:transform .25s ease, box-shadow .35s ease, background .25s ease, border-color .25s ease, color .25s ease;
 }
-.card + .card{margin-top:var(--block-gap)}
+/*.card + .card{margin-top:var(--block-gap)}*/
+.card + .card{margin-top:0%}
 .grid{display:grid;gap:var(--grid-gap);grid-template-columns:repeat(auto-fit, minmax(260px, 1fr))}
 .tag{display:inline-block;font-size:.8rem;color:#000;background:var(--accent);border-radius:999px;padding:6px 12px;font-weight:800}
 
