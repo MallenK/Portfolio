@@ -437,6 +437,11 @@ footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font
 }
 
 
+@media (max-width:640px){
+  img.layer[data-depth="0.50"]{
+    display:none !important;
+  }
+}
 
 
 @media (max-width:480px){
