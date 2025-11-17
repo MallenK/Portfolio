@@ -28,556 +28,535 @@
   <link rel="stylesheet" href="assets/css/base.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <a class="skip-link" href="#main">Saltar al contenido</a>
 
-  <header role="banner">
-    <div class="container nav" aria-label="Cabecera del sitio">
-      <a class="brand" href="#top" aria-label="Inicio">
-        <div class="avatar" aria-hidden="true">SM</div>
-        <div class="meta">
-          <div class="name">Sergi Mallén López</div>
-        </div>
-      </a>
+        <header role="banner">
+          <div class="container nav" aria-label="Cabecera del sitio">
+            <a class="brand" href="#top" aria-label="Inicio">
+              <div class="avatar" aria-hidden="true">SM</div>
+              <div class="meta">
+                <div class="name">Sergi Mallén López</div>
+              </div>
+            </a>
 
-      <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
-        <span class="sr-only">Abrir menú</span> ☰
-      </button>
+            <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+              <span class="sr-only">Abrir menú</span> ☰
+            </button>
 
-      <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
-        <ul>
-          <li><a href="#sobre-mi">Sobre mí</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#cv">CV</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
+            <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
+              <ul>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+
+        <main id="main">
+          <!-- ========================= Hero ========================= -->
+          <section class="hero parallax-wrap pb-5"
+                  id="top"
+                  aria-labelledby="hero-title"
+                  data-animate
+                  data-effect="rotate3d">
+            <!-- fondos -->
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <!-- escena parallax -->
+            <div class="scene" id="heroParallax" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="14">
+              <span class="layer blob" data-depth="0.12" style="left:10%;top:12%"></span>
+              <span class="layer blob small" data-depth="0.28" style="right:12%;bottom:10%"></span>
+              <img class="layer" data-depth="0.50"
+                  src="assets/img/Logo_v4_Blanc.png"
+                  alt="" style="width:420px;right:6%;top:10%;border-radius:14px;opacity:.8">
+            </div>
+
+            <!-- contenido -->
+            <div class="container parallax-slot">
+              <div class="hero-body neoglass" data-animate-group>
+                <h1 id="hero-title" class="title">Sergi Mallen Dev</h1>
+                <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables. Desarrollo de webs rápidas, accesibles y mantenibles</p>
+                <div class="cta" role="group" aria-label="Acciones principales" data-animate-group>
+                  <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
+                  <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========================= Sobre mí ========================= -->
+          <section class="parallax-wrap" id="sobre-mi" style="border: solid;"
+                  aria-labelledby="sobre-title"
+                  data-animate
+                  data-effect="skew-up">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="scene" data-parallax aria-hidden="true" data-scalar-x="10" data-scalar-y="10">
+              <span class="layer blob small" data-depth="0.16" style="left:6%;top:18%"></span>
+            </div>
+
+            <div class="container parallax-slot">
+              <div class="section-head neoglass" data-animate-group style="padding:16px">
+                <h2 id="sobre-title">Sobre mí</h2>
+              </div>
+              <div class="card neoglass glass-gold" role="article" data-animate-group>
+                <div class="about-flex">
+                  <div class="about-text">
+                    <p>
+                      Soy Sergi Mallén, desarrollador web full-stack. Construyo sitios rápidos, claros y fáciles de mantener.
+                      Me muevo cómodo en HTML, CSS y JavaScript, y trabajo backend con PHP y MySQL cuando el proyecto lo pide.
+                    </p>
+
+                    <p>
+                      Disfruto convirtiendo ideas en productos: defino el alcance, maqueto, desarrollo y despliego con CI/CD.
+                      Me obsesionan dos cosas: rendimiento real (Core Web Vitals) y una UX que explique sin fricción.
+                    </p>
+
+                    <p>
+                      He creado proyectos propios como un juego tipo GeoGuessr por España, un tracker de inversiones
+                      y una app de recetas. En freelance, ayudo a negocios locales a lanzar o mejorar su web con
+                      resultados medibles.
+                    </p>
+
+                    <ul class="bullets">
+                      <li>Stack: HTML/CSS/JS, PHP, MySQL, GitHub Actions.</li>
+                      <li>Front: componentes accesibles, imágenes optimizadas, animaciones con control de movimiento.</li>
+                      <li>Ops: Pages/Netlify, automatización de builds y fetchs de datos.</li>
+                    </ul>
+
+                    <div class="cta-row">
+                      <a class="btn" href="#proyectos">Ver proyectos</a>
+                      <a class="btn outline" href="#contacto">Contactar</a>
+                    </div>
+                  </div>
+
+                  <figure class="about-photo">
+                    <img src="assets/img/FotoPerfil-sinBG.png" alt="Cuaderno con notas técnicas y portátil">
+                  </figure>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ========================= Skills ========================= -->
+          <section class="parallax-wrap "
+                  id="skills"
+                  aria-labelledby="skills-title"
+                  data-animate
+                  data-effect="clip-diag">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="scene" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="12">
+              <span class="layer blob small" data-depth="0.20" style="right:8%;top:16%"></span>
+            </div>
+
+            <div class="container parallax-slot">
+              <div class="section-head neoglass" data-animate-group style="padding:16px">
+                <h2 id="skills-title">Skills</h2>
+              </div>
+
+              <div class="grid" data-animate-group>
+                <div class="card neoglass glass-gold skills-group" aria-labelledby="frontend-title" data-animate-group>
+                  <h3 id="frontend-title">Frontend</h3>
+                  <div class="icons" role="list" data-animate-group>
+                    <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
+                  </div>
+                </div>
+
+                <div class="card neoglass glass-gold skills-group" aria-labelledby="backend-title" data-animate-group>
+                  <h3 id="backend-title">Backend</h3>
+                  <div class="icons" role="list" data-animate-group>
+                    <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
+                  </div>
+                </div>
+
+                <div class="card neoglass glass-gold skills-group" aria-labelledby="otros-title" data-animate-group>
+                  <h3 id="otros-title">Otros</h3>
+                  <div class="icons" role="list" data-animate-group>
+                    <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
+                    <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========================= Proyectos ========================= -->
+          <section class="parallax-wrap "
+                  id="proyectos"
+                  aria-labelledby="proyectos-title"
+                  data-animate
+                  data-effect="wipe-up">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="scene" data-parallax aria-hidden="true" data-scalar-x="16" data-scalar-y="12">
+              <span class="layer blob small" data-depth="0.22" style="left:8%;top:22%"></span>
+            </div>
+
+            <div class="container parallax-slot">
+              <div class="section-head neoglass" data-animate-group style="padding:16px">
+                <h2 id="proyectos-title">Proyectos</h2>
+              </div>
+              <div class="grid" role="list" data-animate-group>
+                <article class="card neoglass project neon-gold"
+                        role="listitem"
+                        aria-labelledby="p1-title"
+                        data-animate
+                        data-effect="flip-in">
+                  <figure style="margin:0 0 12px">
+                    <img src="assets/img/AteneuUnioCapt.jpeg" alt="Interior de restaurante moderno" style="width:100%;border-radius:10px">
+                  </figure>
+                  <h3 id="p1-title">Ateneu Unió Restaurant</h3>
+                  <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
+                  <div class="card-actions" data-animate-group>
+                    <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
+                  </div>
+                </article>
+
+                <article class="card neoglass project neon-gold"
+                        role="listitem"
+                        aria-labelledby="p2-title"
+                        data-animate
+                        data-effect="slide-blur">
+                  <figure style="margin:0 0 12px">
+                    <img src="assets/img/AteneuUnioCapt.jpeg" alt="Salón de peluquería con estilo" style="width:100%;border-radius:10px">
+                  </figure>
+                  <h3 id="p2-title">Peluquería Aura — Demo</h3>
+                  <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
+                  <div class="card-actions" data-animate-group>
+                    <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========================= Servicios ========================= -->
+          <section class="parallax-wrap "
+                  id="servicios"
+                  aria-labelledby="servicios-title"
+                  data-animate
+                  data-effect="wipe-right">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="scene" data-parallax aria-hidden="true" data-scalar-x="12" data-scalar-y="10">
+              <span class="layer blob small" data-depth="0.18" style="right:10%;bottom:14%"></span>
+            </div>
+
+            <div class="container parallax-slot">
+              <div class="section-head neoglass" data-animate-group style="padding:16px">
+                <h2 id="servicios-title">Servicios</h2>
+              </div>
+              <div class="grid" role="list" data-animate-group>
+                <div class="card neoglass glass-gold service"
+                    role="listitem"
+                    data-animate
+                    data-effect="slide-blur">
+                  <h3>Creación de páginas web</h3>
+                  <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
+                  <p class="price">150 €+</p>
+                </div>
+                <div class="card neoglass glass-gold service mt-0"
+                    role="listitem"
+                    data-animate
+                    data-effect="slide-blur">
+                  <h3>Rediseño de webs</h3>
+                  <p class="muted">Mejora visual, UX y rendimiento.</p>
+                  <p class="price">120 €+</p>
+                </div>
+                <div class="card neoglass glass-gold service mt-0"
+                    role="listitem"
+                    data-animate
+                    data-effect="slide-blur">
+                  <h3>Consultoría web</h3>
+                  <p class="muted">Auditoría y plan de mejoras.</p>
+                  <p class="price">30 €/h</p>
+                </div>
+                <div class="card neoglass glass-gold service mt-0"
+                    role="listitem"
+                    data-animate
+                    data-effect="slide-blur">
+                  <h3>Gestión de e-commerce</h3>
+                  <p class="muted">Soporte y contenidos mensuales.</p>
+                  <p class="price">75 €/mes+</p>
+                </div>
+                <div class="card neoglass glass-gold service mt-0"
+                    role="listitem"
+                    data-animate
+                    data-effect="slide-blur">
+                  <h3>Clases de programación</h3>
+                  <p class="muted">Sesiones 1:1 prácticas.</p>
+                  <p class="price">20 €/h</p>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ========================= Currículum ========================= -->
+          <section class="parallax-wrap "
+                  id="cv"
+                  aria-labelledby="cv-title"
+                  data-animate
+                  data-effect="blackout">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="container parallax-slot">
+
+              <!-- Título + botón -->
+              <div class="section-head neoglass glass-gold" data-animate-group
+                  style="padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
+                <h2 id="cv-title" style="margin:0">Currículum</h2>
+                <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>
+                  Descargar CV
+                </a>
+              </div>
+
+              <div class="grid">
+
+                <!-- ========================= EXPERIENCIA ========================= -->
+                <div class="card neoglass glass-gold" data-animate-group>
+                  <h3>Experiencia</h3>
+
+                  <div class="timeline" role="list" data-animate-group>
+
+                    <!-- Devinet -->
+                    <div class="timeline-item card neoglass glass-gold"
+                        role="listitem"
+                        data-animate
+                        data-effect="up">
+                      <strong>Full Stack Developer — Devinet</strong>
+                      <span class="muted">Feb 2024 – Actualidad</span>
+
+                      <p class="muted">
+                        Desarrollo y mantenimiento de aplicaciones web internas, integrando APIs,
+                        automatizando procesos y optimizando flujos corporativos. Trabajo full-stack
+                        con enfoque en rendimiento, escalabilidad y buenas prácticas.
+                      </p>
+
+                      <div class="icons">
+                        <div class="icon"><i class="devicon-codeigniter-plain"></i><span>CodeIgniter 4</span></div>
+                        <div class="icon"><i class="devicon-php-plain"></i><span>PHP</span></div>
+                        <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
+                        <div class="icon"><i class="devicon-amazonwebservices-original"></i><span>AWS</span></div>
+                        <div class="icon"><i class="devicon-jquery-plain"></i><span>jQuery</span></div>
+                        <div class="icon"><i class="devicon-git-plain"></i><span>Git</span></div>
+                      </div>
+                    </div>
+
+                    <!-- Tenea -->
+                    <div class="timeline-item card neoglass glass-gold"
+                        role="listitem"
+                        data-animate
+                        data-effect="up">
+                      <strong>Desarrollador Backend — Tenea</strong>
+                      <span class="muted">Oct 2023 – Ene 2024</span>
+
+                      <p class="muted">
+                        Mantenimiento y evolución de sistemas backend para clientes empresariales.
+                        Optimización de rendimiento, refactorización de módulos y soporte técnico
+                        en entornos de alta disponibilidad.
+                      </p>
+
+                      <div class="icons">
+                        <div class="icon"><i class="devicon-symfony-original"></i><span>Symfony</span></div>
+                        <div class="icon"><i class="devicon-nodejs-plain"></i><span>Node.js</span></div>
+                        <div class="icon"><i class="devicon-react-original"></i><span>React</span></div>
+                        <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
+                      </div>
+                    </div>
+
+                    <!-- Vilax -->
+                    <div class="timeline-item card neoglass glass-gold"
+                        role="listitem"
+                        data-animate
+                        data-effect="up">
+                      <strong>Desarrollador Web — Vilax</strong>
+                      <span class="muted">Ene 2023 – Sep 2023</span>
+
+                      <p class="muted">
+                        Creación y mantenimiento de webs corporativas y tiendas online. Optimización SEO,
+                        gestión de catálogo y diseño de interfaces funcionales para mejorar conversión.
+                      </p>
+
+                      <div class="icons">
+                        <div class="icon"><i class="devicon-wordpress-plain"></i><span>WordPress</span></div>
+                        <div class="icon"><i class="devicon-php-plain"></i><span>PHP</span></div>
+                        <div class="icon"><i class="devicon-tailwindcss-plain"></i><span>Tailwind</span></div>
+                        <div class="icon"><i class="devicon-figma-plain"></i><span>Figma</span></div>
+                      </div>
+                    </div>
+
+                    <!-- Farmacia y Salud Digital -->
+                    <div class="timeline-item card neoglass glass-gold"
+                        role="listitem"
+                        data-animate
+                        data-effect="up">
+                      <strong>Operaciones Digitales — Farmacia y Salud Digital</strong>
+                      <span class="muted">Ene 2022 – Jun 2022</span>
+
+                      <p class="muted">
+                        Gestión de catálogos y contenido digital para múltiples e-commerce.
+                        Implementación de SEO técnico y optimización continua para mejorar
+                        la visibilidad y el rendimiento de las páginas.
+                      </p>
+
+                      <div class="icons">
+                        <div class="icon"><i class="devicon-wordpress-plain"></i><span>WordPress</span></div>
+                        <div class="icon"><span>SEO</span></div>
+                        <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div><!-- grid -->
+            </div><!-- container -->
+          </section>
+
+          <!-- ========================= Contacto ========================= -->
+          <section class="parallax-wrap"
+                  id="contacto"
+                  aria-labelledby="contacto-title"
+                  data-animate
+                  data-effect="wipe-up">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="container parallax-slot">
+              <div class="section-head neoglass" data-animate-group style="padding:16px">
+                <h2 id="contacto-title" style="margin:0">Contacto</h2>
+              </div>
+
+              <div class="contact-wrap" data-animate-group>
+                <div class="card neoglass glass-gold contact-card" role="form" aria-labelledby="contacto-title">
+                  <div class="contact-info">
+                    <h3 id="datos-contacto">Hablemos de tu proyecto</h3>
+                    <p class="muted">
+                      Cuéntame qué necesitas: una nueva web, mejorar la actual o un desarrollo a medida.
+                      Suelo responder en 24–48 h laborables.
+                    </p>
+
+                    <ul class="contact-list" aria-label="Datos de contacto">
+                      <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a>
+                      </li>
+
+                      <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:+34670248461">+34 670 24 84 61</a>
+                      </li>
+                    </ul>
+
+                    <p class="muted small">
+                      Si quieres, indícame también presupuesto aproximado y plazos deseados.
+                    </p>
+                  </div>
+
+                  <form class="contact-form"
+                        action="https://formspree.io/f/XXXXXXXX"
+                        method="POST"
+                        aria-labelledby="form-title"
+                        data-animate
+                        data-effect="skew-up">
+                    <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
+
+                    <div class="row" data-animate-group>
+                      <div>
+                        <label class="sr-only" for="name">Tu nombre</label>
+                        <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
+                      </div>
+                      <div>
+                        <label class="sr-only" for="email">Tu email</label>
+                        <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email">
+                      </div>
+                      <div class="full">
+                        <label class="sr-only" for="message">Mensaje</label>
+                        <textarea id="message" name="message" rows="6"
+                                  placeholder="Cuéntame brevemente tu proyecto, objetivos y plazos"
+                                  required aria-required="true"></textarea>
+                      </div>
+                      <div class="full">
+                        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+                      </div>
+                      <p class="muted small full">
+                        No compartiré tus datos con terceros. Solo los usaré para responder a tu mensaje.
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ========================= Footer ========================= -->
+          <footer class="parallax-wrap"
+                  role="contentinfo"
+                  data-animate
+                  data-effect="clip-diag"
+                  style="padding:48px 0 70px">
+            <div class="section-bg" aria-hidden="true"></div>
+            <div class="section-grid" aria-hidden="true"></div>
+
+            <div class="container parallax-slot">
+
+              <div class="card neoglass glass-gold" style="padding:28px; text-align:left">
+
+                <p style="margin:0; font-weight:600;">
+                  © <span id="year"></span> Sergi Mallén López
+                </p>
+
+                <p class="muted" style="margin:6px 0 0; font-size:0.95rem;">
+                  Desarrollador Web Full-Stack — Portfolio personal
+                </p>
+
+                <p class="muted" style="margin:12px 0 0; font-size:0.9rem;">
+                  Alojado en <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+                </p>
+
+              </div>
+
+            </div>
+          </footer>
+        </main>
+
+      </div>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- ========================= Hero ========================= -->
-    <section class="hero parallax-wrap pb-5" id="top" aria-labelledby="hero-title" data-animate data-effect="fade">
-      <!-- fondos -->
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
 
-      <!-- escena parallax -->
-      <div class="scene" id="heroParallax" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="14">
-        <span class="layer blob" data-depth="0.12" style="left:10%;top:12%"></span>
-        <span class="layer blob small" data-depth="0.28" style="right:12%;bottom:10%"></span>
-        <img class="layer" data-depth="0.50"
-             src="assets/img/Logo_v4_Blanc.png"
-             alt="" style="width:420px;right:6%;top:10%;border-radius:14px;opacity:.8">
-      </div>
-
-      <!-- contenido -->
-      <div class="container parallax-slot">
-        <div class="hero-body neoglass" data-animate-group>        
-          <h1 id="hero-title" class="title">Desarrollo de webs rápidas, accesibles y mantenibles</h1>
-          <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
-          <div class="cta" role="group" aria-label="Acciones principales" data-animate-group>
-            <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
-            <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
-          </div>
-
-          <!-- Imagen hero
-          <figure class="mt-5" style="margin:0">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Puesto de trabajo con código en pantalla" style="width:100%;border-radius:12px">
-            <figcaption class="sr-only">Entorno de trabajo de desarrollo</figcaption> 
-          </figure> -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= Sobre mí ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="sobre-mi" aria-labelledby="sobre-title" data-animate data-effect="up">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="10" data-scalar-y="10">
-        <span class="layer blob small" data-depth="0.16" style="left:6%;top:18%"></span>
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="sobre-title">Sobre mí</h2>
-        </div>
-        <div class="card neoglass glass-gold" role="article" data-animate-group>
-          <div class="about-flex">
-            <div class="about-text">            
-              <p>
-                Soy Sergi Mallén, desarrollador web full-stack. Construyo sitios rápidos, claros y fáciles de mantener.
-                Me muevo cómodo en HTML, CSS y JavaScript, y trabajo backend con PHP y MySQL cuando el proyecto lo pide.
-              </p>
-
-              <p>
-                Disfruto convirtiendo ideas en productos: defino el alcance, maqueto, desarrollo y despliego con CI/CD.
-                Me obsesionan dos cosas: rendimiento real (Core Web Vitals) y una UX que explique sin fricción.
-              </p>
-
-              <p>
-                He creado proyectos propios como un juego tipo GeoGuessr por España, un tracker de inversiones
-                y una app de recetas. En freelance, ayudo a negocios locales a lanzar o mejorar su web con
-                resultados medibles.
-              </p>
-
-              <ul class="bullets">
-                <li>Stack: HTML/CSS/JS, PHP, MySQL, GitHub Actions.</li>
-                <li>Front: componentes accesibles, imágenes optimizadas, animaciones con control de movimiento.</li>
-                <li>Ops: Pages/Netlify, automatización de builds y fetchs de datos.</li>
-              </ul>
-
-              <div class="cta-row">
-                <a class="btn" href="#projects">Ver proyectos</a>
-                <a class="btn outline" href="#contact">Contactar</a>
-              </div>
-            </div>
-
-            <figure class="about-photo">
-              <img src="assets/img/FotoPerfil-sinBG.png" alt="Cuaderno con notas técnicas y portátil">
-            </figure>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================= Skills ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="skills" aria-labelledby="skills-title" data-animate data-effect="blackout">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="12">
-        <span class="layer blob small" data-depth="0.20" style="right:8%;top:16%"></span>
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="skills-title">Skills</h2>
-        </div>
-
-        <div class="grid" data-animate-group>
-          <div class="card neoglass glass-gold skills-group" aria-labelledby="frontend-title" data-animate-group>
-            <h3 id="frontend-title">Frontend</h3>
-            <div class="icons" role="list" data-animate-group>
-              <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
-              <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
-              <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
-              <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
-              <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
-              <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
-            </div>
-          </div>
-
-          <div class="card neoglass glass-gold skills-group" aria-labelledby="backend-title" data-animate-group>
-            <h3 id="backend-title">Backend</h3>
-            <div class="icons" role="list" data-animate-group>
-              <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
-              <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
-              <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
-              <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
-              <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
-              <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
-              <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
-            </div>
-          </div>
-
-          <div class="card neoglass glass-gold skills-group" aria-labelledby="otros-title" data-animate-group>
-            <h3 id="otros-title">Otros</h3>
-            <div class="icons" role="list" data-animate-group>
-              <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
-              <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
-              <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
-              <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
-              <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= Proyectos ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="proyectos" aria-labelledby="proyectos-title" data-animate data-effect="up">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="16" data-scalar-y="12">
-        <span class="layer blob small" data-depth="0.22" style="left:8%;top:22%"></span>
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="proyectos-title">Proyectos</h2>
-        </div>
-        <div class="grid" role="list" data-animate-group>
-          <article class="card neoglass project neon-gold" role="listitem" aria-labelledby="p1-title" data-effect="fade">
-            <figure style="margin:0 0 12px">
-              <img src="assets/img/AteneuUnioCapt.jpeg" alt="Interior de restaurante moderno" style="width:100%;border-radius:10px">
-            </figure>
-            <h3 id="p1-title">Ateneu Unió Restaurant</h3>
-            <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
-            <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
-            </div>
-          </article>
-
-          <article class="card neoglass project neon-gold" role="listitem" aria-labelledby="p2-title" data-effect="fade">
-            <figure style="margin:0 0 12px">
-              <img src="assets/img/AteneuUnioCapt.jpeg" alt="Salón de peluquería con estilo" style="width:100%;border-radius:10px">
-            </figure>
-            <h3 id="p2-title">Peluquería Aura — Demo</h3>
-            <p>Demo ligera para negocio local. Estructura escalable y rápida en GitHub Pages.</p>
-            <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= Servicios ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="servicios" aria-labelledby="servicios-title" data-animate data-effect="down">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="12" data-scalar-y="10">
-        <span class="layer blob small" data-depth="0.18" style="right:10%;bottom:14%"></span>
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="servicios-title">Servicios</h2>
-        </div>
-        <div class="grid" role="list" data-animate-group>
-          <div class="card neoglass glass-gold service" role="listitem" data-effect="blur">
-            <h3>Creación de páginas web</h3>
-            <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
-            <p class="price">150 €+</p>
-          </div>
-          <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Rediseño de webs</h3>
-            <p class="muted">Mejora visual, UX y rendimiento.</p>
-            <p class="price">120 €+</p>
-          </div>
-          <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Consultoría web</h3>
-            <p class="muted">Auditoría y plan de mejoras.</p>
-            <p class="price">30 €/h</p>
-          </div>
-          <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Gestión de e-commerce</h3>
-            <p class="muted">Soporte y contenidos mensuales.</p>
-            <p class="price">75 €/mes+</p>
-          </div>
-          <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Clases de programación</h3>
-            <p class="muted">Sesiones 1:1 prácticas.</p>
-            <p class="price">20 €/h</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================= Currículum ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="cv" aria-labelledby="cv-title" data-animate data-effect="blackout">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="container parallax-slot">
-
-        <!-- Título + botón -->
-        <div class="section-head neoglass glass-gold" data-animate-group
-            style="padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
-          <h2 id="cv-title" style="margin:0">Currículum</h2>
-          <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>
-            Descargar CV
-          </a>
-        </div>
-
-        <div class="grid">
-
-          <!-- ========================= EXPERIENCIA ========================= -->
-          <div class="card neoglass glass-gold" data-animate-group>
-            <h3>Experiencia</h3>
-
-            <div class="timeline" role="list" data-animate-group>
-
-              <!-- Devinet -->
-              <div class="timeline-item card neoglass glass-gold"
-                  role="listitem" data-animate data-effect="up">
-                <strong>Full Stack Developer — Devinet</strong>
-                <span class="muted">Feb 2024 – Actualidad</span>
-
-                <p class="muted">
-                  Desarrollo y mantenimiento de aplicaciones web internas, integrando APIs,
-                  automatizando procesos y optimizando flujos corporativos. Trabajo full-stack
-                  con enfoque en rendimiento, escalabilidad y buenas prácticas.
-                </p>
-
-                <div class="icons">
-                  <div class="icon"><i class="devicon-codeigniter-plain"></i><span>CodeIgniter 4</span></div>
-                  <div class="icon"><i class="devicon-php-plain"></i><span>PHP</span></div>
-                  <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
-                  <div class="icon"><i class="devicon-amazonwebservices-original"></i><span>AWS</span></div>
-                  <div class="icon"><i class="devicon-jquery-plain"></i><span>jQuery</span></div>
-                  <div class="icon"><i class="devicon-git-plain"></i><span>Git</span></div>
-                </div>
-              </div>
-
-              <!-- Tenea -->
-              <div class="timeline-item card neoglass glass-gold"
-                  role="listitem" data-animate data-effect="up">
-                <strong>Desarrollador Backend — Tenea</strong>
-                <span class="muted">Oct 2023 – Ene 2024</span>
-
-                <p class="muted">
-                  Mantenimiento y evolución de sistemas backend para clientes empresariales.
-                  Optimización de rendimiento, refactorización de módulos y soporte técnico
-                  en entornos de alta disponibilidad.
-                </p>
-
-                <div class="icons">
-                  <div class="icon"><i class="devicon-symfony-original"></i><span>Symfony</span></div>
-                  <div class="icon"><i class="devicon-nodejs-plain"></i><span>Node.js</span></div>
-                  <div class="icon"><i class="devicon-react-original"></i><span>React</span></div>
-                  <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
-                </div>
-              </div>
-
-              <!-- Vilax -->
-              <div class="timeline-item card neoglass glass-gold"
-                  role="listitem" data-animate data-effect="up">
-                <strong>Desarrollador Web — Vilax</strong>
-                <span class="muted">Ene 2023 – Sep 2023</span>
-
-                <p class="muted">
-                  Creación y mantenimiento de webs corporativas y tiendas online. Optimización SEO,
-                  gestión de catálogo y diseño de interfaces funcionales para mejorar conversión.
-                </p>
-
-                <div class="icons">
-                  <div class="icon"><i class="devicon-wordpress-plain"></i><span>WordPress</span></div>
-                  <div class="icon"><i class="devicon-php-plain"></i><span>PHP</span></div>
-                  <div class="icon"><i class="devicon-tailwindcss-plain"></i><span>Tailwind</span></div>
-                  <div class="icon"><i class="devicon-figma-plain"></i><span>Figma</span></div>
-                </div>
-              </div>
-
-              <!-- Farmacia y Salud Digital -->
-              <div class="timeline-item card neoglass glass-gold"
-                  role="listitem" data-animate data-effect="up">
-                <strong>Operaciones Digitales — Farmacia y Salud Digital</strong>
-                <span class="muted">Ene 2022 – Jun 2022</span>
-
-                <p class="muted">
-                  Gestión de catálogos y contenido digital para múltiples e-commerce.
-                  Implementación de SEO técnico y optimización continua para mejorar
-                  la visibilidad y el rendimiento de las páginas.
-                </p>
-
-                <div class="icons">
-                  <div class="icon"><i class="devicon-wordpress-plain"></i><span>WordPress</span></div>
-                  <div class="icon"><span>SEO</span></div>
-                  <div class="icon"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- ========================= FORMACIÓN ========================= 
-          <div class="card neoglass glass-gold" data-animate-group>
-            <h3>Formación</h3>
-
-            <div class="edu grid" role="list" data-animate-group>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Curso Superior Full Stack — FGUSAL</h4>
-                <p class="muted">2025 · Desarrollo avanzado con PHP, JS y bases de datos.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Programación JS, MySQL y PHP — FGUSAL</h4>
-                <p class="muted">2024 · Backend y frontend con enfoque práctico.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>PHP Certificate — OpenBootcamp</h4>
-                <p class="muted">2023 · Fundamentos y buenas prácticas.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>JavaScript Certificate — OpenBootcamp</h4>
-                <p class="muted">2022 · JS moderno, asincronía y DOM.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>GS Gràfica Interactiva — La Llotja</h4>
-                <p class="muted">2019 – 2022 · Diseño interactivo y digital.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Grado en Impresión Gráfica — Escola Antoni Algueró</h4>
-                <p class="muted">2017 – 2019 · Producción gráfica.</p>
-              </div>
-
-            </div>
-          </div>-->
-
-        </div><!-- grid -->
-      </div><!-- container -->
-    </section>
-
-
-    <!-- ========================= Blog ========================= 
-    <section class="parallax-wrap mt-5 pb-5" id="blog" aria-labelledby="blog-title" data-animate data-effect="blur">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="scene" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="12">
-        <span class="layer blob" data-depth="0.10" style="left:10%;top:18%"></span>
-        <span class="layer blob small" data-depth="0.22" style="right:10%;bottom:12%"></span>
-      </div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
-          <h2 id="blog-title" style="margin:0">Blog</h2>
-          <a class="btn btn-outline" href="blog/">Ver todos</a>
-        </div>
-
-        <div class="grid" role="list" data-animate-group>
-          <article class="card neoglass" role="listitem" aria-labelledby="b1" data-animate data-effect="up">
-            <h3 id="b1">
-              <a href="blog/posts/2025-09-19-php-mysql-estructura.html">
-                Cómo estructuro un proyecto PHP + MySQL
-              </a>
-            </h3>
-            <p class="muted">Organización de carpetas, controladores y modelos.</p>
-          </article>
-
-          <article class="card neoglass mt-0" role="listitem" aria-labelledby="b2" data-animate data-effect="up">
-            <h3 id="b2">
-              <a href="blog/posts/2025-09-19-checklist-rendimiento.html">
-                Checklist de rendimiento para producción
-              </a>
-            </h3>
-            <p class="muted">Verificaciones rápidas de velocidad y optimización.</p>
-          </article>
-
-          <article class="card neoglass mt-0" role="listitem" aria-labelledby="b3" data-animate data-effect="up">
-            <h3 id="b3">
-              <a href="blog/posts/2025-09-19-api-rest-buenas-practicas.html">
-                API REST: buenas prácticas desde backend
-              </a>
-            </h3>
-            <p class="muted">Versionado, códigos HTTP y consistencia.</p>
-          </article>
-        </div>
-      </div>
-    </section>-->
-
-    <!-- ========================= Contacto ========================= -->
-    <section class="parallax-wrap mt-5 pb-5" id="contacto" aria-labelledby="contacto-title" data-animate data-effect="down">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="container parallax-slot">
-        <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="contacto-title" style="margin:0">Contacto</h2>
-        </div>
-
-        <div class="contact-wrap" data-animate-group>
-          <div class="card neoglass glass-gold contact-card" role="form" aria-labelledby="contacto-title">
-            <div class="contact-info">
-              <h3 id="datos-contacto">Hablemos de tu proyecto</h3>
-              <p class="muted">
-                Cuéntame qué necesitas: una nueva web, mejorar la actual o un desarrollo a medida.
-                Suelo responder en 24–48 h laborables.
-              </p>
-
-              <ul class="contact-list" aria-label="Datos de contacto">
-                <li>
-                  <i class="fa-solid fa-envelope"></i>
-                  <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a>
-                </li>
-
-                <li>
-                  <i class="fa-solid fa-phone"></i>
-                  <a href="tel:+34670248461">+34 670 24 84 61</a>
-                </li>
-              </ul>
-
-              <p class="muted small">
-                Si quieres, indícame también presupuesto aproximado y plazos deseados.
-              </p>
-            </div>
-
-            <form class="contact-form"
-                  action="https://formspree.io/f/XXXXXXXX"
-                  method="POST"
-                  aria-labelledby="form-title"
-                  data-animate data-effect="up">
-              <h3 id="form-title" class="sr-only">Formulario de contacto</h3>
-
-              <div class="row" data-animate-group>
-                <div>
-                  <label class="sr-only" for="name">Tu nombre</label>
-                  <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
-                </div>
-                <div>
-                  <label class="sr-only" for="email">Tu email</label>
-                  <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email">
-                </div>
-                <div class="full">
-                  <label class="sr-only" for="message">Mensaje</label>
-                  <textarea id="message" name="message" rows="6"
-                            placeholder="Cuéntame brevemente tu proyecto, objetivos y plazos"
-                            required aria-required="true"></textarea>
-                </div>
-                <div class="full">
-                  <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-                </div>
-                <p class="muted small full">
-                  No compartiré tus datos con terceros. Solo los usaré para responder a tu mensaje.
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================= Footer ========================= -->
-    <footer class="parallax-wrap" role="contentinfo" data-animate data-effect="fade" style="padding:48px 0 70px">
-      <div class="section-bg" aria-hidden="true"></div>
-      <div class="section-grid" aria-hidden="true"></div>
-
-      <div class="container parallax-slot">
-
-        <div class="card neoglass glass-gold" style="padding:28px; text-align:left">
-
-          <p style="margin:0; font-weight:600;">
-            © <span id="year"></span> Sergi Mallén López
-          </p>
-
-          <p class="muted" style="margin:6px 0 0; font-size:0.95rem;">
-            Desarrollador Web Full-Stack — Portfolio personal
-          </p>
-
-          <p class="muted" style="margin:12px 0 0; font-size:0.9rem;">
-            Alojado en <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
-          </p>
-
-        </div>
-
-      </div>
-    </footer>
-
-
-    <!-- Scripts -->
-    <script defer src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
-    <script defer src="assets/js/app.js"></script>
+  <!-- GSAP + plugins -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Aquí va TU copia privada de ScrollSmoother (Club GreenSock) -->
+  <script defer src="/gsap/ScrollSmoother.min.js"></script>
+  <script defer src="assets/js/app.js"></script>

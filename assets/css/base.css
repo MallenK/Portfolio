@@ -12,6 +12,13 @@
   --radius:14px;
   --container:1100px;
 
+  /* Nuevas variables de color para el degradado en movimiento */
+  --bg-move-color-1: #111111;  /* Negro profundo */
+  --bg-move-color-2: #434343;  /* Tu gris base */
+  --bg-move-color-3: #5f5f5f;  /* Un gris más claro (punto de luz) */
+  
+  --bg-position: 0% 0%; /* Variable que GSAP animará *
+
   /* Sombras adaptadas a fondo más claro */
   --shadow: 0 1px 3px rgba(0,0,0,0.25),
             0 4px 8px rgba(0,0,0,0.18);
@@ -30,14 +37,80 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
-  background:var(--bg); color:var(--text); line-height:1.6;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+
+body {
+  margin: 0;
+  font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  overflow: auto;
+
+  /* 1. Degradado grande con ángulo para la animación */
+  background-image: linear-gradient(
+    135deg, /* Ángulo diagonal de 135 grados */
+    var(--bg-move-color-1) 0%, 
+    var(--bg-move-color-2) 30%, 
+    var(--bg-move-color-1) 100%
+  );
+  
+  /* 2. Establecer el tamaño del fondo (ej: 300% de la ventana) */
+  background-size: 300% 300%;
+  
+  /* 3. Usar la variable de posición */
+  background-position: var(--bg-position);
+  
+  /* 4. Fija el fondo al viewport y aplica el color de fallback */
+  background-attachment: fixed;
+  background-color: var(--bg);
+  
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 a{color:inherit}
 .container{max-width:var(--container); margin-inline:auto; padding:0 18px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+main {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth; /* para saltos suaves con rueda / trackpad */
+}
+
+/* Cada sección (y el footer) es una "pantalla" */
+main > section.parallax-wrap,
+main > footer.parallax-wrap {
+  /* min-height: 100vh;
+  sin snap nativo, el snap lo hará GSAP */
+   scroll-snap-align: start;
+     scroll-snap-stop: always; 
+}
+
+/* Opcional: evitar el hueco de margen superior de las secciones */
+main > section.parallax-wrap.mt-5 {
+  margin-top: 0 !important;
+}
+
+/* El contenido interno se centra verticalmente */
+.parallax-slot {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* contenido arriba, nav abajo */
+  min-height: 100vh;
+}
+
+.section-nav {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.section-nav .btn-section-nav {
+  font-size: 0.9rem;
+  padding: 8px 14px;
+}
+
+
 
 /* Header */
 header{
@@ -113,7 +186,7 @@ header{
 
 /* Secciones: más separación vertical */
 section{padding:var(--section-y) 0}
-section + section{padding-top:var(--section-y-tight)}
+/*section + section{padding-top:var(--section-y-tight)}*/
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--block-gap);margin-bottom:calc(var(--block-gap) * 0.9)}
 h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .muted{color:var(--muted);font-size:1rem}
@@ -137,6 +210,13 @@ h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .js [data-animate-group]{position:relative}
 .js [data-animate-group] > *{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;transition-delay:var(--delay,0ms);will-change:opacity,transform}
 .js [data-animate-group] > *.is-visible{opacity:1;transform:none}
+
+
+/* Sobre mi */
+
+#sobre-mi {
+    --section-bg-color: #242424;
+}
 
 /* Tarjetas y grillas */
 .card{
@@ -306,7 +386,22 @@ h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .price{font-weight:800;color:var(--accent)}
 
 /* CV */
-.timeline{display:grid;gap:var(--block-gap)}
+.timeline {
+  display: grid;
+  gap: var(--block-gap);
+}
+/* Media Query para Escritorio (ejemplo: min-width de 1024px) */
+@media (min-width: 1024px) {
+  .timeline {
+    /* Crea un grid de 2 columnas con igual ancho (1fr) */
+    grid-template-columns: 1fr 1fr;
+    /* Define 2 filas que se ajustan al contenido (auto) */
+    grid-template-rows: auto auto;
+    /* Asegura que haya un espacio entre las celdas */
+    gap: 20px; /* Puedes ajustar este valor si usas 'var(--block-gap)' */
+  }
+}
+
 .timeline-item{
   display:grid;gap:6px;padding:14px;border-radius:12px;border:1px solid var(--border);background:#0a0a0a;
   transition:
