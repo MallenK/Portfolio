@@ -31,9 +31,21 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
-  background:var(--bg); color:var(--text); line-height:1.6;
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  margin:0; 
+  font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;
+  
+  /* ================================================= */
+  /* === CAMBIO SOLICITADO: BACKGROUND LINEAR GRADIENT === */
+  /* Va desde un gris oscuro (#181818) en la parte superior a un gris neutro (#2c2c2c) */
+  background: linear-gradient(to bottom, #181818, #2c2c2c);
+  /* Asegura que el degradado cubra todo el viewport */
+  background-attachment: fixed; 
+  /* ================================================= */
+  
+  color:var(--text); 
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased; 
+  text-rendering:optimizeLegibility;
 }
 a{color:inherit}
 .container{max-width:var(--container); margin-inline:auto; padding:0 18px}
