@@ -118,25 +118,141 @@ section + section{padding-top:var(--section-y-tight)}
 h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .muted{color:var(--muted);font-size:1rem}
 
+
+
+
+
+
+
+
+
 /* Hero */
-.hero{position:relative;overflow:hidden;padding: clamp(56px, 9vw, 110px) 0 clamp(36px, 6vw, 64px)}
-.hero-body{position:relative;z-index:1;display:flex;flex-direction:column;gap:clamp(12px,2vw,18px)}
-.hero .title{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.1;font-weight:800;letter-spacing:.2px;margin:10px 0 0}
+.hero{
+    position:relative;
+    overflow:hidden;
+    padding: clamp(40px, 8vw, 110px) 0 clamp(40px, 8vw, 64px); 
+}
+
+/* Contenedor del texto (Desktop/Tablet) */
+.hero .container {
+    display: flex;
+    justify-content: flex-start; 
+}
+
+/* Cuerpo del Hero (el texto) */
+.hero-body{
+    max-width: 550px; 
+    width: 100%;
+    position:relative;
+    z-index:1; 
+    display:flex;
+    flex-direction:column;
+    gap:clamp(12px,2vw,18px);
+}
+
+/* Títulos y texto usan unidades relativas (clamp), lo que ya es responsive */
+.hero .title{font-size:clamp(1.8rem,6vw,3.4rem);line-height:1.1;font-weight:800;letter-spacing:.2px;margin:10px 0 0}
 .hero .kicker{color:var(--muted);margin:12px 0 20px}
 .hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
-.hero-parallax{position:absolute;inset:-35% -25% -10%;pointer-events:none;z-index:0;transform:translateZ(0);opacity:0;transition:opacity .8s ease}
-.hero-layer{position:absolute;border-radius:50%;filter:blur(0);opacity:.35;transform:translateZ(0);box-shadow:0 0 120px rgba(255,210,0,0.16)}
-.hero-layer.layer-1{width:320px;height:320px;top:6%;left:-120px;background:radial-gradient(circle at 30% 30%, rgba(255,210,0,0.8), rgba(255,210,0,0))}
-.hero-layer.layer-2{width:380px;height:380px;bottom:-140px;right:-120px;background:radial-gradient(circle at 70% 70%, rgba(255,255,255,0.18), rgba(255,210,0,0))}
-.hero-layer.layer-3{width:260px;height:260px;top:-120px;right:25%;background:radial-gradient(circle at 40% 40%, rgba(255,210,0,0.65), rgba(255,210,0,0))}
+
+
+/* IMAGEN FIJA Y NO ANIMADA (DESKTOP/TABLET) */
+.hero-fixed-image {
+    position: absolute;
+    width: 420px; 
+    right: 6%; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    border-radius: 14px;
+    opacity: 0.8; 
+    z-index: 0; 
+    pointer-events: none; 
+    object-fit: contain; 
+    max-height: 80%;
+}
+
+
+/* Escena Parallax (blobs) */
+.hero-parallax{
+    position:absolute;
+    inset:-35% -25% -10%;
+    pointer-events:none;
+    z-index:0;
+    transform:translateZ(0);
+    opacity:0;
+    transition:opacity .8s ease;
+}
+/* ... otros estilos de capas y animación del parallax ... */
 .hero[data-animate].is-visible .hero-parallax{opacity:1}
 
-/* Animaciones por scroll */
+
+/* ============================================================================== */
+/* === MEDIA QUERY FINAL PARA MÓVILES (max-width: 768px) === */
+/* ============================================================================== */
+@media (max-width: 768px) {
+    /* 1. LAYOUT FLEXBOX para Hero (Contenido + Imagen) */
+    .hero {
+        /* Hacemos el contenedor Hero un Flex Container */
+        display: flex; 
+        flex-direction: column; /* Apila los hijos (imagen y contenido) verticalmente */
+        align-items: center; /* Centra los hijos horizontalmente */
+    }
+
+    /* 2. IMAGEN: Se reintroduce en el flujo y se ajusta su posición */
+    .hero-fixed-image {
+        position: relative; /* Desactiva la posición absoluta */
+        width: 80%; /* Ocupa un ancho razonable en móvil */
+        max-width: 300px; /* Limita el tamaño máximo */
+        margin-bottom: 24px; /* Espacio entre imagen y texto */
+        
+        /* Deshacer transformaciones de desktop */
+        right: auto;
+        top: auto;
+        transform: none;
+        
+        /* Aseguramos que sea visible */
+        display: block !important; 
+    }
+    
+    /* 3. CONTENIDO: Se expande y se centra */
+    .hero .container {
+        /* Desactiva el flexbox del container para que el hero-body no esté limitado */
+        display: block; 
+    }
+    .hero-body {
+        max-width: 100%;
+        padding: 0 15px;
+        align-items: center;
+        text-align: center;
+    }
+    .hero-body .cta {
+        justify-content: center;
+    }
+    
+    /* 4. ANIMACIONES/PARALLAX: OCULTAR */
+    .hero .scene {
+        display: none !important;
+    }
+    .js [data-animate],
+    .js [data-animate-group] > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        transition-delay: 0ms !important;
+    }
+}
+
+/* Animaciones por scroll (Estilos originales para Desktop/Tablet) */
 .js [data-animate]{opacity:0;transform:translateY(32px) scale(.98);transition:opacity .6s ease, transform .6s ease;will-change:opacity,transform}
 .js [data-animate].is-visible{opacity:1;transform:none}
 .js [data-animate-group]{position:relative}
 .js [data-animate-group] > *{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;transition-delay:var(--delay,0ms);will-change:opacity,transform}
 .js [data-animate-group] > *.is-visible{opacity:1;transform:none}
+
+
+
+
+
 
 /* Tarjetas y grillas */
 .card{
@@ -296,67 +412,114 @@ h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .icon span{font-weight:600}
 .icon:hover{transform:translateY(-1px);box-shadow:var(--shadow-hover)}
 
-/* Proyectos */
-.project h3{margin:0 0 8px}
-.project p{margin:0 0 14px;color:var(--muted)}
-.card-actions{display:flex;gap:12px;flex-wrap:wrap}
 
-/* Grid solo para proyectos y plantillas */
+
+
+/* Proyectos */
+.project h3 {
+  margin: 0 0 8px;
+}
+
+.project p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------ */
+/* GRID PRINCIPAL DE PROYECTOS: DISPOSICIÓN 2X2 (Por defecto para ordenador/tablet) */
+/* ------------------------------------------------ */
+
 .projects-grid {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-  align-items: stretch; /* estira todos los items a la misma altura */
+  /* 2x2: Dos columnas de igual ancho (1fr) */
+  grid-template-columns: repeat(2, 1fr); 
+  align-items: stretch; 
 }
 
-/* Tarjeta de proyecto */
+/* ------------------------------------------------ */
+/* Media Query para Dispositivos Móviles (Disposición 1x4) */
+/* Ancho máximo de 768px para cubrir la mayoría de tablets en vertical y móviles.
+   Si usas "max-width: 600px" solo cubriría móviles pequeños/medianos.
+   Ajusté a 768px para garantizar la disposición 1x4 en móviles y tablets pequeñas.
+*/
+/* ------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .projects-grid {
+    /* 1x4: Una sola columna (1fr) */
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  /* Mantener el padding del 5% en la imagen para móvil/tablet pequeña */
+  .project-figure img {
+    padding: 5%; 
+  }
+}
+
+/* ------------------------------------------------ */
+/* Tarjeta de proyecto y Estilos de Imagen (sin cambios estructurales) */
+/* ------------------------------------------------ */
+
 .project-card {
   display: flex;
   flex-direction: column;
 }
 
-/* Contenido interno crece y empuja abajo tech + botón */
 .project-card .card-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  justify-content: space-between;
 }
 
 .project-figure {
   width: 100%;
-  height: 180px;              /* altura fija */
-  border: 2px solid #d4af37;  /* borde dorado (combina con tu neon-gold) */
+  height: 180px;
+  border: 2px solid #d4af37;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
-  align-items: center;        /* centra vertical */
-  justify-content: center;    /* centra horizontal */
+  align-items: center;
+  justify-content: center;
   margin: 0 0 12px;
-  background: #0002;          /* opcional, sutil */
+  background: #0002;
 }
 
 .project-figure img {
-  width: auto;
+  max-width: 100%;
   height: 100%;
-  object-fit: scale-down;          /* la imagen ocupa el espacio sin deformarse */
-  border-radius: 10px;        /* mantiene tu estilo */
+  object-fit: scale-down;
+  border-radius: 10px;
 }
 
-/* Bloque de tecnologías al fondo del contenido */
 .project-card .project-tech {
-  margin-top: 5%;
+  margin-top: auto; 
+  padding-top: 10px;
 }
 
-.project-card .card-actions{
-  margin-top: 2%;
+.project-card .card-actions {
+  margin-top: 10px;
 }
 
-.subsection-templates{
+.subsection-templates {
   display: none;
   border: solid;
 }
+
+
+
+
+
+
+
 
 /* Servicios */
 .service h3{margin:0 0 10px}
@@ -515,7 +678,7 @@ footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font
 
   /* Cabecera: que respire y no se parta raro */
   .nav{
-    padding:10px 0;
+    padding:10px 10px;
     gap:8px;
   }
 

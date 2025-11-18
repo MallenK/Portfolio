@@ -60,21 +60,18 @@
   <main id="main">
     <!-- ========================= Hero ========================= -->
     <section class="hero parallax-wrap pb-5" id="top" aria-labelledby="hero-title" data-animate data-effect="fade">
-      <!-- fondos -->
       <div class="section-bg" aria-hidden="true"></div>
       <div class="section-grid" aria-hidden="true"></div>
 
-      <!-- escena parallax -->
       <div class="scene" id="heroParallax" data-parallax aria-hidden="true" data-scalar-x="14" data-scalar-y="14">
         <span class="layer blob" data-depth="0.12" style="left:10%;top:12%"></span>
         <span class="layer blob small" data-depth="0.28" style="right:12%;bottom:10%"></span>
-        <img class="layer" data-depth="0.50"
-             src="assets/img/Logo_v4_Blanc.png"
-             alt="" style="width:420px;right:6%;top:10%;border-radius:14px;opacity:.8">
-      </div>
+        </div>
 
-      <!-- contenido -->
-      <div class="container parallax-slot">
+      <img class="hero-fixed-image" 
+           src="assets/img/Logo_v4_Blanc.png"
+           alt="Logo Sergi Mallén" aria-hidden="true"> 
+           <div class="container parallax-slot">
         <div class="hero-body neoglass" data-animate-group>        
           <h1 id="hero-title" class="title">Sergi Mallén Lopez</h1>
           <h2 id="hero-subtitle" class="subtitle">Web developer</h1>
@@ -83,12 +80,6 @@
             <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
             <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
           </div>
-
-          <!-- Imagen hero
-          <figure class="mt-5" style="margin:0">
-            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" alt="Puesto de trabajo con código en pantalla" style="width:100%;border-radius:12px">
-            <figcaption class="sr-only">Entorno de trabajo de desarrollo</figcaption> 
-          </figure> -->
         </div>
       </div>
     </section>
@@ -110,25 +101,28 @@
           <div class="about-flex">
             <div class="about-text">            
               <p>
-                Soy Sergi Mallén, desarrollador web full-stack. Construyo sitios rápidos, claros y fáciles de mantener.
-                Me muevo cómodo en HTML, CSS y JavaScript, y trabajo backend con PHP y MySQL cuando el proyecto lo pide.
+                Soy <strong>Sergi Mallén</strong>, desarrollador web con más de cuatro años de experiencia.
+                Me especializo en la creación de sitios corporativos y aplicaciones web funcionales, 
+                con una base sólida en el desarrollo Full-Stack.
               </p>
 
               <p>
-                Disfruto convirtiendo ideas en productos: defino el alcance, maqueto, desarrollo y despliego con CI/CD.
-                Me obsesionan dos cosas: rendimiento real (Core Web Vitals) y una UX que explique sin fricción.
+                Mi dominio abarca <strong>HTML, CSS, JavaScript, PHP y MySQL</strong>. Priorizo siempre un código limpio, 
+                una estructura lógica y la eficiencia del producto, lo que asegura el mantenimiento a largo plazo.
+                Busco activamente nuevos retos técnicos para aplicar mis conocimientos y aportar valor.
               </p>
 
               <p>
-                He creado proyectos propios como un juego tipo GeoGuessr por España, un tracker de inversiones
-                y una app de recetas. En freelance, ayudo a negocios locales a lanzar o mejorar su web con
-                resultados medibles.
+                He trabajado con *frameworks* como <strong>CodeIgniter</strong> y <strong>Symphony</strong>, 
+                además de tecnologías modernas como <strong>React</strong> y <strong>Node.js</strong>. 
+                Mi experiencia incluye la <strong>optimización SEO</strong> para mejorar la visibilidad online y 
+                el uso de <strong>API Rest</strong> en soluciones integrales.
               </p>
 
               <ul class="bullets">
-                <li>Stack: HTML/CSS/JS, PHP, MySQL, GitHub Actions.</li>
-                <li>Front: componentes accesibles, imágenes optimizadas, animaciones con control de movimiento.</li>
-                <li>Ops: Pages/Netlify, automatización de builds y fetchs de datos.</li>
+                <li>Stack Principal: <strong>PHP, MySQL</strong> , CodeIgniter y React/Node.js.</li>
+                <li>Filosofía: Código limpio, eficiencia y enfoque en la fiabilidad del Backend.</li>
+                <li>Herramientas clave: Git, JQuery, WordPress, Figma y SEO.</li>
               </ul>
 
               <div class="cta-row">
@@ -167,29 +161,33 @@
               <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
               <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
               <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+              <div class="icon" role="listitem"><i class="devicon-jquery-plain" aria-hidden="true"></i><span>jQuery</span></div>
               <div class="icon" role="listitem"><i class="devicon-react-original" aria-hidden="true"></i><span>React</span></div>
+              <div class="icon" role="listitem"><i class="devicon-tailwindcss-plain" aria-hidden="true"></i><span>Tailwind CSS</span></div>
               <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
               <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
             </div>
           </div>
 
           <div class="card neoglass glass-gold skills-group" aria-labelledby="backend-title" data-animate-group>
-            <h3 id="backend-title">Backend</h3>
+            <h3 id="backend-title">Backend & Bases de Datos</h3>
             <div class="icons" role="list" data-animate-group>
               <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
               <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
               <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
               <div class="icon" role="listitem"><i class="devicon-nodejs-plain" aria-hidden="true"></i><span>Node.js</span></div>
-              <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST (Swagger)</span></div>
               <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
+              <div class="icon" role="listitem"><i class="devicon-swagger-plain" aria-hidden="true"></i><span>API REST</span></div>
               <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
             </div>
           </div>
 
           <div class="card neoglass glass-gold skills-group" aria-labelledby="otros-title" data-animate-group>
-            <h3 id="otros-title">Otros</h3>
+            <h3 id="otros-title">Plataformas & Herramientas</h3>
             <div class="icons" role="list" data-animate-group>
               <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+              <div class="icon" role="listitem"><i class="devicon-amazonwebservices-original"></i><span>AWS</span></div>
+              <div class="icon" role="listitem"><span>SEO</span></div>
               <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
               <div class="icon" role="listitem"><i class="devicon-npm-original-wordmark" aria-hidden="true"></i><span>NPM</span></div>
               <div class="icon" role="listitem"><i class="devicon-composer-line" aria-hidden="true"></i><span>Composer</span></div>
@@ -324,7 +322,7 @@
                 <img src="assets/img/fabverbatim-1.png" alt="Taller de motos Quim Motos" style="width:100%;border-radius:10px">
               </figure>
               <h3 id="p4-title">Fab Verbatim</h3>
-              <p>Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para este taller de motos local.</p>
+              <p>Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para una traductora independiente.</p>
 
               <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Quim Motos">
@@ -507,7 +505,7 @@
         <!-- Título + botón -->
         <div class="section-head neoglass glass-gold" data-animate-group
             style="padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
-          <h2 id="cv-title" style="margin:0">Currículum</h2>
+          <h2 id="cv-title" style="margin:0">Experiencia</h2>
           <a class="btn btn-outline" href="assets/docs/CV Sergi Mallén.pdf" download>
             Descargar CV
           </a>
@@ -516,9 +514,7 @@
         <div class="grid">
 
           <!-- ========================= EXPERIENCIA ========================= -->
-          <div class="card neoglass glass-gold" data-animate-group>
-            <h3>Experiencia</h3>
-
+          
             <div class="timeline" role="list" data-animate-group>
 
               <!-- Devinet -->
@@ -602,7 +598,6 @@
               </div>
 
             </div>
-          </div>
 
           <!-- ========================= FORMACIÓN ========================= 
           <div class="card neoglass glass-gold" data-animate-group>
