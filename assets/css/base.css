@@ -57,7 +57,7 @@ header{
   background:rgba(0,0,0,0.75); backdrop-filter:saturate(120%) blur(8px);
   border-bottom:1px solid var(--border);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 14px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .avatar{
   width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;
@@ -129,9 +129,9 @@ section + section{padding-top:var(--section-y-tight)}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--block-gap);margin-bottom:calc(var(--block-gap) * 0.9)}
 h2{font-size:clamp(1.2rem,2.6vw,1.6rem);margin:0 0 6px;letter-spacing:.3px}
 .muted{color:var(--muted);font-size:1rem}
-
-
-
+.section-head h2{
+  font-size: 2rem;
+}
 
 
 
@@ -705,10 +705,12 @@ footer{padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font
   h2{
     font-size:1.1rem;
   }
-  .section-head{
+  .section-head h2{
     flex-direction:column;
     align-items:flex-start;
     gap:10px;
+    flex-direction: row;
+    font-size: 1.75rem;
   }
 
   /* Cards: menos padding para que no se vean “mazacote” */
