@@ -39,19 +39,24 @@
         </div>
       </a>
 
+      <div class="lang-selector px-4">
+        <button onclick="changeLanguage('ca')" class="lang-btn" aria-label="Cambiar a Català">CA</button>
+        <button onclick="changeLanguage('es')" class="lang-btn active" aria-label="Cambiar a Español">ES</button>
+        <button onclick="changeLanguage('en')" class="lang-btn" aria-label="Switch to English">EN</button>
+      </div>
+
       <button id="menuBtn" class="menu-toggle" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
         <span class="sr-only">Abrir menú</span> ☰
       </button>
 
       <nav id="navMenu" role="navigation" aria-label="Navegación principal" class="menu">
         <ul>
-          <li><a href="#sobre-mi">Sobre mí</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#cv">CV</a></li>
-          <!-- <li><a href="#blog">Blog</a></li>-->
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
+          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#proyectos" data-i18n="nav.projects">Proyectos</a></li>
+          <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+          <li><a href="#cv" data-i18n="nav.cv">CV</a></li>
+          <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -74,11 +79,14 @@
            <div class="container parallax-slot">
         <div class="hero-body neoglass" data-animate-group>        
           <h1 id="hero-title" class="title">Sergi Mallén Lopez</h1>
-          <h2 id="hero-subtitle" class="subtitle">Web developer</h1>
-          <p class="kicker">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
+          
+          <h2 id="hero-subtitle" class="subtitle" data-i18n="hero.subtitle">Web developer</h2>
+          
+          <p class="kicker" data-i18n="hero.text">Full-Stack centrado en rendimiento, accesibilidad y mantenimiento a largo plazo. Sitios y APIs claros, seguros y escalables.</p>
+          
           <div class="cta" role="group" aria-label="Acciones principales" data-animate-group>
-            <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos">Ver proyectos</a>
-            <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto">Pedir presupuesto</a>
+            <a class="btn btn-primary" href="#proyectos" aria-label="Ir a proyectos" data-i18n="hero.btn_projects">Ver proyectos</a>
+            <a class="btn btn-outline" href="#contacto" aria-label="Ir a contacto para pedir presupuesto" data-i18n="hero.btn_budget">Pedir presupuesto</a>
           </div>
         </div>
       </div>
@@ -95,24 +103,24 @@
 
       <div class="container parallax-slot">
         <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="sobre-title">Sobre mí</h2>
+          <h2 id="sobre-title" data-i18n="about.title">Sobre mí</h2>
         </div>
         <div class="card neoglass glass-gold" role="article" data-animate-group>
           <div class="about-flex">
             <div class="about-text">            
-              <p>
+              <p data-i18n="about.p1">
                 Soy <strong>Sergi Mallén</strong>, desarrollador web con más de cuatro años de experiencia.
                 Me especializo en la creación de sitios corporativos y aplicaciones web funcionales, 
                 con una base sólida en el desarrollo Full-Stack.
               </p>
 
-              <p>
+              <p data-i18n="about.p2">
                 Mi dominio abarca <strong>HTML, CSS, JavaScript, PHP y MySQL</strong>. Priorizo siempre un código limpio, 
                 una estructura lógica y la eficiencia del producto, lo que asegura el mantenimiento a largo plazo.
                 Busco activamente nuevos retos técnicos para aplicar mis conocimientos y aportar valor.
               </p>
 
-              <p>
+              <p data-i18n="about.p3">
                 He trabajado con *frameworks* como <strong>CodeIgniter</strong> y <strong>Symphony</strong>, 
                 además de tecnologías modernas como <strong>React</strong> y <strong>Node.js</strong>. 
                 Mi experiencia incluye la <strong>optimización SEO</strong> para mejorar la visibilidad online y 
@@ -120,14 +128,14 @@
               </p>
 
               <ul class="bullets">
-                <li>Stack Principal: <strong>PHP, MySQL</strong> , CodeIgniter y React/Node.js.</li>
-                <li>Filosofía: Código limpio, eficiencia y enfoque en la fiabilidad del Backend.</li>
-                <li>Herramientas clave: Git, JQuery, WordPress, Figma y SEO.</li>
+                <li data-i18n="about.list1">Stack Principal: <strong>PHP, MySQL</strong> , CodeIgniter y React/Node.js.</li>
+                <li data-i18n="about.list2">Filosofía: Código limpio, eficiencia y enfoque en la fiabilidad del Backend.</li>
+                <li data-i18n="about.list3">Herramientas clave: Git, JQuery, WordPress, Figma y SEO.</li>
               </ul>
 
               <div class="cta-row">
-                <a class="btn" href="#projects">Ver proyectos</a>
-                <a class="btn outline" href="#contact">Contactar</a>
+                <a class="btn" href="#proyectos" data-i18n="hero.btn_projects">Ver proyectos</a>
+                <a class="btn outline" href="#contacto" data-i18n="about.btn_contact">Contactar</a>
               </div>
             </div>
 
@@ -151,12 +159,12 @@
 
       <div class="container parallax-slot">
         <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="skills-title">Skills</h2>
+          <h2 id="skills-title" data-i18n="skills.title">Skills</h2>
         </div>
 
         <div class="grid" data-animate-group>
           <div class="card neoglass glass-gold skills-group" aria-labelledby="frontend-title" data-animate-group>
-            <h3 id="frontend-title">Frontend</h3>
+            <h3 id="frontend-title" data-i18n="skills.frontend">Frontend</h3>
             <div class="icons" role="list" data-animate-group>
               <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
               <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
@@ -170,7 +178,7 @@
           </div>
 
           <div class="card neoglass glass-gold skills-group" aria-labelledby="backend-title" data-animate-group>
-            <h3 id="backend-title">Backend & Bases de Datos</h3>
+            <h3 id="backend-title" data-i18n="skills.backend">Backend & Bases de Datos</h3>
             <div class="icons" role="list" data-animate-group>
               <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
               <div class="icon" role="listitem"><i class="devicon-symfony-original" aria-hidden="true"></i><span>Symfony</span></div>
@@ -183,7 +191,7 @@
           </div>
 
           <div class="card neoglass glass-gold skills-group" aria-labelledby="otros-title" data-animate-group>
-            <h3 id="otros-title">Plataformas & Herramientas</h3>
+            <h3 id="otros-title" data-i18n="skills.tools">Plataformas & Herramientas</h3>
             <div class="icons" role="list" data-animate-group>
               <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
               <div class="icon" role="listitem"><i class="devicon-amazonwebservices-original"></i><span>AWS</span></div>
@@ -209,15 +217,12 @@
 
       <div class="container parallax-slot">
 
-        <!-- Título principal -->
         <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="proyectos-title">Proyectos</h2>
+          <h2 id="proyectos-title" data-i18n="projects.title">Proyectos</h2>
         </div>
 
-        <!-- --------- LISTA PRINCIPAL DE PROYECTOS --------- -->
         <div class="grid projects-grid" role="list" data-animate-group>
 
-          <!-- Ateneu Unió -->
           <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="p1-title" data-effect="fade">
             <div class="card-content">
               <figure class="project-figure">
@@ -225,231 +230,159 @@
               </figure>
 
               <h3 id="p1-title">Ateneu Unió Restaurant</h3>
-              <p>Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
+              <p data-i18n="projects.p1_desc">Web corporativa del restaurante. Contenidos claros, diseño accesible y enfoque local.</p>
 
-              <!-- Tecnologías (mismos iconos que Skills) -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Ateneu Unió">
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+                <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+                <div class="icon" role="listitem"><i class="devicon-figma-plain" aria-hidden="true"></i><span>Figma</span></div>
               </div>
 
               <div class="card-actions" data-animate-group>
-                <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer">Visitar</a>
+                <a class="btn btn-primary" href="https://ateneuuniorestaurant.com" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_visit">Visitar</a>
               </div>
             </div>
           </article>
 
-          <!-- Schneider -->
           <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="p3-title" data-effect="fade">
             <div class="card-content">
               <figure class="project-figure">
                 <img src="assets/img/se_logo.svg" alt="Logo Schneider Electric" style="filter: invert();">
               </figure>
               <h3 id="p3-title">Schneider Electric</h3>
-              <p>Durante mi etapa en Devinet formé parte del equipo de soporte técnico internacional para tres herramientas de gestión interna de Schneider Electric.</p>
+              <p data-i18n="projects.p2_desc">Durante mi etapa en Devinet formé parte del equipo de soporte técnico internacional para tres herramientas de gestión interna de Schneider Electric.</p>
 
-              <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Schneider Electric">
-                <div class="icon" role="listitem">
-                  <i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-php-plain" aria-hidden="true"></i><span>PHP</span></div>
+                <div class="icon" role="listitem"><i class="devicon-codeigniter-plain" aria-hidden="true"></i><span>CodeIgniter</span></div>
+                <div class="icon" role="listitem"><i class="devicon-mysql-plain" aria-hidden="true"></i><span>MySQL</span></div>
+                <div class="icon" role="listitem"><i class="devicon-git-plain" aria-hidden="true"></i><span>Git</span></div>
+                <div class="icon" role="listitem"><i class="devicon-postman-plain" aria-hidden="true"></i><span>Postman</span></div>
+                <div class="icon" role="listitem"><i class="devicon-docker-plain" aria-hidden="true"></i><span>Docker</span></div>
               </div>
 
               <div class="card-actions" data-animate-group>
-                <a class="btn btn-primary" href="https://www.se.com/ww/en/" target="_blank" rel="noopener noreferrer">Visitar</a>
+                <a class="btn btn-primary" href="https://www.se.com/ww/en/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_visit">Visitar</a>
               </div>
             </div>
           </article>
 
-          <!-- Quim Motos -->
           <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="p4-title" data-effect="fade">
             <div class="card-content">
               <figure class="project-figure">
                 <img src="assets/img/Group-271.png" alt="Taller de motos Quim Motos" style="width:100%;border-radius:10px">
               </figure>
               <h3 id="p4-title">Quim Motos</h3>
-              <p>Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para este taller de motos local.</p>
+              <p data-i18n="projects.p3_desc">Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para este taller de motos local.</p>
 
-              <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Quim Motos">
-                <div class="icon" role="listitem">
-                  <i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
               </div>
 
               <div class="card-actions" data-animate-group>
-                <a class="btn btn-primary" href="https://quimmotos.com/" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+                <a class="btn btn-primary" href="https://quimmotos.com/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_visit">Ver proyecto</a>
               </div>
             </div>
           </article>
 
 
-          <!-- Fab Verbatim -->
-          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="p4-title" data-effect="fade">
+          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="p5-title" data-effect="fade">
             <div class="card-content">
               <figure class="project-figure">
                 <img src="assets/img/fabverbatim-1.png" alt="Taller de motos Quim Motos" style="width:100%;border-radius:10px">
               </figure>
-              <h3 id="p4-title">Fab Verbatim</h3>
-              <p>Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para una traductora independiente.</p>
+              <h3 id="p5-title">Fab Verbatim</h3>
+              <p data-i18n="projects.p4_desc">Proyecto desarrollado durante mi etapa en Vilax, donde diseñé y maqueté la web corporativa para una traductora independiente.</p>
 
-              <!-- Tecnologías -->
-              <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Quim Motos">
-                <div class="icon" role="listitem">
-                  <i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
+              <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Fab Verbatim">
+                <div class="icon" role="listitem"><i class="devicon-wordpress-plain" aria-hidden="true"></i><span>WordPress</span></div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
               </div>
             </div>
 
             <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://fabverbatim.com/" target="_blank" rel="noopener noreferrer">Ver proyecto</a>
+              <a class="btn btn-primary" href="https://fabverbatim.com/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_visit">Ver proyecto</a>
             </div>
           </article>
 
         </div>
 
-        <!-- ========================= SUBSECCIÓN PLANTILLAS ========================= -->
         <div class="section-head neoglass mt-5 subsection-templates" data-animate-group style="padding:16px">
-          <h3 id="plantillas-title">Plantillas</h3>
+          <h3 id="plantillas-title" data-i18n="projects.tpl_title">Plantillas</h3>
         </div>
 
         <div class="grid subsection-templates" role="list" data-animate-group>
 
-          <!-- Peluquería Aura — plantilla -->
           <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="tpl1-title" data-effect="fade">
             <div class="card-content">
               <figure style="margin:0 0 12px">
                 <img src="assets/img/AteneuUnioCapt.jpeg" alt="Plantilla web para peluquería" style="width:100%;border-radius:10px">
               </figure>
               <h3 id="tpl1-title">Peluquería Aura — Template</h3>
-              <p>Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
+              <p data-i18n="projects.tpl_desc">Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
 
-              <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Peluquería Aura">
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+                <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+                <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
               </div>
             </div>
 
             <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_demo">Ver demo</a>
             </div>
           </article>
 
-          <!-- Peluquería Aura — plantilla -->
-          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="tpl1-title" data-effect="fade">
+          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="tpl2-title" data-effect="fade">
             <div class="card-content">
               <figure style="margin:0 0 12px">
                 <img src="assets/img/peluqueria_aura.jpeg" alt="Plantilla web para peluquería" style="width:100%;border-radius:10px">
               </figure>
-              <h3 id="tpl1-title">Peluquería Aura — Template</h3>
-              <p>Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
+              <h3 id="tpl2-title">Peluquería Aura — Template</h3>
+              <p data-i18n="projects.tpl_desc">Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
 
-              <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Peluquería Aura">
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+                <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+                <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
               </div>
             </div>
 
             <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_demo">Ver demo</a>
             </div>
           </article>
 
-          <!-- Peluquería Aura — plantilla -->
-          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="tpl1-title" data-effect="fade">
+          <article class="card neoglass project neon-gold project-card" role="listitem" aria-labelledby="tpl3-title" data-effect="fade">
             <div class="card-content">
               <figure style="margin:0 0 12px">
                 <img src="assets/img/peluqueria_aura.jpeg" alt="Plantilla web para peluquería" style="width:100%;border-radius:10px">
               </figure>
-              <h3 id="tpl1-title">Peluquería Aura — Template</h3>
-              <p>Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
+              <h3 id="tpl3-title">Peluquería Aura — Template</h3>
+              <p data-i18n="projects.tpl_desc">Plantilla ligera para negocios locales, pensada para desplegar rápido en GitHub Pages y optimizada para móvil.</p>
 
-              <!-- Tecnologías -->
               <div class="project-tech icons" role="list" aria-label="Tecnologías utilizadas en Peluquería Aura">
-                <div class="icon" role="listitem">
-                  <i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span>
-                </div>
-                <div class="icon" role="listitem">
-                  <i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span>
-                </div>
+                <div class="icon" role="listitem"><i class="devicon-html5-plain" aria-hidden="true"></i><span>HTML5</span></div>
+                <div class="icon" role="listitem"><i class="devicon-css3-plain" aria-hidden="true"></i><span>CSS3</span></div>
+                <div class="icon" role="listitem"><i class="devicon-javascript-plain" aria-hidden="true"></i><span>JavaScript</span></div>
+                <div class="icon" role="listitem"><i class="devicon-bootstrap-plain" aria-hidden="true"></i><span>Bootstrap</span></div>
               </div>
             </div>
 
             <div class="card-actions" data-animate-group>
-              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer">Ver demo</a>
+              <a class="btn btn-primary" href="https://mallenk.github.io/PeluqueriaAura/" target="_blank" rel="noopener noreferrer" data-i18n="projects.btn_demo">Ver demo</a>
             </div>
           </article>
 
         </div>
 
-
     </section>
-
 
     <!-- ========================= Servicios ========================= -->
     <section class="parallax-wrap mt-5 pb-5" id="servicios" aria-labelledby="servicios-title" data-animate data-effect="down">
@@ -462,34 +395,41 @@
 
       <div class="container parallax-slot">
         <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="servicios-title">Servicios</h2>
+          <h2 id="servicios-title" data-i18n="services.title">Servicios</h2>
         </div>
+        
         <div class="grid" role="list" data-animate-group>
+          
           <div class="card neoglass glass-gold service" role="listitem" data-effect="blur">
-            <h3>Creación de páginas web</h3>
-            <p class="muted">Webs rápidas, seguras y fáciles de gestionar.</p>
+            <h3 data-i18n="services.s1_title">Creación de páginas web</h3>
+            <p class="muted" data-i18n="services.s1_desc">Webs rápidas, seguras y fáciles de gestionar.</p>
             <p class="price">150 €+</p>
           </div>
+
           <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Rediseño de webs</h3>
-            <p class="muted">Mejora visual, UX y rendimiento.</p>
+            <h3 data-i18n="services.s2_title">Rediseño de webs</h3>
+            <p class="muted" data-i18n="services.s2_desc">Mejora visual, UX y rendimiento.</p>
             <p class="price">120 €+</p>
           </div>
+
           <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Consultoría web</h3>
-            <p class="muted">Auditoría y plan de mejoras.</p>
-            <p class="price">30 €/h</p>
+            <h3 data-i18n="services.s3_title">Consultoría web</h3>
+            <p class="muted" data-i18n="services.s3_desc">Auditoría y plan de mejoras.</p>
+            <p class="price">30 <span data-i18n="services.price_hour">€/h</span></p>
           </div>
+
           <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Gestión de e-commerce</h3>
-            <p class="muted">Soporte y contenidos mensuales.</p>
-            <p class="price">75 €/mes+</p>
+            <h3 data-i18n="services.s4_title">Gestión de e-commerce</h3>
+            <p class="muted" data-i18n="services.s4_desc">Soporte y contenidos mensuales.</p>
+            <p class="price">75 <span data-i18n="services.price_month">€/mes</span>+</p>
           </div>
+
           <div class="card neoglass glass-gold service mt-0" role="listitem" data-effect="blur">
-            <h3>Clases de programación</h3>
-            <p class="muted">Sesiones 1:1 prácticas.</p>
-            <p class="price">20 €/h</p>
+            <h3 data-i18n="services.s5_title">Clases de programación</h3>
+            <p class="muted" data-i18n="services.s5_desc">Sesiones 1:1 prácticas.</p>
+            <p class="price">20 <span data-i18n="services.price_hour">€/h</span></p>
           </div>
+
         </div>
 
       </div>
@@ -502,28 +442,26 @@
 
       <div class="container parallax-slot">
 
-        <!-- Título + botón -->
         <div class="section-head neoglass glass-gold" data-animate-group
             style="padding:16px;display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap">
-          <h2 id="cv-title" style="margin:0">Experiencia</h2>
-          <a class="btn btn-outline" href="assets/docs/Sergi-Mallén-López-CV.pdf" download>
+          
+          <h2 id="cv-title" style="margin:0" data-i18n="cv.title">Experiencia</h2>
+          
+          <a class="btn btn-outline" href="assets/docs/Sergi-Mallén-López-CV.pdf" download data-i18n="cv.btn_download">
             Descargar CV
           </a>
         </div>
 
         <div class="grid">
 
-          <!-- ========================= EXPERIENCIA ========================= -->
-          
-            <div class="timeline" role="list" data-animate-group>
+          <div class="timeline" role="list" data-animate-group>
 
-              <!-- Devinet -->
               <div class="timeline-item card neoglass glass-gold"
                   role="listitem" data-animate data-effect="up">
-                <strong>Full Stack Developer — Devinet</strong>
+                <strong><span data-i18n="cv.job1_title">Full Stack Developer</span> — Devinet</strong>
                 <span class="muted">Feb 2024 – Actualidad</span>
 
-                <p class="muted">
+                <p class="muted" data-i18n="cv.job1_desc">
                   Desarrollo y mantenimiento de aplicaciones web internas, integrando APIs,
                   automatizando procesos y optimizando flujos corporativos. Trabajo full-stack
                   con enfoque en rendimiento, escalabilidad y buenas prácticas.
@@ -539,13 +477,12 @@
                 </div>
               </div>
 
-              <!-- Tenea -->
               <div class="timeline-item card neoglass glass-gold"
                   role="listitem" data-animate data-effect="up">
-                <strong>Desarrollador Backend — Tenea</strong>
+                <strong><span data-i18n="cv.job2_title">Desarrollador Backend</span> — Tenea</strong>
                 <span class="muted">Oct 2023 – Ene 2024</span>
 
-                <p class="muted">
+                <p class="muted" data-i18n="cv.job2_desc">
                   Mantenimiento y evolución de sistemas backend para clientes empresariales.
                   Optimización de rendimiento, refactorización de módulos y soporte técnico
                   en entornos de alta disponibilidad.
@@ -559,13 +496,12 @@
                 </div>
               </div>
 
-              <!-- Vilax -->
               <div class="timeline-item card neoglass glass-gold"
                   role="listitem" data-animate data-effect="up">
-                <strong>Desarrollador Web — Vilax</strong>
+                <strong><span data-i18n="cv.job3_title">Desarrollador Web</span> — Vilax</strong>
                 <span class="muted">Ene 2023 – Sep 2023</span>
 
-                <p class="muted">
+                <p class="muted" data-i18n="cv.job3_desc">
                   Creación y mantenimiento de webs corporativas y tiendas online. Optimización SEO,
                   gestión de catálogo y diseño de interfaces funcionales para mejorar conversión.
                 </p>
@@ -578,13 +514,12 @@
                 </div>
               </div>
 
-              <!-- Farmacia y Salud Digital -->
               <div class="timeline-item card neoglass glass-gold"
                   role="listitem" data-animate data-effect="up">
-                <strong>Operaciones Digitales — Farmacia y Salud Digital</strong>
+                <strong><span data-i18n="cv.job4_title">Operaciones Digitales</span> — Farmacia y Salud Digital</strong>
                 <span class="muted">Ene 2022 – Jun 2022</span>
 
-                <p class="muted">
+                <p class="muted" data-i18n="cv.job4_desc">
                   Gestión de catálogos y contenido digital para múltiples e-commerce.
                   Implementación de SEO técnico y optimización continua para mejorar
                   la visibilidad y el rendimiento de las páginas.
@@ -599,47 +534,8 @@
 
             </div>
 
-          <!-- ========================= FORMACIÓN ========================= 
-          <div class="card neoglass glass-gold" data-animate-group>
-            <h3>Formación</h3>
-
-            <div class="edu grid" role="list" data-animate-group>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Curso Superior Full Stack — FGUSAL</h4>
-                <p class="muted">2025 · Desarrollo avanzado con PHP, JS y bases de datos.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Programación JS, MySQL y PHP — FGUSAL</h4>
-                <p class="muted">2024 · Backend y frontend con enfoque práctico.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>PHP Certificate — OpenBootcamp</h4>
-                <p class="muted">2023 · Fundamentos y buenas prácticas.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>JavaScript Certificate — OpenBootcamp</h4>
-                <p class="muted">2022 · JS moderno, asincronía y DOM.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>GS Gràfica Interactiva — La Llotja</h4>
-                <p class="muted">2019 – 2022 · Diseño interactivo y digital.</p>
-              </div>
-
-              <div class="card neoglass glass-gold" role="listitem" data-animate data-effect="fade">
-                <h4>Grado en Impresión Gráfica — Escola Antoni Algueró</h4>
-                <p class="muted">2017 – 2019 · Producción gráfica.</p>
-              </div>
-
-            </div>
-          </div>-->
-
-        </div><!-- grid -->
-      </div><!-- container -->
+        </div>
+      </div>
     </section>
 
 
@@ -697,14 +593,15 @@
 
       <div class="container parallax-slot">
         <div class="section-head neoglass" data-animate-group style="padding:16px">
-          <h2 id="contacto-title" style="margin:0">Contacto</h2>
+          <h2 id="contacto-title" style="margin:0" data-i18n="contact.title">Contacto</h2>
         </div>
 
         <div class="contact-wrap" data-animate-group>
           <div class="card neoglass glass-gold contact-card" role="form" aria-labelledby="contacto-title">
             <div class="contact-info">
-              <h3 id="datos-contacto">Hablemos de tu proyecto</h3>
-              <p class="muted">
+              <h3 id="datos-contacto" data-i18n="contact.subtitle">Hablemos de tu proyecto</h3>
+              
+              <p class="muted" data-i18n="contact.text">
                 Cuéntame qué necesitas: una nueva web, mejorar la actual o un desarrollo a medida.
                 Suelo responder en 24–48 h laborables.
               </p>
@@ -721,7 +618,7 @@
                 </li>
               </ul>
 
-              <p class="muted small">
+              <p class="muted small" data-i18n="contact.budget_note">
                 Si quieres, indícame también presupuesto aproximado y plazos deseados.
               </p>
             </div>
@@ -736,22 +633,22 @@
               <div class="row" data-animate-group>
                 <div>
                   <label class="sr-only" for="name">Tu nombre</label>
-                  <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name">
+                  <input id="name" name="name" placeholder="Tu nombre" required aria-required="true" autocomplete="name" data-i18n="contact.form_name">
                 </div>
                 <div>
                   <label class="sr-only" for="email">Tu email</label>
-                  <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email">
+                  <input id="email" type="email" name="email" placeholder="Tu email" required aria-required="true" autocomplete="email" data-i18n="contact.form_email">
                 </div>
                 <div class="full">
                   <label class="sr-only" for="message">Mensaje</label>
                   <textarea id="message" name="message" rows="6"
                             placeholder="Cuéntame brevemente tu proyecto, objetivos y plazos"
-                            required aria-required="true"></textarea>
+                            required aria-required="true" data-i18n="contact.form_msg_ph"></textarea>
                 </div>
                 <div class="full">
-                  <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+                  <button class="btn btn-primary" type="submit" data-i18n="contact.btn_send">Enviar mensaje</button>
                 </div>
-                <p class="muted small full">
+                <p class="muted small full" data-i18n="contact.privacy">
                   No compartiré tus datos con terceros. Solo los usaré para responder a tu mensaje.
                 </p>
               </div>
@@ -760,7 +657,6 @@
         </div>
       </div>
     </section>
-
     <!-- ========================= Footer ========================= -->
     <footer class="parallax-wrap" role="contentinfo" data-animate data-effect="fade" style="padding:48px 0 70px">
       <div class="section-bg" aria-hidden="true"></div>
@@ -774,12 +670,12 @@
             © <span id="year"></span> Sergi Mallén López
           </p>
 
-          <p class="muted" style="margin:6px 0 0; font-size:0.95rem;">
+          <p class="muted" style="margin:6px 0 0; font-size:0.95rem;" data-i18n="footer.role">
             Desarrollador Web Full-Stack — Portfolio personal
           </p>
 
           <p class="muted" style="margin:12px 0 0; font-size:0.9rem;">
-            Alojado en <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+            <span data-i18n="footer.hosted">Alojado en</span> <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
           </p>
 
         </div>
@@ -787,7 +683,8 @@
       </div>
     </footer>
 
-
     <!-- Scripts -->
     <script defer src="https://cdn.jsdelivr.net/npm/parallax-js@3.1.0/dist/parallax.min.js"></script>
     <script defer src="assets/js/app.js"></script>
+  </main>
+</body>

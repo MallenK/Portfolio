@@ -106,6 +106,42 @@ header{
   .menu ul{flex-direction:row;gap:16px;margin:0;padding:0}
 }
 
+
+.lang-selector {
+  display: flex;
+  gap: 8px;
+  margin-left: 20px; /* Ajustar según tu diseño */
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn.active {
+  background: rgba(212, 175, 55, 0.8); /* Tu color dorado */
+  border-color: rgba(212, 175, 55, 1);
+  color: #000;
+  font-weight: bold;
+}
+
+/* Ajuste para móvil */
+@media (max-width: 768px) {
+  .lang-selector {
+    margin: 0;
+  }
+}
+
 /* Botones */
 .btn{
   appearance:none;border:0;cursor:pointer;padding:12px 18px;border-radius:12px;font-weight:800;letter-spacing:.2px;
