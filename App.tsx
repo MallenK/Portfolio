@@ -13,28 +13,99 @@ import Services from './sections/Services';
 import Contact from './sections/Contact';
 import { TRANSLATIONS } from './constants';
 
+// Easter Eggs Imports
+import { CheatProvider } from './context/CheatContext';
+import CheatSheet from './components/CheatSheet';
+import TimeTravelFX from './components/EasterEggs/TimeTravelFX';
+import WorldModeFX from './components/EasterEggs/WorldModeFX';
+import GlitchFX from './components/EasterEggs/GlitchFX';
+import MessiMode from './components/EasterEggs/MessiMode';
+import NavbarEgg from './components/EasterEggs/NavbarEgg';
+import Chatbox from './components/Chatbox';
+
 gsap.registerPlugin(ScrollTrigger);
 
 type Lang = 'es' | 'en' | 'cat';
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [lang, setLang] = useState<Lang>(() => {
-    // Check localStorage for saved language or default to 'cat'
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio-lang');
       return (saved as Lang) || 'cat';
     }
     return 'cat';
   });
+  
   const containerRef = useRef<HTMLDivElement>(null);
+  const navbarRef = useRef<HTMLElement>(null); // REF PARA SMART NAVBAR
   const content = TRANSLATIONS[lang];
 
   useEffect(() => {
-    // Save language preference
     localStorage.setItem('portfolio-lang', lang);
   }, [lang]);
+
+  // SMART NAVBAR LOGIC (Apple/Medium Style)
+  useEffect(() => {
+    if (isLoading) return; // No adjuntar listeners hasta que cargue la app
+
+    let lastScrollY = window.scrollY;
+    const navbar = navbarRef.current;
+
+    const handleScroll = () => {
+      if (!navbar) return;
+
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      // 1. Ignorar micro-scrolls (Threshold 10px)
+      if (Math.abs(delta) < 10) return;
+
+      // 2. Zona Segura Superior (Siempre visible si < 50px)
+      if (currentScrollY < 50) {
+        gsap.to(navbar, { y: '0%', duration: 0.3, ease: 'power2.out' });
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      // 3. Determinar dirección y animar
+      if (delta > 0) {
+        // SCROLL DOWN -> HIDE
+        gsap.to(navbar, { y: '-100%', duration: 0.35, ease: 'power2.out' });
+        console.log('[Navbar]', { direction: 'DOWN', scrollY: currentScrollY });
+        console.log('[Navbar] HIDE');
+      } else {
+        // SCROLL UP -> SHOW
+        gsap.to(navbar, { y: '0%', duration: 0.35, ease: 'power2.out' });
+        console.log('[Navbar]', { direction: 'UP', scrollY: currentScrollY });
+        console.log('[Navbar] SHOW');
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading]);
+
+  // DEBUG & VIEWPORT LOGGING
+  useEffect(() => {
+    const logViewport = () => {
+      const isMobile = window.innerWidth <= 768;
+      const isLandscape = window.innerWidth > window.innerHeight;
+      console.log('[Viewport Detection]', {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        isMobile,
+        isLandscape,
+        mode: isMobile ? (isLandscape ? 'Mobile Landscape' : 'Mobile Portrait') : 'Desktop'
+      });
+    };
+    logViewport();
+    window.addEventListener('resize', logViewport);
+    return () => window.removeEventListener('resize', logViewport);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,12 +131,22 @@ const App: React.FC = () => {
   useEffect(() => {
     if (isLoading) return;
     ScrollTrigger.refresh();
-  }, [isLoading, lang]); // Refresh on lang change to ensure layout triggers adjust if text length changes
+  }, [isLoading, lang]);
 
   return (
     <div ref={containerRef} className="relative selection:bg-[#F5C400] selection:text-black bg-[#0B0B0B]">
-      <CustomCursor />
+      {/* Hide cursor on touch devices strictly via CSS media query if preferred, but component handles basic visibility */}
+      <div className="hidden md:block">
+        <CustomCursor />
+      </div>
       
+      {/* GLOBAL EASTER EGG LAYERS */}
+      <TimeTravelFX />
+      <WorldModeFX />
+      <GlitchFX />
+      <MessiMode />
+      <NavbarEgg />
+
       <AnimatePresence mode="wait">
         {isLoading ? (
           <motion.div
@@ -101,50 +182,70 @@ const App: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <nav className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 flex justify-between items-center mix-blend-difference">
-              <div className="text-xl font-black tracking-tighter uppercase text-white">
-                S.Mallén<span className="text-[#F5C400]"> / MallenK</span>
-              </div>
-              <div className="flex gap-8 items-center">
-                 <div className="hidden md:flex gap-12 items-center">
-                  <a href="#projects" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.projects}</a>
-                  <a href="#about" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.about}</a>
-                  <a href="#contact" className="px-8 py-3 bg-[#F5C400] text-black rounded-full text-[10px] uppercase tracking-widest font-black hover:bg-white transition-colors">{content.nav.contact}</a>
+            {/* WRAPPER ID FOR RETRO FILTERS SCOPING */}
+            <div id="portfolio-content" className="w-full h-full relative">
+              {/* Navbar adjusted padding for mobile (p-4) vs desktop (p-10) */}
+              <nav 
+                ref={navbarRef}
+                className="fixed top-0 left-0 w-full z-50 p-4 md:p-10 flex justify-between items-center mix-blend-difference will-change-transform"
+              >
+                {/* ID added for NavbarEgg target */}
+                <div id="navbar-logo" className="text-xl font-black tracking-tighter uppercase text-white cursor-pointer">
+                  S.Mallén<span className="text-[#F5C400]"> / MallenK</span>
                 </div>
-                <div className="flex gap-3 text-[10px] font-black uppercase tracking-widest text-white">
-                  {(['es', 'cat', 'en'] as Lang[]).map((l) => (
-                    <button 
-                      key={l} 
-                      onClick={() => setLang(l)}
-                      className={`${lang === l ? 'text-[#F5C400]' : 'text-white/40'} hover:text-white transition-colors`}
-                    >
-                      {l.toUpperCase()}
-                    </button>
-                  ))}
+                <div className="flex gap-8 items-center">
+                   <div className="hidden md:flex gap-12 items-center">
+                    <a href="#projects" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.projects}</a>
+                    <a href="#about" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.about}</a>
+                    <a href="#contact" className="px-8 py-3 bg-[#F5C400] text-black rounded-full text-[10px] uppercase tracking-widest font-black hover:bg-white transition-colors">{content.nav.contact}</a>
+                  </div>
+                  <div className="flex gap-3 text-[10px] font-black uppercase tracking-widest text-white">
+                    {(['es', 'cat', 'en'] as Lang[]).map((l) => (
+                      <button 
+                        key={l} 
+                        onClick={() => setLang(l)}
+                        className={`${lang === l ? 'text-[#F5C400]' : 'text-white/40'} hover:text-white transition-colors`}
+                      >
+                        {l.toUpperCase()}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </nav>
+              </nav>
 
-            <Hero content={content.hero} />
-            <div id="about"><About content={content.about} /></div>
-            <div id="services"><Services content={content.services} /></div>
-            <div id="projects"><Projects content={content.projects} /></div>
-            <div id="skills"><Skills content={content.skills} /></div>
-            <Experience content={content.experience} />
+              <Hero content={content.hero} />
+              <div id="about"><About content={content.about} /></div>
+              <div id="services"><Services content={content.services} /></div>
+              <div id="projects"><Projects content={content.projects} /></div>
+              <div id="skills"><Skills content={content.skills} /></div>
+              <Experience content={content.experience} />
+              
+              <section className="min-h-[50vh] md:min-h-screen bg-[#F5C400] text-black flex items-center justify-center overflow-hidden">
+                 <div className="text-center px-6">
+                    <h2 className="text-[14vw] font-black uppercase leading-[0.8] tracking-tighter">
+                      Crafting<br/>Digital<br/>Logic
+                    </h2>
+                 </div>
+              </section>
+
+              <div id="contact"><Contact content={content.contact} /></div>
+            </div>
             
-            <section className="min-h-screen bg-[#F5C400] text-black flex items-center justify-center overflow-hidden">
-               <div className="text-center px-6">
-                  <h2 className="text-[14vw] font-black uppercase leading-[0.8] tracking-tighter">
-                    Crafting<br/>Digital<br/>Logic
-                  </h2>
-               </div>
-            </section>
-
-            <div id="contact"><Contact content={content.contact} /></div>
+            {/* UI ELEMENTS OUTSIDE PORTFOLIO-CONTENT (UNAFFECTED BY RETRO FILTERS) */}
+            <CheatSheet />
+            <Chatbox lang={lang} content={content} />
           </motion.main>
         )}
       </AnimatePresence>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <CheatProvider>
+      <AppContent />
+    </CheatProvider>
   );
 };
 

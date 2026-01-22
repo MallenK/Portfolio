@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -33,24 +32,23 @@ const About: React.FC<Props> = ({ content }) => {
   }, []);
 
   return (
-    <section ref={containerRef} className="min-h-screen py-32 px-6 flex flex-col justify-center max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <div className="lg:col-span-4">
-          <h2 className="about-reveal text-[10px] uppercase tracking-[0.5em] text-[#F5C400] font-black sticky top-32">
-            {content.label}
-          </h2>
-        </div>
-        <div className="lg:col-span-8">
-          <p className="about-reveal text-4xl sm:text-5xl lg:text-7xl font-light leading-[1] tracking-tighter text-white mb-16">
-            {content.title} <span className="text-[#F5C400] font-black uppercase italic">{content.highlight}</span> {content.p1}
-          </p>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 text-white/40 text-lg leading-relaxed font-light">
-            <div className="about-reveal">
-              {content.p2}
-            </div>
-            <div className="about-reveal">
-              No solo escribo código; diseño soluciones. Desde plataformas industriales hasta automatizaciones con IA, mi objetivo es siempre el mismo: eficiencia, escalabilidad y un impacto medible en el producto final.
+    <section ref={containerRef} className="min-h-screen py-32 px-6 flex flex-col justify-center bg-[#0B0B0B] w-full">
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-4">
+            <h2 className="about-reveal text-[10px] uppercase tracking-[0.5em] text-[#F5C400] font-black">
+              {content.label}
+            </h2>
+          </div>
+          <div className="lg:col-span-8">
+            <p className="about-reveal text-4xl sm:text-5xl lg:text-7xl font-light leading-[1] tracking-tighter text-white mb-16">
+              {content.title} <span className="text-[#F5C400] font-black uppercase italic">{content.highlight}</span> {content.p1}
+            </p>
+            
+            <div className="grid grid-cols-1 gap-12 text-white/40 text-lg leading-relaxed font-light">
+              <div className="about-reveal">
+                {content.p2}
+              </div>
             </div>
           </div>
         </div>

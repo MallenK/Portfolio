@@ -31,7 +31,7 @@ const Experience: React.FC<Props> = ({ content }) => {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-32 px-6">
+    <section ref={containerRef} className="py-32 px-6 bg-[#0B0B0B] text-white">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-sm uppercase tracking-[0.4em] text-zinc-500 mb-16">
           {content.label}
