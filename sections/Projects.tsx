@@ -2,18 +2,22 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { PROJECTS } from '../constants';
+import { PortfolioContent } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Projects: React.FC = () => {
+interface Props {
+  content: PortfolioContent['projects'];
+}
+
+const Projects: React.FC<Props> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       cardsRef.current.forEach((card, i) => {
-        if (i === PROJECTS.length - 1) return;
+        if (i === content.items.length - 1) return;
 
         ScrollTrigger.create({
           trigger: card,
@@ -37,20 +41,20 @@ const Projects: React.FC = () => {
       });
     });
     return () => ctx.revert();
-  }, []);
+  }, [content.items]); // Add dependency to refresh if language changes
 
   return (
     <section ref={sectionRef} className="bg-[#0B0B0B] py-32">
       <div className="px-6 max-w-7xl mx-auto mb-24">
-         <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#F5C400] font-black mb-4">Portfolio / 03</h2>
-         <h3 className="text-6xl md:text-9xl font-black uppercase tracking-tighter">Proyectos</h3>
+         <h2 className="text-[10px] uppercase tracking-[0.5em] text-[#F5C400] font-black mb-4">{content.label}</h2>
+         <h3 className="text-6xl md:text-9xl font-black uppercase tracking-tighter">{content.title}</h3>
       </div>
 
       <div className="flex flex-col">
-        {PROJECTS.map((project, index) => (
+        {content.items.map((project, index) => (
           <div
             key={project.id}
-            ref={(el) => (cardsRef.current[index] = el!)}
+            ref={(el) => { if (el) cardsRef.current[index] = el; }}
             className="w-full h-screen flex items-center justify-center p-4 md:p-10 bg-[#0B0B0B]"
           >
             <div className="relative w-full h-full md:h-[85vh] bg-zinc-950 rounded-[3rem] overflow-hidden group border border-white/5">

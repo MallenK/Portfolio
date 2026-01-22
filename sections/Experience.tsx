@@ -2,11 +2,15 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { EXPERIENCES } from '../constants';
+import { PortfolioContent } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Experience: React.FC = () => {
+interface Props {
+  content: PortfolioContent['experience'];
+}
+
+const Experience: React.FC<Props> = ({ content }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,11 +34,11 @@ const Experience: React.FC = () => {
     <section ref={containerRef} className="py-32 px-6">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-sm uppercase tracking-[0.4em] text-zinc-500 mb-16">
-          History / 04
+          {content.label}
         </h2>
 
         <div className="space-y-24">
-          {EXPERIENCES.map((exp) => (
+          {content.items.map((exp) => (
             <div
               key={exp.id}
               className="exp-block relative pl-12 border-l border-zinc-800"

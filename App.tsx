@@ -11,13 +11,30 @@ import Skills from './sections/Skills';
 import Experience from './sections/Experience';
 import Services from './sections/Services';
 import Contact from './sections/Contact';
+import { TRANSLATIONS } from './constants';
 
 gsap.registerPlugin(ScrollTrigger);
+
+type Lang = 'es' | 'en' | 'cat';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [lang, setLang] = useState<Lang>(() => {
+    // Check localStorage for saved language or default to 'cat'
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio-lang');
+      return (saved as Lang) || 'cat';
+    }
+    return 'cat';
+  });
   const containerRef = useRef<HTMLDivElement>(null);
+  const content = TRANSLATIONS[lang];
+
+  useEffect(() => {
+    // Save language preference
+    localStorage.setItem('portfolio-lang', lang);
+  }, [lang]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,7 +60,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (isLoading) return;
     ScrollTrigger.refresh();
-  }, [isLoading]);
+  }, [isLoading, lang]); // Refresh on lang change to ensure layout triggers adjust if text length changes
 
   return (
     <div ref={containerRef} className="relative selection:bg-[#F5C400] selection:text-black bg-[#0B0B0B]">
@@ -86,21 +103,34 @@ const App: React.FC = () => {
           >
             <nav className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 flex justify-between items-center mix-blend-difference">
               <div className="text-xl font-black tracking-tighter uppercase text-white">
-                S.Mallén<span className="text-[#F5C400]">_</span>
+                S.Mallén<span className="text-[#F5C400]"> / MallenK</span>
               </div>
-              <div className="hidden md:flex gap-12 items-center">
-                <a href="#projects" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">Proyectos</a>
-                <a href="#about" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">Perfil</a>
-                <a href="#contact" className="px-8 py-3 bg-[#F5C400] text-black rounded-full text-[10px] uppercase tracking-widest font-black hover:bg-white transition-colors">Contacto</a>
+              <div className="flex gap-8 items-center">
+                 <div className="hidden md:flex gap-12 items-center">
+                  <a href="#projects" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.projects}</a>
+                  <a href="#about" className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 hover:text-[#F5C400] transition-colors">{content.nav.about}</a>
+                  <a href="#contact" className="px-8 py-3 bg-[#F5C400] text-black rounded-full text-[10px] uppercase tracking-widest font-black hover:bg-white transition-colors">{content.nav.contact}</a>
+                </div>
+                <div className="flex gap-3 text-[10px] font-black uppercase tracking-widest text-white">
+                  {(['es', 'cat', 'en'] as Lang[]).map((l) => (
+                    <button 
+                      key={l} 
+                      onClick={() => setLang(l)}
+                      className={`${lang === l ? 'text-[#F5C400]' : 'text-white/40'} hover:text-white transition-colors`}
+                    >
+                      {l.toUpperCase()}
+                    </button>
+                  ))}
+                </div>
               </div>
             </nav>
 
-            <Hero />
-            <div id="about"><About /></div>
-            <div id="services"><Services /></div>
-            <div id="projects"><Projects /></div>
-            <Skills />
-            <Experience />
+            <Hero content={content.hero} />
+            <div id="about"><About content={content.about} /></div>
+            <div id="services"><Services content={content.services} /></div>
+            <div id="projects"><Projects content={content.projects} /></div>
+            <div id="skills"><Skills content={content.skills} /></div>
+            <Experience content={content.experience} />
             
             <section className="min-h-screen bg-[#F5C400] text-black flex items-center justify-center overflow-hidden">
                <div className="text-center px-6">
@@ -110,7 +140,7 @@ const App: React.FC = () => {
                </div>
             </section>
 
-            <div id="contact"><Contact /></div>
+            <div id="contact"><Contact content={content.contact} /></div>
           </motion.main>
         )}
       </AnimatePresence>

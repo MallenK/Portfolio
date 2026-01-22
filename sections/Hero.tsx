@@ -1,15 +1,40 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from '../components/MagneticWrapper';
+import { PortfolioContent } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Hero: React.FC = () => {
+interface Props {
+  content: PortfolioContent['hero'];
+}
+
+const Hero: React.FC<Props> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  
+  // Typewriter effect state
+  const [displayedText, setDisplayedText] = useState('');
+
+  useEffect(() => {
+    const fullText = content.subtitle;
+    setDisplayedText(''); // Reset when language changes
+    let currentIndex = 0;
+    
+    const interval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setDisplayedText(fullText.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 40); // Type speed
+
+    return () => clearInterval(interval);
+  }, [content.subtitle]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,9 +71,10 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="z-10 text-center max-w-7xl">
-        <div className="overflow-hidden mb-6">
+        <div className="overflow-hidden mb-6 h-6 flex items-center justify-center">
           <span className="block text-[#F5C400] font-black tracking-[0.4em] uppercase text-[10px] md:text-xs">
-            Barcelona • Full Stack Developer • Creative Logic
+            {displayedText}
+            <span className="animate-pulse">|</span>
           </span>
         </div>
 
@@ -61,17 +87,18 @@ const Hero: React.FC = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <MagneticWrapper strength={0.15}>
             <a href="#projects" className="px-12 py-6 bg-[#F5C400] text-black rounded-full font-black uppercase text-xs tracking-[0.2em] hover:scale-105 transition-transform">
-              Ver Proyectos
+              {content.cta}
             </a>
           </MagneticWrapper>
-          <a href="#about" className="text-xs uppercase tracking-widest font-bold text-white/40 hover:text-[#F5C400] transition-colors">
-            Sobre mí
+          {/* Changed link to #skills to point to the technical stack section, avoiding external issues */}
+          <a href="#skills" className="text-xs uppercase tracking-widest font-bold text-white/40 hover:text-[#F5C400] transition-colors">
+            MallenK Info
           </a>
         </div>
       </div>
 
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
-        <span className="text-[8px] uppercase tracking-[0.5em] text-white/20 font-bold">Scroll to Explore</span>
+        <span className="text-[8px] uppercase tracking-[0.5em] text-white/20 font-bold">{content.scroll}</span>
         <div className="w-px h-12 bg-gradient-to-b from-[#F5C400] to-transparent" />
       </div>
 

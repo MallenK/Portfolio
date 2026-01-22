@@ -2,10 +2,15 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { PortfolioContent } from '../types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const About: React.FC = () => {
+interface Props {
+  content: PortfolioContent['about'];
+}
+
+const About: React.FC<Props> = ({ content }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,20 +37,20 @@ const About: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div className="lg:col-span-4">
           <h2 className="about-reveal text-[10px] uppercase tracking-[0.5em] text-[#F5C400] font-black sticky top-32">
-            Profile / 01
+            {content.label}
           </h2>
         </div>
         <div className="lg:col-span-8">
           <p className="about-reveal text-4xl sm:text-5xl lg:text-7xl font-light leading-[1] tracking-tighter text-white mb-16">
-            Ingeniería de software enfocada en crear <span className="text-[#F5C400] font-black uppercase italic">productos reales</span> y experiencias escalables.
+            {content.title} <span className="text-[#F5C400] font-black uppercase italic">{content.highlight}</span> {content.p1}
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 text-white/40 text-lg leading-relaxed font-light">
             <div className="about-reveal">
-              Residente en Colònia Güell, Barcelona. Mi pasión es resolver problemas complejos mediante arquitecturas Full Stack robustas, integrando desde PHP legacy hasta soluciones modernas con React y Supabase.
+              {content.p2}
             </div>
             <div className="about-reveal">
-              No solo escribo código; diseño sistemas que perduran. Mi enfoque combina la eficiencia del backend con la interactividad creativa del frontend, buscando siempre el equilibrio entre rendimiento y estética.
+              No solo escribo código; diseño soluciones. Desde plataformas industriales hasta automatizaciones con IA, mi objetivo es siempre el mismo: eficiencia, escalabilidad y un impacto medible en el producto final.
             </div>
           </div>
         </div>

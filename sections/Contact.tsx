@@ -3,10 +3,16 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from '../components/MagneticWrapper';
+import { PortfolioContent } from '../types';
+import { SOCIAL_LINKS } from '../constants';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Contact: React.FC = () => {
+interface Props {
+  content: PortfolioContent['contact'];
+}
+
+const Contact: React.FC<Props> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,7 +37,7 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div>
             <h2 className="contact-reveal text-[10px] uppercase tracking-[0.5em] text-zinc-400 font-black mb-12">
-              Collaborate / 05
+              {content.label}
             </h2>
             <h3 className="contact-reveal text-[15vw] lg:text-[10vw] font-black leading-[0.8] tracking-tighter uppercase mb-16">
               Start<br /><span className="text-zinc-200">Build</span><br /><span className="text-[#F5C400]">Now</span>
@@ -39,15 +45,15 @@ const Contact: React.FC = () => {
             
             <div className="space-y-12">
               <div className="contact-reveal">
-                <p className="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-black">Email Profesional</p>
-                <a href="mailto:sergimallen@example.com" className="text-2xl md:text-4xl font-black hover:text-[#F5C400] transition-colors lowercase">hello@sergimallen.dev</a>
+                <p className="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-black">{content.freelanceLabel}</p>
+                <a href={`mailto:${SOCIAL_LINKS.email}`} className="text-2xl md:text-4xl font-black hover:text-[#F5C400] transition-colors lowercase">{SOCIAL_LINKS.email}</a>
               </div>
               <div className="contact-reveal flex flex-wrap gap-12">
                 <div>
-                   <p className="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-black">Social</p>
+                   <p className="text-[10px] uppercase tracking-widest text-zinc-400 mb-4 font-black">{content.socialLabel}</p>
                    <div className="flex gap-8">
-                     <a href="https://linkedin.com/in/mallenk" target="_blank" className="text-xl font-black hover:text-[#F5C400] transition-colors uppercase italic">LinkedIn</a>
-                     <a href="https://github.com/mallenk" target="_blank" className="text-xl font-black hover:text-[#F5C400] transition-colors uppercase italic">Github</a>
+                     <a href={SOCIAL_LINKS.linkedin} target="_blank" className="text-xl font-black hover:text-[#F5C400] transition-colors uppercase italic">LinkedIn</a>
+                     <a href={SOCIAL_LINKS.github} target="_blank" className="text-xl font-black hover:text-[#F5C400] transition-colors uppercase italic">Github</a>
                    </div>
                 </div>
               </div>
@@ -56,26 +62,26 @@ const Contact: React.FC = () => {
 
           <div className="contact-reveal space-y-12">
             <div className="group border-b border-zinc-200 pb-6 focus-within:border-black transition-colors">
-              <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">Tu Nombre</label>
-              <input type="text" className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light outline-none placeholder:text-zinc-100" placeholder="Nombre completo" />
+              <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">{content.formName}</label>
+              <input type="text" className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light outline-none placeholder:text-zinc-100" placeholder={content.formName} />
             </div>
             <div className="group border-b border-zinc-200 pb-6 focus-within:border-black transition-colors">
-              <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">Proyecto / Idea</label>
-              <input type="text" className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light outline-none placeholder:text-zinc-100" placeholder="Brief de la idea" />
+              <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">{content.formIdea}</label>
+              <input type="text" className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light outline-none placeholder:text-zinc-100" placeholder={content.formIdea} />
             </div>
             
             <MagneticWrapper strength={0.1}>
               <button className="w-full py-10 bg-black text-white rounded-full font-black uppercase tracking-[0.4em] text-xs hover:bg-[#F5C400] hover:text-black transition-all duration-500">
-                Enviar Solicitud
+                {content.btn}
               </button>
             </MagneticWrapper>
           </div>
         </div>
 
         <div className="mt-40 pt-16 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase font-black tracking-[0.5em] text-zinc-300">
-           <span>Sergi Mallén © 2024</span>
-           <span className="text-center">Basado en Colònia Güell, Barcelona</span>
-           <span>Full Stack Logic</span>
+           <span>{content.footerText}</span>
+           <span className="text-center">{content.footerLoc}</span>
+           <span>{content.footerRole}</span>
         </div>
       </div>
     </section>
