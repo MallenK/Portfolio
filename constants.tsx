@@ -5,7 +5,7 @@ import { PortfolioContent } from './types';
 const IMAGES = {
   schneider: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
   myker: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200',
-  ateneu: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1200',
+  ateneu: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200',
   ai: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200',
   cafeteras: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1200'
 };
@@ -31,8 +31,10 @@ const COMMON_SKILLS = [
 
 export const SOCIAL_LINKS = {
   email: 'sergimallenweb@gmail.com',
-  linkedin: 'https://linkedin.com/in/mallenk',
-  github: 'https://github.com/MallenK'
+  linkedin: 'https://www.linkedin.com/feed/?trk=guest_homepage-basic_google-one-tap-submit',
+  github: 'https://github.com/MallenK',
+  instagram: 'https://instagram.com/mallenk18',
+  whatsapp: 'https://wa.me/34670248461'
 };
 
 export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
@@ -67,24 +69,64 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       title: 'Proyectos',
       items: [
         {
-          id: '01', title: 'Schneider Electric', category: 'Enterprise / Industria', year: '2024', role: 'Full Stack Engineer', image: IMAGES.schneider, stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
-          description: 'Mantenimiento y evolución de plataforma industrial en entorno corporativo internacional. Desarrollo full-stack crítico en producción.'
+          id: '01',
+          title: 'Schneider Electric',
+          category: 'Enterprise / Industria',
+          year: '2024',
+          role: 'Full Stack Engineer',
+          image: IMAGES.schneider,
+          url: 'https://www.se.com/es/es/',
+          stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
+          description:
+            'Mantenimiento y evolución de plataforma industrial en entorno corporativo internacional. Desarrollo full-stack crítico en producción.'
         },
         {
-          id: '02', title: 'Myker Academy', category: 'Corporativo / EdTech', year: '2025', role: 'Lead Developer', image: IMAGES.myker, stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
-          description: 'Diseño y desarrollo de web corporativa para escuela de idiomas con enfoque en captación de leads y posicionamiento de marca.'
+          id: '02',
+          title: 'Myker Academy',
+          category: 'Corporativo / EdTech',
+          year: '2025',
+          role: 'Lead Developer',
+          image: IMAGES.myker,
+          url: 'https://mykeracademy.com/',
+          stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
+          description:
+            'Diseño y desarrollo de web corporativa para escuela de idiomas con enfoque en captación de leads y posicionamiento de marca.'
         },
         {
-          id: '03', title: 'Ateneu Unió', category: 'Negocio / Gastronomía', year: '2023', role: 'Full Stack Developer', image: IMAGES.ateneu, stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description: 'Web corporativa para restaurante histórico local. Diseño responsive de alta fidelidad y optimización para conversión de reservas.'
+          id: '03',
+          title: 'AI Exam Assistant',
+          category: 'Asistente IA / Producto',
+          year: '2024',
+          role: 'Product Engineer',
+          image: IMAGES.ai,
+          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
+          stack: ['GPT', 'OpenAI API'],
+          description:
+            'Asistente de estudio inteligente capaz de generar exámenes y resúmenes personalizados a partir de documentos subidos por el usuario.'
         },
         {
-          id: '04', title: 'AI Exam Assistant', category: 'Asistente IA / Producto', year: '2024', role: 'Product Engineer', image: IMAGES.ai, stack: ['GPT', 'OpenAI API'],
-          description: 'Asistente de estudio inteligente capaz de generar exámenes y resúmenes personalizados a partir de documentos subidos por el usuario.'
+          id: '04',
+          title: 'Cafeteras Review',
+          category: 'Producto Personal / SEO',
+          year: '2024',
+          role: 'Founder & Dev',
+          image: IMAGES.cafeteras,
+          url: 'https://cafeterasreview.vercel.app/#/',
+          stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
+          description:
+            'Plataforma de comparación y afiliación desarrollada como producto propio. Enfocada en SEO programático y rendimiento.'
         },
         {
-          id: '05', title: 'Cafeteras Review', category: 'Producto Personal / SEO', year: '2024', role: 'Founder & Dev', image: IMAGES.cafeteras, stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
-          description: 'Plataforma de comparación y afiliación desarrollada como producto propio. Enfocada en SEO programático y rendimiento.'
+          id: '05',
+          title: 'Ateneu Unió',
+          category: 'Negocio / Gastronomía',
+          year: '2023',
+          role: 'Full Stack Developer',
+          image: IMAGES.ateneu,
+          url: 'https://ateneuuniorestaurant.com/',
+          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
+          description:
+            'Web corporativa para restaurante histórico local. Diseño responsive de alta fidelidad y consultoría en integración de IA para captar nuevos clientes y fidelizar a los habituales.'
         }
       ]
     },
@@ -110,9 +152,10 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
     },
     contact: {
       label: 'Collaborate / 06',
-      freelanceLabel: 'Freelance & Enterprise',
+      freelanceLabel: 'Servicios Freelance y Empresa',
       socialLabel: 'Social',
       formName: 'Tu Nombre',
+      formEmail: 'Tu correo electrónico',
       formIdea: 'Proyecto / Idea',
       btn: 'Enviar Solicitud',
       footerText: 'Sergi Mallén © 2024',
@@ -151,24 +194,64 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       title: 'Projectes',
       items: [
         {
-          id: '01', title: 'Schneider Electric', category: 'Enterprise / Indústria', year: '2024', role: 'Full Stack Engineer', image: IMAGES.schneider, stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
-          description: 'Manteniment i evolució de plataforma industrial en entorn corporatiu internacional. Desenvolupament full-stack crític en producció.'
+          id: '01',
+          title: 'Schneider Electric',
+          category: 'Enterprise / Indústria',
+          year: '2024',
+          role: 'Full Stack Engineer',
+          image: IMAGES.schneider,
+          url: 'https://www.se.com/es/es/',
+          stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
+          description:
+            'Manteniment i evolució d’una plataforma industrial en un entorn corporatiu internacional. Desenvolupament full-stack crític en producció.'
         },
         {
-          id: '02', title: 'Myker Academy', category: 'Corporatiu / EdTech', year: '2025', role: 'Lead Developer', image: IMAGES.myker, stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
-          description: 'Disseny, desenvolupament i manteniment de web corporativa per a escola d\'idiomes amb enfocament en captació de leads i posicionament de marca.'
+          id: '02',
+          title: 'Myker Academy',
+          category: 'Corporatiu / EdTech',
+          year: '2025',
+          role: 'Lead Developer',
+          image: IMAGES.myker,
+          url: 'https://mykeracademy.com/',
+          stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
+          description:
+            'Disseny i desenvolupament de web corporativa per a una escola d’idiomes, amb enfocament en la captació de leads, el posicionament de marca i l’escalabilitat digital.'
         },
         {
-          id: '03', title: 'Ateneu Unió', category: 'Negoci / Gastronomia', year: '2023', role: 'Full Stack Developer', image: IMAGES.ateneu, stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description: 'Web corporativa per a restaurant històric local. Disseny responsive d\'alta fidelitat i optimització per a conversió de reserves.'
+          id: '03',
+          title: 'AI Exam Assistant',
+          category: 'Assistent IA / Producte',
+          year: '2024',
+          role: 'Product Engineer',
+          image: IMAGES.ai,
+          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
+          stack: ['GPT', 'OpenAI API'],
+          description:
+            'Assistent d’estudi intel·ligent dissenyat per generar exàmens i resums personalitzats a partir de documents pujats per l’usuari mitjançant IA.'
         },
         {
-          id: '04', title: 'AI Exam Assistant', category: 'Assistent IA / Producte', year: '2024', role: 'Product Engineer', image: IMAGES.ai, stack: ['GPT', 'OpenAI API'],
-          description: 'Assistent d\'estudi intel·ligent capaç de generar exàmens i resums personalitzats a partir de documents pujats per l\'usuari.'
+          id: '04',
+          title: 'Cafeteras Review',
+          category: 'Producte Personal / SEO',
+          year: '2024',
+          role: 'Founder & Dev',
+          image: IMAGES.cafeteras,
+          url: 'https://cafeterasreview.vercel.app/#/',
+          stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
+          description:
+            'Plataforma de comparació i afiliació desenvolupada com a producte propi, enfocada en SEO programàtic, rendiment i automatització de contingut.'
         },
         {
-          id: '05', title: 'Cafeteras Review', category: 'Producte Personal / SEO', year: '2024', role: 'Founder & Dev', image: IMAGES.cafeteras, stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
-          description: 'Plataforma de comparació i afiliació desenvolupada com a producte propi. Enfocada en SEO programàtic i rendiment.'
+          id: '05',
+          title: 'Ateneu Unió',
+          category: 'Negoci / Gastronomia',
+          year: '2023',
+          role: 'Full Stack Developer',
+          image: IMAGES.ateneu,
+          url: 'https://ateneuuniorestaurant.com/',
+          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
+          description:
+            'Web corporativa per a restaurant històric local. Disseny responsive d’alta fidelitat i consultoria en integració d’IA per captar nous clients i fidelitzar els habituals.'
         }
       ]
     },
@@ -194,9 +277,10 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
     },
     contact: {
       label: 'Collaborate / 06',
-      freelanceLabel: 'Freelance & Enterprise',
+      freelanceLabel: 'Freelance i entorn corporatiu',
       socialLabel: 'Social',
       formName: 'El teu Nom',
+      formEmail: 'El teu correu electrònic',
       formIdea: 'Projecte / Idea',
       btn: 'Enviar Sol·licitud',
       footerText: 'Sergi Mallén © 2024',
@@ -235,24 +319,64 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       title: 'Projects',
       items: [
         {
-          id: '01', title: 'Schneider Electric', category: 'Enterprise / Industry', year: '2024', role: 'Full Stack Engineer', image: IMAGES.schneider, stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
-          description: 'Maintenance and evolution of industrial platform in international corporate environment. Critical full-stack development in production.'
+          id: '01',
+          title: 'Schneider Electric',
+          category: 'Enterprise / Industry',
+          year: '2024',
+          role: 'Full Stack Engineer',
+          image: IMAGES.schneider,
+          url: 'https://www.se.com/es/es/',
+          stack: ['PHP', 'CodeIgniter', 'MySQL', 'Git', 'Postman', 'Docker'],
+          description:
+            'Maintenance and evolution of an industrial platform within an international corporate environment. Critical full-stack development in production.'
         },
         {
-          id: '02', title: 'Myker Academy', category: 'Corporate / EdTech', year: '2025', role: 'Lead Developer', image: IMAGES.myker, stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
-          description: 'Design and development of corporate website for language school focused on lead generation and brand positioning.'
+          id: '02',
+          title: 'Myker Academy',
+          category: 'Corporate / EdTech',
+          year: '2025',
+          role: 'Lead Developer',
+          image: IMAGES.myker,
+          url: 'https://mykeracademy.com/',
+          stack: ['Google AI Studio', 'React', 'TypeScript', 'Tailwind', 'npm', 'SEO'],
+          description:
+            'Design and development of a corporate website for a language school, focused on lead generation, brand positioning, and scalable digital presence.'
         },
         {
-          id: '03', title: 'Ateneu Unió', category: 'Business / Gastronomy', year: '2023', role: 'Full Stack Developer', image: IMAGES.ateneu, stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description: 'Corporate website for historic local restaurant. High-fidelity responsive design and optimization for reservation conversion.'
+          id: '03',
+          title: 'AI Exam Assistant',
+          category: 'AI Assistant / Product',
+          year: '2024',
+          role: 'Product Engineer',
+          image: IMAGES.ai,
+          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
+          stack: ['GPT', 'OpenAI API'],
+          description:
+            'Intelligent study assistant designed to generate personalized exams and summaries from user-uploaded documents using AI.'
         },
         {
-          id: '04', title: 'AI Exam Assistant', category: 'AI Assistant / Product', year: '2024', role: 'Product Engineer', image: IMAGES.ai, stack: ['GPT', 'OpenAI API'],
-          description: 'Intelligent study assistant capable of generating personalized exams and summaries from user-uploaded documents.'
+          id: '04',
+          title: 'Cafeteras Review',
+          category: 'Personal Product / SEO',
+          year: '2024',
+          role: 'Founder & Dev',
+          image: IMAGES.cafeteras,
+          url: 'https://cafeterasreview.vercel.app/#/',
+          stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
+          description:
+            'Product comparison and affiliate platform developed as a personal product, focused on programmatic SEO, performance, and content automation.'
         },
         {
-          id: '05', title: 'Cafeteras Review', category: 'Personal Product / SEO', year: '2024', role: 'Founder & Dev', image: IMAGES.cafeteras, stack: ['Amazon API', 'Google AI Studio', 'Supabase', 'Angular', 'Vercel'],
-          description: 'Comparison and affiliation platform developed as own product. Focused on programmatic SEO and performance.'
+          id: '05',
+          title: 'Ateneu Unió',
+          category: 'Business / Gastronomy',
+          year: '2023',
+          role: 'Full Stack Developer',
+          image: IMAGES.ateneu,
+          url: 'https://ateneuuniorestaurant.com/',
+          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
+          description:
+            'Corporate website for a historic local restaurant. High-fidelity responsive design and AI integration consultancy to attract new customers and retain loyal ones.'
         }
       ]
     },
@@ -281,6 +405,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       freelanceLabel: 'Freelance & Enterprise',
       socialLabel: 'Social',
       formName: 'Your Name',
+      formEmail: 'Your email',
       formIdea: 'Project / Idea',
       btn: 'Send Request',
       footerText: 'Sergi Mallén © 2024',

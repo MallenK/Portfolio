@@ -6,6 +6,7 @@ export interface Project {
   description: string;
   stack: string[];
   role: string;
+  url: string;
   year: string;
   image: string;
   link?: string;
@@ -74,6 +75,7 @@ export interface PortfolioContent {
     freelanceLabel: string;
     socialLabel: string;
     formName: string;
+    formEmail: string;
     formIdea: string;
     btn: string;
     footerText: string;
