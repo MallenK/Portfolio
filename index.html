@@ -64,13 +64,23 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
       }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BGKJGJPGGZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BGKJGJPGGZ');
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
     <div class="noise"></div>
 
-    <!-- 🔥 ENTRADA REAL DE TU PROYECTO (VITE + TU ESTRUCTURA) -->
     <script type="module" src="/index.tsx"></script>
+
   </body>
 </html>
