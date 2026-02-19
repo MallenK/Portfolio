@@ -1,7 +1,0 @@
-{
-  "name": "Portfolio Sergi Mallen GSAP",
-  "description": "A high-end, cinematic Full Stack Developer portfolio inspired by Lusion.co, featuring smooth animations, narrative scroll, and premium UX.",
-  "requestFramePermissions": [
-    "camera"
-  ]
-}
