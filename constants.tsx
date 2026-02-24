@@ -1,13 +1,17 @@
-
 import { PortfolioContent } from './types';
 
 // Datos comunes (imágenes, stacks técnicos que no requieren traducción)
+
 const IMAGES = {
-  schneider: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
-  myker: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200',
-  ateneu: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200',
+  schneider:
+    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200',
+  myker:
+    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200',
   ai: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200',
-  cafeteras: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1200'
+  cafeteras:
+    'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1200',
+  crotxet:
+    'https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80&w=1200'
 };
 
 const COMMON_SKILLS = [
@@ -60,7 +64,11 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'SaaS & Apps a Medida', desc: 'Construcción de plataformas escalables y productos digitales.', icon: '🚀' },
         { title: 'Automatización Procesos', desc: 'Optimización de flujos internos y sistemas empresariales.', icon: '⚙️' },
         { title: 'Integración IA', desc: 'Chatbots, análisis de datos y asistentes inteligentes.', icon: '🧠' },
-        { title: 'Consultoría y Auditoría Web', desc: 'Análisis técnico, evaluación de rendimiento y arquitectura, auditoría de experiencia de usuario y definición de planes de mejora con recomendaciones accionables para productos digitales.', icon: '🔍' },
+        {
+          title: 'Consultoría y Auditoría Web',
+          desc: 'Análisis técnico, evaluación de rendimiento y arquitectura, auditoría de experiencia de usuario y definición de planes de mejora con recomendaciones accionables para productos digitales.',
+          icon: '🔍'
+        },
         { title: 'Clases Programación/IA', desc: 'Sesiones prácticas personalizadas para aprender programación e inteligencia artificial.', icon: '🎓' }
       ]
     },
@@ -106,6 +114,18 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '04',
+          title: 'Cro&Txet',
+          category: 'E-commerce / Handmade',
+          year: '2025',
+          role: 'Full Stack Developer',
+          image: IMAGES.crotxet,
+          url: 'https://www.croandtxet.cat/',
+          stack: ['React', 'TypeScript', 'Tailwind', 'Vercel', 'EmailJS', 'i18n', 'SEO'],
+          description:
+            'Tienda online de bolsos hechos a mano. Experiencia de compra cuidada, catálogo visual, multi-idioma y enfoque en marca para convertir visitas en pedidos.'
+        },
+        {
+          id: '05',
           title: 'Cafeteras Review',
           category: 'Producto Personal / SEO',
           year: '2024',
@@ -116,18 +136,6 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           description:
             'Plataforma de comparación y afiliación desarrollada como producto propio. Enfocada en SEO programático y rendimiento.'
         },
-        {
-          id: '05',
-          title: 'Ateneu Unió',
-          category: 'Negocio / Gastronomía',
-          year: '2023',
-          role: 'Full Stack Developer',
-          image: IMAGES.ateneu,
-          url: 'https://ateneuuniorestaurant.com/',
-          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description:
-            'Web corporativa para restaurante histórico local. Diseño responsive de alta fidelidad y consultoría en integración de IA para captar nuevos clientes y fidelizar a los habituales.'
-        }
       ]
     },
     skills: {
@@ -141,12 +149,26 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'History / 05',
       items: [
         {
-          id: 'exp1', company: 'Schneider Electric', role: 'Full Stack Web Developer', period: 'Actualidad',
-          achievements: ['Mantenimiento y evolución de plataforma web industrial crítica', 'Desarrollo Full Stack en entorno Enterprise internacional', 'Gestión de incidencias y optimización de rendimiento en producción']
+          id: 'exp1',
+          company: 'Schneider Electric',
+          role: 'Full Stack Web Developer',
+          period: 'Actualidad',
+          achievements: [
+            'Mantenimiento y evolución de plataforma web industrial crítica',
+            'Desarrollo Full Stack en entorno Enterprise internacional',
+            'Gestión de incidencias y optimización de rendimiento en producción'
+          ]
         },
         {
-          id: 'exp2', company: 'Freelance & Consultant', role: 'Product Engineer', period: '2021 - Present',
-          achievements: ['Desarrollo de webs corporativas premium y soluciones SaaS', 'Implementación de automatizaciones de negocio e integración de IA', 'Auditoría técnica y refactorización de sistemas legacy']
+          id: 'exp2',
+          company: 'Freelance & Consultant',
+          role: 'Product Engineer',
+          period: '2021 - Present',
+          achievements: [
+            'Desarrollo de webs corporativas premium y soluciones SaaS',
+            'Implementación de automatizaciones de negocio e integración de IA',
+            'Auditoría técnica y refactorización de sistemas legacy'
+          ]
         }
       ]
     },
@@ -163,6 +185,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       footerRole: 'Full Stack Logic'
     }
   },
+
   cat: {
     nav: { projects: 'Projectes', about: 'Perfil', contact: 'Contacte' },
     hero: {
@@ -175,7 +198,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       title: 'Desenvolupador Full Stack enfocat en construir',
       highlight: 'PRODUCTES ESCALABLES',
       p1: 'i sistemes automatitzats per millorar la productivitat dels meus clients.',
-      p2: 'Combino la solidesa del desenvolupament Enterprise amb l\'agilitat de l\'ecosistema freelance. Especialitzat en crear arquitectures robustes que resolen problemes de negoci reals.'
+      p2: "Combino la solidesa del desenvolupament Enterprise amb l'agilitat de l'ecosistema freelance. Especialitzat en crear arquitectures robustes que resolen problemes de negoci reals."
     },
     services: {
       label: 'Core / 02',
@@ -185,7 +208,11 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'SaaS & Apps a Mida', desc: 'Construcció de plataformes escalables i productes digitals.', icon: '🚀' },
         { title: 'Automatització Processos', desc: 'Optimització de fluxos interns i sistemes empresarials.', icon: '⚙️' },
         { title: 'Integració IA', desc: 'Chatbots, anàlisi de dades i assistents intel·ligents.', icon: '🧠' },
-        { title: 'Consultoria i Auditoria Web', desc: 'Anàlisi tècnic, avaluació de rendiment i arquitectura, auditoria d\'experiència d\'usuari i definició de plans de millora amb recomanacions accionables per a productes digitals.', icon: '🔍' },
+        {
+          title: 'Consultoria i Auditoria Web',
+          desc: "Anàlisi tècnic, avaluació de rendiment i arquitectura, auditoria d'experiència d'usuari i definició de plans de millora amb recomanacions accionables per a productes digitals.",
+          icon: '🔍'
+        },
         { title: 'Classes Programació/IA', desc: 'Sessions pràctiques personalitzades per aprendre programació i intel·ligència artificial.', icon: '🎓' }
       ]
     },
@@ -231,6 +258,18 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '04',
+          title: 'Cro&Txet',
+          category: 'E-commerce / Handmade',
+          year: '2025',
+          role: 'Full Stack Developer',
+          image: IMAGES.crotxet,
+          url: 'https://www.croandtxet.cat/',
+          stack: ['React', 'TypeScript', 'Tailwind', 'Vercel', 'EmailJS', 'i18n', 'SEO'],
+          description:
+            'Botiga online de bolsos fets a mà. Experiència de compra cuidada, catàleg visual, multi-idioma i enfocament en marca per convertir visites en comandes.'
+        },
+        {
+          id: '05',
           title: 'Cafeteras Review',
           category: 'Producte Personal / SEO',
           year: '2024',
@@ -241,18 +280,6 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           description:
             'Plataforma de comparació i afiliació desenvolupada com a producte propi, enfocada en SEO programàtic, rendiment i automatització de contingut.'
         },
-        {
-          id: '05',
-          title: 'Ateneu Unió',
-          category: 'Negoci / Gastronomia',
-          year: '2023',
-          role: 'Full Stack Developer',
-          image: IMAGES.ateneu,
-          url: 'https://ateneuuniorestaurant.com/',
-          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description:
-            'Web corporativa per a restaurant històric local. Disseny responsive d’alta fidelitat i consultoria en integració d’IA per captar nous clients i fidelitzar els habituals.'
-        }
       ]
     },
     skills: {
@@ -266,12 +293,26 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'History / 05',
       items: [
         {
-          id: 'exp1', company: 'Schneider Electric', role: 'Full Stack Web Developer', period: 'Actualitat',
-          achievements: ['Manteniment i evolució de plataforma web industrial crítica', 'Desenvolupament Full Stack en entorn Enterprise internacional', 'Gestió d\'incidències i optimització de rendiment en producció']
+          id: 'exp1',
+          company: 'Schneider Electric',
+          role: 'Full Stack Web Developer',
+          period: 'Actualitat',
+          achievements: [
+            'Manteniment i evolució de plataforma web industrial crítica',
+            "Desenvolupament Full Stack en entorn Enterprise internacional",
+            "Gestió d'incidències i optimització de rendiment en producció"
+          ]
         },
         {
-          id: 'exp2', company: 'Freelance & Consultant', role: 'Product Engineer', period: '2021 - Present',
-          achievements: ['Desenvolupament de webs corporatives premium i solucions SaaS', 'Implementació d\'automatitzacions de negoci i integració d\'IA', 'Auditoria tècnica i refactorització de sistemes legacy']
+          id: 'exp2',
+          company: 'Freelance & Consultant',
+          role: 'Product Engineer',
+          period: '2021 - Present',
+          achievements: [
+            'Desenvolupament de webs corporatives premium i solucions SaaS',
+            "Implementació d'automatitzacions de negoci i integració d'IA",
+            'Auditoria tècnica i refactorització de sistemes legacy'
+          ]
         }
       ]
     },
@@ -288,6 +329,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       footerRole: 'Full Stack Logic'
     }
   },
+
   en: {
     nav: { projects: 'Projects', about: 'Profile', contact: 'Contact' },
     hero: {
@@ -299,7 +341,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'Profile / 01',
       title: 'Full Stack Developer focused on building',
       highlight: 'SCALABLE PRODUCTS',
-      p1: 'and automated systems to improve my clients\' productivity.',
+      p1: "and automated systems to improve my clients' productivity.",
       p2: 'I combine the solidity of Enterprise development with the agility of the freelance ecosystem. Specialized in creating robust architectures that solve real business problems.'
     },
     services: {
@@ -310,7 +352,11 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'SaaS & Custom Apps', desc: 'Construction of scalable platforms and digital products.', icon: '🚀' },
         { title: 'Process Automation', desc: 'Optimization of internal workflows and business systems.', icon: '⚙️' },
         { title: 'AI Integration', desc: 'Chatbots, data analysis, and intelligent assistants.', icon: '🧠' },
-        { title: 'Web Consulting & Audit', desc: 'Technical analysis, performance and architecture evaluation, UX audit, and definition of improvement plans with actionable recommendations for digital products.', icon: '🔍' },
+        {
+          title: 'Web Consulting & Audit',
+          desc: 'Technical analysis, performance and architecture evaluation, UX audit, and definition of improvement plans with actionable recommendations for digital products.',
+          icon: '🔍'
+        },
         { title: 'Coding/AI Mentoring', desc: 'Personalized practical sessions to learn programming and artificial intelligence.', icon: '🎓' }
       ]
     },
@@ -356,6 +402,18 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '04',
+          title: 'Cro&Txet',
+          category: 'E-commerce / Handmade',
+          year: '2025',
+          role: 'Full Stack Developer',
+          image: IMAGES.crotxet,
+          url: 'https://www.croandtxet.cat/',
+          stack: ['React', 'TypeScript', 'Tailwind', 'Vercel', 'EmailJS', 'i18n', 'SEO'],
+          description:
+            'Handmade bags online store. Crafted shopping experience, visual catalog, multi-language support, and brand-focused UX to convert visits into orders.'
+        },
+        {
+          id: '05',
           title: 'Cafeteras Review',
           category: 'Personal Product / SEO',
           year: '2024',
@@ -366,18 +424,6 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           description:
             'Product comparison and affiliate platform developed as a personal product, focused on programmatic SEO, performance, and content automation.'
         },
-        {
-          id: '05',
-          title: 'Ateneu Unió',
-          category: 'Business / Gastronomy',
-          year: '2023',
-          role: 'Full Stack Developer',
-          image: IMAGES.ateneu,
-          url: 'https://ateneuuniorestaurant.com/',
-          stack: ['HTML', 'CSS', 'JavaScript', 'Figma', 'SEO'],
-          description:
-            'Corporate website for a historic local restaurant. High-fidelity responsive design and AI integration consultancy to attract new customers and retain loyal ones.'
-        }
       ]
     },
     skills: {
@@ -391,12 +437,26 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'History / 05',
       items: [
         {
-          id: 'exp1', company: 'Schneider Electric', role: 'Full Stack Web Developer', period: 'Present',
-          achievements: ['Maintenance and evolution of critical industrial web platform', 'Full Stack Development in international Enterprise environment', 'Incident management and performance optimization in production']
+          id: 'exp1',
+          company: 'Schneider Electric',
+          role: 'Full Stack Web Developer',
+          period: 'Present',
+          achievements: [
+            'Maintenance and evolution of critical industrial web platform',
+            'Full Stack Development in international Enterprise environment',
+            'Incident management and performance optimization in production'
+          ]
         },
         {
-          id: 'exp2', company: 'Freelance & Consultant', role: 'Product Engineer', period: '2021 - Present',
-          achievements: ['Development of premium corporate websites and SaaS solutions', 'Implementation of business automations and AI integration', 'Technical audit and legacy system refactoring']
+          id: 'exp2',
+          company: 'Freelance & Consultant',
+          role: 'Product Engineer',
+          period: '2021 - Present',
+          achievements: [
+            'Development of premium corporate websites and SaaS solutions',
+            'Implementation of business automations and AI integration',
+            'Technical audit and legacy system refactoring'
+          ]
         }
       ]
     },

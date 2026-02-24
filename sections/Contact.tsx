@@ -4,12 +4,44 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from '../components/MagneticWrapper';
 import { PortfolioContent } from '../types';
 import { SOCIAL_LINKS } from '../constants';
+import emailjs from "@emailjs/browser";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   content: PortfolioContent['contact'];
 }
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+
+  const templateParams = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    email: (form.elements.namedItem("email") as HTMLInputElement).value,
+    message: (form.elements.namedItem("message") as HTMLInputElement).value,
+    date: new Date().toLocaleString()
+  };
+
+  emailjs
+    .send(
+      "service_cilgouv",
+      "template_7vb1edf",
+      templateParams,
+      "iGpB097zxE-0bBxRC"
+    )
+    .then(() => {
+      alert("Mensaje enviado correctamente");
+      form.reset();
+    })
+    .catch((err) => {
+      console.error("EmailJS error:", err);
+      alert("Error al enviar mensaje");
+    });
+};
+
+
 
 const Contact: React.FC<Props> = ({ content }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -107,10 +139,10 @@ const Contact: React.FC<Props> = ({ content }) => {
 
           {/* RIGHT – FORM */}
           <form
-            action="https://formspree.io/f/xanvepwo"
-            method="POST"
+            onSubmit={handleSubmit}
             className="contact-reveal space-y-12"
           >
+
             {/* NAME */}
             <div className="group border-b border-zinc-200 pb-6 focus-within:border-black transition-colors">
               <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">
@@ -144,11 +176,11 @@ const Contact: React.FC<Props> = ({ content }) => {
               <label className="text-[10px] uppercase font-black tracking-widest text-zinc-400 block mb-2">
                 {content.formIdea}
               </label>
-              <input
-                type="text"
+              <textarea
                 name="message"
                 required
-                className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light text-black outline-none placeholder:text-zinc-400"
+                rows={3}
+                className="w-full bg-transparent py-2 text-2xl md:text-4xl font-light text-black outline-none placeholder:text-zinc-400 resize-none"
                 placeholder={content.formIdea}
               />
             </div>
@@ -161,7 +193,9 @@ const Contact: React.FC<Props> = ({ content }) => {
                 {content.btn}
               </button>
             </MagneticWrapper>
+
           </form>
+
         </div>
 
         {/* FOOTER */}

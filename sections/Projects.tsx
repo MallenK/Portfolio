@@ -60,6 +60,7 @@ const Projects: React.FC<Props> = ({ content }) => {
           opacity: 0,
           y: 60,
           scale: 0.95,
+          pointerEvents: "none", // ← CLAVE
           zIndex: (i) => i + 1,
           display: 'flex',
           alignItems: 'center',
@@ -90,10 +91,15 @@ const Projects: React.FC<Props> = ({ content }) => {
         // 3. Secuencia Cards Desktop
         cards.forEach((card, index) => {
           const projectId = content.items[index].id;
-          tl.to(card, {
-            y: 0, opacity: 1, scale: 1, duration: 1, ease: "power3.out",
-            onStart: () => setActiveCardId(projectId)
-          });
+            tl.to(card, {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              pointerEvents: "auto",
+              duration: 1,
+              ease: "power3.out",
+              onStart: () => setActiveCardId(projectId)
+            });
           tl.to(card, { duration: 0.5 }); // Hold
           tl.to(card, { y: -40, opacity: 0, scale: 0.98, duration: 1, ease: "power2.in" });
         });
@@ -211,11 +217,19 @@ const Projects: React.FC<Props> = ({ content }) => {
                   </div>
                   
                   {/* Botón ajustado para móvil */}
-                  <button className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#F5C400] group-hover:text-black transition-all duration-300 shrink-0 cursor-pointer bg-black/40 backdrop-blur-sm md:bg-transparent">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 md:w-8 md:h-8 -rotate-45">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                     </svg>
-                  </button>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#F5C400] group-hover:text-black transition-all duration-300 shrink-0 cursor-pointer bg-black/40 backdrop-blur-sm md:bg-transparent">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 md:w-8 md:h-8 -rotate-45"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                  </a>
+
                 </div>
               </div>
 
