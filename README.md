@@ -1,20 +1,114 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
+<img width="1200" alt="Portfolio Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
+# Sergi Mallén
+### Full Stack Developer · AI Integration · Scalable Digital Products
+
+[🌐 Live Portfolio](https://mallenk.github.io/NOMBRE-DEL-REPO/)  
+[💼 LinkedIn](https://www.linkedin.com/in/TU-USUARIO) · [🐙 GitHub](https://github.com/MallenK)
+
 </div>
 
-# Run and deploy your AI Studio app
+---
 
-This contains everything you need to run your app locally.
+## 🚀 About This Project
 
-View your app in AI Studio: https://ai.studio/apps/drive/1hlVLvfcGxCFQuQytNZYhBmpy227pB_Bx
+This repository contains my personal Full Stack portfolio.
 
-## Run Locally
+It reflects:
 
-**Prerequisites:**  Node.js
+- Enterprise-grade development experience  
+- Scalable product architecture  
+- AI integration & automation workflows  
+- Clean, performance-oriented UI/UX  
 
+The goal is not just visual presentation — it demonstrates real technical capability and production-ready thinking.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+## 🧠 Tech Stack
+
+**Frontend**  
+React · TypeScript · Vite · TailwindCSS  
+
+**Animation & Interaction**  
+GSAP · Framer Motion  
+
+**Backend / APIs**  
+Node.js · Supabase  
+
+**Deployment**  
+GitHub Pages · Vercel  
+
+**AI Integration**  
+Google AI Studio · LLM APIs  
+
+---
+
+## ⚙️ Run Locally
+
+### Prerequisites
+- Node.js 18+
+
+### Install dependencies
+```bash
+npm install
+```
+
+### Configure environment variables
+
+Create a `.env.local` file and add:
+
+```env
+GEMINI_API_KEY=your_api_key_here
+```
+
+### Start development server
+```bash
+npm run dev
+```
+
+---
+
+## 📦 Build & Deploy
+
+### Create production build
+```bash
+npm run build
+```
+
+### Deploy to GitHub Pages
+```bash
+npm run deploy
+```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+ ├── components/
+ ├── sections/
+ ├── translations/
+ ├── assets/
+ └── main.tsx
+```
+
+---
+
+## 🎯 Development Philosophy
+
+- Build scalable systems, not just interfaces  
+- Automate wherever possible  
+- Focus on performance and clarity  
+- Treat every project as a product  
+
+---
+
+<div align="center">
+
+### Built with precision. Designed for impact.
+
+</div>
