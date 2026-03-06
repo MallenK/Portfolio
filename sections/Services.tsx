@@ -54,14 +54,58 @@ const Services: React.FC<Props> = ({ content }) => {
           {content.items.map((service, i) => (
             <div
               key={i}
-              className="service-card p-10 md:p-12 border border-white/5 bg-zinc-900/20 rounded-3xl hover:border-[#F5C400] transition-colors duration-500"
+              className="service-card p-10 md:p-12 border border-white/5 bg-zinc-900/20 rounded-3xl hover:border-[#F5C400] transition-colors duration-500 flex flex-col justify-between items-center text-center"
             >
-              <h4 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-4">
-                {service.title}
-              </h4>
-              <p className="text-white/50 font-light leading-relaxed max-w-sm mx-auto">
-                {service.desc}
-              </p>
+              <div>
+                <h4 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-4">
+                  {service.title}
+                </h4>
+
+                <p className="text-white/50 font-light leading-relaxed max-w-sm mx-auto mb-6">
+                  {service.desc}
+                </p>
+              </div>
+
+              {service.url && (
+                <a
+                  href={service.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#F5C400] hover:text-black transition-all duration-300 shrink-0 cursor-pointer bg-black/40 backdrop-blur-sm"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5 md:w-7 md:h-7 -rotate-45"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </a>
+              )}
+
+              {service.action === "open-ai-chat" && (
+                <button
+                  onClick={() => {
+                    const chatButton = document.querySelector(
+                      '.fixed.bottom-6.right-6 button'
+                    ) as HTMLButtonElement | null;
+
+                    if (chatButton) {
+                      chatButton.click();
+                    }
+                  }}
+                  className="w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#F5C400] hover:text-black transition-all duration-300 shrink-0 cursor-pointer bg-black/40 backdrop-blur-sm"
+                >
+                  💬
+                </button>
+              )}
             </div>
           ))}
         </div>

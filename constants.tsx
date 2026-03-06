@@ -60,10 +60,25 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'Core / 02',
       title: 'Servicios',
       items: [
-        { title: 'Web Corporativa Premium', desc: 'Desarrollo de webs profesionales orientadas a conversión y marca.', icon: '💎' },
-        { title: 'SaaS & Apps a Medida', desc: 'Construcción de plataformas escalables y productos digitales.', icon: '🚀' },
+        {
+          title: 'Web Corporativa Premium',
+          desc: 'Desarrollo de webs profesionales orientadas a conversión y marca.',
+          icon: '💎',
+          url: 'https://mykeracademy.com/'
+        },
+        {
+          title: 'SaaS & Apps a Medida',
+          desc: 'Construcción de plataformas escalables y productos digitales.',
+          icon: '🚀',
+          url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/'
+        },
         { title: 'Automatización Procesos', desc: 'Optimización de flujos internos y sistemas empresariales.', icon: '⚙️' },
-        { title: 'Integración IA', desc: 'Chatbots, análisis de datos y asistentes inteligentes.', icon: '🧠' },
+        {
+          title: 'Integración IA',
+          desc: 'Chatbots, análisis de datos y asistentes inteligentes.',
+          icon: '🧠',
+          action: 'open-ai-chat'
+        },       
         {
           title: 'Consultoría y Auditoría Web',
           desc: 'Análisis técnico, evaluación de rendimiento y arquitectura, auditoría de experiencia de usuario y definición de planes de mejora con recomendaciones accionables para productos digitales.',
@@ -102,15 +117,15 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '03',
-          title: 'AI Exam Assistant',
-          category: 'Asistente IA / Producto',
+          title: 'Project Architecture Planner',
+          category: 'AI Architecture / Dev Tool',
           year: '2024',
-          role: 'Product Engineer',
+          role: 'AI Product Engineer',
           image: IMAGES.ai,
-          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
-          stack: ['GPT', 'OpenAI API'],
+          url: 'https://chatgpt.com/g/g-699de200e9c481919b02f30b73bc79bb-project-architecture-planner',
+          stack: ['GPT', 'OpenAI', 'System Design'],
           description:
-            'Asistente de estudio inteligente capaz de generar exámenes y resúmenes personalizados a partir de documentos subidos por el usuario.'
+            'Asistente de arquitectura de software basado en IA que ayuda a diseñar la estructura técnica de proyectos digitales.'
         },
         {
           id: '04',
@@ -204,16 +219,39 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'Core / 02',
       title: 'Serveis',
       items: [
-        { title: 'Web Corporativa Premium', desc: 'Desenvolupament de webs professionals orientades a conversió i marca.', icon: '💎' },
-        { title: 'SaaS & Apps a Mida', desc: 'Construcció de plataformes escalables i productes digitals.', icon: '🚀' },
-        { title: 'Automatització Processos', desc: 'Optimització de fluxos interns i sistemes empresarials.', icon: '⚙️' },
-        { title: 'Integració IA', desc: 'Chatbots, anàlisi de dades i assistents intel·ligents.', icon: '🧠' },
+        {
+          title: 'Web Corporativa Premium',
+          desc: 'Desenvolupament de webs professionals orientades a conversió i marca.',
+          icon: '💎',
+          url: 'https://mykeracademy.com/'
+        },
+        {
+          title: 'SaaS & Apps a Mida',
+          desc: 'Construcció de plataformes escalables i productes digitals.',
+          icon: '🚀',
+          url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/'
+        },
+        {
+          title: 'Automatització Processos',
+          desc: 'Optimització de fluxos interns i sistemes empresarials.',
+          icon: '⚙️'
+        },
+        {
+          title: 'Integració IA',
+          desc: 'Chatbots, anàlisi de dades i assistents intel·ligents.',
+          icon: '🧠',
+          action: 'open-ai-chat'
+        },
         {
           title: 'Consultoria i Auditoria Web',
           desc: "Anàlisi tècnic, avaluació de rendiment i arquitectura, auditoria d'experiència d'usuari i definició de plans de millora amb recomanacions accionables per a productes digitals.",
           icon: '🔍'
         },
-        { title: 'Classes Programació/IA', desc: 'Sessions pràctiques personalitzades per aprendre programació i intel·ligència artificial.', icon: '🎓' }
+        {
+          title: 'Classes Programació/IA',
+          desc: 'Sessions pràctiques personalitzades per aprendre programació i intel·ligència artificial.',
+          icon: '🎓'
+        }
       ]
     },
     projects: {
@@ -246,15 +284,15 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '03',
-          title: 'AI Exam Assistant',
-          category: 'Assistent IA / Producte',
+          title: 'Project Architecture Planner',
+          category: 'Arquitectura IA / Eina Dev',
           year: '2024',
-          role: 'Product Engineer',
+          role: 'AI Product Engineer',
           image: IMAGES.ai,
-          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
-          stack: ['GPT', 'OpenAI API'],
+          url: 'https://chatgpt.com/g/g-699de200e9c481919b02f30b73bc79bb-project-architecture-planner',
+          stack: ['GPT', 'OpenAI', 'System Design'],
           description:
-            'Assistent d’estudi intel·ligent dissenyat per generar exàmens i resums personalitzats a partir de documents pujats per l’usuari mitjançant IA.'
+            'Assistent d’arquitectura de software basat en IA que ajuda a dissenyar l’estructura tècnica de projectes digitals.'
         },
         {
           id: '04',
@@ -348,16 +386,39 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       label: 'Core / 02',
       title: 'Services',
       items: [
-        { title: 'Premium Corporate Web', desc: 'Development of professional websites focused on conversion and branding.', icon: '💎' },
-        { title: 'SaaS & Custom Apps', desc: 'Construction of scalable platforms and digital products.', icon: '🚀' },
-        { title: 'Process Automation', desc: 'Optimization of internal workflows and business systems.', icon: '⚙️' },
-        { title: 'AI Integration', desc: 'Chatbots, data analysis, and intelligent assistants.', icon: '🧠' },
+        {
+          title: 'Premium Corporate Web',
+          desc: 'Development of professional websites focused on conversion and branding.',
+          icon: '💎',
+          url: 'https://mykeracademy.com/'
+        },
+        {
+          title: 'SaaS & Custom Apps',
+          desc: 'Construction of scalable platforms and digital products.',
+          icon: '🚀',
+          url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/'
+        },
+        {
+          title: 'Process Automation',
+          desc: 'Optimization of internal workflows and business systems.',
+          icon: '⚙️'
+        },
+        {
+          title: 'AI Integration',
+          desc: 'Chatbots, data analysis, and intelligent assistants.',
+          icon: '🧠',
+          action: 'open-ai-chat'
+        },
         {
           title: 'Web Consulting & Audit',
           desc: 'Technical analysis, performance and architecture evaluation, UX audit, and definition of improvement plans with actionable recommendations for digital products.',
           icon: '🔍'
         },
-        { title: 'Coding/AI Mentoring', desc: 'Personalized practical sessions to learn programming and artificial intelligence.', icon: '🎓' }
+        {
+          title: 'Coding/AI Mentoring',
+          desc: 'Personalized practical sessions to learn programming and artificial intelligence.',
+          icon: '🎓'
+        }
       ]
     },
     projects: {
@@ -390,15 +451,15 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         },
         {
           id: '03',
-          title: 'AI Exam Assistant',
-          category: 'AI Assistant / Product',
+          title: 'Project Architecture Planner',
+          category: 'AI Architecture / Dev Tool',
           year: '2024',
-          role: 'Product Engineer',
+          role: 'AI Product Engineer',
           image: IMAGES.ai,
-          url: 'https://chatgpt.com/g/g-696a3563c30c8191b5e1d3a53d388f93-tutor-de-examenes-con-documentos',
-          stack: ['GPT', 'OpenAI API'],
+          url: 'https://chatgpt.com/g/g-699de200e9c481919b02f30b73bc79bb-project-architecture-planner',
+          stack: ['GPT', 'OpenAI', 'System Design'],
           description:
-            'Intelligent study assistant designed to generate personalized exams and summaries from user-uploaded documents using AI.'
+            'AI-powered software architecture assistant designed to help structure digital projects.'
         },
         {
           id: '04',

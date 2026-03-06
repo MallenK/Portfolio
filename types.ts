@@ -26,9 +26,11 @@ export interface SkillGroup {
 }
 
 export interface Service {
-  title: string;
-  desc: string;
-  icon: string;
+  title: string
+  desc: string
+  icon: string
+  url?: string
+  action?: string
 }
 
 export interface PortfolioContent {

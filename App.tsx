@@ -73,13 +73,9 @@ const AppContent: React.FC = () => {
       if (delta > 0) {
         // SCROLL DOWN -> HIDE
         gsap.to(navbar, { y: '-100%', duration: 0.35, ease: 'power2.out' });
-        console.log('[Navbar]', { direction: 'DOWN', scrollY: currentScrollY });
-        console.log('[Navbar] HIDE');
       } else {
         // SCROLL UP -> SHOW
         gsap.to(navbar, { y: '0%', duration: 0.35, ease: 'power2.out' });
-        console.log('[Navbar]', { direction: 'UP', scrollY: currentScrollY });
-        console.log('[Navbar] SHOW');
       }
 
       lastScrollY = currentScrollY;
