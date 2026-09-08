@@ -758,9 +758,11 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
     >
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
       {n.shape === 'box' && (
-        <group ref={spin as any}>
-          <BlueprintStack lit={lit} theme={theme} count={n.count ?? 5} />
-        </group>
+        <mesh ref={spin}>
+          <boxGeometry args={[0.42, 0.42, 0.42]} />
+          {mat}
+          <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54'} />
+        </mesh>
       )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>
