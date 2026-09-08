@@ -413,6 +413,62 @@ const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: n
   );
 };
 
+/* ---------- Servicios core — a selector wheel: one ring divided into as
+     many segments as offerings, a spoke marking each boundary, and a single
+     marker per segment that only differs by size/glow — brighter and bigger
+     when that service opens a link or a chat directly. "Pick one." The
+     satellites outside echo the same single marker shape, never a zoo of
+     different icons. ---------- */
+const SelectorWheel: React.FC<{
+  lit: boolean;
+  theme: 'dark' | 'light';
+  services: { action: boolean }[];
+}> = ({ lit, theme, services }) => {
+  const g = useRef<THREE.Group>(null);
+  useFrame((_, dt) => {
+    if (g.current) g.current.rotation.y += dt * 0.14;
+  });
+  const n = Math.max(services.length, 3);
+  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
+  const color = lit ? ACCENT : base;
+  const R = 0.3;
+  return (
+    <group ref={g}>
+      <mesh>
+        <sphereGeometry args={[0.09, 20, 20]} />
+        <meshStandardMaterial color={color} emissive={ACCENT} emissiveIntensity={lit ? 0.8 : 0.32} roughness={0.3} metalness={0.3} />
+      </mesh>
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[R, 0.012, 8, 48]} />
+        <meshBasicMaterial color={color} transparent opacity={lit ? 0.6 : 0.35} toneMapped={false} />
+      </mesh>
+      {Array.from({ length: n }).map((_, i) => {
+        const a0 = (i / n) * Math.PI * 2;
+        const mid = a0 + Math.PI / n;
+        const on = services[i]?.action;
+        return (
+          <group key={i}>
+            <mesh position={[Math.cos(a0) * R * 0.5, 0, Math.sin(a0) * R * 0.5]} rotation={[0, -a0, 0]}>
+              <boxGeometry args={[R, 0.006, 0.006]} />
+              <meshBasicMaterial color={color} transparent opacity={lit ? 0.4 : 0.2} toneMapped={false} />
+            </mesh>
+            <mesh position={[Math.cos(mid) * (R + 0.06), 0, Math.sin(mid) * (R + 0.06)]}>
+              <sphereGeometry args={[on ? 0.026 : 0.016, 10, 10]} />
+              <meshStandardMaterial
+                color={on ? ACCENT : color}
+                emissive={ACCENT}
+                emissiveIntensity={on ? 1 : 0.4}
+                roughness={0.3}
+                metalness={0.2}
+              />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+};
+
 /* ============================================================ CLUSTER DUST
    a drifting particle haze around each primary so clusters read as nebulae */
 export const ClusterDust: React.FC<{
@@ -713,20 +769,7 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       )}
       {n.shape === 'burst' && (
         <group ref={spin as any}>
-          <mesh>
-            <sphereGeometry args={[0.16, 16, 16]} />
-            {mat}
-          </mesh>
-          {Array.from({ length: 9 }).map((_, i) => {
-            const a = (i / 9) * Math.PI * 2;
-            const b = Math.sin(i * 1.7) * 0.5;
-            return (
-              <mesh key={i} position={[Math.cos(a) * 0.28, b * 0.3, Math.sin(a) * 0.28]} rotation={[0, -a, Math.PI / 2 + b]}>
-                <coneGeometry args={[0.035, 0.34, 6]} />
-                {mat}
-              </mesh>
-            );
-          })}
+          <SelectorWheel lit={lit} theme={theme} services={n.data?.serviceMarks ?? []} />
         </group>
       )}
       {n.shape === 'portal' && <Singularity lit={lit} theme={theme} />}
@@ -898,14 +941,29 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SERVICE: a flat hexagon badge, scaled down to match the Perfil
-             satellites' average size --- */}
+      {/* --- SERVICE: the same single marker shape as the core's selector
+             wheel — a sphere that only grows and glows brighter when this
+             offering opens a link or a chat directly, never a distinct icon
+             per service. --- */}
       {n.variant === 'service' && (
-        <mesh rotation={[Math.PI / 2, 0, Math.PI / 6]} scale={NON_SKILL_SAT_SCALE}>
-          <cylinderGeometry args={[0.16, 0.16, 0.05, 6]} />
-          {chip}
-          <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#565650'} />
-        </mesh>
+        <group scale={NON_SKILL_SAT_SCALE}>
+          {(d.url || d.action) && (
+            <mesh>
+              <sphereGeometry args={[0.19, 16, 16]} />
+              <meshBasicMaterial color={ACCENT} transparent opacity={0.14} toneMapped={false} />
+            </mesh>
+          )}
+          <mesh>
+            <sphereGeometry args={[d.url || d.action ? 0.13 : 0.09, 18, 18]} />
+            <meshStandardMaterial
+              color={d.url || d.action ? ACCENT : lit ? ACCENT : base}
+              emissive={ACCENT}
+              emissiveIntensity={d.url || d.action ? 1 : lit ? 0.8 : 0.28}
+              roughness={0.3}
+              metalness={0.25}
+            />
+          </mesh>
+        </group>
       )}
 
       {(hovered || active) && (

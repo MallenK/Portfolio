@@ -32,6 +32,9 @@ export interface GNode3D {
     /** Experiencia primary only — one entry per career stage, most recent
      *  first, driving the strata rings (see StrataCluster in nodes.tsx). */
     stages?: { current: boolean; year: string }[];
+    /** Servicios primary only — one entry per offering, in the same order
+     *  as the satellites, marking which ones open a link or a chat. */
+    serviceMarks?: { action: boolean }[];
     url?: string;
     action?: string;
     stackCount?: number;
@@ -128,7 +131,9 @@ export function buildGraph3D(c: PortfolioContent) {
       data:
         id === 'experiencia'
           ? { stages: c.experience.items.map((e, i) => ({ current: i === 0, year: e.period })) }
-          : undefined
+          : id === 'servicios'
+            ? { serviceMarks: c.services.items.map((sv) => ({ action: !!(sv.url || sv.action) })) }
+            : undefined
     });
     edges.push({ a: 'core', b: id });
   });
