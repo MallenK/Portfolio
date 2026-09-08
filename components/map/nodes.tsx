@@ -269,7 +269,7 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
      its height, echoing the outer 'company' satellite for that same stage
      so the two read as one continuous thread. ---------- */
 const StrataCluster: React.FC<{
-  stages: { current: boolean }[];
+  stages: { current: boolean; year?: string }[];
   lit: boolean;
   theme: 'dark' | 'light';
 }> = ({ stages, lit, theme }) => {
@@ -312,6 +312,24 @@ const StrataCluster: React.FC<{
                 metalness={0.2}
               />
             </mesh>
+            {/* year label riding on the ring, always visible */}
+            {st.year && (
+              <Html center distanceFactor={9} position={[r + 0.12, y, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
+                <span
+                  style={{
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: 600,
+                    fontSize: '9px',
+                    letterSpacing: '0.05em',
+                    whiteSpace: 'nowrap',
+                    color: st.current ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
+                    textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 8px #000'
+                  }}
+                >
+                  {st.year}
+                </span>
+              </Html>
+            )}
           </group>
         );
       })}
@@ -760,6 +778,24 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
               <boxGeometry args={[0.4, 0.02, 0.4]} />
               <meshBasicMaterial color={ACCENT} toneMapped={false} />
             </mesh>
+          )}
+          {/* persistent year label — always readable, no hover needed */}
+          {d.year && (
+            <Html center distanceFactor={11} position={[0, 0.32, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
+              <span
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: 600,
+                  fontSize: '9px',
+                  letterSpacing: '0.06em',
+                  whiteSpace: 'nowrap',
+                  color: current ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
+                  textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 8px #000'
+                }}
+              >
+                {d.year}
+              </span>
+            </Html>
           )}
         </group>
       )}

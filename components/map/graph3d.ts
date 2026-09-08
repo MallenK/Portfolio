@@ -28,7 +28,7 @@ export interface GNode3D {
     iconScale?: number;
     /** Experiencia primary only — one entry per career stage, most recent
      *  first, driving the strata rings (see StrataCluster in nodes.tsx). */
-    stages?: { current: boolean }[];
+    stages?: { current: boolean; year: string }[];
     url?: string;
     action?: string;
     stackCount?: number;
@@ -124,7 +124,7 @@ export function buildGraph3D(c: PortfolioContent) {
       pos: [conf.dir[0] * S, conf.y, conf.dir[1] * S],
       data:
         id === 'experiencia'
-          ? { stages: c.experience.items.map((e, i) => ({ current: i === 0 })) }
+          ? { stages: c.experience.items.map((e, i) => ({ current: i === 0, year: e.period })) }
           : undefined
     });
     edges.push({ a: 'core', b: id });
