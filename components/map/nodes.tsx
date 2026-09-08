@@ -347,24 +347,8 @@ const StrataCluster: React.FC<{
             <group position={[Math.cos(plateA) * r, y, Math.sin(plateA) * r]} scale={st.current ? 1.15 : 0.85}>
               <YearMarker current={st.current} color={color} seed={i * 1.9} />
             </group>
-            {/* year label riding on the ring, always visible */}
-            {st.year && (
-              <Html center distanceFactor={9} position={[r + 0.12, y, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
-                <span
-                  style={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 600,
-                    fontSize: '9px',
-                    letterSpacing: '0.05em',
-                    whiteSpace: 'nowrap',
-                    color: st.current ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
-                    textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 8px #000'
-                  }}
-                >
-                  {st.year}
-                </span>
-              </Html>
-            )}
+            {/* no year text here — spinning with the ring made it unreadable;
+                the year lives on the outer 'company' satellite instead */}
           </group>
         );
       })}
