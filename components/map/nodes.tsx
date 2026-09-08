@@ -370,65 +370,6 @@ const StrataCluster: React.FC<{
      Each sheet carries a pair of crossed construction lines instead of a
      solid face, so it reads as a draft/plan rather than a finished object —
      the finished thing lives outside, on the satellites. ---------- */
-/* ---------- Proyectos core — a small terminal window: three traffic-light
-     dots, a command line, and a blinking cursor. "Developer" identity for
-     the section that shows shipped work, chosen over the blueprint stack. */
-const TerminalCore: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
-  lit,
-  theme,
-  count
-}) => {
-  const g = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (g.current) g.current.rotation.y += dt * 0.05;
-  });
-  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
-  const color = lit ? ACCENT : base;
-  const w = 0.62;
-  const h = 0.4;
-  const dot = theme === 'light' ? '#8c8b83' : '#5e5e5e';
-  const mono = 'Menlo, Consolas, "IBM Plex Mono", monospace';
-  return (
-    <group ref={g}>
-      <mesh>
-        <planeGeometry args={[w, h]} />
-        <meshBasicMaterial color={theme === 'light' ? '#1c1c1a' : '#0a0a0a'} side={THREE.DoubleSide} />
-        <Edges color={color} />
-      </mesh>
-      <mesh position={[0, h / 2 - 0.032, 0.001]}>
-        <planeGeometry args={[w, 0.064]} />
-        <meshBasicMaterial color={theme === 'light' ? '#2c2c28' : '#161616'} />
-      </mesh>
-      {[0, 1, 2].map((i) => (
-        <mesh key={i} position={[-w / 2 + 0.045 + i * 0.032, h / 2 - 0.032, 0.002]}>
-          <sphereGeometry args={[0.011, 8, 8]} />
-          <meshBasicMaterial color={dot} />
-        </mesh>
-      ))}
-      <Html center distanceFactor={9} position={[0, -0.02, 0.002]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
-        <style>{'@keyframes term-blink{50%{opacity:0}}'}</style>
-        <div style={{ fontFamily: mono, fontSize: '9px', color, whiteSpace: 'nowrap' }}>
-          $ ls proyectos/
-          <span
-            style={{
-              display: 'inline-block',
-              width: 6,
-              height: 10,
-              marginLeft: 4,
-              background: color,
-              verticalAlign: 'middle',
-              animation: 'term-blink 1s step-start infinite'
-            }}
-          />
-        </div>
-      </Html>
-      <Html center distanceFactor={9} position={[0, -0.13, 0.002]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
-        <div style={{ fontFamily: mono, fontSize: '8px', color: dot, whiteSpace: 'nowrap' }}>{count} entregados</div>
-      </Html>
-    </group>
-  );
-};
-
 const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
   lit,
   theme,
@@ -793,7 +734,8 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       g.current.scale.setScalar(s);
     }
     if (spin.current) {
-      spin.current.rotation.y += dt * 0.25;
+      spin.current.rotation.y += dt * (n.shape === 'box' ? 0.4 : 0.25);
+      if (n.shape === 'box') spin.current.rotation.x += dt * 0.2;
     }
   });
 
@@ -815,7 +757,11 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       onClick={(e) => { e.stopPropagation(); onNode(n.id, n.section); }}
     >
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
-      {n.shape === 'box' && <TerminalCore lit={lit} theme={theme} count={n.count ?? 5} />}
+      {n.shape === 'box' && (
+        <group ref={spin as any}>
+          <BlueprintStack lit={lit} theme={theme} count={n.count ?? 5} />
+        </group>
+      )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>
           <StrataCluster stages={n.data?.stages ?? [{ current: true }, { current: false }, { current: false }]} lit={lit} theme={theme} />
