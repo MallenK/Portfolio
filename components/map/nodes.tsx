@@ -17,6 +17,9 @@ const NON_SKILL_SAT_SCALE = 0.58;
 /* Perfil is deliberately shapeless (option C: a dense, living cluster, not a
    fixed geometric shell) — this keeps it the single biggest primary node. */
 const PERFIL_PRIMARY_BOOST = 1.28;
+/* uniform down-scale of the core cluster's own elements (wire shells + inner
+   icons) — the outer node boost above stays untouched. */
+const PERFIL_CORE_SCALE = 0.62;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
@@ -228,7 +231,7 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
   });
   const seed = lit ? ACCENT : theme === 'light' ? '#0a0a0a' : '#e4e4dc';
   return (
-    <group ref={g}>
+    <group ref={g} scale={PERFIL_CORE_SCALE}>
       <mesh>
         <icosahedronGeometry args={[0.22, 0]} />
         <meshBasicMaterial color={seed} toneMapped={false} wireframe transparent opacity={lit ? 0.9 : 0.5} />
