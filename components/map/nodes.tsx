@@ -29,9 +29,6 @@ const PERFIL_CORE_SCALE = 0.18;
    core in final world size (Perfil gets PERFIL_PRIMARY_BOOST on top of its
    own core scale; Experiencia doesn't, so this value is higher). */
 const STRATA_CORE_SCALE = 0.36;
-/* Proyectos' forged gem — single value to resize it against the primary
-   node's own screen-fitted footprint. */
-const FORGE_CORE_SCALE = 0.62;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
@@ -405,10 +402,6 @@ const ForgeCore: React.FC<{ theme: 'dark' | 'light'; count: number }> = ({ theme
              vec3 V = normalize(-vP);
              float fres = pow(1.0 - max(dot(vN,V),0.0), 2.2);
              vec3 col = mix(uDark, uGold, band) + uGold*fres*0.55 + uGold*spark*1.0;
-             // faint CRT scanlines — ties the gem back to "screens shipped",
-             // matching the real screenshots on the satellites outside
-             float scan = sin(vUv.y*90.0 + uT*2.0) * 0.5 + 0.5;
-             col *= 0.92 + 0.08*scan;
              gl_FragColor = vec4(col,1.0);
            }`
       }),
@@ -447,7 +440,7 @@ const ForgeCore: React.FC<{ theme: 'dark' | 'light'; count: number }> = ({ theme
   });
 
   return (
-    <group scale={FORGE_CORE_SCALE}>
+    <group>
       <mesh ref={knot} material={knotMat}>
         <icosahedronGeometry args={[0.3, 1]} />
       </mesh>
