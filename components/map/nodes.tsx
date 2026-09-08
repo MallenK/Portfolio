@@ -10,6 +10,13 @@ const ACCENT = '#fde100';
 /* the core keeps its size; the rest of the graph reads larger */
 const PRIMARY_SCALE = 1.92;
 const SAT_SCALE = 1.9;
+/* project/company/service satellites are solid shapes that read visually
+   heavier than the Perfil tech-icon medallions at the same scale — shrink
+   them so their average footprint matches the Perfil satellites. */
+const NON_SKILL_SAT_SCALE = 0.58;
+/* Perfil is deliberately shapeless (option C: a dense, living cluster, not a
+   fixed geometric shell) — this keeps it the single biggest primary node. */
+const PERFIL_PRIMARY_BOOST = 1.28;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
@@ -200,31 +207,43 @@ const CountRing: React.FC<{ count: number; lit: boolean; theme: 'dark' | 'light'
   );
 };
 
-/* ---------- Perfil core — a dense rotating nucleus of the 4 tech marks around
-     a wire seed; the seed answers hover/active, the marks stay bone so they read
-     as a "preview" distinct from the big satellite badges ---------- */
+/* ---------- Perfil core — no fixed shell, it's the one "living" primary:
+     a dense rotating nucleus of the 4 inner tech marks around a wire seed,
+     wrapped in a second slower outer wire shell for more presence. The seed
+     answers hover/active, the marks stay bone so they read as a "preview"
+     distinct from the big satellite badges. Deliberately bigger than the
+     other primaries' fixed geometry — see PERFIL_PRIMARY_BOOST. ---------- */
 const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ lit, theme }) => {
   const g = useRef<THREE.Group>(null);
+  const shell = useRef<THREE.Mesh>(null);
   useFrame((_, dt) => {
     if (g.current) {
       g.current.rotation.y += dt * 0.5;
       g.current.rotation.x += dt * 0.14;
+    }
+    if (shell.current) {
+      shell.current.rotation.y -= dt * 0.16;
+      shell.current.rotation.z += dt * 0.09;
     }
   });
   const seed = lit ? ACCENT : theme === 'light' ? '#0a0a0a' : '#e4e4dc';
   return (
     <group ref={g}>
       <mesh>
-        <icosahedronGeometry args={[0.11, 0]} />
+        <icosahedronGeometry args={[0.22, 0]} />
         <meshBasicMaterial color={seed} toneMapped={false} wireframe transparent opacity={lit ? 0.9 : 0.5} />
+      </mesh>
+      <mesh ref={shell}>
+        <icosahedronGeometry args={[0.34, 1]} />
+        <meshBasicMaterial color={seed} toneMapped={false} wireframe transparent opacity={lit ? 0.5 : 0.22} />
       </mesh>
       {PERFIL_INNER.map((tech, i) => {
         const a = (i / PERFIL_INNER.length) * Math.PI * 2;
-        const y = (i % 2 ? 1 : -1) * 0.11;
+        const y = (i % 2 ? 1 : -1) * 0.17;
         const icon = iconForSkill(tech) ?? iconForCategory('Tooling');
         return (
-          <group key={tech} position={[Math.cos(a) * 0.36, y, Math.sin(a) * 0.36]} rotation={[0, -a, 0]}>
-            <TechIcon icon={icon} size={0.19} lit={false} theme={theme} spin={false} />
+          <group key={tech} position={[Math.cos(a) * 0.56, y, Math.sin(a) * 0.56]} rotation={[0, -a, 0]}>
+            <TechIcon icon={icon} size={0.26} lit={false} theme={theme} spin={false} />
           </group>
         );
       })}
@@ -482,11 +501,15 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
   const lit = hovered || active;
   const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
 
+  // Perfil has no fixed shell — it's the only "living" primary, so it always
+  // reads as the largest node in the graph.
+  const ownScale = n.shape === 'icosa' ? PERFIL_PRIMARY_BOOST : 1;
+
   useFrame((_, dt) => {
     if (g.current) {
       const s = THREE.MathUtils.damp(
         g.current.scale.x,
-        (lit ? 1.4 : dim ? 0.86 : 1) * PRIMARY_SCALE,
+        (lit ? 1.4 : dim ? 0.86 : 1) * PRIMARY_SCALE * ownScale,
         9,
         dt
       );
@@ -624,9 +647,10 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
       {...bind}
       onClick={(e) => { e.stopPropagation(); onNode(n.id, n.section, n.anchor); }}
     >
-      {/* --- PROJECT: a billboarded chip showing the year, live ring --- */}
+      {/* --- PROJECT: a billboarded chip showing the year, live ring —
+             scaled down to match the Perfil satellites' average size --- */}
       {n.variant === 'project' && (
-        <Billboard>
+        <Billboard scale={NON_SKILL_SAT_SCALE}>
           <mesh>
             <planeGeometry args={[0.4, 0.24]} />
             {chip}
@@ -660,9 +684,10 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </Billboard>
       )}
 
-      {/* --- COMPANY: a plate; the current job gets a gold rim + is larger --- */}
+      {/* --- COMPANY: a plate; the current job gets a gold rim + is larger,
+             scaled down to match the Perfil satellites' average size --- */}
       {n.variant === 'company' && (
-        <group scale={current ? 1.25 : 1}>
+        <group scale={(current ? 1.25 : 1) * NON_SKILL_SAT_SCALE}>
           <mesh>
             <boxGeometry args={[0.34, 0.12, 0.34]} />
             {chip}
@@ -689,9 +714,10 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SERVICE: a flat hexagon badge --- */}
+      {/* --- SERVICE: a flat hexagon badge, scaled down to match the Perfil
+             satellites' average size --- */}
       {n.variant === 'service' && (
-        <mesh rotation={[Math.PI / 2, 0, Math.PI / 6]}>
+        <mesh rotation={[Math.PI / 2, 0, Math.PI / 6]} scale={NON_SKILL_SAT_SCALE}>
           <cylinderGeometry args={[0.16, 0.16, 0.05, 6]} />
           {chip}
           <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#565650'} />

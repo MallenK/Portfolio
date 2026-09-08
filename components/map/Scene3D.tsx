@@ -175,8 +175,8 @@ const Graph: React.FC<Omit<Props, 'content'> & { data: ReturnType<typeof buildGr
               key={`dust-${p.id}`}
               center={p.pos}
               theme={theme}
-              count={p.section === 'contacto' ? 90 : 220}
-              radius={p.section === 'contacto' ? 1.6 : 2.7}
+              count={p.section === 'contacto' ? 90 : p.section === 'perfil' ? 320 : 220}
+              radius={p.section === 'contacto' ? 1.6 : p.section === 'perfil' ? 3.4 : 2.7}
             />
           ))}
 
