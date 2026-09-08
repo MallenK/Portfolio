@@ -27,8 +27,6 @@ export interface GNode3D {
     /** company satellite ring size, 0 (oldest) to 1 (most recent) */
     stageScale?: number;
     image?: string;
-    /** which fixed icon a 'service' satellite draws (see ServiceIcon) */
-    serviceIndex?: number;
     /** per-node size multiplier so the outer ring reads as varied sizes */
     iconScale?: number;
     /** Experiencia primary only — one entry per career stage, most recent
@@ -185,7 +183,7 @@ export function buildGraph3D(c: PortfolioContent) {
     c.services.items.map((sv, i) => ({
       label: sv.title,
       anchor: String(i),
-      data: { url: sv.url, action: sv.action, serviceIndex: i }
+      data: { url: sv.url, action: sv.action, stackCount: i + 1 }
     })),
     1.7
   );

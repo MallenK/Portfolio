@@ -413,150 +413,6 @@ const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: n
   );
 };
 
-/* ---------- Servicios core — a faceted gem refracting the accent light out
-     toward each offering, "one core, many solutions". Thin light shafts
-     fan out in the same directions the service satellites orbit in. ---------- */
-const PrismCore: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
-  lit,
-  theme,
-  count
-}) => {
-  const gem = useRef<THREE.Mesh>(null);
-  useFrame((_, dt) => {
-    if (gem.current) {
-      gem.current.rotation.y += dt * 0.24;
-      gem.current.rotation.x += dt * 0.1;
-    }
-  });
-  const n = Math.max(count || 6, 4);
-  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
-  const color = lit ? ACCENT : base;
-  return (
-    <group>
-      <mesh ref={gem}>
-        <icosahedronGeometry args={[0.2, 0]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={ACCENT}
-          emissiveIntensity={lit ? 0.75 : 0.28}
-          roughness={0.15}
-          metalness={0.55}
-          flatShading
-        />
-      </mesh>
-      {Array.from({ length: n }).map((_, i) => {
-        const a = (i / n) * Math.PI * 2;
-        const len = 0.46;
-        return (
-          <mesh key={i} position={[Math.cos(a) * len * 0.5, 0, Math.sin(a) * len * 0.5]} rotation={[0, -a, 0]}>
-            <boxGeometry args={[len, 0.012, 0.012]} />
-            <meshBasicMaterial color={ACCENT} transparent opacity={lit ? 0.6 : 0.3} toneMapped={false} depthWrite={false} />
-          </mesh>
-        );
-      })}
-    </group>
-  );
-};
-
-/* ---------- Service satellite icons — one small distinct primitive per
-     offering (index-keyed, matches c.services.items order in constants.tsx):
-     0 web · 1 SaaS/layers · 2 automation/gear · 3 AI (real Claude mark) ·
-     4 audit/magnifier · 5 teaching/book. ---------- */
-const ServiceIcon: React.FC<{ index: number; lit: boolean; theme: 'dark' | 'light' }> = ({
-  index,
-  lit,
-  theme
-}) => {
-  const g = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (g.current) g.current.rotation.y += dt * 0.4;
-  });
-  if (index === 3) {
-    return <TechIcon icon={iconForSkill('Claude') ?? iconForCategory('Tooling')} size={0.22} lit={lit} theme={theme} />;
-  }
-  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
-  const color = lit ? ACCENT : base;
-  const matProps = { color, emissive: ACCENT, emissiveIntensity: lit ? 0.8 : 0.28, roughness: 0.4, metalness: 0.15 };
-
-  if (index === 0) {
-    // Web corporativa premium — browser frame
-    return (
-      <group ref={g}>
-        <mesh>
-          <planeGeometry args={[0.17, 0.12]} />
-          <meshStandardMaterial {...matProps} transparent opacity={0.18} side={THREE.DoubleSide} />
-          <Edges color={color} />
-        </mesh>
-        <mesh position={[0, 0.042, 0.001]}>
-          <planeGeometry args={[0.17, 0.026]} />
-          <meshBasicMaterial color={color} transparent opacity={0.5} toneMapped={false} />
-        </mesh>
-      </group>
-    );
-  }
-  if (index === 1) {
-    // SaaS y apps a medida — stacked layers
-    return (
-      <group ref={g}>
-        {[-0.032, 0, 0.032].map((y, i) => (
-          <mesh key={i} position={[0, y, 0]} rotation={[Math.PI / 2, 0, Math.PI / 4]}>
-            <cylinderGeometry args={[0.09 - i * 0.012, 0.09 - i * 0.012, 0.014, 4]} />
-            <meshStandardMaterial {...matProps} />
-          </mesh>
-        ))}
-      </group>
-    );
-  }
-  if (index === 2) {
-    // Automatización de procesos — gear
-    return (
-      <group ref={g}>
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.07, 0.018, 8, 20]} />
-          <meshStandardMaterial {...matProps} />
-        </mesh>
-        {Array.from({ length: 8 }).map((_, i) => {
-          const a = (i / 8) * Math.PI * 2;
-          return (
-            <mesh key={i} position={[Math.cos(a) * 0.09, Math.sin(a) * 0.09, 0]} rotation={[0, 0, a]}>
-              <boxGeometry args={[0.03, 0.022, 0.022]} />
-              <meshStandardMaterial {...matProps} />
-            </mesh>
-          );
-        })}
-      </group>
-    );
-  }
-  if (index === 4) {
-    // Consultoría y auditoría web — magnifying glass
-    return (
-      <group ref={g} rotation={[0, 0, 0.5]}>
-        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
-          <torusGeometry args={[0.05, 0.014, 8, 24]} />
-          <meshStandardMaterial {...matProps} />
-        </mesh>
-        <mesh position={[0.05, -0.06, 0]} rotation={[0, 0, Math.PI / 4]}>
-          <cylinderGeometry args={[0.012, 0.012, 0.09, 8]} />
-          <meshStandardMaterial {...matProps} />
-        </mesh>
-      </group>
-    );
-  }
-  // 5 — Clases de programación / IA — open book
-  return (
-    <group ref={g}>
-      <mesh position={[-0.045, 0, 0]} rotation={[0, 0.5, 0]}>
-        <planeGeometry args={[0.09, 0.12]} />
-        <meshStandardMaterial {...matProps} side={THREE.DoubleSide} />
-      </mesh>
-      <mesh position={[0.045, 0, 0]} rotation={[0, -0.5, 0]}>
-        <planeGeometry args={[0.09, 0.12]} />
-        <meshStandardMaterial {...matProps} side={THREE.DoubleSide} />
-      </mesh>
-    </group>
-  );
-};
-
 /* ============================================================ CLUSTER DUST
    a drifting particle haze around each primary so clusters read as nebulae */
 export const ClusterDust: React.FC<{
@@ -857,7 +713,20 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       )}
       {n.shape === 'burst' && (
         <group ref={spin as any}>
-          <PrismCore lit={lit} theme={theme} count={n.count ?? 6} />
+          <mesh>
+            <sphereGeometry args={[0.16, 16, 16]} />
+            {mat}
+          </mesh>
+          {Array.from({ length: 9 }).map((_, i) => {
+            const a = (i / 9) * Math.PI * 2;
+            const b = Math.sin(i * 1.7) * 0.5;
+            return (
+              <mesh key={i} position={[Math.cos(a) * 0.28, b * 0.3, Math.sin(a) * 0.28]} rotation={[0, -a, Math.PI / 2 + b]}>
+                <coneGeometry args={[0.035, 0.34, 6]} />
+                {mat}
+              </mesh>
+            );
+          })}
         </group>
       )}
       {n.shape === 'portal' && <Singularity lit={lit} theme={theme} />}
@@ -1029,26 +898,14 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SERVICE: a hexagon pedestal carrying a distinct icon per
-             offering, scaled to match the Perfil satellites' average size.
-             A small gold dot marks the ones that open a link or a chat. --- */}
+      {/* --- SERVICE: a flat hexagon badge, scaled down to match the Perfil
+             satellites' average size --- */}
       {n.variant === 'service' && (
-        <group scale={NON_SKILL_SAT_SCALE}>
-          <mesh rotation={[Math.PI / 2, 0, Math.PI / 6]} position={[0, -0.05, 0]} scale={0.72}>
-            <cylinderGeometry args={[0.16, 0.16, 0.05, 6]} />
-            {chip}
-            <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#565650'} />
-          </mesh>
-          <group position={[0, 0.07, 0]}>
-            <ServiceIcon index={d.serviceIndex ?? 0} lit={lit} theme={theme} />
-          </group>
-          {(d.url || d.action) && (
-            <mesh position={[0.15, 0.17, 0]}>
-              <sphereGeometry args={[0.02, 8, 8]} />
-              <meshBasicMaterial color={ACCENT} toneMapped={false} />
-            </mesh>
-          )}
-        </group>
+        <mesh rotation={[Math.PI / 2, 0, Math.PI / 6]} scale={NON_SKILL_SAT_SCALE}>
+          <cylinderGeometry args={[0.16, 0.16, 0.05, 6]} />
+          {chip}
+          <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#565650'} />
+        </mesh>
       )}
 
       {(hovered || active) && (
