@@ -1,5 +1,5 @@
 import { PortfolioContent } from '../../types';
-import { SKILL_ICON } from './techIcons';
+import { PERFIL_OUTER } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
 export type PrimaryShape = 'icosa' | 'box' | 'strata' | 'burst' | 'portal';
@@ -24,6 +24,8 @@ export interface GNode3D {
     current?: boolean;
     skillCount?: number;
     skillCategory?: string;
+    /** per-node size multiplier so the outer ring reads as varied sizes */
+    iconScale?: number;
     url?: string;
     action?: string;
     stackCount?: number;
@@ -67,7 +69,7 @@ export function buildGraph3D(c: PortfolioContent) {
   const sats = (
     pid: string,
     variant: SatVariant,
-    items: { label: string; anchor: string; data: GNode3D['data'] }[],
+    items: { label: string; anchor: string; data: GNode3D['data']; distScale?: number }[],
     distMul = 1
   ) => {
     const p = nodes.find((n) => n.id === pid)!;
@@ -78,7 +80,7 @@ export function buildGraph3D(c: PortfolioContent) {
     items.forEach((it, i) => {
       const t = items.length === 1 ? 0 : i / (items.length - 1) - 0.5;
       const a = outward + t * spread;
-      const dist = (1.45 + (i % 2) * 0.5 + rng(pid + i) * 0.45) * distMul;
+      const dist = (1.45 + (i % 2) * 0.5 + rng(pid + i) * 0.45) * distMul * (it.distScale ?? 1);
       const id = `${pid}:${i}`;
       nodes.push({
         id,
@@ -122,19 +124,17 @@ export function buildGraph3D(c: PortfolioContent) {
   });
 
   // ---- children (contacto is a leaf: no satellites) ----
-  // Perfil satellites: one per named technology with a real brand icon —
-  // deduped by icon graphic so no logo appears twice (e.g. CodeIgniter reuses
-  // the PHP mark and is skipped once PHP is already shown).
-  const seenIconPaths = new Set<string>();
-  const perfilTechs: { label: string; anchor: string; data: GNode3D['data'] }[] = [];
-  c.about.skills.forEach((g) => {
-    g.skills.forEach((skill) => {
-      const icon = SKILL_ICON[skill];
-      if (!icon || seenIconPaths.has(icon.path)) return;
-      seenIconPaths.add(icon.path);
-      perfilTechs.push({ label: skill, anchor: g.category, data: { skillCategory: g.category } });
-    });
-  });
+  // Perfil's outer ring: the curated PERFIL_OUTER list (already deduped and
+  // clear of the 4 inner-ring marks — see techIcons.ts), each satellite
+  // getting its own size + distance so the ring reads as varied, not uniform.
+  const categoryOf = new Map<string, string>();
+  c.about.skills.forEach((g) => g.skills.forEach((s) => categoryOf.set(s, g.category)));
+  const perfilTechs = PERFIL_OUTER.map((label) => ({
+    label,
+    anchor: categoryOf.get(label) ?? 'perfil',
+    data: { skillCategory: categoryOf.get(label), iconScale: 0.65 + rng(label + 'size') * 0.95 },
+    distScale: 0.85 + rng(label + 'dist') * 0.75
+  }));
   sats('perfil', 'skill', perfilTechs, 1.7);
   sats(
     'proyectos',

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Billboard, Edges, Html } from '@react-three/drei';
 import type { GNode3D } from './graph3d';
-import { iconForCategory, iconForSkill, iconTexture, PERFIL_CATEGORIES } from './techIcons';
+import { iconForCategory, iconForSkill, iconTexture, PERFIL_INNER } from './techIcons';
 
 const ACCENT = '#fde100';
 
@@ -218,12 +218,13 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
         <icosahedronGeometry args={[0.11, 0]} />
         <meshBasicMaterial color={seed} toneMapped={false} wireframe transparent opacity={lit ? 0.9 : 0.5} />
       </mesh>
-      {PERFIL_CATEGORIES.map((cat, i) => {
-        const a = (i / PERFIL_CATEGORIES.length) * Math.PI * 2;
+      {PERFIL_INNER.map((tech, i) => {
+        const a = (i / PERFIL_INNER.length) * Math.PI * 2;
         const y = (i % 2 ? 1 : -1) * 0.11;
+        const icon = iconForSkill(tech) ?? iconForCategory('Tooling');
         return (
-          <group key={cat} position={[Math.cos(a) * 0.36, y, Math.sin(a) * 0.36]} rotation={[0, -a, 0]}>
-            <TechIcon icon={iconForCategory(cat, i)} size={0.19} lit={false} theme={theme} spin={false} />
+          <group key={tech} position={[Math.cos(a) * 0.36, y, Math.sin(a) * 0.36]} rotation={[0, -a, 0]}>
+            <TechIcon icon={icon} size={0.19} lit={false} theme={theme} spin={false} />
           </group>
         );
       })}
@@ -675,10 +676,16 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SKILL: an extruded 3D icon of this specific technology --- */}
+      {/* --- SKILL: an extruded 3D icon of this specific technology, sized
+             per-node so the outer ring reads as varied, not uniform --- */}
       {n.variant === 'skill' && (
         <group>
-          <TechIcon icon={iconForSkill(n.label) ?? iconForCategory('Tooling')} size={0.44} lit={lit} theme={theme} />
+          <TechIcon
+            icon={iconForSkill(n.label) ?? iconForCategory('Tooling')}
+            size={0.44 * (d.iconScale ?? 1)}
+            lit={lit}
+            theme={theme}
+          />
         </group>
       )}
 

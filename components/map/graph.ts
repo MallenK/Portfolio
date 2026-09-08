@@ -1,5 +1,5 @@
 import { PortfolioContent } from '../../types';
-import { SKILL_ICON } from './techIcons';
+import { PERFIL_OUTER } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
 
@@ -86,7 +86,7 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
 
   const addSats = (
     pid: string,
-    items: { label: string; live?: boolean }[],
+    items: { label: string; live?: boolean; rScale?: number; distScale?: number }[],
     scale = 1
   ) => {
     const p = nodes.find((n) => n.id === pid)!;
@@ -96,9 +96,10 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
       const id = `${pid}:${i}`;
       const n = mk(id, it.label, 'satellite', pid, pid);
       n.live = it.live;
+      if (it.rScale) n.r = n.r * it.rScale;
       const t = items.length === 1 ? 0 : i / (items.length - 1) - 0.5;
       const a = base + t * spread;
-      const dist = (0.19 + (i % 2) * 0.055) * scale;
+      const dist = (0.19 + (i % 2) * 0.055) * scale * (it.distScale ?? 1);
       n.hx = p.hx + Math.cos(a) * dist;
       n.hy = p.hy + Math.sin(a) * dist;
       nodes.push(n);
@@ -109,18 +110,20 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
   const s = small ? 0.62 : 1;
   const cap = <T,>(a: T[], n: number) => (small ? a.slice(0, n) : a);
 
-  // Perfil: one satellite per named technology, deduped by icon graphic so
-  // no logo/technology repeats (e.g. CodeIgniter reuses the PHP mark).
-  const seenIconPaths = new Set<string>();
-  const perfilTechs: { label: string }[] = [];
-  c.about.skills.forEach((g) => {
-    g.skills.forEach((skill) => {
-      const icon = SKILL_ICON[skill];
-      if (!icon || seenIconPaths.has(icon.path)) return;
-      seenIconPaths.add(icon.path);
-      perfilTechs.push({ label: skill });
-    });
-  });
+  function rng(str: string) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619) >>> 0;
+    return (h % 100000) / 100000;
+  }
+
+  // Perfil's outer ring: same curated tech list as the 3D map (PHP, MySQL,
+  // JavaScript and Claude live in the inner ring instead — see techIcons.ts),
+  // each with its own size + distance so the ring reads as varied.
+  const perfilTechs = PERFIL_OUTER.map((label) => ({
+    label,
+    rScale: 0.7 + rng(label + 'size') * 0.9,
+    distScale: 0.85 + rng(label + 'dist') * 0.75
+  }));
   addSats('perfil', cap(perfilTechs, 9), s * 1.7);
   addSats('proyectos', cap(c.projects.items, 4).map((p) => ({ label: p.title, live: p.live })), s * 1.7);
   addSats('experiencia', cap(c.experience.items, 4).map((e) => ({ label: e.company })), s * 1.7);

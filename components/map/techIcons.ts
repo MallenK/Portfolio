@@ -13,7 +13,12 @@ import {
   siSass,
   siBootstrap,
   siDocker,
-  siWordpress
+  siWordpress,
+  siClaude,
+  siVercel,
+  siGooglegemini,
+  siGithubcopilot,
+  siHuggingface
 } from 'simple-icons';
 
 /**
@@ -34,9 +39,8 @@ export function iconForCategory(category: string, index = 0) {
 }
 
 /**
- * Per-skill icon lookup (see COMMON_SKILLS in constants.tsx). Keyed by the exact
- * skill label used in that list. Skills with no brand mark (API REST, Agile,
- * CRO, SEO) fall back to iconForSkill's caller deciding what to show instead.
+ * Every icon usable on the Perfil map — real apps, languages, frameworks and
+ * tools only, no decorative marks. Keyed by the exact label shown on the node.
  */
 export const SKILL_ICON: Record<string, { path: string; title: string }> = {
   HTML: { path: siHtml5.path, title: siHtml5.title },
@@ -53,12 +57,37 @@ export const SKILL_ICON: Record<string, { path: string; title: string }> = {
   Git: { path: siGit.path, title: siGit.title },
   Docker: { path: siDocker.path, title: siDocker.title },
   WordPress: { path: siWordpress.path, title: siWordpress.title },
-  'Google Analytics & GTM': { path: siGoogleanalytics.path, title: siGoogleanalytics.title }
+  'Google Analytics & GTM': { path: siGoogleanalytics.path, title: siGoogleanalytics.title },
+  Claude: { path: siClaude.path, title: siClaude.title },
+  Vercel: { path: siVercel.path, title: siVercel.title },
+  'Google Gemini': { path: siGooglegemini.path, title: siGooglegemini.title },
+  'GitHub Copilot': { path: siGithubcopilot.path, title: siGithubcopilot.title },
+  'Hugging Face': { path: siHuggingface.path, title: siHuggingface.title }
 };
 
 export function iconForSkill(skill: string) {
   return SKILL_ICON[skill];
 }
+
+/** Inner ring — the 4 marks rotating tight against the Perfil core. */
+export const PERFIL_INNER = ['PHP', 'MySQL', 'JavaScript', 'Claude'];
+
+/** Outer ring — full-size satellites orbiting further out, deduped against
+ *  PERFIL_INNER and against each other's icon graphic (e.g. CodeIgniter is
+ *  skipped, it reuses the PHP mark already shown). AI tools + Vercel added
+ *  alongside the core stack. */
+export const PERFIL_OUTER = [
+  'TypeScript',
+  'React',
+  'Symfony',
+  'Node.js',
+  'Git',
+  'Google Analytics & GTM',
+  'Vercel',
+  'Google Gemini',
+  'GitHub Copilot',
+  'Hugging Face'
+];
 
 const texCache = new Map<string, THREE.Texture>();
 
