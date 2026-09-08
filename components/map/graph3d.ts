@@ -26,6 +26,7 @@ export interface GNode3D {
     skillCategory?: string;
     /** company satellite ring size, 0 (oldest) to 1 (most recent) */
     stageScale?: number;
+    image?: string;
     /** per-node size multiplier so the outer ring reads as varied sizes */
     iconScale?: number;
     /** Experiencia primary only — one entry per career stage, most recent
@@ -154,7 +155,7 @@ export function buildGraph3D(c: PortfolioContent) {
     c.projects.items.map((p) => ({
       label: p.title,
       anchor: p.id,
-      data: { year: p.year, live: p.live, url: p.url, stackCount: p.stack.length }
+      data: { year: p.year, live: p.live, url: p.url, stackCount: p.stack.length, image: p.image }
     })),
     1.7
   );

@@ -1,6 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { Suspense, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useLoader } from '@react-three/fiber';
 import { Billboard, Edges, Html } from '@react-three/drei';
 import type { GNode3D } from './graph3d';
 import { iconForCategory, iconForSkill, iconTexture, PERFIL_INNER } from './techIcons';
@@ -140,6 +140,15 @@ const Singularity: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ lit,
       </mesh>
     </group>
   );
+};
+
+/* ---------- Project satellite face — the real project screenshot as a
+     texture, loaded through Suspense so only this one satellite waits on
+     its image instead of dropping the whole 3D map back to its fallback. */
+const ProjectFace: React.FC<{ url: string }> = ({ url }) => {
+  const tex = useLoader(THREE.TextureLoader, url);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return <meshBasicMaterial map={tex} toneMapped={false} />;
 };
 
 /* ---------- 3D tech medallion: a coin carrying the tech icon in relief ---------- */
@@ -349,6 +358,54 @@ const StrataCluster: React.FC<{
             </group>
             {/* no year text here — spinning with the ring made it unreadable;
                 the year lives on the outer 'company' satellite instead */}
+          </group>
+        );
+      })}
+    </group>
+  );
+};
+
+/* ---------- Proyectos core — a loose fan of thin translucent sheets, like
+     blueprints or design layers left half-open, one per shipped project.
+     Each sheet carries a pair of crossed construction lines instead of a
+     solid face, so it reads as a draft/plan rather than a finished object —
+     the finished thing lives outside, on the satellites. ---------- */
+const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
+  lit,
+  theme,
+  count
+}) => {
+  const g = useRef<THREE.Group>(null);
+  useFrame((_, dt) => {
+    if (g.current) g.current.rotation.y += dt * 0.16;
+  });
+  const n = Math.max(Math.min(count || 5, 6), 3);
+  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
+  const color = lit ? ACCENT : base;
+  return (
+    <group ref={g}>
+      {Array.from({ length: n }).map((_, i) => {
+        const t = n === 1 ? 0 : i / (n - 1);
+        const y = (t - 0.5) * 0.3;
+        const fan = (i - (n - 1) / 2) * 0.22;
+        const w = 0.46 - t * 0.08;
+        const h = 0.32 - t * 0.05;
+        const diag = Math.max(w, h) * 1.05;
+        return (
+          <group key={i} position={[0, y, 0]} rotation={[0.05, fan, 0.04 * i]}>
+            <mesh>
+              <planeGeometry args={[w, h]} />
+              <meshBasicMaterial color={color} transparent opacity={lit ? 0.16 : 0.09} side={THREE.DoubleSide} depthWrite={false} />
+              <Edges color={color} />
+            </mesh>
+            <mesh rotation={[0, 0, Math.PI / 4]}>
+              <planeGeometry args={[diag, 0.004]} />
+              <meshBasicMaterial color={color} transparent opacity={lit ? 0.55 : 0.28} toneMapped={false} depthWrite={false} />
+            </mesh>
+            <mesh rotation={[0, 0, -Math.PI / 4]}>
+              <planeGeometry args={[diag, 0.004]} />
+              <meshBasicMaterial color={color} transparent opacity={lit ? 0.55 : 0.28} toneMapped={false} depthWrite={false} />
+            </mesh>
           </group>
         );
       })}
@@ -645,11 +702,9 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
     >
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
       {n.shape === 'box' && (
-        <mesh ref={spin}>
-          <boxGeometry args={[0.42, 0.42, 0.42]} />
-          {mat}
-          <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54'} />
-        </mesh>
+        <group ref={spin as any}>
+          <BlueprintStack lit={lit} theme={theme} count={n.count ?? 5} />
+        </group>
       )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>
@@ -750,23 +805,36 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
       {...bind}
       onClick={(e) => { e.stopPropagation(); onNode(n.id, n.section, n.anchor); }}
     >
-      {/* --- PROJECT: a billboarded chip showing the year, live ring —
-             scaled down to match the Perfil satellites' average size --- */}
+      {/* --- PROJECT: a small screen showing the real shipped screenshot,
+             framed by a thin bezel — the year sits below as a caption
+             instead of over the image, live ring on top --- */}
       {n.variant === 'project' && (
         <Billboard scale={NON_SKILL_SAT_SCALE}>
+          <mesh position={[0, 0, -0.004]}>
+            <planeGeometry args={[0.44, 0.28]} />
+            <meshBasicMaterial color={lit ? ACCENT : theme === 'light' ? '#3a3a34' : '#1c1c1a'} toneMapped={false} />
+          </mesh>
           <mesh>
             <planeGeometry args={[0.4, 0.24]} />
-            {chip}
+            {d.image ? (
+              <Suspense fallback={chip}>
+                <ProjectFace url={d.image} />
+              </Suspense>
+            ) : (
+              chip
+            )}
             <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#565650'} />
           </mesh>
-          <Html center distanceFactor={11} style={{ pointerEvents: 'none' }} zIndexRange={[12, 0]}>
+          <Html center distanceFactor={11} position={[0, -0.18, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[12, 0]}>
             <span
               style={{
                 fontFamily: 'Montserrat, sans-serif',
                 fontWeight: 700,
-                fontSize: '10px',
+                fontSize: '9px',
                 letterSpacing: '0.08em',
-                color: '#0a0a0a'
+                whiteSpace: 'nowrap',
+                color: lit ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
+                textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 8px #000'
               }}
             >
               {d.year}
