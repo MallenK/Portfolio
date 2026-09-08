@@ -25,6 +25,10 @@ const PERFIL_PRIMARY_BOOST = 1.99;
    4 inner icons that spin in place against the node, not the outer ring that
    actually orbits at distance. The outer node boost above stays untouched. */
 const PERFIL_CORE_SCALE = 0.18;
+/* Experiencia's strata rings — tuned so the core cluster matches Perfil's
+   core in final world size (Perfil gets PERFIL_PRIMARY_BOOST on top of its
+   own core scale; Experiencia doesn't, so this value is higher). */
+const STRATA_CORE_SCALE = 0.36;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
@@ -277,7 +281,7 @@ const StrataCluster: React.FC<{
   const span = 0.16 * Math.min(n - 1, 4);
   const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
   return (
-    <group ref={g}>
+    <group ref={g} scale={STRATA_CORE_SCALE}>
       {stages.map((st, i) => {
         // i=0 is the most recent stage: top ring, biggest, brightest.
         const t = n === 1 ? 0 : i / (n - 1);
