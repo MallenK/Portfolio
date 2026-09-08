@@ -259,6 +259,62 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
   );
 };
 
+/* ---------- Experiencia core — one ring per career stage, stacked as time
+     layers (most recent on top, biggest and gold-lit; older stages shrink
+     and dim going down). Each ring carries its own small plate orbiting at
+     its height, echoing the outer 'company' satellite for that same stage
+     so the two read as one continuous thread. ---------- */
+const StrataCluster: React.FC<{
+  stages: { current: boolean }[];
+  lit: boolean;
+  theme: 'dark' | 'light';
+}> = ({ stages, lit, theme }) => {
+  const g = useRef<THREE.Group>(null);
+  useFrame((_, dt) => {
+    if (g.current) g.current.rotation.y += dt * 0.14;
+  });
+  const n = Math.max(stages.length, 1);
+  const span = 0.16 * Math.min(n - 1, 4);
+  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
+  return (
+    <group ref={g}>
+      {stages.map((st, i) => {
+        // i=0 is the most recent stage: top ring, biggest, brightest.
+        const t = n === 1 ? 0 : i / (n - 1);
+        const y = span / 2 - t * span;
+        const r = 0.44 - t * 0.22;
+        const color = st.current ? ACCENT : lit ? ACCENT : base;
+        const emissive = st.current ? 0.75 : lit ? 0.5 : theme === 'light' ? 0.05 : 0.22 - t * 0.1;
+        const plateA = i * 1.3;
+        return (
+          <group key={i}>
+            <mesh position={[0, y, 0]} rotation={[Math.PI / 2, 0, 0]}>
+              <torusGeometry args={[r, st.current ? 0.045 : 0.03, 8, 40]} />
+              <meshStandardMaterial
+                color={color}
+                emissive={ACCENT}
+                emissiveIntensity={emissive}
+                roughness={0.4}
+                metalness={0.1}
+              />
+            </mesh>
+            <mesh position={[Math.cos(plateA) * r, y, Math.sin(plateA) * r]} scale={st.current ? 1.15 : 0.85}>
+              <boxGeometry args={[0.05, 0.05, 0.05]} />
+              <meshStandardMaterial
+                color={color}
+                emissive={ACCENT}
+                emissiveIntensity={st.current ? 1 : 0.4}
+                roughness={0.35}
+                metalness={0.2}
+              />
+            </mesh>
+          </group>
+        );
+      })}
+    </group>
+  );
+};
+
 /* ============================================================ CLUSTER DUST
    a drifting particle haze around each primary so clusters read as nebulae */
 export const ClusterDust: React.FC<{
@@ -556,12 +612,7 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>
-          {[0.42, 0.32, 0.22].map((rr, i) => (
-            <mesh key={i} position={[0, (i - 1) * 0.16, 0]} rotation={[Math.PI / 2, 0, 0]}>
-              <torusGeometry args={[rr, 0.035, 8, 40]} />
-              {mat}
-            </mesh>
-          ))}
+          <StrataCluster stages={n.data?.stages ?? [{ current: true }, { current: false }, { current: false }]} lit={lit} theme={theme} />
         </group>
       )}
       {n.shape === 'burst' && (

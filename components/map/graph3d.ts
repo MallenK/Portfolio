@@ -26,6 +26,9 @@ export interface GNode3D {
     skillCategory?: string;
     /** per-node size multiplier so the outer ring reads as varied sizes */
     iconScale?: number;
+    /** Experiencia primary only — one entry per career stage, most recent
+     *  first, driving the strata rings (see StrataCluster in nodes.tsx). */
+    stages?: { current: boolean }[];
     url?: string;
     action?: string;
     stackCount?: number;
@@ -69,7 +72,7 @@ export function buildGraph3D(c: PortfolioContent) {
   const sats = (
     pid: string,
     variant: SatVariant,
-    items: { label: string; anchor: string; data: GNode3D['data']; distScale?: number }[],
+    items: { label: string; anchor: string; data: GNode3D['data']; distScale?: number; yOverride?: number }[],
     distMul = 1
   ) => {
     const p = nodes.find((n) => n.id === pid)!;
@@ -93,7 +96,7 @@ export function buildGraph3D(c: PortfolioContent) {
         data: it.data,
         pos: [
           px + Math.cos(a) * dist,
-          py + (rng(id + 'y') - 0.5) * 2.6,
+          py + (it.yOverride ?? (rng(id + 'y') - 0.5) * 2.6),
           pz + Math.sin(a) * dist + (rng(id + 'z') - 0.5) * 1.4
         ]
       });
@@ -118,7 +121,11 @@ export function buildGraph3D(c: PortfolioContent) {
       section: id,
       count: count || undefined,
       shape: conf.shape,
-      pos: [conf.dir[0] * S, conf.y, conf.dir[1] * S]
+      pos: [conf.dir[0] * S, conf.y, conf.dir[1] * S],
+      data:
+        id === 'experiencia'
+          ? { stages: c.experience.items.map((e, i) => ({ current: i === 0 })) }
+          : undefined
     });
     edges.push({ a: 'core', b: id });
   });
@@ -149,14 +156,21 @@ export function buildGraph3D(c: PortfolioContent) {
     })),
     1.7
   );
+  // Experiencia's satellites line up with the primary's own strata rings
+  // (see StrataCluster in nodes.tsx) — the most recent role sits highest,
+  // matching its ring, and each older stage steps down in the same order.
   sats(
     'experiencia',
     'company',
-    c.experience.items.map((e, i) => ({
-      label: e.company,
-      anchor: e.id,
-      data: { year: e.period, current: i === 0 }
-    })),
+    c.experience.items.map((e, i) => {
+      const t = c.experience.items.length === 1 ? 0 : i / (c.experience.items.length - 1);
+      return {
+        label: e.company,
+        anchor: e.id,
+        data: { year: e.period, current: i === 0 },
+        yOverride: (0.5 - t) * 2.2
+      };
+    }),
     1.7
   );
   sats(
