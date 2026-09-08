@@ -1,4 +1,5 @@
 import { PortfolioContent } from '../../types';
+import { SKILL_ICON } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
 
@@ -107,7 +108,20 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
 
   const s = small ? 0.62 : 1;
   const cap = <T,>(a: T[], n: number) => (small ? a.slice(0, n) : a);
-  addSats('perfil', cap(c.about.skills, 3).map((x) => ({ label: x.category })), s * 1.7);
+
+  // Perfil: one satellite per named technology, deduped by icon graphic so
+  // no logo/technology repeats (e.g. CodeIgniter reuses the PHP mark).
+  const seenIconPaths = new Set<string>();
+  const perfilTechs: { label: string }[] = [];
+  c.about.skills.forEach((g) => {
+    g.skills.forEach((skill) => {
+      const icon = SKILL_ICON[skill];
+      if (!icon || seenIconPaths.has(icon.path)) return;
+      seenIconPaths.add(icon.path);
+      perfilTechs.push({ label: skill });
+    });
+  });
+  addSats('perfil', cap(perfilTechs, 9), s * 1.7);
   addSats('proyectos', cap(c.projects.items, 4).map((p) => ({ label: p.title, live: p.live })), s * 1.7);
   addSats('experiencia', cap(c.experience.items, 4).map((e) => ({ label: e.company })), s * 1.7);
   addSats('servicios', c.services.items.slice(0, small ? 3 : 4).map((x) => ({ label: x.title })), s * 1.7);

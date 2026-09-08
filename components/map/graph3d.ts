@@ -1,4 +1,5 @@
 import { PortfolioContent } from '../../types';
+import { SKILL_ICON } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
 export type PrimaryShape = 'icosa' | 'box' | 'strata' | 'burst' | 'portal';
@@ -22,6 +23,7 @@ export interface GNode3D {
     live?: boolean;
     current?: boolean;
     skillCount?: number;
+    skillCategory?: string;
     url?: string;
     action?: string;
     stackCount?: number;
@@ -120,16 +122,20 @@ export function buildGraph3D(c: PortfolioContent) {
   });
 
   // ---- children (contacto is a leaf: no satellites) ----
-  sats(
-    'perfil',
-    'skill',
-    c.about.skills.map((g) => ({
-      label: g.category,
-      anchor: g.category,
-      data: { skillCount: g.skills.length }
-    })),
-    1.7
-  );
+  // Perfil satellites: one per named technology with a real brand icon —
+  // deduped by icon graphic so no logo appears twice (e.g. CodeIgniter reuses
+  // the PHP mark and is skipped once PHP is already shown).
+  const seenIconPaths = new Set<string>();
+  const perfilTechs: { label: string; anchor: string; data: GNode3D['data'] }[] = [];
+  c.about.skills.forEach((g) => {
+    g.skills.forEach((skill) => {
+      const icon = SKILL_ICON[skill];
+      if (!icon || seenIconPaths.has(icon.path)) return;
+      seenIconPaths.add(icon.path);
+      perfilTechs.push({ label: skill, anchor: g.category, data: { skillCategory: g.category } });
+    });
+  });
+  sats('perfil', 'skill', perfilTechs, 1.7);
   sats(
     'proyectos',
     'project',

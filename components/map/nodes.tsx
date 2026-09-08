@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Billboard, Edges, Html } from '@react-three/drei';
 import type { GNode3D } from './graph3d';
-import { iconForCategory, iconTexture, PERFIL_CATEGORIES } from './techIcons';
+import { iconForCategory, iconForSkill, iconTexture, PERFIL_CATEGORIES } from './techIcons';
 
 const ACCENT = '#fde100';
 
@@ -125,16 +125,14 @@ const Singularity: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ lit,
 
 /* ---------- 3D tech medallion: a coin carrying the tech icon in relief ---------- */
 const TechIcon: React.FC<{
-  category: string;
-  index?: number;
+  icon: { path: string; title: string };
   size: number;
   lit: boolean;
   theme: 'dark' | 'light';
   spin?: boolean;
   spinSpeed?: number;
-}> = ({ category, index = 0, size, lit, theme, spin = true, spinSpeed = 0.35 }) => {
+}> = ({ icon, size, lit, theme, spin = true, spinSpeed = 0.35 }) => {
   const g = useRef<THREE.Group>(null);
-  const icon = iconForCategory(category, index);
   const tex = useMemo(() => iconTexture(icon.path, icon.title), [icon.path, icon.title]);
   const light = theme === 'light';
   // engraved medallion: bone coin with a dark mark; gold coin when lit
@@ -225,7 +223,7 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
         const y = (i % 2 ? 1 : -1) * 0.11;
         return (
           <group key={cat} position={[Math.cos(a) * 0.36, y, Math.sin(a) * 0.36]} rotation={[0, -a, 0]}>
-            <TechIcon category={cat} index={i} size={0.19} lit={false} theme={theme} spin={false} />
+            <TechIcon icon={iconForCategory(cat, i)} size={0.19} lit={false} theme={theme} spin={false} />
           </group>
         );
       })}
@@ -677,12 +675,10 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SKILL: an extruded 3D icon of the category's flagship tech + a
-             ring of pips = number of technologies in that category --- */}
+      {/* --- SKILL: an extruded 3D icon of this specific technology --- */}
       {n.variant === 'skill' && (
         <group>
-          <TechIcon category={n.label} size={0.44} lit={lit} theme={theme} />
-          <CountRing count={d.skillCount ?? 0} lit={lit} theme={theme} />
+          <TechIcon icon={iconForSkill(n.label) ?? iconForCategory('Tooling')} size={0.44} lit={lit} theme={theme} />
         </group>
       )}
 
@@ -702,7 +698,7 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
             n.variant === 'company'
               ? d.year
               : n.variant === 'skill'
-                ? `${iconForCategory(n.label).title} · ${d.skillCount} tecnologías`
+                ? d.skillCategory
                 : n.variant === 'project'
                   ? `${d.year}${d.live ? ' · en producción' : ''}`
                   : undefined
