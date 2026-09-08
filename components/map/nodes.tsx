@@ -370,6 +370,100 @@ const StrataCluster: React.FC<{
      Each sheet carries a pair of crossed construction lines instead of a
      solid face, so it reads as a draft/plan rather than a finished object —
      the finished thing lives outside, on the satellites. ---------- */
+/* ---------- Proyectos core — a faceted gem forged from the same flowing
+     gold-noise shader as the central core (CoreNode), so it reads with the
+     same "spectacular" weight instead of a flat schematic. A fresnel halo,
+     an ambient glow sprite and one ember per shipped project orbiting it. */
+const ForgeCore: React.FC<{ theme: 'dark' | 'light'; count: number }> = ({ theme, count }) => {
+  const knot = useRef<THREE.Mesh>(null);
+  const halo = useRef<THREE.Mesh>(null);
+  const embers = useRef<THREE.Group>(null);
+
+  const knotMat = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        uniforms: {
+          uT: { value: 0 },
+          uGold: { value: new THREE.Color(ACCENT) },
+          uDark: { value: new THREE.Color(theme === 'light' ? '#20201a' : '#0d0d0a') }
+        },
+        vertexShader: `varying vec2 vUv; varying vec3 vN; varying vec3 vP;
+          void main(){ vUv=uv; vN=normalize(normalMatrix*normal);
+            vec4 mv=modelViewMatrix*vec4(position,1.); vP=mv.xyz;
+            gl_Position=projectionMatrix*mv; }`,
+        fragmentShader:
+          NOISE +
+          `varying vec2 vUv; varying vec3 vN; varying vec3 vP;
+           uniform float uT; uniform vec3 uGold; uniform vec3 uDark;
+           void main(){
+             float flow = fbm3(vec3(vUv*vec2(6.0,6.0) + vec2(0.0,-uT*0.5), uT*0.15));
+             float band = smoothstep(0.42,0.75,flow);
+             float spark = smoothstep(0.88,0.99,flow);
+             vec3 V = normalize(-vP);
+             float fres = pow(1.0 - max(dot(vN,V),0.0), 2.2);
+             vec3 col = mix(uDark, uGold, band) + uGold*fres*0.55 + uGold*spark*1.0;
+             gl_FragColor = vec4(col,1.0);
+           }`
+      }),
+    [theme]
+  );
+
+  const haloMat = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+        uniforms: { uGold: { value: new THREE.Color(ACCENT) } },
+        vertexShader: `varying vec3 vN; varying vec3 vP;
+          void main(){ vN=normalize(normalMatrix*normal);
+            vec4 mv=modelViewMatrix*vec4(position,1.); vP=mv.xyz;
+            gl_Position=projectionMatrix*mv; }`,
+        fragmentShader: `varying vec3 vN; varying vec3 vP; uniform vec3 uGold;
+          void main(){ vec3 V=normalize(-vP);
+            float f=pow(1.0-abs(dot(vN,V)),3.0);
+            gl_FragColor=vec4(uGold, f*0.32); }`
+      }),
+    []
+  );
+
+  const n = Math.max(count || 5, 3);
+
+  useFrame((state, dt) => {
+    knotMat.uniforms.uT.value = state.clock.elapsedTime;
+    if (knot.current) {
+      knot.current.rotation.y += dt * 0.3;
+      knot.current.rotation.x += dt * 0.13;
+    }
+    if (halo.current) halo.current.rotation.y -= dt * 0.18;
+    if (embers.current) embers.current.rotation.y += dt * 0.5;
+  });
+
+  return (
+    <group>
+      <mesh ref={knot} material={knotMat}>
+        <icosahedronGeometry args={[0.3, 1]} />
+      </mesh>
+      <mesh ref={halo} material={haloMat} scale={1.2}>
+        <sphereGeometry args={[0.42, 32, 32]} />
+      </mesh>
+      <GlowSprite size={1.3} opacity={theme === 'light' ? 0.12 : 0.2} additive={theme !== 'light'} />
+      <group ref={embers}>
+        {Array.from({ length: n }).map((_, i) => {
+          const a = (i / n) * Math.PI * 2;
+          const y = Math.sin(i * 1.9) * 0.14;
+          return (
+            <mesh key={i} position={[Math.cos(a) * 0.5, y, Math.sin(a) * 0.5]}>
+              <sphereGeometry args={[0.02, 8, 8]} />
+              <meshBasicMaterial color={ACCENT} toneMapped={false} />
+            </mesh>
+          );
+        })}
+      </group>
+    </group>
+  );
+};
+
 const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
   lit,
   theme,
@@ -759,7 +853,7 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
       {n.shape === 'box' && (
         <group ref={spin as any}>
-          <BlueprintStack lit={lit} theme={theme} count={n.count ?? 5} />
+          <ForgeCore theme={theme} count={n.count ?? 5} />
         </group>
       )}
       {n.shape === 'strata' && (
