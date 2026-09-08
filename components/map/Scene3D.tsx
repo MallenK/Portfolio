@@ -80,7 +80,18 @@ const Controls: React.FC<{
     if (n && focusId !== 'core') {
       const [x, y, z] = n.pos;
       const d = n.kind === 'satellite' ? 3.2 : 5;
-      c.setLookAt(x + d * 0.45, y + d * 0.32, z + d, x, y, z, true);
+      if (n.id === 'experiencia' && n.kind === 'primary') {
+        // Experiencia is viewed "from the other side" — camera pulled back
+        // toward the central core instead of pushed further out past the
+        // node, so it reads as looking at the career timeline from home.
+        const dir = new THREE.Vector3(x, y, z);
+        const dist = dir.length() || 1;
+        dir.divideScalar(dist);
+        const camPos = new THREE.Vector3(x, y, z).addScaledVector(dir, -d);
+        c.setLookAt(camPos.x, camPos.y + d * 0.22, camPos.z, x, y, z, true);
+      } else {
+        c.setLookAt(x + d * 0.45, y + d * 0.32, z + d, x, y, z, true);
+      }
     } else {
       c.setLookAt(0, small() ? 2 : 0.5, homeDist(), 0, small() ? 1.4 : 0, 0, true);
     }
