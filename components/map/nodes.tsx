@@ -20,7 +20,7 @@ const PERFIL_PRIMARY_BOOST = 1.28;
 /* uniform down-scale of the core cluster's own elements — the wire shells +
    4 inner icons that spin in place against the node, not the outer ring that
    actually orbits at distance. The outer node boost above stays untouched. */
-const PERFIL_CORE_SCALE = 0.4;
+const PERFIL_CORE_SCALE = 0.18;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
