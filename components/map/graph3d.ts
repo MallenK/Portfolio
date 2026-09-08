@@ -137,7 +137,8 @@ export function buildGraph3D(c: PortfolioContent) {
       label: p.title,
       anchor: p.id,
       data: { year: p.year, live: p.live, url: p.url, stackCount: p.stack.length }
-    }))
+    })),
+    1.7
   );
   sats(
     'experiencia',
@@ -146,7 +147,8 @@ export function buildGraph3D(c: PortfolioContent) {
       label: e.company,
       anchor: e.id,
       data: { year: e.period, current: i === 0 }
-    }))
+    })),
+    1.7
   );
   sats(
     'servicios',
@@ -155,7 +157,8 @@ export function buildGraph3D(c: PortfolioContent) {
       label: sv.title,
       anchor: String(i),
       data: { url: sv.url, action: sv.action, stackCount: i + 1 }
-    }))
+    })),
+    1.7
   );
 
   return { nodes, edges };
