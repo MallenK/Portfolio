@@ -263,11 +263,53 @@ const PerfilCluster: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ li
   );
 };
 
+/* ---------- Year marker — a small faceted core that breathes (pulses in
+     scale, spins) instead of sitting static; the current stage also emits
+     a slow radar-style ping ring so "ongoing" reads at a glance. ---------- */
+const YearMarker: React.FC<{ current: boolean; color: string; seed: number }> = ({ current, color, seed }) => {
+  const core = useRef<THREE.Mesh>(null);
+  const ping = useRef<THREE.Mesh>(null);
+  const pingMat = useRef<THREE.MeshBasicMaterial>(null);
+  useFrame((state, dt) => {
+    if (core.current) {
+      core.current.rotation.y += dt * (current ? 0.9 : 0.45);
+      core.current.rotation.x += dt * 0.28;
+      const s = 1 + Math.sin(state.clock.elapsedTime * 2.2 + seed) * (current ? 0.24 : 0.12);
+      core.current.scale.setScalar(s);
+    }
+    if (current && ping.current && pingMat.current) {
+      const t = (state.clock.elapsedTime * 0.55 + seed) % 1;
+      ping.current.scale.setScalar(1 + t * 3.2);
+      pingMat.current.opacity = (1 - t) * 0.55;
+    }
+  });
+  return (
+    <group>
+      <mesh ref={core}>
+        <octahedronGeometry args={[0.05, 0]} />
+        <meshStandardMaterial
+          color={color}
+          emissive={ACCENT}
+          emissiveIntensity={current ? 1 : 0.45}
+          roughness={0.3}
+          metalness={0.25}
+        />
+      </mesh>
+      {current && (
+        <mesh ref={ping} rotation={[Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[0.05, 0.064, 28]} />
+          <meshBasicMaterial ref={pingMat} color={ACCENT} toneMapped={false} transparent opacity={0.5} depthWrite={false} />
+        </mesh>
+      )}
+    </group>
+  );
+};
+
 /* ---------- Experiencia core — one ring per career stage, stacked as time
      layers (most recent on top, biggest and gold-lit; older stages shrink
-     and dim going down). Each ring carries its own small plate orbiting at
-     its height, echoing the outer 'company' satellite for that same stage
-     so the two read as one continuous thread. ---------- */
+     and dim going down). Each ring carries its own small animated marker
+     orbiting at its height, echoing the outer 'company' satellite for that
+     same stage so the two read as one continuous thread. ---------- */
 const StrataCluster: React.FC<{
   stages: { current: boolean; year?: string }[];
   lit: boolean;
@@ -302,16 +344,9 @@ const StrataCluster: React.FC<{
                 metalness={0.1}
               />
             </mesh>
-            <mesh position={[Math.cos(plateA) * r, y, Math.sin(plateA) * r]} scale={st.current ? 1.15 : 0.85}>
-              <boxGeometry args={[0.05, 0.05, 0.05]} />
-              <meshStandardMaterial
-                color={color}
-                emissive={ACCENT}
-                emissiveIntensity={st.current ? 1 : 0.4}
-                roughness={0.35}
-                metalness={0.2}
-              />
-            </mesh>
+            <group position={[Math.cos(plateA) * r, y, Math.sin(plateA) * r]} scale={st.current ? 1.15 : 0.85}>
+              <YearMarker current={st.current} color={color} seed={i * 1.9} />
+            </group>
             {/* year label riding on the ring, always visible */}
             {st.year && (
               <Html center distanceFactor={9} position={[r + 0.12, y, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
@@ -657,25 +692,28 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       )}
       {n.shape === 'portal' && <Singularity lit={lit} theme={theme} />}
 
-      {/* persistent small label + count */}
-      <Html center position={[0, n.shape === 'strata' ? 0.72 : 0.62, 0]} distanceFactor={13} style={{ pointerEvents: 'none' }} zIndexRange={[15, 0]}>
-        <span
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 600,
-            fontSize: '11px',
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
-            whiteSpace: 'nowrap',
-            color: lit ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
-            opacity: dim ? 0.4 : 1,
-            textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 10px #000'
-          }}
-        >
-          {n.label}
-          {n.count ? `  ·  ${n.count}` : n.section === 'contacto' ? '  ·  →' : ''}
-        </span>
-      </Html>
+      {/* persistent small label + count — Experiencia stays label-free, its
+          5 dated rings already carry that information on their own */}
+      {n.shape !== 'strata' && (
+        <Html center position={[0, 0.62, 0]} distanceFactor={13} style={{ pointerEvents: 'none' }} zIndexRange={[15, 0]}>
+          <span
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: 600,
+              fontSize: '11px',
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+              color: lit ? ACCENT : theme === 'light' ? '#565650' : '#9a9a9a',
+              opacity: dim ? 0.4 : 1,
+              textShadow: theme === 'light' ? '0 0 8px #f4f3ee' : '0 0 10px #000'
+            }}
+          >
+            {n.label}
+            {n.count ? `  ·  ${n.count}` : n.section === 'contacto' ? '  ·  →' : ''}
+          </span>
+        </Html>
+      )}
       {(hovered || active) && n.section !== 'contacto' && (
         <NameCard
           text={n.label}
