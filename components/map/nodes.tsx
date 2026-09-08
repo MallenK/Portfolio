@@ -17,9 +17,10 @@ const NON_SKILL_SAT_SCALE = 0.58;
 /* Perfil is deliberately shapeless (option C: a dense, living cluster, not a
    fixed geometric shell) — this keeps it the single biggest primary node. */
 const PERFIL_PRIMARY_BOOST = 1.28;
-/* uniform down-scale of the core cluster's own elements (wire shells + inner
-   icons) — the outer node boost above stays untouched. */
-const PERFIL_CORE_SCALE = 0.62;
+/* uniform down-scale of the core cluster's own elements — the wire shells +
+   4 inner icons that spin in place against the node, not the outer ring that
+   actually orbits at distance. The outer node boost above stays untouched. */
+const PERFIL_CORE_SCALE = 0.4;
 
 /* compact 3D value-noise for the flow shaders */
 const NOISE = /* glsl */ `
