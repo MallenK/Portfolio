@@ -65,7 +65,8 @@ export function buildGraph3D(c: PortfolioContent) {
   const sats = (
     pid: string,
     variant: SatVariant,
-    items: { label: string; anchor: string; data: GNode3D['data'] }[]
+    items: { label: string; anchor: string; data: GNode3D['data'] }[],
+    distMul = 1
   ) => {
     const p = nodes.find((n) => n.id === pid)!;
     const [px, py, pz] = p.pos;
@@ -75,7 +76,7 @@ export function buildGraph3D(c: PortfolioContent) {
     items.forEach((it, i) => {
       const t = items.length === 1 ? 0 : i / (items.length - 1) - 0.5;
       const a = outward + t * spread;
-      const dist = 1.45 + (i % 2) * 0.5 + rng(pid + i) * 0.45;
+      const dist = (1.45 + (i % 2) * 0.5 + rng(pid + i) * 0.45) * distMul;
       const id = `${pid}:${i}`;
       nodes.push({
         id,
@@ -126,7 +127,8 @@ export function buildGraph3D(c: PortfolioContent) {
       label: g.category,
       anchor: g.category,
       data: { skillCount: g.skills.length }
-    }))
+    })),
+    1.7
   );
   sats(
     'proyectos',

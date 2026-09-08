@@ -107,7 +107,7 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
 
   const s = small ? 0.62 : 1;
   const cap = <T,>(a: T[], n: number) => (small ? a.slice(0, n) : a);
-  addSats('perfil', cap(c.about.skills, 3).map((x) => ({ label: x.category })), s);
+  addSats('perfil', cap(c.about.skills, 3).map((x) => ({ label: x.category })), s * 1.7);
   addSats('proyectos', cap(c.projects.items, 4).map((p) => ({ label: p.title, live: p.live })), s);
   addSats('experiencia', cap(c.experience.items, 4).map((e) => ({ label: e.company })), s);
   addSats('servicios', c.services.items.slice(0, small ? 3 : 4).map((x) => ({ label: x.title })), s);

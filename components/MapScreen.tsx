@@ -162,14 +162,6 @@ const MapScreen: React.FC<Props> = ({
         </div>
 
         <div className="flex flex-col items-center gap-4 pb-10 text-center sm:pb-6">
-          <div>
-            <h1 className="font-[var(--font-display)] text-[clamp(1.5rem,7vw,3.2rem)] font-extrabold uppercase leading-none tracking-[0.12em] text-fg [text-shadow:0_0_26px_var(--bg),0_0_26px_var(--bg)]">
-              {meta.name}
-            </h1>
-            <p className="mt-3 max-w-[30ch] text-[12.5px] leading-relaxed text-fgdim [text-shadow:0_0_14px_var(--bg)]">
-              {meta.tagline}
-            </p>
-          </div>
           <span className="font-[var(--font-display)] text-[9px] font-medium uppercase tracking-[0.28em] text-fgfaint [text-shadow:0_0_12px_var(--bg)]">
             {ui.mapHint}
           </span>
