@@ -14,9 +14,13 @@ const SAT_SCALE = 1.9;
    heavier than the Perfil tech-icon medallions at the same scale — shrink
    them so their average footprint matches the Perfil satellites. */
 const NON_SKILL_SAT_SCALE = 0.58;
+/* every satellite across every section reads the same size now — this is
+   the single value to change to resize ALL satellites at once (Perfil's
+   outer tech medallions included, no more per-node variance). */
+const SAT_ICON_SIZE = 0.27;
 /* Perfil is deliberately shapeless (option C: a dense, living cluster, not a
    fixed geometric shell) — this keeps it the single biggest primary node. */
-const PERFIL_PRIMARY_BOOST = 1.28;
+const PERFIL_PRIMARY_BOOST = 1.99;
 /* uniform down-scale of the core cluster's own elements — the wire shells +
    4 inner icons that spin in place against the node, not the outer ring that
    actually orbits at distance. The outer node boost above stays untouched. */
@@ -705,13 +709,13 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </group>
       )}
 
-      {/* --- SKILL: an extruded 3D icon of this specific technology, sized
-             per-node so the outer ring reads as varied, not uniform --- */}
+      {/* --- SKILL: an extruded 3D icon of this specific technology, same
+             fixed size as every other satellite (SAT_ICON_SIZE) --- */}
       {n.variant === 'skill' && (
         <group>
           <TechIcon
             icon={iconForSkill(n.label) ?? iconForCategory('Tooling')}
-            size={0.44 * (d.iconScale ?? 1)}
+            size={SAT_ICON_SIZE}
             lit={lit}
             theme={theme}
           />

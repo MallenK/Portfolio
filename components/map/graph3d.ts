@@ -125,15 +125,18 @@ export function buildGraph3D(c: PortfolioContent) {
 
   // ---- children (contacto is a leaf: no satellites) ----
   // Perfil's outer ring: the curated PERFIL_OUTER list (already deduped and
-  // clear of the 4 inner-ring marks — see techIcons.ts), each satellite
-  // getting its own size + distance so the ring reads as varied, not uniform.
+  // clear of the 4 inner-ring marks — see techIcons.ts). Every satellite is
+  // the same size (SAT_ICON_SIZE, in nodes.tsx) — hierarchy here comes from
+  // distance instead: PERFIL_OUTER is ordered core-stack-first, so the core
+  // stack (TypeScript, React, Symfony, Node.js, Git…) sits closer and the
+  // extras (AI tools, Vercel) sit further out, nearest to furthest in order.
   const categoryOf = new Map<string, string>();
   c.about.skills.forEach((g) => g.skills.forEach((s) => categoryOf.set(s, g.category)));
-  const perfilTechs = PERFIL_OUTER.map((label) => ({
+  const perfilTechs = PERFIL_OUTER.map((label, i) => ({
     label,
     anchor: categoryOf.get(label) ?? 'perfil',
-    data: { skillCategory: categoryOf.get(label), iconScale: 0.65 + rng(label + 'size') * 0.95 },
-    distScale: 0.85 + rng(label + 'dist') * 0.75
+    data: { skillCategory: categoryOf.get(label) },
+    distScale: 0.8 + (i / Math.max(1, PERFIL_OUTER.length - 1)) * 0.9
   }));
   sats('perfil', 'skill', perfilTechs, 1.7);
   sats(

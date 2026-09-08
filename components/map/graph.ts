@@ -110,19 +110,14 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
   const s = small ? 0.62 : 1;
   const cap = <T,>(a: T[], n: number) => (small ? a.slice(0, n) : a);
 
-  function rng(str: string) {
-    let h = 2166136261;
-    for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619) >>> 0;
-    return (h % 100000) / 100000;
-  }
-
   // Perfil's outer ring: same curated tech list as the 3D map (PHP, MySQL,
-  // JavaScript and Claude live in the inner ring instead — see techIcons.ts),
-  // each with its own size + distance so the ring reads as varied.
-  const perfilTechs = PERFIL_OUTER.map((label) => ({
+  // JavaScript and Claude live in the inner ring instead — see techIcons.ts).
+  // Every satellite is the same size now (no rScale) — hierarchy comes from
+  // distance: PERFIL_OUTER is ordered core-stack-first, so it sits closer
+  // and the extras (AI tools, Vercel) sit further out, in order.
+  const perfilTechs = PERFIL_OUTER.map((label, i) => ({
     label,
-    rScale: 0.7 + rng(label + 'size') * 0.9,
-    distScale: 0.85 + rng(label + 'dist') * 0.75
+    distScale: 0.8 + (i / Math.max(1, PERFIL_OUTER.length - 1)) * 0.9
   }));
   addSats('perfil', cap(perfilTechs, 9), s * 1.7);
   addSats('proyectos', cap(c.projects.items, 4).map((p) => ({ label: p.title, live: p.live })), s * 1.7);
