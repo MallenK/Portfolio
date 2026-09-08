@@ -787,20 +787,15 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
         </Billboard>
       )}
 
-      {/* --- COMPANY: a plate; the current job gets a gold rim + is larger,
-             scaled down to match the Perfil satellites' average size --- */}
+      {/* --- COMPANY: a single ring, no stacked layers — its radius scales
+             with recency (oldest = smallest, most recent = biggest), same
+             read as the strata rings inside the core it echoes --- */}
       {n.variant === 'company' && (
-        <group scale={(current ? 1.25 : 1) * NON_SKILL_SAT_SCALE}>
-          <mesh>
-            <boxGeometry args={[0.34, 0.12, 0.34]} />
+        <group scale={(0.55 + (d.stageScale ?? 1) * 0.75) * NON_SKILL_SAT_SCALE}>
+          <mesh rotation={[Math.PI / 2, 0, 0]}>
+            <torusGeometry args={[0.19, current ? 0.032 : 0.022, 10, 44]} />
             {chip}
           </mesh>
-          {current && (
-            <mesh position={[0, 0.11, 0]}>
-              <boxGeometry args={[0.4, 0.02, 0.4]} />
-              <meshBasicMaterial color={ACCENT} toneMapped={false} />
-            </mesh>
-          )}
           {/* persistent year label — always readable, no hover needed */}
           {d.year && (
             <Html center distanceFactor={11} position={[0, 0.32, 0]} style={{ pointerEvents: 'none' }} zIndexRange={[10, 0]}>
