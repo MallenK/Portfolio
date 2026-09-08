@@ -1,5 +1,20 @@
 import * as THREE from 'three';
-import { siReact, siNodedotjs, siGit, siGoogleanalytics } from 'simple-icons';
+import {
+  siReact,
+  siNodedotjs,
+  siGit,
+  siGoogleanalytics,
+  siPhp,
+  siMysql,
+  siTypescript,
+  siJavascript,
+  siSymfony,
+  siHtml5,
+  siSass,
+  siBootstrap,
+  siDocker,
+  siWordpress
+} from 'simple-icons';
 
 /**
  * Flagship technology per Perfil skill category (see COMMON_SKILLS in constants).
@@ -16,6 +31,33 @@ export const PERFIL_CATEGORIES = Object.keys(CATEGORY_ICON);
 
 export function iconForCategory(category: string, index = 0) {
   return CATEGORY_ICON[category] ?? Object.values(CATEGORY_ICON)[index % PERFIL_CATEGORIES.length];
+}
+
+/**
+ * Per-skill icon lookup (see COMMON_SKILLS in constants.tsx). Keyed by the exact
+ * skill label used in that list. Skills with no brand mark (API REST, Agile,
+ * CRO, SEO) fall back to iconForSkill's caller deciding what to show instead.
+ */
+export const SKILL_ICON: Record<string, { path: string; title: string }> = {
+  HTML: { path: siHtml5.path, title: siHtml5.title },
+  'CSS / SASS': { path: siSass.path, title: siSass.title },
+  JavaScript: { path: siJavascript.path, title: siJavascript.title },
+  TypeScript: { path: siTypescript.path, title: siTypescript.title },
+  React: { path: siReact.path, title: siReact.title },
+  Bootstrap: { path: siBootstrap.path, title: siBootstrap.title },
+  PHP: { path: siPhp.path, title: siPhp.title },
+  CodeIgniter: { path: siPhp.path, title: 'CodeIgniter' },
+  Symfony: { path: siSymfony.path, title: siSymfony.title },
+  'Node.js': { path: siNodedotjs.path, title: siNodedotjs.title },
+  MySQL: { path: siMysql.path, title: siMysql.title },
+  Git: { path: siGit.path, title: siGit.title },
+  Docker: { path: siDocker.path, title: siDocker.title },
+  WordPress: { path: siWordpress.path, title: siWordpress.title },
+  'Google Analytics & GTM': { path: siGoogleanalytics.path, title: siGoogleanalytics.title }
+};
+
+export function iconForSkill(skill: string) {
+  return SKILL_ICON[skill];
 }
 
 const texCache = new Map<string, THREE.Texture>();
