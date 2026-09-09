@@ -4,6 +4,7 @@ import { useFrame, useLoader } from '@react-three/fiber';
 import { Billboard, Edges, Html } from '@react-three/drei';
 import type { GNode3D } from './graph3d';
 import { iconForCategory, iconForSkill, iconTexture, PERFIL_INNER } from './techIcons';
+import { GLOBE, ss } from './globeSecrets';
 
 const ACCENT = '#fde100';
 
@@ -354,6 +355,244 @@ const NetPacket: React.FC<{ curve: THREE.QuadraticBezierCurve3; lit: boolean; se
   );
 };
 
+const FWD = /* @__PURE__ */ new THREE.Vector3(0, 0, 1);
+
+const latLngDir = (latDeg: number, lngDeg: number) => {
+  const lat = (latDeg * Math.PI) / 180;
+  const lng = (lngDeg * Math.PI) / 180;
+  return new THREE.Vector3(
+    Math.cos(lat) * Math.cos(lng),
+    Math.sin(lat),
+    Math.cos(lat) * Math.sin(lng)
+  );
+};
+
+/* ---------- "the rest of the web": faint points scattered over the surface
+     that breathe together, so the globe reads as populated, not empty ------ */
+const SurfaceMotes: React.FC<{ R: number; count: number; lit: boolean; theme: 'dark' | 'light' }> = ({
+  R,
+  count,
+  lit,
+  theme
+}) => {
+  const ref = useRef<THREE.Points>(null);
+  const geo = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < count; i++) {
+      const y = 1 - ((i + 0.5) / count) * 2;
+      const rad = Math.sqrt(Math.max(0, 1 - y * y));
+      const th = i * golden;
+      pos[i * 3] = Math.cos(th) * rad * R;
+      pos[i * 3 + 1] = y * R;
+      pos[i * 3 + 2] = Math.sin(th) * rad * R;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    return g;
+  }, [count, R]);
+  useEffect(() => () => geo.dispose(), [geo]);
+  useFrame((state) => {
+    const m = ref.current?.material as THREE.PointsMaterial | undefined;
+    if (m) m.opacity = (lit ? 0.85 : 0.42) + Math.sin(state.clock.elapsedTime * 1.6) * 0.16;
+  });
+  return (
+    <points ref={ref} geometry={geo}>
+      <pointsMaterial
+        size={0.006}
+        color={lit ? ACCENT : theme === 'light' ? '#8f8f84' : '#c4c4b8'}
+        sizeAttenuation
+        transparent
+        opacity={0.45}
+        depthWrite={false}
+        toneMapped={false}
+      />
+    </points>
+  );
+};
+
+/* ---------- a satellite orbiting the globe — just the moving dot (+ a short
+     fading trail), no drawn orbit path: motion is what reads as "satellite" -- */
+const OrbitSat: React.FC<{ R: number; seed: number }> = ({ R, seed }) => {
+  const s = useRef<THREE.Group>(null);
+  const t1 = useRef<THREE.Mesh>(null);
+  const t2 = useRef<THREE.Mesh>(null);
+  const tilt = useMemo<[number, number, number]>(
+    () => [0.5 + seed * 0.9, seed * 1.7, seed * 2.3],
+    [seed]
+  );
+  const rad = R * (1.24 + ((seed * 7) % 5) * 0.07);
+  const speed = 0.35 + ((seed * 3) % 5) * 0.09;
+  const at = (a: number, m: THREE.Object3D | null) => {
+    if (m) m.position.set(Math.cos(a) * rad, 0, Math.sin(a) * rad);
+  };
+  useFrame((state) => {
+    const a = state.clock.elapsedTime * speed + seed * 2;
+    at(a, s.current);
+    at(a - 0.12, t1.current);
+    at(a - 0.24, t2.current);
+  });
+  return (
+    <group rotation={tilt}>
+      <group ref={s}>
+        <mesh>
+          <sphereGeometry args={[0.0075, 8, 8]} />
+          <meshBasicMaterial color={ACCENT} toneMapped={false} />
+        </mesh>
+      </group>
+      <mesh ref={t1}>
+        <sphereGeometry args={[0.005, 6, 6]} />
+        <meshBasicMaterial color={ACCENT} transparent opacity={0.4} toneMapped={false} />
+      </mesh>
+      <mesh ref={t2}>
+        <sphereGeometry args={[0.0035, 6, 6]} />
+        <meshBasicMaterial color={ACCENT} transparent opacity={0.18} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+};
+
+/* ---------- radar-style "signal" ring that fires from a random pin ---------- */
+const SignalPing: React.FC<{ dirs: THREE.Vector3[]; R: number; everySec: number }> = ({
+  dirs,
+  R,
+  everySec
+}) => {
+  const ring = useRef<THREE.Mesh>(null);
+  const mat = useRef<THREE.MeshBasicMaterial>(null);
+  const state = useRef({ next: everySec, from: 0, t: 2 });
+  useFrame((clk, dt) => {
+    const s = state.current;
+    if (s.t > 1) {
+      if (clk.clock.elapsedTime > s.next) {
+        s.from = Math.floor(Math.random() * Math.max(dirs.length, 1));
+        s.t = 0;
+        s.next = clk.clock.elapsedTime + everySec;
+      }
+      return;
+    }
+    s.t += dt / 1.4;
+    const d = dirs[s.from];
+    if (ring.current && mat.current && d) {
+      ring.current.position.copy(d).multiplyScalar(R);
+      ring.current.quaternion.setFromUnitVectors(FWD, d);
+      ring.current.scale.setScalar(0.02 + s.t * 0.16);
+      mat.current.opacity = (1 - s.t) * 0.5;
+    }
+  });
+  return (
+    <mesh ref={ring}>
+      <ringGeometry args={[0.6, 1, 24]} />
+      <meshBasicMaterial
+        ref={mat}
+        color={ACCENT}
+        transparent
+        opacity={0}
+        side={THREE.DoubleSide}
+        depthWrite={false}
+        toneMapped={false}
+      />
+    </mesh>
+  );
+};
+
+/* ---------- easter egg · data raining down the globe (code "online") ---------- */
+const DataRain: React.FC<{ R: number }> = ({ R }) => {
+  const N = 64;
+  const { geo, speeds } = useMemo(() => {
+    const pos = new Float32Array(N * 3);
+    const spd = new Float32Array(N);
+    for (let i = 0; i < N; i++) {
+      const th = Math.random() * Math.PI * 2;
+      const r = R * (0.55 + Math.random() * 0.55);
+      pos[i * 3] = Math.cos(th) * r;
+      pos[i * 3 + 1] = (Math.random() * 2 - 1) * R * 1.5;
+      pos[i * 3 + 2] = Math.sin(th) * r;
+      spd[i] = 0.35 + Math.random() * 0.6;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    return { geo: g, speeds: spd };
+  }, [R]);
+  useEffect(() => () => geo.dispose(), [geo]);
+  useFrame((_, dt) => {
+    const p = geo.getAttribute('position') as THREE.BufferAttribute;
+    for (let i = 0; i < N; i++) {
+      let y = p.getY(i) - speeds[i] * dt;
+      if (y < -R * 1.5) y = R * 1.5;
+      p.setY(i, y);
+    }
+    p.needsUpdate = true;
+  });
+  return (
+    <points geometry={geo}>
+      <pointsMaterial
+        size={0.015}
+        color={ACCENT}
+        sizeAttenuation
+        transparent
+        opacity={1}
+        depthWrite={false}
+        toneMapped={false}
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+};
+
+/* ---------- easter egg · the hidden 6th "project" pinned on the globe ---------- */
+const GhostPin: React.FC<{ dir: THREE.Vector3; R: number; onOpen: () => void }> = ({
+  dir,
+  R,
+  onOpen
+}) => {
+  const seed = useRef<THREE.Mesh>(null);
+  const [hover, setHover] = useState(false);
+  const quat = useMemo<[number, number, number, number]>(() => {
+    const q = new THREE.Quaternion().setFromUnitVectors(FWD, dir);
+    return [q.x, q.y, q.z, q.w];
+  }, [dir]);
+  useFrame((state) => {
+    if (!seed.current) return;
+    const b = 1 + Math.sin(state.clock.elapsedTime * 2.2) * 0.4;
+    seed.current.scale.setScalar((hover ? 1.7 : 1) * b);
+  });
+  return (
+    <group position={dir.clone().multiplyScalar(R)} quaternion={quat}>
+      <mesh
+        ref={seed}
+        onClick={(e) => {
+          e.stopPropagation();
+          onOpen();
+        }}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          setHover(true);
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerOut={() => {
+          setHover(false);
+          document.body.style.cursor = '';
+        }}
+      >
+        <sphereGeometry args={[0.014, 12, 12]} />
+        <meshBasicMaterial color={ACCENT} wireframe toneMapped={false} />
+      </mesh>
+      <mesh>
+        <ringGeometry args={[0.022, 0.028, 20]} />
+        <meshBasicMaterial
+          color={ACCENT}
+          transparent
+          opacity={hover ? 0.9 : 0.45}
+          side={THREE.DoubleSide}
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </mesh>
+    </group>
+  );
+};
+
 /* ---------- one project pinned on the globe. Live-in-production pins pulse
      and carry a soft halo; delivered-only pins hold a steady dot. ---------- */
 const NetPin: React.FC<{
@@ -399,23 +638,24 @@ const NetGlobe: React.FC<{
   const g = useRef<THREE.Group>(null);
   const R = 0.27;
 
-  const { pins, curves } = useMemo(() => {
+  const { pins, dirs, curves } = useMemo(() => {
     const n = Math.max(projects.length, 2);
     const golden = Math.PI * (3 - Math.sqrt(5));
     // even spread over the sphere (fibonacci), deterministic
-    const pts = Array.from({ length: n }, (_, i) => {
+    const ds = Array.from({ length: n }, (_, i) => {
       const y = 1 - ((i + 0.5) / n) * 2;
       const rad = Math.sqrt(Math.max(0, 1 - y * y));
       const th = i * golden;
-      return new THREE.Vector3(Math.cos(th) * rad, y, Math.sin(th) * rad).multiplyScalar(R);
+      return new THREE.Vector3(Math.cos(th) * rad, y, Math.sin(th) * rad);
     });
+    const pts = ds.map((d) => d.clone().multiplyScalar(R));
     // wire consecutive pins with an arc that bulges just off the surface
     const cs = pts.map((p, i) => {
       const q = pts[(i + 1) % n];
       const mid = p.clone().add(q).multiplyScalar(0.5).normalize().multiplyScalar(R * 1.28);
       return new THREE.QuadraticBezierCurve3(p, mid, q);
     });
-    return { pins: pts, curves: cs };
+    return { pins: pts, dirs: ds, curves: cs };
   }, [projects]);
 
   const tubes = useMemo(
@@ -424,60 +664,181 @@ const NetGlobe: React.FC<{
   );
   useEffect(() => () => tubes.forEach((t) => t.dispose()), [tubes]);
 
+  const ghostDir = useMemo(
+    () => latLngDir(GLOBE.ghostPin.latDeg, GLOBE.ghostPin.lngDeg),
+    []
+  );
+
+  /* ---- easter eggs: typed codes, session-persisted reveals, HUD toast ---- */
+  const [rain, setRain] = useState(false);
+  const [ghost, setGhost] = useState(() => ss.get('mk-globe-ghost') === '1');
+  const [swarm, setSwarm] = useState(() => ss.get('mk-globe-swarm') === '1');
+  const [toast, setToast] = useState<string | null>(null);
+  const toastTimer = useRef<number>();
+
+  const flash = (msg: string) => {
+    setToast(msg);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(null), 2600);
+  };
+
+  useEffect(() => {
+    console.log(
+      `%c ${GLOBE.consoleNote.join(' ')} `,
+      'background:#0b0b0b;color:#fde100;padding:8px 10px;border:1px solid #fde100;border-radius:4px;font-weight:bold'
+    );
+    let buf = '';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      buf = (buf + e.key.toLowerCase()).replace(/[^a-z]/g, '').slice(-18);
+      if (buf.endsWith(GLOBE.dataRain.code)) {
+        setRain(true);
+        flash(GLOBE.dataRain.toast);
+        window.setTimeout(() => {
+          setRain(false);
+          setGhost(true);
+          ss.set('mk-globe-ghost', '1');
+        }, GLOBE.dataRain.seconds * 1000);
+      }
+      if (buf.endsWith(GLOBE.swarm.code)) {
+        setSwarm(true);
+        ss.set('mk-globe-swarm', '1');
+        flash(GLOBE.swarm.toast);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.clearTimeout(toastTimer.current);
+    };
+  }, []);
+
+  const openGhost = () => {
+    flash(GLOBE.ghostPin.toast);
+    const url = GLOBE.ghostPin.url;
+    if (GLOBE.ghostPin.openInNewTab) window.open(url, '_blank', 'noopener,noreferrer');
+    else window.location.href = url;
+  };
+
   useFrame((_, dt) => {
-    if (g.current) g.current.rotation.y += dt * 0.2;
+    if (g.current) g.current.rotation.y += dt * (rain ? 0.55 : 0.2);
   });
 
   const wire = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
   const arc = lit ? ACCENT : theme === 'light' ? '#b0851f' : '#8f7d33';
   const gridOp = lit ? 0.55 : theme === 'light' ? 0.32 : 0.26;
+  const orbiterCount = GLOBE.detail.orbiters + (swarm ? GLOBE.swarm.addOrbiters : 0);
 
   return (
-    <group ref={g} rotation={[0.32, 0, 0.16]}>
-      {/* clean lat / long grid — meridians through the poles + parallels */}
-      {Array.from({ length: 6 }).map((_, k) => (
-        <mesh key={`m${k}`} rotation={[0, (k * Math.PI) / 6, 0]}>
-          <torusGeometry args={[R, 0.0016, 3, 72]} />
-          <meshBasicMaterial color={wire} transparent opacity={gridOp} toneMapped={false} />
-        </mesh>
+    <group>
+      {/* atmosphere — a soft halo, does not spin with the surface */}
+      {GLOBE.detail.atmosphere && (
+        <GlowSprite
+          size={R * 5.2}
+          opacity={(lit ? 0.16 : 0.09) * (theme === 'light' ? 0.6 : 1)}
+          additive={theme !== 'light'}
+        />
+      )}
+
+      {/* satellites on their own tilted orbits */}
+      {Array.from({ length: orbiterCount }).map((_, i) => (
+        <OrbitSat key={i} R={R} seed={i + 1} />
       ))}
-      {[-0.62, -0.32, 0, 0.32, 0.62].map((f, k) => {
-        const h = f * R;
-        const rr = Math.sqrt(Math.max(0.0001, R * R - h * h));
-        return (
-          <mesh key={`p${k}`} position={[0, h, 0]} rotation={[Math.PI / 2, 0, 0]}>
-            <torusGeometry args={[rr, 0.0016, 3, 72]} />
+
+      {/* the spinning globe */}
+      <group ref={g} rotation={[0.32, 0, 0.16]}>
+        {/* clean lat / long grid — meridians through the poles + parallels */}
+        {Array.from({ length: 6 }).map((_, k) => (
+          <mesh key={`m${k}`} rotation={[0, (k * Math.PI) / 6, 0]}>
+            <torusGeometry args={[R, 0.0016, 3, 72]} />
             <meshBasicMaterial color={wire} transparent opacity={gridOp} toneMapped={false} />
           </mesh>
-        );
-      })}
-      {/* solid fill just inside so the globe has body and mutes the far side */}
-      <mesh scale={0.985}>
-        <sphereGeometry args={[R, 32, 24]} />
-        <meshBasicMaterial
-          color={theme === 'light' ? '#f4f3ee' : '#0b0b0a'}
-          transparent
-          opacity={lit ? 0.5 : 0.72}
-        />
-      </mesh>
-      {/* connection arcs + packets */}
-      {tubes.map((geo, i) => (
-        <mesh key={i} geometry={geo}>
+        ))}
+        {[-0.62, -0.32, 0, 0.32, 0.62].map((f, k) => {
+          const h = f * R;
+          const rr = Math.sqrt(Math.max(0.0001, R * R - h * h));
+          return (
+            <mesh key={`p${k}`} position={[0, h, 0]} rotation={[Math.PI / 2, 0, 0]}>
+              <torusGeometry args={[rr, 0.0016, 3, 72]} />
+              <meshBasicMaterial color={wire} transparent opacity={gridOp} toneMapped={false} />
+            </mesh>
+          );
+        })}
+
+        {/* solid fill just inside so the globe has body and mutes the far side */}
+        <mesh scale={0.985}>
+          <sphereGeometry args={[R, 32, 24]} />
           <meshBasicMaterial
-            color={arc}
-            toneMapped={false}
+            color={theme === 'light' ? '#f4f3ee' : '#0b0b0a'}
             transparent
-            opacity={lit ? 0.85 : 0.45}
+            opacity={lit ? 0.5 : 0.72}
           />
         </mesh>
-      ))}
-      {curves.map((c, i) => (
-        <NetPacket key={i} curve={c} lit={lit} seed={i * 1.4} />
-      ))}
-      {/* project pins */}
-      {pins.map((p, i) => (
-        <NetPin key={i} pos={p} live={!!projects[i]?.live} lit={lit} theme={theme} seed={i * 1.7} />
-      ))}
+
+        {/* pole caps */}
+        {GLOBE.detail.poles &&
+          [1, -1].map((s) => (
+            <mesh key={s} position={[0, s * R * 1.04, 0]}>
+              <sphereGeometry args={[0.008, 8, 8]} />
+              <meshBasicMaterial
+                color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#6a6a62'}
+                toneMapped={false}
+              />
+            </mesh>
+          ))}
+
+        {GLOBE.detail.surfaceMotes > 0 && (
+          <SurfaceMotes R={R} count={GLOBE.detail.surfaceMotes} lit={lit} theme={theme} />
+        )}
+
+        {/* connection arcs + packets */}
+        {tubes.map((geo, i) => (
+          <mesh key={i} geometry={geo}>
+            <meshBasicMaterial color={arc} toneMapped={false} transparent opacity={lit ? 0.85 : 0.45} />
+          </mesh>
+        ))}
+        {curves.map((c, i) => (
+          <NetPacket key={i} curve={c} lit={lit} seed={i * 1.4} />
+        ))}
+
+        {GLOBE.detail.signalPing && (
+          <SignalPing dirs={dirs} R={R} everySec={GLOBE.detail.pingEverySec} />
+        )}
+
+        {/* project pins */}
+        {pins.map((p, i) => (
+          <NetPin key={i} pos={p} live={!!projects[i]?.live} lit={lit} theme={theme} seed={i * 1.7} />
+        ))}
+
+        {/* easter eggs living on the surface */}
+        {rain && <DataRain R={R} />}
+        {ghost && <GhostPin dir={ghostDir} R={R} onOpen={openGhost} />}
+      </group>
+
+      {toast && (
+        <Html
+          center
+          position={[0, R * 2.6, 0]}
+          distanceFactor={10}
+          style={{ pointerEvents: 'none' }}
+          zIndexRange={[30, 0]}
+        >
+          <span
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: 800,
+              fontSize: '10px',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
+              color: ACCENT,
+              textShadow: theme === 'light' ? '0 0 10px #f4f3ee' : '0 0 12px #000'
+            }}
+          >
+            {toast}
+          </span>
+        </Html>
+      )}
     </group>
   );
 };
