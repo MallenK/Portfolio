@@ -7,6 +7,7 @@ import CameraControlsImpl from 'camera-controls';
 import { PortfolioContent } from '../../types';
 import { buildGraph3D, GNode3D } from './graph3d';
 import { CoreNode, PrimaryNode, SatelliteNode, ClusterDust } from './nodes';
+import Sky from './Sky';
 import { atmos } from '../bg/atmos';
 
 interface Props {
@@ -178,6 +179,9 @@ const Graph: React.FC<Omit<Props, 'content'> & { data: ReturnType<typeof buildGr
       <ambientLight intensity={theme === 'light' ? 0.95 : 0.5} />
       <pointLight position={[8, 10, 12]} intensity={theme === 'light' ? 34 : 58} color="#fff6d0" />
       <pointLight position={[9, 7, 6]} intensity={theme === 'light' ? 8 : 14} color="#fde100" />
+
+      {/* world-fixed sky: constellations + ambient events, parallax with the camera */}
+      <Sky theme={theme} reducedMotion={reducedMotion} onNode={onNode} />
 
       <GraphGroup reducedMotion={reducedMotion}>
         {!reducedMotion &&
