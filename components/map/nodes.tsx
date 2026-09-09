@@ -196,38 +196,6 @@ const TechIcon: React.FC<{
   );
 };
 
-/* ---------- thin ring carrying N pips = skill count in that category ---------- */
-const CountRing: React.FC<{ count: number; lit: boolean; theme: 'dark' | 'light' }> = ({
-  count,
-  lit,
-  theme
-}) => {
-  const g = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (g.current) g.current.rotation.z += dt * 0.22;
-  });
-  const R = 0.36;
-  const line = lit ? ACCENT : theme === 'light' ? '#9a988c' : '#5f5f57';
-  const pip = lit ? ACCENT : theme === 'light' ? '#0a0a0a' : '#cecec4';
-  return (
-    <group ref={g} rotation={[Math.PI / 2 - 0.5, 0, 0]}>
-      <mesh>
-        <torusGeometry args={[R, 0.004, 6, 64]} />
-        <meshBasicMaterial color={line} toneMapped={false} transparent opacity={0.5} />
-      </mesh>
-      {Array.from({ length: Math.max(count, 1) }).map((_, i) => {
-        const a = (i / Math.max(count, 1)) * Math.PI * 2;
-        return (
-          <mesh key={i} position={[Math.cos(a) * R, Math.sin(a) * R, 0]}>
-            <sphereGeometry args={[0.02, 8, 8]} />
-            <meshBasicMaterial color={pip} toneMapped={false} />
-          </mesh>
-        );
-      })}
-    </group>
-  );
-};
-
 /* ---------- Perfil core — no fixed shell, it's the one "living" primary:
      a dense rotating nucleus of the 4 inner tech marks around a wire seed,
      wrapped in a second slower outer wire shell for more presence. The seed
@@ -365,50 +333,139 @@ const StrataCluster: React.FC<{
   );
 };
 
-/* ---------- Proyectos core — a loose fan of thin translucent sheets, like
-     blueprints or design layers left half-open, one per shipped project.
-     Each sheet carries a pair of crossed construction lines instead of a
-     solid face, so it reads as a draft/plan rather than a finished object —
-     the finished thing lives outside, on the satellites. ---------- */
-const BlueprintStack: React.FC<{ lit: boolean; theme: 'dark' | 'light'; count: number }> = ({
-  lit,
-  theme,
-  count
-}) => {
-  const g = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
-    if (g.current) g.current.rotation.y += dt * 0.16;
-  });
-  const n = Math.max(Math.min(count || 5, 6), 3);
+/* ---------- one filled cell of the Proyectos lattice = one shipped project.
+     A live-in-production project breathes (emissive pulse); a delivered-only
+     one holds a steady low glow. ---------- */
+const VoxelCell: React.FC<{
+  pos: [number, number, number];
+  unit: number;
+  live: boolean;
+  lit: boolean;
+  theme: 'dark' | 'light';
+  seed: number;
+}> = ({ pos, unit, live, lit, theme, seed }) => {
+  const mat = useRef<THREE.MeshStandardMaterial>(null);
   const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
-  const color = lit ? ACCENT : base;
+  const rest = live ? 0.5 : theme === 'light' ? 0.05 : 0.24;
+  const edge = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
+  useFrame((state) => {
+    if (!mat.current) return;
+    mat.current.emissiveIntensity = lit
+      ? 1
+      : live
+        ? 0.4 + Math.sin(state.clock.elapsedTime * 2 + seed) * 0.28
+        : rest;
+  });
+  return (
+    <mesh position={pos}>
+      <boxGeometry args={[unit, unit, unit]} />
+      <meshStandardMaterial
+        ref={mat}
+        color={lit ? ACCENT : base}
+        emissive={ACCENT}
+        emissiveIntensity={rest}
+        roughness={0.4}
+        metalness={0.12}
+      />
+      <Edges color={edge} />
+    </mesh>
+  );
+};
+
+/* ---------- Proyectos core — a voxel lattice: an N-per-side grid of small
+     cubes that together read as one larger, loose cube. Filled cells are
+     shipped projects, packed centre-out so the built work clusters at the
+     core and the empty slots sit on the shell — "a grid still filling in".
+     The finished screens live outside, on the satellites. ---------- */
+const VoxelLattice: React.FC<{
+  lit: boolean;
+  theme: 'dark' | 'light';
+  projects: { live: boolean }[];
+}> = ({ lit, theme, projects }) => {
+  const g = useRef<THREE.Group>(null);
+
+  const { cells, span, unit } = useMemo(() => {
+    const count = Math.max(projects.length, 1);
+    // smallest grid side whose volume holds every project, min 2 (5 -> 2)
+    const dim = Math.max(2, Math.ceil(Math.cbrt(count)));
+    const SPAN = 0.5;
+    const pitch = SPAN / dim;
+    const u = pitch * 0.72;
+    const mid = (dim - 1) / 2;
+    const all: { key: string; pos: [number, number, number]; d2: number }[] = [];
+    for (let x = 0; x < dim; x++)
+      for (let y = 0; y < dim; y++)
+        for (let z = 0; z < dim; z++)
+          all.push({
+            key: `${x}-${y}-${z}`,
+            pos: [(x - mid) * pitch, (y - mid) * pitch, (z - mid) * pitch],
+            d2: (x - mid) ** 2 + (y - mid) ** 2 + (z - mid) ** 2
+          });
+    // fill from the centre outward; stable tie-break on key
+    all.sort((a, b) => a.d2 - b.d2 || (a.key < b.key ? -1 : 1));
+    return {
+      cells: all.map((cell, i) => ({
+        ...cell,
+        filled: i < count,
+        live: !!projects[i]?.live
+      })),
+      span: SPAN,
+      unit: u
+    };
+  }, [projects]);
+
+  const hullGeo = useMemo(
+    () => new THREE.EdgesGeometry(new THREE.BoxGeometry(span * 1.06, span * 1.06, span * 1.06)),
+    [span]
+  );
+
+  useFrame((_, dt) => {
+    if (g.current) {
+      g.current.rotation.y += dt * 0.1;
+      g.current.rotation.x += dt * 0.035;
+    }
+  });
+
+  const edge = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
+
   return (
     <group ref={g}>
-      {Array.from({ length: n }).map((_, i) => {
-        const t = n === 1 ? 0 : i / (n - 1);
-        const y = (t - 0.5) * 0.3;
-        const fan = (i - (n - 1) / 2) * 0.22;
-        const w = 0.46 - t * 0.08;
-        const h = 0.32 - t * 0.05;
-        const diag = Math.max(w, h) * 1.05;
-        return (
-          <group key={i} position={[0, y, 0]} rotation={[0.05, fan, 0.04 * i]}>
-            <mesh>
-              <planeGeometry args={[w, h]} />
-              <meshBasicMaterial color={color} transparent opacity={lit ? 0.16 : 0.09} side={THREE.DoubleSide} depthWrite={false} />
-              <Edges color={color} />
-            </mesh>
-            <mesh rotation={[0, 0, Math.PI / 4]}>
-              <planeGeometry args={[diag, 0.004]} />
-              <meshBasicMaterial color={color} transparent opacity={lit ? 0.55 : 0.28} toneMapped={false} depthWrite={false} />
-            </mesh>
-            <mesh rotation={[0, 0, -Math.PI / 4]}>
-              <planeGeometry args={[diag, 0.004]} />
-              <meshBasicMaterial color={color} transparent opacity={lit ? 0.55 : 0.28} toneMapped={false} depthWrite={false} />
-            </mesh>
-          </group>
-        );
-      })}
+      {cells.map((c, i) =>
+        c.filled ? (
+          <VoxelCell
+            key={c.key}
+            pos={c.pos}
+            unit={unit}
+            live={c.live}
+            lit={lit}
+            theme={theme}
+            seed={i * 1.7}
+          />
+        ) : (
+          // empty slot — a small recessed marker, not a full wireframe box,
+          // so the filled work stays the focus and the lattice reads clean
+          <mesh key={c.key} position={c.pos}>
+            <boxGeometry args={[unit * 0.3, unit * 0.3, unit * 0.3]} />
+            <meshBasicMaterial
+              color={edge}
+              transparent
+              opacity={lit ? 0.7 : theme === 'light' ? 0.4 : 0.35}
+              toneMapped={false}
+            />
+          </mesh>
+        )
+      )}
+      {/* just the 12 outer edges so the cluster still reads as one cube from
+          a distance — no face diagonals, unlike a wireframe box */}
+      <lineSegments geometry={hullGeo}>
+        <lineBasicMaterial
+          color={edge}
+          transparent
+          opacity={lit ? 0.35 : theme === 'light' ? 0.16 : 0.14}
+          toneMapped={false}
+          depthWrite={false}
+        />
+      </lineSegments>
     </group>
   );
 };
@@ -717,7 +774,6 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
   const spin = useRef<THREE.Mesh>(null);
   const { hovered, bind } = useHover(onHover, n.id);
   const lit = hovered || active;
-  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
 
   // Perfil has no fixed shell — it's the only "living" primary, so it always
   // reads as the largest node in the graph.
@@ -734,20 +790,12 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       g.current.scale.setScalar(s);
     }
     if (spin.current) {
-      spin.current.rotation.y += dt * (n.shape === 'box' ? 0.4 : 0.25);
-      if (n.shape === 'box') spin.current.rotation.x += dt * 0.2;
+      // proyectos ('box') carries the voxel lattice — a slow tumble reads
+      // better on a grid of cubes than the old fast box spin
+      spin.current.rotation.y += dt * (n.shape === 'box' ? 0.16 : 0.25);
+      if (n.shape === 'box') spin.current.rotation.x += dt * 0.05;
     }
   });
-
-  const mat = (
-    <meshStandardMaterial
-      color={lit ? ACCENT : base}
-      emissive={lit ? ACCENT : base}
-      emissiveIntensity={lit ? 1.1 : theme === 'light' ? 0.04 : 0.28}
-      roughness={0.4}
-      metalness={0.1}
-    />
-  );
 
   return (
     <group
@@ -758,11 +806,9 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
     >
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
       {n.shape === 'box' && (
-        <mesh ref={spin}>
-          <boxGeometry args={[0.42, 0.42, 0.42]} />
-          {mat}
-          <Edges color={lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54'} />
-        </mesh>
+        <group ref={spin as any}>
+          <VoxelLattice lit={lit} theme={theme} projects={n.data?.projectMarks ?? []} />
+        </group>
       )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>

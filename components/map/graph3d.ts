@@ -35,6 +35,10 @@ export interface GNode3D {
     /** Servicios primary only — one entry per offering, in the same order
      *  as the satellites, marking which ones open a link or a chat. */
     serviceMarks?: { action: boolean }[];
+    /** Proyectos primary only — one entry per shipped project, in the same
+     *  order as the satellites, marking which ones are live in production.
+     *  Drives the voxel lattice in nodes.tsx (VoxelLattice). */
+    projectMarks?: { live: boolean }[];
     url?: string;
     action?: string;
     stackCount?: number;
@@ -133,7 +137,9 @@ export function buildGraph3D(c: PortfolioContent) {
           ? { stages: c.experience.items.map((e, i) => ({ current: i === 0, year: e.period })) }
           : id === 'servicios'
             ? { serviceMarks: c.services.items.map((sv) => ({ action: !!(sv.url || sv.action) })) }
-            : undefined
+            : id === 'proyectos'
+              ? { projectMarks: c.projects.items.map((p) => ({ live: !!p.live })) }
+              : undefined
     });
     edges.push({ a: 'core', b: id });
   });
