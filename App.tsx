@@ -14,7 +14,6 @@ import WorldModeFX from './components/EasterEggs/WorldModeFX';
 import GlitchFX from './components/EasterEggs/GlitchFX';
 import MessiMode from './components/EasterEggs/MessiMode';
 import NavbarEgg from './components/EasterEggs/NavbarEgg';
-import Chatbox from './components/Chatbox';
 
 type Lang = 'es' | 'en' | 'cat';
 
@@ -75,14 +74,6 @@ const AppContent: React.FC = () => {
     setFocus(null);
   }, []);
 
-  const openChat = useCallback(() => {
-    closeAll();
-    setTimeout(
-      () => (document.querySelector('[data-chat-toggle]') as HTMLButtonElement | null)?.click(),
-      120
-    );
-  }, [closeAll]);
-
   return (
     <>
       <TimeTravelFX />
@@ -133,11 +124,9 @@ const AppContent: React.FC = () => {
               content={content}
               onClose={closeAll}
               onNavigate={(id) => openNode(id, id)}
-              onOpenChat={openChat}
             />
 
             <CheatSheet />
-            <Chatbox lang={lang} content={content as any} />
           </motion.div>
         )}
       </AnimatePresence>

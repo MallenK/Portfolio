@@ -10,7 +10,6 @@ interface Props {
   anchor: string | null;
   content: PortfolioContent;
   onNavigate: (id: string) => void;
-  onOpenChat: () => void;
 }
 
 const NODES = ['perfil', 'proyectos', 'experiencia', 'servicios', 'contacto'] as const;
@@ -163,7 +162,7 @@ const Experiencia: React.FC<Props> = ({ content }) => {
 };
 
 /* ---------------- servicios ---------------- */
-const Servicios: React.FC<Props> = ({ content, onOpenChat }) => {
+const Servicios: React.FC<Props> = ({ content }) => {
   const { services } = content;
   return (
     <div>
@@ -197,11 +196,7 @@ const Servicios: React.FC<Props> = ({ content, onOpenChat }) => {
           const cls = 'group flex w-full items-start gap-4 border-b border-hair px-2 py-5 text-left';
           return (
             <Reveal key={s.title} delay={i * 45}>
-              {s.action === 'open-ai-chat' ? (
-                <button data-anchor={String(i)} className={cls} onClick={onOpenChat}>
-                  {inner}
-                </button>
-              ) : s.url ? (
+              {s.url ? (
                 <a data-anchor={String(i)} className={cls} href={s.url} target="_blank" rel="noopener noreferrer">
                   {inner}
                 </a>

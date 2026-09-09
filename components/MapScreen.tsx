@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useState } from 'react';
 import { PortfolioContent } from '../types';
 import Background from './bg/Background';
 import Constellation from './map/Constellation';
-import Minimap from './map/Minimap';
+import NavMap from './map/NavMap';
 import type { Theme } from '../hooks/useApp';
 
 type Lang = 'es' | 'en' | 'cat';
@@ -83,8 +83,8 @@ const MapScreen: React.FC<Props> = ({
 
       {/* ---------- HUD ---------- */}
       <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-4 sm:p-6">
-        {webgl && !reducedMotion && (
-          <Minimap content={content} active={active} onJump={onFly} label={content.ui.mapLabel} />
+        {webgl && (
+          <NavMap content={content} active={active} focus={focus} onFly={onFly} />
         )}
         <div className="flex items-start justify-between gap-3">
           <button

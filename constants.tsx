@@ -229,7 +229,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'Web corporativa premium', desc: 'Webs profesionales orientadas a conversión y marca.', url: 'https://mykeracademy.com/' },
         { title: 'SaaS y apps a medida', desc: 'Plataformas escalables y productos digitales desde cero.', url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/' },
         { title: 'Automatización de procesos', desc: 'Optimización de flujos internos y sistemas de empresa.' },
-        { title: 'Integración de IA', desc: 'Chatbots, análisis de datos y asistentes inteligentes.', action: 'open-ai-chat' },
+        { title: 'Integración de IA', desc: 'Chatbots, análisis de datos y asistentes inteligentes.' },
         { title: 'Consultoría y auditoría web', desc: 'Análisis técnico, rendimiento, arquitectura y UX, con un plan de mejora accionable.' },
         { title: 'Clases de programación / IA', desc: 'Sesiones prácticas personalizadas para aprender a programar e integrar IA.' }
       ]
@@ -397,7 +397,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'Web corporativa premium', desc: 'Webs professionals orientades a conversió i marca.', url: 'https://mykeracademy.com/' },
         { title: 'SaaS i apps a mida', desc: 'Plataformes escalables i productes digitals des de zero.', url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/' },
         { title: 'Automatització de processos', desc: 'Optimització de fluxos interns i sistemes d’empresa.' },
-        { title: 'Integració d’IA', desc: 'Chatbots, anàlisi de dades i assistents intel·ligents.', action: 'open-ai-chat' },
+        { title: 'Integració d’IA', desc: 'Chatbots, anàlisi de dades i assistents intel·ligents.' },
         { title: 'Consultoria i auditoria web', desc: 'Anàlisi tècnic, rendiment, arquitectura i UX, amb un pla de millora accionable.' },
         { title: 'Classes de programació / IA', desc: 'Sessions pràctiques personalitzades per aprendre a programar i integrar IA.' }
       ]
@@ -565,7 +565,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
         { title: 'Premium corporate web', desc: 'Professional websites focused on conversion and brand.', url: 'https://mykeracademy.com/' },
         { title: 'SaaS & custom apps', desc: 'Scalable platforms and digital products from scratch.', url: 'https://mallenk.github.io/Plantilla-Plataforma-Academia-Escolar/' },
         { title: 'Process automation', desc: 'Optimisation of internal workflows and business systems.' },
-        { title: 'AI integration', desc: 'Chatbots, data analysis and intelligent assistants.', action: 'open-ai-chat' },
+        { title: 'AI integration', desc: 'Chatbots, data analysis and intelligent assistants.' },
         { title: 'Web consulting & audit', desc: 'Technical analysis, performance, architecture and UX, with an actionable improvement plan.' },
         { title: 'Coding / AI mentoring', desc: 'Personalised hands-on sessions to learn coding and AI integration.' }
       ]

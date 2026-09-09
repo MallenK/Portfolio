@@ -10,7 +10,6 @@ interface Props {
   content: PortfolioContent;
   onClose: () => void;
   onNavigate: (id: string) => void;
-  onOpenChat: () => void;
 }
 
 const titleFor = (id: string, c: PortfolioContent) => {
@@ -41,7 +40,7 @@ const NUM: Record<string, string> = {
   contacto: '05'
 };
 
-const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate, onOpenChat }) => {
+const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate }) => {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -112,7 +111,6 @@ const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate, 
                   anchor={anchor}
                   content={content}
                   onNavigate={onNavigate}
-                  onOpenChat={onOpenChat}
                 />
               </AnimatedContent>
             </div>
