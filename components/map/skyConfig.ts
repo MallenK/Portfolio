@@ -1,46 +1,41 @@
 /* ============================================================================
- *  EL CIELO — CONSTELACIONES + EVENTOS RANDOM  (dentro del mundo 3D)
+ *  EL CIELO — CONSTELACIONES REALES + EVENTOS RANDOM  (dentro del mundo 3D)
  *  ---------------------------------------------------------------------------
- *  Todo esto es seguro de tocar. Las constelaciones viven en la galaxia: al
- *  orbitar la cámara se mueven contigo, como estrellas de verdad.
+ *  Cada constelación es un asterismo real (Orión, Osa Mayor, Casiopea…).
+ *  Viven en la galaxia: al orbitar la cámara se mueven contigo.
  *
- *  Estrellas: [azimut°, altura°]  (y opcionalmente un 3º número = tamaño ×).
- *    azimut  0..360  -> alrededor de ti. 180 = de frente al cargar la web.
- *    altura  0 = horizonte. Positivo = arriba, negativo = abajo.
- *            ~15..35 se ve asomando por encima del mapa al cargar.
- *  Líneas: pares de índices dentro de "stars".
+ *  - anchor: [azimut°, altura°]  -> DÓNDE va la constelación en el cielo.
+ *      azimut 0..360 alrededor (180 = de frente al cargar). altura 0 = horizonte.
+ *      Para MOVER una constelación entera: cambia solo su anchor.
+ *  - scale: grados por unidad -> el TAMAÑO. Bájalo y se hace más pequeña.
+ *  - stars: la FORMA real (offsets relativos). No la toques si quieres que
+ *      siga pareciéndose a la constelación de verdad.
+ *  - brightness: brillo/tamaño de cada estrella (mismo orden que stars).
+ *  - lines: pares de índices de "stars".
  *
- *  onClick admite:
- *    'flash:tu texto'   -> escribe el texto un momento en el cielo
- *    'comet'            -> lanza un cometa
- *    'shower'           -> lluvia de estrellas fugaces
- *    'node:core'        -> enfoca/abre ese nodo del mapa (core, perfil, proyectos…)
- *    'url:https://...'  -> abre un enlace en otra pestaña
+ *  onClick: 'flash:texto' | 'comet' | 'shower' | 'node:core' | 'url:https://...'
  * ========================================================================== */
 
 export type SkyAction = string;
-/** [azimut, altura] o [azimut, altura, tamaño×] */
-export type SkyStar = [number, number] | [number, number, number];
 
 export interface SkyConstellation {
   name: string;
-  stars: SkyStar[];
+  anchor: [number, number];
+  scale?: number;
+  stars: [number, number][];
+  brightness?: number[];
   lines: [number, number][];
-  /** si es interactuable: brilla al pasar el ratón y responde al clic */
   interactive?: boolean;
   onClick?: SkyAction;
 }
 
 export const SKY = {
-  radius: 62, // a qué distancia viven las estrellas del cielo
-  starSize: 0.24, // tamaño base de las estrellas (las varía cada una un poco)
+  radius: 62,
+  starSize: 0.1, // estrellas pequeñas — son estrellas de verdad
 
-  /* -- eventos random ambientales -------------------------------------- */
   events: {
     enabled: true,
-    /** segundos entre eventos: valor aleatorio dentro de este rango */
     everySec: [6, 15] as [number, number],
-    /** probabilidad relativa de cada tipo */
     weights: { comet: 4, shootingStar: 10, satellite: 3, flare: 4 } as Record<string, number>,
     comet: { color: '#fff2c4', speedSec: [3, 4.6] as [number, number], tail: 7, size: 0.34 },
     shootingStar: { color: '#ffffff', speedSec: [0.55, 1] as [number, number], tail: 4.5 },
@@ -48,93 +43,121 @@ export const SKY = {
     flare: { color: '#fde100' }
   },
 
-  /* -- constelaciones ----------------------------------------------- */
   constellations: [
     {
-      // la firma — una M encima del núcleo. Clic = abre el manifiesto.
-      name: 'MallenK',
+      name: 'Orión',
+      anchor: [148, 14],
+      scale: 2.4,
+      // Betelgeuse, Bellatrix, cinturón (Alnitak/Alnilam/Mintaka), Saiph, Rigel
       stars: [
-        [173, 22, 1.1],
-        [177, 33, 0.8],
-        [181, 26, 1.4],
-        [185, 33, 0.7],
-        [189, 22, 1.0]
+        [-1.0, 1.5],
+        [1.1, 1.5],
+        [-0.45, 0.05],
+        [0.0, 0.0],
+        [0.5, 0.0],
+        [-0.85, -1.5],
+        [1.0, -1.6]
       ],
+      brightness: [1.7, 1.2, 1.1, 1.2, 1.1, 0.9, 1.7],
       lines: [
         [0, 1],
-        [1, 2],
+        [0, 2],
+        [1, 4],
         [2, 3],
-        [3, 4]
+        [3, 4],
+        [2, 5],
+        [4, 6]
       ],
       interactive: true,
       onClick: 'node:core'
     },
     {
-      name: 'La Antena',
+      name: 'Osa Mayor',
+      anchor: [72, 25],
+      scale: 2.2,
+      // cazo (Dubhe, Merak, Phecda, Megrez) + mango (Alioth, Mizar, Alkaid)
       stars: [
-        [147, 16, 1.3],
-        [149, 26, 0.9],
-        [148, 36, 0.7],
-        [155, 40, 1.1],
-        [141, 39, 0.8]
+        [0.0, 0.9],
+        [0.0, 0.2],
+        [0.85, 0.05],
+        [0.9, 0.8],
+        [1.6, 0.95],
+        [2.3, 1.15],
+        [3.0, 1.5]
       ],
+      brightness: [1.4, 1.3, 1.1, 0.9, 1.3, 1.2, 1.2],
       lines: [
         [0, 1],
         [1, 2],
         [2, 3],
-        [2, 4]
+        [3, 0],
+        [3, 4],
+        [4, 5],
+        [5, 6]
       ],
       interactive: true,
       onClick: 'comet'
     },
     {
-      name: 'La Señal',
+      name: 'Casiopea',
+      anchor: [210, 28],
+      scale: 2.2,
       stars: [
-        [206, 15, 0.9],
-        [212, 26, 1.5],
-        [219, 21, 0.8],
-        [214, 36, 1.0],
-        [222, 32, 0.7]
+        [0.0, 0.0],
+        [1.0, 0.7],
+        [2.0, 0.15],
+        [3.0, 0.8],
+        [4.0, 0.1]
       ],
-      lines: [
-        [0, 1],
-        [1, 2],
-        [1, 3],
-        [3, 4]
-      ],
-      interactive: true,
-      onClick: 'url:https://github.com/MallenK'
-    },
-    {
-      name: 'El Faro',
-      stars: [
-        [124, 20, 1.2],
-        [126, 31, 0.8],
-        [124, 42, 1.6],
-        [131, 47, 0.7],
-        [118, 47, 0.9]
-      ],
+      brightness: [1.2, 1.1, 1.3, 1.0, 1.1],
       lines: [
         [0, 1],
         [1, 2],
         [2, 3],
-        [2, 4]
+        [3, 4]
       ],
       interactive: true,
       onClick: 'flash:sigue mirando arriba'
     },
     {
-      name: 'El Vigía',
+      name: 'Cisne',
+      anchor: [292, 20],
+      scale: 2.4,
+      // Deneb, Sadr, Albireo (espina) + Gienah, Delta (alas) — la Cruz del Norte
       stars: [
-        [232, 26, 0.9],
-        [239, 30, 1.1],
-        [235, 37, 0.7],
-        [235, 22, 0.8],
-        [235, 30, 1.6]
+        [0.0, 1.7],
+        [0.1, 0.3],
+        [0.25, -1.6],
+        [-1.4, 0.5],
+        [1.3, 0.55]
       ],
+      brightness: [1.6, 1.1, 0.9, 1.0, 1.0],
       lines: [
-        [0, 4],
-        [1, 4],
+        [0, 1],
+        [1, 2],
+        [3, 1],
+        [1, 4]
+      ],
+      interactive: true,
+      onClick: 'url:https://github.com/MallenK'
+    },
+    {
+      name: 'Lira',
+      anchor: [12, 30],
+      scale: 1.4,
+      // Vega + el paralelogramo
+      stars: [
+        [0.0, 1.1],
+        [-0.4, -0.1],
+        [0.5, 0.0],
+        [-0.25, -1.1],
+        [0.65, -1.0]
+      ],
+      brightness: [1.8, 0.7, 0.7, 0.7, 0.7],
+      lines: [
+        [0, 1],
+        [0, 2],
+        [1, 3],
         [2, 4],
         [3, 4]
       ],
@@ -142,53 +165,76 @@ export const SKY = {
       onClick: 'shower'
     },
     {
-      // decorativa, por debajo del mapa
-      name: 'El Puente',
+      name: 'León',
+      anchor: [340, 26],
+      scale: 2.0,
+      // la hoz (Regulus + curva) y el triángulo trasero (Zosma, Denebola)
       stars: [
-        [162, -30, 0.8],
-        [172, -22, 1.2],
-        [182, -19, 0.7],
-        [192, -22, 1.3],
-        [202, -30, 0.9]
+        [0.0, 0.0],
+        [0.05, 0.6],
+        [0.15, 1.15],
+        [0.3, 1.6],
+        [0.7, 1.75],
+        [1.0, 1.3],
+        [-1.8, 0.75],
+        [-2.7, 0.35]
       ],
+      brightness: [1.5, 0.8, 1.1, 0.8, 0.8, 0.9, 1.0, 1.2],
       lines: [
         [0, 1],
         [1, 2],
         [2, 3],
+        [3, 4],
+        [4, 5],
+        [0, 6],
+        [6, 7],
+        [7, 0],
+        [2, 6]
+      ]
+    },
+    {
+      name: 'Tauro',
+      anchor: [230, 12],
+      scale: 2.4,
+      // la V de las Híades con Aldebarán, hacia Elnath
+      stars: [
+        [0.0, 0.0],
+        [0.55, 0.45],
+        [1.1, 0.95],
+        [0.5, -0.35],
+        [1.15, -0.7]
+      ],
+      brightness: [1.5, 0.8, 1.1, 0.8, 0.9],
+      lines: [
+        [0, 1],
+        [1, 2],
+        [0, 3],
         [3, 4]
       ]
     },
     {
-      // decorativa, se descubre orbitando a la izquierda
-      name: 'El Río',
+      name: 'Osa Menor',
+      anchor: [285, 42],
+      scale: 2.0,
+      // con la Estrella Polar
       stars: [
-        [86, 10, 1.0],
-        [96, 22, 0.7],
-        [106, 14, 1.4],
-        [116, 26, 0.8],
-        [126, 16, 1.1]
+        [0.0, 1.5],
+        [0.25, 0.9],
+        [0.1, 0.35],
+        [-0.35, 0.1],
+        [-0.55, -0.35],
+        [-0.75, 0.35],
+        [-0.15, -0.15]
       ],
+      brightness: [1.3, 0.7, 0.7, 0.8, 1.1, 1.0, 0.7],
       lines: [
         [0, 1],
         [1, 2],
         [2, 3],
-        [3, 4]
-      ]
-    },
-    {
-      // decorativa, se descubre orbitando a la derecha
-      name: 'El Compás',
-      stars: [
-        [262, 30, 1.2],
-        [270, 46, 0.8],
-        [278, 30, 1.2],
-        [270, 46, 0.7],
-        [270, 58, 1.5]
-      ],
-      lines: [
-        [0, 1],
-        [1, 2],
-        [1, 4]
+        [3, 6],
+        [6, 4],
+        [4, 5],
+        [5, 3]
       ]
     }
   ] as SkyConstellation[]

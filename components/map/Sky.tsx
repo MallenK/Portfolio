@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { Billboard, Html, Line } from '@react-three/drei';
 import { atmos } from '../bg/atmos';
-import { SKY, type SkyConstellation, type SkyStar } from './skyConfig';
+import { SKY, type SkyConstellation } from './skyConfig';
 
 const ACCENT = '#fde100';
 const DEG = Math.PI / 180;
@@ -133,10 +133,6 @@ const Flare: React.FC<{ onDone: () => void }> = ({ onDone }) => {
 };
 
 /* ---------------------------------------------------------------- constellation */
-const azOf = (s: SkyStar) => s[0];
-const altOf = (s: SkyStar) => s[1];
-const sizeOf = (s: SkyStar) => s[2] ?? 1;
-
 const Constellation: React.FC<{
   data: SkyConstellation;
   theme: 'dark' | 'light';
@@ -145,12 +141,13 @@ const Constellation: React.FC<{
   const [hover, setHover] = useState(false);
   const starGrp = useRef<THREE.Group>(null);
 
-  const { pts, sizes, edges, center, span } = useMemo(() => {
-    const dirs = data.stars.map((s) => dirFrom(azOf(s), altOf(s)));
+  const { pts, sizes, bri, edges, center, span } = useMemo(() => {
+    const s = data.scale ?? 3;
+    const [a0, alt0] = data.anchor;
+    const dirs = data.stars.map(([dx, dy]) => dirFrom(a0 + dx * s, alt0 + dy * s));
     const p = dirs.map((d) => d.clone().multiplyScalar(SKY.radius));
-    const sz = data.stars.map(
-      (s, i) => SKY.starSize * sizeOf(s) * (data.interactive ? 1.15 : 1) * (0.85 + ((i * 37) % 7) / 20)
-    );
+    const b = data.stars.map((_, i) => data.brightness?.[i] ?? 1);
+    const sz = b.map((v) => SKY.starSize * v * (data.interactive ? 1.12 : 1));
     const e = data.lines
       .map(([a, b]) => (p[a] && p[b] ? ([p[a], p[b]] as [THREE.Vector3, THREE.Vector3]) : null))
       .filter((x): x is [THREE.Vector3, THREE.Vector3] => !!x);
@@ -158,7 +155,7 @@ const Constellation: React.FC<{
     dirs.forEach((d) => ctr.add(d));
     ctr.normalize();
     const sp = Math.max(...dirs.map((d) => d.angleTo(ctr)), 0.05);
-    return { pts: p, sizes: sz, edges: e, center: ctr.multiplyScalar(SKY.radius), span: sp };
+    return { pts: p, sizes: sz, bri: b, edges: e, center: ctr.multiplyScalar(SKY.radius), span: sp };
   }, [data]);
 
   useFrame((state) => {
@@ -176,29 +173,49 @@ const Constellation: React.FC<{
   return (
     <group>
       {edges.map((seg, i) => (
-        <Line key={i} points={seg} color={lineColor} lineWidth={hover ? 1.7 : 1} transparent opacity={hover ? 0.85 : 0.34} depthWrite={false} />
+        <Line key={i} points={seg} color={lineColor} lineWidth={hover ? 1.6 : 1} transparent opacity={hover ? 0.8 : 0.3} depthWrite={false} />
       ))}
       <group ref={starGrp}>
         {pts.map((p, i) => (
           <mesh key={i} position={p}>
-            <sphereGeometry args={[hover ? sizes[i] * 1.4 : sizes[i], 8, 8]} />
-            <meshBasicMaterial color={starColor} transparent opacity={0.82} toneMapped={false} depthWrite={false} />
+            <sphereGeometry args={[hover ? sizes[i] * 1.5 : sizes[i], 6, 6]} />
+            <meshBasicMaterial color={starColor} transparent opacity={0.9} toneMapped={false} depthWrite={false} />
           </mesh>
         ))}
       </group>
       {pts.map((p, i) => (
         <mesh key={`h${i}`} position={p}>
-          <sphereGeometry args={[sizes[i] * 2.8, 10, 10]} />
+          <sphereGeometry args={[sizes[i] * (hover ? 3.6 : 2.9), 8, 8]} />
           <meshBasicMaterial
             color={hover ? ACCENT : '#fff2cc'}
             transparent
-            opacity={hover ? 0.22 : theme === 'light' ? 0.06 : 0.11}
+            opacity={hover ? 0.28 : theme === 'light' ? 0.06 : 0.16}
             depthWrite={false}
             blending={THREE.AdditiveBlending}
             toneMapped={false}
           />
         </mesh>
       ))}
+      {/* diffraction spikes on the brightest stars — real bright stars sparkle */}
+      {pts.map((p, i) =>
+        bri[i] >= 1.4 ? (
+          <Billboard key={`s${i}`} position={p}>
+            {[0, Math.PI / 2].map((r) => (
+              <mesh key={r} rotation={[0, 0, r]}>
+                <planeGeometry args={[sizes[i] * 22, sizes[i] * 1.4]} />
+                <meshBasicMaterial
+                  color={hover ? ACCENT : '#fff4d6'}
+                  transparent
+                  opacity={hover ? 0.5 : 0.28}
+                  depthWrite={false}
+                  blending={THREE.AdditiveBlending}
+                  toneMapped={false}
+                />
+              </mesh>
+            ))}
+          </Billboard>
+        ) : null
+      )}
 
       {data.interactive && (
         <mesh
