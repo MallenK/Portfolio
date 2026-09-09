@@ -2,7 +2,7 @@ import { PortfolioContent } from '../../types';
 import { PERFIL_OUTER } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
-export type PrimaryShape = 'icosa' | 'box' | 'strata' | 'burst' | 'portal';
+export type PrimaryShape = 'icosa' | 'globe' | 'strata' | 'burst' | 'portal';
 export type SatVariant = 'project' | 'company' | 'skill' | 'service';
 
 export interface GNode3D {
@@ -37,7 +37,7 @@ export interface GNode3D {
     serviceMarks?: { action: boolean }[];
     /** Proyectos primary only — one entry per shipped project, in the same
      *  order as the satellites, marking which ones are live in production.
-     *  Drives the voxel lattice in nodes.tsx (VoxelLattice). */
+     *  Drives the wireframe globe in nodes.tsx (NetGlobe). */
     projectMarks?: { live: boolean }[];
     url?: string;
     action?: string;
@@ -55,7 +55,7 @@ export interface GEdge3D {
 const PRIMARY: Record<string, { dir: [number, number]; y: number; shape: PrimaryShape }> = {
   perfil: { dir: [-0.95, -0.31], y: 1.1, shape: 'icosa' },
   contacto: { dir: [0.0, -1.0], y: 2.4, shape: 'portal' },
-  proyectos: { dir: [0.95, -0.31], y: -0.7, shape: 'box' },
+  proyectos: { dir: [0.95, -0.31], y: -0.7, shape: 'globe' },
   experiencia: { dir: [0.59, 0.81], y: 1.7, shape: 'strata' },
   servicios: { dir: [-0.59, 0.81], y: -1.5, shape: 'burst' }
 };

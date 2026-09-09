@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { Billboard, Edges, Html } from '@react-three/drei';
@@ -333,139 +333,151 @@ const StrataCluster: React.FC<{
   );
 };
 
-/* ---------- one filled cell of the Proyectos lattice = one shipped project.
-     A live-in-production project breathes (emissive pulse); a delivered-only
-     one holds a steady low glow. ---------- */
-const VoxelCell: React.FC<{
-  pos: [number, number, number];
-  unit: number;
-  live: boolean;
-  lit: boolean;
-  theme: 'dark' | 'light';
-  seed: number;
-}> = ({ pos, unit, live, lit, theme, seed }) => {
-  const mat = useRef<THREE.MeshStandardMaterial>(null);
-  const base = theme === 'light' ? '#0a0a0a' : '#eeeee6';
-  const rest = live ? 0.5 : theme === 'light' ? 0.05 : 0.24;
-  const edge = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
+/* ---------- a data packet riding a connection arc between two projects ---------- */
+const NetPacket: React.FC<{ curve: THREE.QuadraticBezierCurve3; lit: boolean; seed: number }> = ({
+  curve,
+  lit,
+  seed
+}) => {
+  const m = useRef<THREE.Mesh>(null);
   useFrame((state) => {
-    if (!mat.current) return;
-    mat.current.emissiveIntensity = lit
-      ? 1
-      : live
-        ? 0.4 + Math.sin(state.clock.elapsedTime * 2 + seed) * 0.28
-        : rest;
+    if (!m.current) return;
+    const t = (state.clock.elapsedTime * 0.32 + seed) % 1;
+    const p = curve.getPoint(t);
+    m.current.position.set(p.x, p.y, p.z);
   });
   return (
-    <mesh position={pos}>
-      <boxGeometry args={[unit, unit, unit]} />
-      <meshStandardMaterial
-        ref={mat}
-        color={lit ? ACCENT : base}
-        emissive={ACCENT}
-        emissiveIntensity={rest}
-        roughness={0.4}
-        metalness={0.12}
-      />
-      <Edges color={edge} />
+    <mesh ref={m}>
+      <sphereGeometry args={[0.009, 6, 6]} />
+      <meshBasicMaterial color={ACCENT} toneMapped={false} transparent opacity={lit ? 1 : 0.7} />
     </mesh>
   );
 };
 
-/* ---------- Proyectos core — a voxel lattice: an N-per-side grid of small
-     cubes that together read as one larger, loose cube. Filled cells are
-     shipped projects, packed centre-out so the built work clusters at the
-     core and the empty slots sit on the shell — "a grid still filling in".
-     The finished screens live outside, on the satellites. ---------- */
-const VoxelLattice: React.FC<{
+/* ---------- one project pinned on the globe. Live-in-production pins pulse
+     and carry a soft halo; delivered-only pins hold a steady dot. ---------- */
+const NetPin: React.FC<{
+  pos: THREE.Vector3;
+  live: boolean;
+  lit: boolean;
+  theme: 'dark' | 'light';
+  seed: number;
+}> = ({ pos, live, lit, theme, seed }) => {
+  const dot = useRef<THREE.Mesh>(null);
+  useFrame((state) => {
+    if (!dot.current) return;
+    const pulse = live ? 1 + Math.sin(state.clock.elapsedTime * 3 + seed) * 0.3 : 1;
+    dot.current.scale.setScalar(lit ? 1.35 : pulse);
+  });
+  const color = lit || live ? ACCENT : theme === 'light' ? '#0a0a0a' : '#e2e2da';
+  return (
+    <group position={pos}>
+      <mesh ref={dot}>
+        <sphereGeometry args={[0.013, 12, 12]} />
+        <meshBasicMaterial color={color} toneMapped={false} />
+      </mesh>
+      {live && (
+        <mesh>
+          <sphereGeometry args={[0.024, 12, 12]} />
+          <meshBasicMaterial color={ACCENT} transparent opacity={0.16} toneMapped={false} depthWrite={false} />
+        </mesh>
+      )}
+    </group>
+  );
+};
+
+/* ---------- Proyectos core — a wireframe globe: the projects are live sites
+     on the internet, so the node is the web itself. One glowing pin per
+     project sits on the surface, great-circle arcs wire the pins together
+     (the network), and packets travel the arcs. The globe turns slowly on a
+     tilted axis; the screenshots live outside, on the satellites. ---------- */
+const NetGlobe: React.FC<{
   lit: boolean;
   theme: 'dark' | 'light';
   projects: { live: boolean }[];
 }> = ({ lit, theme, projects }) => {
   const g = useRef<THREE.Group>(null);
+  const R = 0.27;
 
-  const { cells, span, unit } = useMemo(() => {
-    const count = Math.max(projects.length, 1);
-    // smallest grid side whose volume holds every project, min 2 (5 -> 2)
-    const dim = Math.max(2, Math.ceil(Math.cbrt(count)));
-    const SPAN = 0.5;
-    const pitch = SPAN / dim;
-    const u = pitch * 0.72;
-    const mid = (dim - 1) / 2;
-    const all: { key: string; pos: [number, number, number]; d2: number }[] = [];
-    for (let x = 0; x < dim; x++)
-      for (let y = 0; y < dim; y++)
-        for (let z = 0; z < dim; z++)
-          all.push({
-            key: `${x}-${y}-${z}`,
-            pos: [(x - mid) * pitch, (y - mid) * pitch, (z - mid) * pitch],
-            d2: (x - mid) ** 2 + (y - mid) ** 2 + (z - mid) ** 2
-          });
-    // fill from the centre outward; stable tie-break on key
-    all.sort((a, b) => a.d2 - b.d2 || (a.key < b.key ? -1 : 1));
-    return {
-      cells: all.map((cell, i) => ({
-        ...cell,
-        filled: i < count,
-        live: !!projects[i]?.live
-      })),
-      span: SPAN,
-      unit: u
-    };
+  const { pins, curves } = useMemo(() => {
+    const n = Math.max(projects.length, 2);
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    // even spread over the sphere (fibonacci), deterministic
+    const pts = Array.from({ length: n }, (_, i) => {
+      const y = 1 - ((i + 0.5) / n) * 2;
+      const rad = Math.sqrt(Math.max(0, 1 - y * y));
+      const th = i * golden;
+      return new THREE.Vector3(Math.cos(th) * rad, y, Math.sin(th) * rad).multiplyScalar(R);
+    });
+    // wire consecutive pins with an arc that bulges just off the surface
+    const cs = pts.map((p, i) => {
+      const q = pts[(i + 1) % n];
+      const mid = p.clone().add(q).multiplyScalar(0.5).normalize().multiplyScalar(R * 1.28);
+      return new THREE.QuadraticBezierCurve3(p, mid, q);
+    });
+    return { pins: pts, curves: cs };
   }, [projects]);
 
-  const hullGeo = useMemo(
-    () => new THREE.EdgesGeometry(new THREE.BoxGeometry(span * 1.06, span * 1.06, span * 1.06)),
-    [span]
+  const tubes = useMemo(
+    () => curves.map((c) => new THREE.TubeGeometry(c, 26, 0.003, 6, false)),
+    [curves]
   );
+  useEffect(() => () => tubes.forEach((t) => t.dispose()), [tubes]);
 
   useFrame((_, dt) => {
-    if (g.current) {
-      g.current.rotation.y += dt * 0.1;
-      g.current.rotation.x += dt * 0.035;
-    }
+    if (g.current) g.current.rotation.y += dt * 0.2;
   });
 
-  const edge = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
+  const wire = lit ? ACCENT : theme === 'light' ? '#8a8a82' : '#5a5a54';
+  const arc = lit ? ACCENT : theme === 'light' ? '#b0851f' : '#8f7d33';
+  const gridOp = lit ? 0.55 : theme === 'light' ? 0.32 : 0.26;
 
   return (
-    <group ref={g}>
-      {cells.map((c, i) =>
-        c.filled ? (
-          <VoxelCell
-            key={c.key}
-            pos={c.pos}
-            unit={unit}
-            live={c.live}
-            lit={lit}
-            theme={theme}
-            seed={i * 1.7}
-          />
-        ) : (
-          // empty slot — a small recessed marker, not a full wireframe box,
-          // so the filled work stays the focus and the lattice reads clean
-          <mesh key={c.key} position={c.pos}>
-            <boxGeometry args={[unit * 0.3, unit * 0.3, unit * 0.3]} />
-            <meshBasicMaterial
-              color={edge}
-              transparent
-              opacity={lit ? 0.7 : theme === 'light' ? 0.4 : 0.35}
-              toneMapped={false}
-            />
+    <group ref={g} rotation={[0.32, 0, 0.16]}>
+      {/* clean lat / long grid — meridians through the poles + parallels */}
+      {Array.from({ length: 6 }).map((_, k) => (
+        <mesh key={`m${k}`} rotation={[0, (k * Math.PI) / 6, 0]}>
+          <torusGeometry args={[R, 0.0016, 3, 72]} />
+          <meshBasicMaterial color={wire} transparent opacity={gridOp} toneMapped={false} />
+        </mesh>
+      ))}
+      {[-0.62, -0.32, 0, 0.32, 0.62].map((f, k) => {
+        const h = f * R;
+        const rr = Math.sqrt(Math.max(0.0001, R * R - h * h));
+        return (
+          <mesh key={`p${k}`} position={[0, h, 0]} rotation={[Math.PI / 2, 0, 0]}>
+            <torusGeometry args={[rr, 0.0016, 3, 72]} />
+            <meshBasicMaterial color={wire} transparent opacity={gridOp} toneMapped={false} />
           </mesh>
-        )
-      )}
-      {/* just the 12 outer edges so the cluster still reads as one cube from
-          a distance — no face diagonals, unlike a wireframe box */}
-      <lineSegments geometry={hullGeo}>
-        <lineBasicMaterial
-          color={edge}
+        );
+      })}
+      {/* solid fill just inside so the globe has body and mutes the far side */}
+      <mesh scale={0.985}>
+        <sphereGeometry args={[R, 32, 24]} />
+        <meshBasicMaterial
+          color={theme === 'light' ? '#f4f3ee' : '#0b0b0a'}
           transparent
-          opacity={lit ? 0.35 : theme === 'light' ? 0.16 : 0.14}
-          toneMapped={false}
-          depthWrite={false}
+          opacity={lit ? 0.5 : 0.72}
         />
-      </lineSegments>
+      </mesh>
+      {/* connection arcs + packets */}
+      {tubes.map((geo, i) => (
+        <mesh key={i} geometry={geo}>
+          <meshBasicMaterial
+            color={arc}
+            toneMapped={false}
+            transparent
+            opacity={lit ? 0.85 : 0.45}
+          />
+        </mesh>
+      ))}
+      {curves.map((c, i) => (
+        <NetPacket key={i} curve={c} lit={lit} seed={i * 1.4} />
+      ))}
+      {/* project pins */}
+      {pins.map((p, i) => (
+        <NetPin key={i} pos={p} live={!!projects[i]?.live} lit={lit} theme={theme} seed={i * 1.7} />
+      ))}
     </group>
   );
 };
@@ -789,12 +801,8 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       );
       g.current.scale.setScalar(s);
     }
-    if (spin.current) {
-      // proyectos ('box') carries the voxel lattice — a slow tumble reads
-      // better on a grid of cubes than the old fast box spin
-      spin.current.rotation.y += dt * (n.shape === 'box' ? 0.16 : 0.25);
-      if (n.shape === 'box') spin.current.rotation.x += dt * 0.05;
-    }
+    // proyectos ('globe') owns its own tilt + spin inside NetGlobe
+    if (spin.current) spin.current.rotation.y += dt * 0.25;
   });
 
   return (
@@ -805,10 +813,8 @@ export const PrimaryNode: React.FC<Common> = ({ n, theme, active, dim, onNode, o
       onClick={(e) => { e.stopPropagation(); onNode(n.id, n.section); }}
     >
       {n.shape === 'icosa' && <PerfilCluster lit={lit} theme={theme} />}
-      {n.shape === 'box' && (
-        <group ref={spin as any}>
-          <VoxelLattice lit={lit} theme={theme} projects={n.data?.projectMarks ?? []} />
-        </group>
+      {n.shape === 'globe' && (
+        <NetGlobe lit={lit} theme={theme} projects={n.data?.projectMarks ?? []} />
       )}
       {n.shape === 'strata' && (
         <group ref={spin as any}>
