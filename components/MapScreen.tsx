@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useState } from 'react';
 import { PortfolioContent } from '../types';
 import Background from './bg/Background';
+import SkyLayer from './SkyLayer';
 import Constellation from './map/Constellation';
 import Minimap from './map/Minimap';
 import type { Theme } from '../hooks/useApp';
@@ -65,6 +66,7 @@ const MapScreen: React.FC<Props> = ({
   return (
     <div className="relative h-[100svh] w-full overflow-hidden">
       <Background theme={theme} reducedMotion={reducedMotion} />
+      <SkyLayer theme={theme} reducedMotion={reducedMotion} onNode={onNode} />
 
       {webgl ? (
         <Suspense fallback={fall}>
