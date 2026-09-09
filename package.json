@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc --noEmit",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run typecheck && npm run build",
@@ -26,6 +28,7 @@
     "vgpu": "^0.4.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^22.14.0",
     "@types/react": "^18.3.12",
