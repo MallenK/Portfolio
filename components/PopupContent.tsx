@@ -111,7 +111,17 @@ const Proyectos: React.FC<Props> = ({ content }) => {
               <p className="mt-3 max-w-[58ch] text-[13.5px] leading-relaxed text-fgdim">
                 {p.description}
               </p>
-              <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-[var(--font-display)] text-[10px] font-medium uppercase tracking-[0.1em] text-fgfaint">
+              {p.highlights && p.highlights.length > 0 && (
+                <ul className="mt-3 max-w-[60ch] space-y-2 border-l border-hair pl-4">
+                  {p.highlights.map((h, k) => (
+                    <li key={k} className="flex gap-2.5 text-[12.5px] leading-relaxed text-fgdim">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="mt-3.5 flex flex-wrap gap-x-3 gap-y-1 font-[var(--font-display)] text-[10px] font-medium uppercase tracking-[0.1em] text-fgfaint">
                 {p.stack.map((s) => (
                   <span key={s}>{s}</span>
                 ))}

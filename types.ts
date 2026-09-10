@@ -10,6 +10,8 @@ export interface Project {
   image: string;
   /** live in production — earns the accent "en producción" marker */
   live?: boolean;
+  /** featured project — a few extra bullet points under the description */
+  highlights?: string[];
 }
 
 export interface Experience {
