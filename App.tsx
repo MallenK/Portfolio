@@ -5,6 +5,7 @@ import { TRANSLATIONS } from './constants';
 import { useTheme, useReducedMotion } from './hooks/useApp';
 import MapScreen from './components/MapScreen';
 import Popup from './components/Popup';
+import CVView from './components/CVView';
 
 import ClickSpark from './components/reactbits/ClickSpark';
 import { CheatProvider } from './context/CheatContext';
@@ -24,6 +25,7 @@ const AppContent: React.FC = () => {
   const [active, setActive] = useState<string | null>(null);
   const [anchor, setAnchor] = useState<string | null>(null);
   const [focus, setFocus] = useState<string | null>(null);
+  const [cvOpen, setCvOpen] = useState(false);
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window === 'undefined') return 'cat';
     return (localStorage.getItem('portfolio-lang') as Lang) || 'cat';
@@ -114,6 +116,7 @@ const AppContent: React.FC = () => {
                   onNode={openNode}
                   onSelect={selectNode}
                   onFly={flyTo}
+                  onOpenCV={() => setCvOpen(true)}
                 />
               </ClickSpark>
             </div>
@@ -125,6 +128,8 @@ const AppContent: React.FC = () => {
               onClose={closeAll}
               onNavigate={(id) => openNode(id, id)}
             />
+
+            <CVView open={cvOpen} lang={lang} content={content} onClose={() => setCvOpen(false)} />
 
             <CheatSheet />
           </motion.div>

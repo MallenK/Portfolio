@@ -23,6 +23,8 @@ interface Props {
   /** 3D node click — select first, open on a second click */
   onSelect: (id: string, section: string, anchor?: string) => void;
   onFly: (id: string) => void;
+  /** open the one-page CV / quick-view overlay */
+  onOpenCV: () => void;
 }
 
 const AREAS = ['perfil', 'proyectos', 'experiencia', 'servicios', 'contacto'] as const;
@@ -47,7 +49,8 @@ const MapScreen: React.FC<Props> = ({
   focus,
   onNode,
   onSelect,
-  onFly
+  onFly,
+  onOpenCV
 }) => {
   const { meta, ui, nav } = content;
   const [webgl] = useState(hasWebGL);
@@ -119,13 +122,12 @@ const MapScreen: React.FC<Props> = ({
           </div>
 
           <div className="pointer-events-auto flex items-center gap-3 sm:gap-4">
-            <a
-              href={`${import.meta.env.BASE_URL}cv.pdf`}
-              download="Sergi_Mallen_CV.pdf"
+            <button
+              onClick={onOpenCV}
               className="font-[var(--font-display)] text-[11px] font-semibold uppercase tracking-[0.14em] text-fgdim transition-colors hover:text-fg [text-shadow:0_0_12px_var(--bg)]"
             >
               {nav.cv}
-            </a>
+            </button>
             <div className="flex items-center gap-1.5 font-[var(--font-display)] text-[11px] font-semibold uppercase tracking-[0.1em] [text-shadow:0_0_12px_var(--bg)]">
               {(['es', 'cat', 'en'] as Lang[]).map((l) => (
                 <button

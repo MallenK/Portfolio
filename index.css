@@ -112,6 +112,28 @@ h1, h2, h3, h4 { margin: 0; font-weight: 700; }
 .contact-form input:focus-visible,
 .contact-form textarea:focus-visible { outline: none; }
 
+/* ---- CV / quick-view: print to a clean, compact résumé ---- */
+@media print {
+  html, body { overflow: visible !important; background: #fff !important; }
+  #root { display: none !important; }
+  .cv-portal { position: static !important; background: #fff !important; }
+  .cv-scroll { position: static !important; height: auto !important; overflow: visible !important; }
+  .cv-no-print { display: none !important; }
+  .cv-sheet {
+    max-width: none !important; margin: 0 !important; padding: 0 !important;
+    color: #000 !important; font-size: 10.5px; line-height: 1.4;
+  }
+  .cv-sheet .cv-ink, .cv-sheet h1, .cv-sheet h2, .cv-sheet h3 { color: #000 !important; }
+  .cv-sheet .cv-dim { color: #2b2b2b !important; }
+  .cv-sheet a { color: #000 !important; text-decoration: none; }
+  .cv-sheet .cv-rule { background: #bbb !important; margin-top: 6px !important; margin-bottom: 12px !important; }
+  .cv-sheet section { margin-top: 0 !important; }
+  .cv-sheet h1 { font-size: 26px !important; }
+  /* keep individual entries whole; let big sections flow across pages */
+  .cv-section { break-inside: avoid; }
+  @page { margin: 1.3cm; }
+}
+
 /* a popup row jumped to from a node — brief highlight */
 .anchor-hit {
   animation: anchorHit 2.2s var(--ease-out);
