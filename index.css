@@ -103,6 +103,10 @@ h1, h2, h3, h4 { margin: 0; font-weight: 700; }
 
 .hair { height: 1px; background: var(--hair); }
 
+/* contact form — the animated accent underline is the focus indicator */
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible { outline: none; }
+
 /* a popup row jumped to from a node — brief highlight */
 .anchor-hit {
   animation: anchorHit 2.2s var(--ease-out);
