@@ -141,7 +141,19 @@ const Proyectos: React.FC<Props> = ({ content }) => {
               <p className="mt-1.5 font-[var(--font-display)] text-[11px] font-medium uppercase tracking-[0.14em] text-fgdim">
                 {p.category} · {p.year} · {ui.roleLabel} {p.role}
               </p>
-              <p className="mt-3 max-w-[58ch] text-[13.5px] leading-relaxed text-fgdim">
+              {p.image && (
+                <span className="mt-3.5 block max-w-[420px] overflow-hidden border border-hair">
+                  <img
+                    src={p.image}
+                    alt={`${p.title} — captura del sitio`}
+                    loading="lazy"
+                    width={1280}
+                    height={800}
+                    className="block aspect-[16/10] w-full object-cover object-top opacity-85 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </span>
+              )}
+              <p className="mt-3.5 max-w-[58ch] text-[13.5px] leading-relaxed text-fgdim">
                 {p.description}
               </p>
               {p.highlights && p.highlights.length > 0 && (

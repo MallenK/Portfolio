@@ -1,14 +1,12 @@
 import { PortfolioContent } from './types';
 
+// real screenshots of the live sites (public/shots/*, captured 2026-09-10)
+const shot = (name: string) => `${import.meta.env.BASE_URL}shots/${name}.jpg`;
 const IMAGES = {
-  myker:
-    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1200',
-  jpprep:
-    'https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&q=80&w=1200',
-  crotxet:
-    'https://images.unsplash.com/photo-1537832816519-689ad163238b?auto=format&fit=crop&q=80&w=1200',
-  ateneu:
-    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200'
+  myker: shot('myker'),
+  jpprep: shot('jpprep'),
+  crotxet: shot('crotxet'),
+  ateneu: shot('ateneu')
 };
 
 export const SOCIAL_LINKS = {
