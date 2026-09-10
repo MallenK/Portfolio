@@ -304,9 +304,9 @@ const Contacto: React.FC<Props> = ({ content }) => {
   };
 
   return (
-    <div className="grid gap-x-10 gap-y-9 md:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
-      {/* ---- left: reach me directly ---- */}
-      <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-9">
+      {/* ---- reach me directly ---- */}
+      <div className="flex flex-col gap-7">
         <Reveal>
           <span className="inline-flex items-center gap-2 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.2em] text-fgdim">
             <span className="relative flex h-1.5 w-1.5">
@@ -321,7 +321,7 @@ const Contacto: React.FC<Props> = ({ content }) => {
         <Reveal delay={70}>
           <a
             href={`mailto:${SOCIAL_LINKS.email}`}
-            className="block break-all text-[15px] leading-tight text-fg transition-colors hover:text-accentink sm:text-[17px]"
+            className="block break-words text-[15px] leading-tight text-fg transition-colors hover:text-accentink sm:text-[17px]"
           >
             <ShinyText text={SOCIAL_LINKS.email} color="#8a8a8a" shineColor="#fde100" speed={4} />
           </a>
@@ -364,9 +364,9 @@ const Contacto: React.FC<Props> = ({ content }) => {
         </Reveal>
       </div>
 
-      {/* ---- right: the form, as a defined surface ---- */}
+      {/* ---- the form, as a defined surface ---- */}
       <Reveal delay={90}>
-        <div className="relative border border-hair bg-bg2/70 p-5 backdrop-blur-sm sm:p-7">
+        <div className="relative border border-hair bg-bg2/70 p-5 backdrop-blur-sm sm:p-6">
           <span className="absolute inset-x-0 top-0 h-px bg-accent/40" />
 
           {status === 'sent' ? (
@@ -419,7 +419,7 @@ const Contacto: React.FC<Props> = ({ content }) => {
         </div>
       </Reveal>
 
-      <div className="flex flex-col gap-1 border-t border-hair pt-6 font-[var(--font-display)] text-[10px] font-medium uppercase tracking-[0.2em] text-fgfaint sm:flex-row sm:justify-between md:col-span-2">
+      <div className="flex flex-col gap-1 border-t border-hair pt-6 font-[var(--font-display)] text-[10px] font-medium uppercase tracking-[0.2em] text-fgfaint sm:flex-row sm:justify-between sm:gap-4">
         <span>{meta.name} © 2026</span>
         <span>{contact.footerLoc}</span>
         <span>{contact.footerRole}</span>

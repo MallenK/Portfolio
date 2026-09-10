@@ -62,6 +62,9 @@ const MapScreen: React.FC<Props> = ({
     </div>
   );
 
+  // ≥ lg with a node open: the galaxy + HUD shrink to the left of the info panel
+  const shift = active ? 'lg:right-[var(--panel-w)]' : '';
+
   return (
     <div className="relative h-[100svh] w-full overflow-hidden">
       <Background theme={theme} reducedMotion={reducedMotion} />
@@ -75,6 +78,7 @@ const MapScreen: React.FC<Props> = ({
             focusId={focus}
             activeSection={active}
             onNode={onSelect}
+            panelOpen={!!active}
           />
         </Suspense>
       ) : (
@@ -82,8 +86,10 @@ const MapScreen: React.FC<Props> = ({
       )}
 
       {/* ---------- HUD ---------- */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-4 sm:p-6">
-        {webgl && (
+      <div
+        className={`pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-4 transition-[right] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-6 ${shift}`}
+      >
+        {webgl && !active && (
           <NavMap content={content} active={active} focus={focus} onFly={onFly} />
         )}
         <div className="flex items-start justify-between gap-3">

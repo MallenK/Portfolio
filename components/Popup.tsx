@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PortfolioContent } from '../types';
+import { useMediaQuery } from '../hooks/useApp';
 import PopupContent from './PopupContent';
 import AnimatedContent from './reactbits/AnimatedContent';
 
@@ -42,6 +43,9 @@ const NUM: Record<string, string> = {
 
 const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate }) => {
   const panelRef = useRef<HTMLDivElement>(null);
+  // ≥ lg: node info opens as a right-hand panel and the galaxy shifts left.
+  // below that: keep the emergent popup.
+  const split = useMediaQuery('(min-width: 1024px)');
 
   useEffect(() => {
     if (!nodeId) return;
@@ -64,29 +68,34 @@ const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate }
     <AnimatePresence>
       {nodeId && (
         <motion.div
-          className="fixed inset-0 z-[10000] flex items-end justify-center sm:items-center sm:p-6"
+          className="fixed z-[10000] flex inset-0 items-end justify-center sm:items-center sm:p-6 lg:left-auto lg:right-0 lg:w-[var(--panel-w)] lg:items-stretch lg:p-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
+          {/* scrim only for the emergent popup — in split mode the galaxy stays live */}
           <button
             aria-label={content.ui.close}
             onClick={onClose}
-            className="absolute inset-0 bg-[var(--scrim)] backdrop-blur-[3px]"
+            className="absolute inset-0 bg-[var(--scrim)] backdrop-blur-[3px] lg:hidden"
           />
 
           <motion.div
             ref={panelRef}
             role="dialog"
-            aria-modal="true"
+            aria-modal={split ? undefined : true}
             aria-label={titleFor(nodeId, content)}
             tabIndex={-1}
-            initial={{ y: 40, opacity: 0.6 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 30, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
-            className="relative flex max-h-[92svh] w-full flex-col border border-hair bg-bg outline-none sm:max-h-[85vh] sm:max-w-2xl"
+            initial={split ? { x: '100%' } : { y: 40, opacity: 0.6 }}
+            animate={split ? { x: 0 } : { y: 0, opacity: 1 }}
+            exit={split ? { x: '100%' } : { y: 30, opacity: 0 }}
+            transition={
+              split
+                ? { type: 'spring', stiffness: 260, damping: 34 }
+                : { type: 'spring', stiffness: 320, damping: 32 }
+            }
+            className="relative flex max-h-[92svh] w-full flex-col border border-hair bg-bg outline-none sm:max-h-[85vh] sm:max-w-2xl lg:h-full lg:max-h-none lg:max-w-none lg:border-y-0 lg:border-r-0 lg:border-l lg:shadow-[-24px_0_60px_-30px_rgba(0,0,0,0.55)]"
           >
             <header className="flex items-start justify-between gap-4 border-b border-hair px-5 py-4 sm:px-8 sm:py-6">
               <div className="flex items-baseline gap-3">

@@ -18,6 +18,21 @@ export function useTheme() {
   return { theme, toggle: () => setTheme((t) => (t === 'dark' ? 'light' : 'dark')) };
 }
 
+/** true while the viewport matches the query (SSR-safe, live) */
+export function useMediaQuery(query: string) {
+  const [match, setMatch] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(query).matches
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const fn = () => setMatch(mq.matches);
+    fn();
+    mq.addEventListener('change', fn);
+    return () => mq.removeEventListener('change', fn);
+  }, [query]);
+  return match;
+}
+
 export function useReducedMotion() {
   const [rm, setRm] = useState(
     () =>

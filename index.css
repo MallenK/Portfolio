@@ -18,6 +18,11 @@
   --color-accentink: var(--accent-ink);
 }
 
+:root {
+  /* width of the desktop split panel (node info on the right) */
+  --panel-w: clamp(380px, 40vw, 600px);
+}
+
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;

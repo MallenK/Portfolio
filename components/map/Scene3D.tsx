@@ -17,6 +17,8 @@ interface Props {
   focusId: string | null;
   activeSection: string | null;
   onNode: (id: string, section: string, anchor?: string) => void;
+  /** ≥ lg: a node info panel is open on the right — shrink the canvas to the left */
+  panelOpen?: boolean;
 }
 
 const small = () => typeof window !== 'undefined' && window.innerWidth < 720;
@@ -232,12 +234,25 @@ const Graph: React.FC<Omit<Props, 'content'> & { data: ReturnType<typeof buildGr
 };
 
 /* ------------------------------------------------------------------ scene */
-const Scene3D: React.FC<Props> = ({ content, theme, reducedMotion, focusId, activeSection, onNode }) => {
+const Scene3D: React.FC<Props> = ({
+  content,
+  theme,
+  reducedMotion,
+  focusId,
+  activeSection,
+  onNode,
+  panelOpen
+}) => {
   const data = useMemo(() => buildGraph3D(content), [content]);
   const s = small();
 
   return (
-    <div className="fixed inset-0" style={{ touchAction: 'none' }}>
+    <div
+      className={`fixed inset-0 transition-[right] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        panelOpen ? 'lg:right-[var(--panel-w)]' : ''
+      }`}
+      style={{ touchAction: 'none' }}
+    >
       <Canvas
         dpr={[1, 1.75]}
         style={{ touchAction: 'none' }}
