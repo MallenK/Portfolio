@@ -233,7 +233,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       formEmail: 'Tu correo',
       formIdea: 'Proyecto o idea',
       footerLoc: 'Colònia Güell, Barcelona',
-      footerRole: 'Full Stack Engineer'
+      footerRole: 'Full Stack Developer'
     }
   },
 
