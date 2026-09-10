@@ -3,7 +3,7 @@ import { PERFIL_OUTER } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
 export type PrimaryShape = 'icosa' | 'globe' | 'strata' | 'burst' | 'portal';
-export type SatVariant = 'project' | 'company' | 'skill' | 'service';
+export type SatVariant = 'project' | 'company' | 'skill' | 'service' | 'credential';
 
 export interface GNode3D {
   id: string;
@@ -42,6 +42,8 @@ export interface GNode3D {
     url?: string;
     action?: string;
     stackCount?: number;
+    /** credential satellite (Perfil) — 'edu' = formación, 'lang' = idiomas */
+    credKind?: 'edu' | 'lang';
   };
 }
 
@@ -160,6 +162,38 @@ export function buildGraph3D(c: PortfolioContent) {
     distScale: 0.8 + (i / Math.max(1, PERFIL_OUTER.length - 1)) * 0.9
   }));
   sats('perfil', 'skill', perfilTechs, 1.7);
+
+  // Perfil also carries two "credential" nodes — Formación + Idiomas — pinned
+  // close to the cluster on the side facing the core, so they read as part of
+  // who he is, not as another tech in the outer ring. Each opens the Perfil
+  // popup scrolled to its own block.
+  {
+    const p = nodes.find((n) => n.id === 'perfil')!;
+    const [px, py, pz] = p.pos;
+    const coreAz = Math.atan2(-pz, -px); // from perfil toward the core
+    (
+      [
+        ['formacion', c.about.educationTag, 'edu', 0.62, 2.1, 0.7],
+        ['idiomas', c.about.languagesTag, 'lang', -0.62, 2.4, -0.9]
+      ] as [string, string, 'edu' | 'lang', number, number, number][]
+    ).forEach(([key, label, credKind, da, dist, dy]) => {
+      const a = coreAz + da;
+      const id = `perfil:cred:${key}`;
+      nodes.push({
+        id,
+        kind: 'satellite',
+        label,
+        section: 'perfil',
+        anchor: key,
+        parent: 'perfil',
+        variant: 'credential',
+        data: { credKind },
+        pos: [px + Math.cos(a) * dist, py + dy, pz + Math.sin(a) * dist]
+      });
+      edges.push({ a: 'perfil', b: id });
+    });
+  }
+
   sats(
     'proyectos',
     'project',

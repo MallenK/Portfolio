@@ -955,6 +955,82 @@ export const ClusterDust: React.FC<{
   );
 };
 
+/* ---------- Perfil credential satellites ----------
+   Formación is a small wireframe "knowledge crystal"; Idiomas is a set of
+   concentric rings that breathe outward (signal / speech). Both stay quieter
+   than the tech medallions — they sit near the Perfil cluster, not in the
+   outer tech ring. */
+const EduCrystal: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ lit, theme }) => {
+  const g = useRef<THREE.Group>(null);
+  const core = useRef<THREE.Mesh>(null);
+  useFrame((_, dt) => {
+    if (g.current) {
+      g.current.rotation.y += dt * 0.42;
+      g.current.rotation.x += dt * 0.16;
+    }
+    if (core.current) core.current.rotation.y -= dt * 0.7;
+  });
+  const col = lit ? ACCENT : theme === 'light' ? '#0a0a0a' : '#e2e2da';
+  return (
+    <group ref={g} scale={NON_SKILL_SAT_SCALE} rotation={[0.3, 0, 0.4]}>
+      {/* faceted cage */}
+      <mesh>
+        <octahedronGeometry args={[0.2, 1]} />
+        <meshBasicMaterial color={col} wireframe transparent opacity={lit ? 0.95 : 0.5} toneMapped={false} />
+      </mesh>
+      {/* small bright seed, counter-spinning and off-axis so it reads as a gem, not a tile */}
+      <mesh ref={core} rotation={[0, Math.PI / 4, 0]} scale={0.26}>
+        <octahedronGeometry args={[0.2, 0]} />
+        <meshStandardMaterial color={col} emissive={ACCENT} emissiveIntensity={lit ? 1 : 0.32} roughness={0.3} metalness={0.2} />
+      </mesh>
+      {/* thin equatorial hoop — a slow orbit of study around it */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.26, 0.004, 6, 44]} />
+        <meshBasicMaterial color={col} transparent opacity={lit ? 0.6 : 0.28} toneMapped={false} />
+      </mesh>
+    </group>
+  );
+};
+
+const LangRings: React.FC<{ lit: boolean; theme: 'dark' | 'light' }> = ({ lit, theme }) => {
+  const rings = useRef<(THREE.Mesh | null)[]>([]);
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    rings.current.forEach((m, i) => {
+      if (!m) return;
+      const ph = (t * 0.5 + i / 3) % 1;
+      m.scale.setScalar(0.4 + ph * 1.2);
+      (m.material as THREE.MeshBasicMaterial).opacity = (1 - ph) * (lit ? 0.95 : 0.6);
+    });
+  });
+  const col = lit ? ACCENT : theme === 'light' ? '#0a0a0a' : '#e2e2da';
+  return (
+    <group scale={NON_SKILL_SAT_SCALE}>
+      <mesh>
+        <sphereGeometry args={[0.05, 14, 14]} />
+        <meshStandardMaterial color={col} emissive={ACCENT} emissiveIntensity={lit ? 1 : 0.4} roughness={0.3} />
+      </mesh>
+      {/* a steady inner hoop so the node always reads, + 3 rings that pulse outward */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.11, 0.008, 8, 44]} />
+        <meshBasicMaterial color={col} transparent opacity={lit ? 0.8 : 0.4} depthWrite={false} toneMapped={false} />
+      </mesh>
+      {[0, 1, 2].map((i) => (
+        <mesh
+          key={i}
+          ref={(m) => {
+            rings.current[i] = m;
+          }}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          <torusGeometry args={[0.16, 0.008, 8, 44]} />
+          <meshBasicMaterial color={col} transparent opacity={0.5} depthWrite={false} toneMapped={false} />
+        </mesh>
+      ))}
+    </group>
+  );
+};
+
 type Common = {
   n: GNode3D;
   theme: 'dark' | 'light';
@@ -1355,6 +1431,14 @@ export const SatelliteNode: React.FC<Common> = ({ n, theme, active, dim, onNode,
           />
         </group>
       )}
+
+      {/* --- CREDENTIAL: Perfil's Formación + Idiomas nodes --- */}
+      {n.variant === 'credential' &&
+        (n.data?.credKind === 'lang' ? (
+          <LangRings lit={lit} theme={theme} />
+        ) : (
+          <EduCrystal lit={lit} theme={theme} />
+        ))}
 
       {/* --- SERVICE: the same single marker shape as the core's selector
              wheel — a sphere that only grows and glows brighter when this

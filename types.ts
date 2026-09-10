@@ -27,6 +27,17 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export interface EducationItem {
+  title: string;
+  org: string;
+  period: string;
+}
+
+export interface LanguageItem {
+  name: string;
+  level: string;
+}
+
 export interface Service {
   title: string;
   desc: string;
@@ -73,6 +84,10 @@ export interface PortfolioContent {
     body: string;
     skillsTag: string;
     skills: SkillGroup[];
+    educationTag: string;
+    education: EducationItem[];
+    languagesTag: string;
+    languages: LanguageItem[];
   };
   projects: {
     tag: string;

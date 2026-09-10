@@ -110,7 +110,21 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       lead: 'Cuatro años construyendo aplicaciones web y sitios corporativos para clientes y equipos de producto — de la base de datos al deploy.',
       body: 'Trabajo el backend y el frontend con la misma exigencia, con más soltura en el backend: modelo de datos, APIs, autenticación, infraestructura. Me implico de lleno en cada proyecto — código limpio, estructura lógica y que aguante en producción. También automatizo procesos con IA y trabajo con NFC para llevar esas automatizaciones al mundo físico.',
       skillsTag: 'Stack',
-      skills: COMMON_SKILLS
+      skills: COMMON_SKILLS,
+      educationTag: 'Formación',
+      education: [
+        { title: 'Curso de Python', org: 'Fundación General · Universidad de Salamanca', period: '2026 · en curso' },
+        { title: 'Curso avanzado para desarrolladores Full Stack', org: 'Fundación General · Universidad de Salamanca', period: '2025' },
+        { title: 'Programación en JavaScript, MySQL y PHP', org: 'Fundación General · Universidad de Salamanca', period: '2024' },
+        { title: 'Certificados de PHP y JavaScript', org: 'OpenBootcamp', period: '2022 – 2023' },
+        { title: 'Grado Superior en Gráfica Interactiva', org: 'Escola La Llotja, Barcelona', period: '2019 – 2022' }
+      ],
+      languagesTag: 'Idiomas',
+      languages: [
+        { name: 'Español', level: 'Nativo' },
+        { name: 'Catalán', level: 'Nativo' },
+        { name: 'Inglés', level: 'Profesional' }
+      ]
     },
     projects: {
       tag: 'Proyectos',
@@ -277,7 +291,21 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       lead: 'Quatre anys construint aplicacions web i llocs corporatius per a clients i equips de producte — de la base de dades al deploy.',
       body: 'Treballo el backend i el frontend amb la mateixa exigència, amb més soltesa al backend: model de dades, APIs, autenticació, infraestructura. M’implico de ple en cada projecte — codi net, estructura lògica i que aguanti en producció. També automatitzo processos amb IA i treballo amb NFC per portar aquestes automatitzacions al món físic.',
       skillsTag: 'Stack',
-      skills: COMMON_SKILLS
+      skills: COMMON_SKILLS,
+      educationTag: 'Formació',
+      education: [
+        { title: 'Curs de Python', org: 'Fundación General · Universitat de Salamanca', period: '2026 · en curs' },
+        { title: 'Curs avançat per a desenvolupadors Full Stack', org: 'Fundación General · Universitat de Salamanca', period: '2025' },
+        { title: 'Programació en JavaScript, MySQL i PHP', org: 'Fundación General · Universitat de Salamanca', period: '2024' },
+        { title: 'Certificats de PHP i JavaScript', org: 'OpenBootcamp', period: '2022 – 2023' },
+        { title: 'Grau Superior en Gràfica Interactiva', org: 'Escola La Llotja, Barcelona', period: '2019 – 2022' }
+      ],
+      languagesTag: 'Idiomes',
+      languages: [
+        { name: 'Català', level: 'Natiu' },
+        { name: 'Castellà', level: 'Natiu' },
+        { name: 'Anglès', level: 'Professional' }
+      ]
     },
     projects: {
       tag: 'Projectes',
@@ -444,7 +472,21 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       lead: 'Four years building web applications and corporate sites for clients and product teams — from the database to the deploy.',
       body: 'I work the backend and the frontend to the same standard, with more ease on the backend: data model, APIs, authentication, infrastructure. I commit fully to every project — clean code, a logical structure, and holding up in production. I also automate processes with AI, and work with NFC to take those automations into the physical world.',
       skillsTag: 'Stack',
-      skills: COMMON_SKILLS
+      skills: COMMON_SKILLS,
+      educationTag: 'Education',
+      education: [
+        { title: 'Python course', org: 'Fundación General · University of Salamanca', period: '2026 · ongoing' },
+        { title: 'Advanced Full Stack developer course', org: 'Fundación General · University of Salamanca', period: '2025' },
+        { title: 'JavaScript, MySQL and PHP programming', org: 'Fundación General · University of Salamanca', period: '2024' },
+        { title: 'PHP and JavaScript certifications', org: 'OpenBootcamp', period: '2022 – 2023' },
+        { title: 'Higher Diploma in Interactive Graphics', org: 'Escola La Llotja, Barcelona', period: '2019 – 2022' }
+      ],
+      languagesTag: 'Languages',
+      languages: [
+        { name: 'Spanish', level: 'Native' },
+        { name: 'Catalan', level: 'Native' },
+        { name: 'English', level: 'Professional' }
+      ]
     },
     projects: {
       tag: 'Work',

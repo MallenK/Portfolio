@@ -71,6 +71,39 @@ const Perfil: React.FC<Props> = ({ content }) => {
           ))}
         </div>
       </Reveal>
+
+      <Reveal delay={220}>
+        <div data-anchor="formacion">
+          <p className="tag mb-3">{a.educationTag}</p>
+          <ul className="border-t border-hair">
+            {a.education.map((e, i) => (
+              <li
+                key={i}
+                className="grid gap-1 border-b border-hair px-2 py-3.5 sm:grid-cols-[7rem_1fr] sm:gap-6"
+              >
+                <span className="tag-n">{e.period}</span>
+                <span className="text-[13px] leading-relaxed text-fg">
+                  {e.title}
+                  <span className="mt-0.5 block text-[12px] text-fgdim">{e.org}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
+
+      <Reveal delay={270}>
+        <div data-anchor="idiomas">
+          <p className="tag mb-3">{a.languagesTag}</p>
+          <ul className="flex flex-wrap gap-x-8 gap-y-2 border-t border-hair pt-4">
+            {a.languages.map((l, i) => (
+              <li key={i} className="text-[13px] text-fgdim">
+                <span className="text-fg">{l.name}</span> · {l.level}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </div>
   );
 };
