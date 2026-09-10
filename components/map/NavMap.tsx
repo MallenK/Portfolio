@@ -59,7 +59,7 @@ const NavMap: React.FC<Props> = ({ content, active, focus, onFly }) => {
           <span className="font-[var(--font-display)] text-[8px] font-semibold uppercase tracking-[0.22em] text-fgfaint">
             {content.ui.mapLabel}
           </span>
-          <button
+          <button type="button"
             onClick={() => onFly('core')}
             aria-label={content.meta.alias}
             className="grid h-4 w-4 place-items-center border border-hair text-[9px] leading-none text-fgdim transition-colors hover:border-accent hover:text-accentink"
@@ -68,7 +68,8 @@ const NavMap: React.FC<Props> = ({ content, active, focus, onFly }) => {
           </button>
         </div>
 
-        <svg viewBox="-4 -4 108 108" className="block h-[130px] w-[130px]">
+        {/* decorative plan — keyboard/AT navigation is the section list below */}
+        <svg viewBox="-4 -4 108 108" className="block h-[130px] w-[130px]" aria-hidden="true">
           <circle cx="50" cy="50" r="50" fill="none" stroke="var(--hair)" strokeWidth="0.6" opacity="0.5" />
           {edges.map((e, i) => {
             const a = nodes.find((n) => n.id === e.a);
@@ -98,6 +99,7 @@ const NavMap: React.FC<Props> = ({ content, active, focus, onFly }) => {
             const cy = py(n.pos);
             const r = n.kind === 'core' ? 3.6 : 3;
             return (
+              // biome-ignore lint/a11y/useKeyWithClickEvents: mouse-only enhancement inside an aria-hidden diagram; the section <button> list below is the accessible path
               <g
                 key={n.id}
                 style={{ cursor: 'pointer' }}
@@ -125,7 +127,7 @@ const NavMap: React.FC<Props> = ({ content, active, focus, onFly }) => {
           {SECTIONS.map((s) => {
             const on = focus === s || active === s;
             return (
-              <button
+              <button type="button"
                 key={s}
                 onClick={() => onFly(s)}
                 onMouseEnter={() => setHover(s)}

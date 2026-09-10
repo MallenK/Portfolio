@@ -96,7 +96,7 @@ const MapScreen: React.FC<Props> = ({
           <NavMap content={content} active={active} focus={focus} onFly={onFly} />
         )}
         <div className="flex items-start justify-between gap-3">
-          <button
+          <button type="button"
             id="navbar-logo"
             onClick={() => onNode('core', 'core')}
             className="pointer-events-auto font-[var(--font-display)] text-sm font-bold uppercase tracking-[0.22em] text-fg [text-shadow:0_0_16px_var(--bg)]"
@@ -107,7 +107,7 @@ const MapScreen: React.FC<Props> = ({
           {/* area pills — fly the camera to a cluster */}
           <div className="pointer-events-auto hidden items-center gap-1.5 lg:flex">
             {AREAS.map((a) => (
-              <button
+              <button type="button"
                 key={a}
                 onClick={() => onFly(a)}
                 className={`border px-2.5 py-1 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
@@ -122,7 +122,7 @@ const MapScreen: React.FC<Props> = ({
           </div>
 
           <div className="pointer-events-auto flex items-center gap-3 sm:gap-4">
-            <button
+            <button type="button"
               onClick={onOpenCV}
               className="font-[var(--font-display)] text-[11px] font-semibold uppercase tracking-[0.14em] text-fgdim transition-colors hover:text-fg [text-shadow:0_0_12px_var(--bg)]"
             >
@@ -130,7 +130,7 @@ const MapScreen: React.FC<Props> = ({
             </button>
             <div className="flex items-center gap-1.5 font-[var(--font-display)] text-[11px] font-semibold uppercase tracking-[0.1em] [text-shadow:0_0_12px_var(--bg)]">
               {(['es', 'cat', 'en'] as Lang[]).map((l) => (
-                <button
+                <button type="button"
                   key={l}
                   onClick={() => setLang(l)}
                   aria-pressed={lang === l}
@@ -140,7 +140,7 @@ const MapScreen: React.FC<Props> = ({
                 </button>
               ))}
             </div>
-            <button
+            <button type="button"
               onClick={toggleTheme}
               aria-label={theme === 'dark' ? 'Modo claro' : 'Modo oscuro'}
               className="grid h-8 w-8 place-items-center rounded-full border border-hair bg-bg/60 text-fgdim backdrop-blur-sm transition-colors hover:text-fg"

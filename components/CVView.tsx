@@ -65,13 +65,13 @@ const CVView: React.FC<Props> = ({ open, lang, content, onClose }) => {
               >
                 {t.download}
               </a>
-              <button
+              <button type="button"
                 onClick={() => window.print()}
                 className="border border-hair bg-bg/70 px-3 py-1.5 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.16em] text-fgdim backdrop-blur-sm transition-colors hover:border-accent hover:text-accentink"
               >
                 {t.print}
               </button>
-              <button
+              <button type="button"
                 onClick={onClose}
                 className="flex items-center gap-2 border border-hair bg-bg/70 px-3 py-1.5 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.16em] text-fgdim backdrop-blur-sm transition-colors hover:border-accent hover:text-accentink"
               >

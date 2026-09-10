@@ -559,6 +559,7 @@ const GhostPin: React.FC<{ dir: THREE.Vector3; R: number; onOpen: () => void }> 
   });
   return (
     <group position={dir.clone().multiplyScalar(R)} quaternion={quat}>
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: react-three-fiber raycaster event on a 3D mesh, not a DOM click */}
       <mesh
         ref={seed}
         onClick={(e) => {

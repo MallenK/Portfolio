@@ -64,14 +64,14 @@ const CheatSheet: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="pt-2 border-t border-white/5 space-y-2">
-                <button 
+                <button type="button" 
                   onClick={handleShowGif} 
                   className="w-full py-2 bg-white/10 hover:bg-white/20 text-white text-[10px] font-bold uppercase tracking-widest transition-colors rounded border border-white/10 flex items-center justify-center gap-2"
                 >
                   <span>🎬</span> Mostrar GIF
                 </button>
 
-                <button 
+                <button type="button" 
                   onClick={() => { setIsOpen(false); triggerGlitch(); }} 
                   className="w-full py-2 bg-[#F5C400] text-black text-[10px] font-black uppercase tracking-widest hover:bg-white transition-colors rounded flex items-center justify-center gap-2"
                 >
@@ -83,7 +83,7 @@ const CheatSheet: React.FC = () => {
         )}
       </AnimatePresence>
 
-      <button
+      <button type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="System override"
         style={{ background: 'var(--bg-2)', borderColor: 'var(--hair)', color: isOpen ? 'var(--bg)' : 'var(--fg-dim)', backgroundColor: isOpen ? 'var(--accent)' : 'var(--bg-2)' }}
@@ -100,7 +100,7 @@ const CheatSheet: React.FC = () => {
 };
 
 const CheatToggle: React.FC<{ label: string; active: boolean; onClick: () => void }> = ({ label, active, onClick }) => (
-  <button onClick={onClick} className="w-full flex justify-between items-center group p-2 rounded hover:bg-white/5 transition-colors text-left bg-black/20">
+  <button type="button" onClick={onClick} className="w-full flex justify-between items-center group p-2 rounded hover:bg-white/5 transition-colors text-left bg-black/20">
     <span className="text-[10px] uppercase font-semibold text-white/80 group-hover:text-white transition-colors">{label}</span>
     <div className={`w-8 h-4 rounded-full p-0.5 transition-colors ${active ? 'bg-[#F5C400]' : 'bg-white/10'}`}>
       <div className={`w-3 h-3 bg-white rounded-full shadow-sm transition-transform ${active ? 'translate-x-4' : 'translate-x-0'}`} />
@@ -109,7 +109,7 @@ const CheatToggle: React.FC<{ label: string; active: boolean; onClick: () => voi
 );
 
 const ModeBtn: React.FC<{ label: string; active: boolean; onClick: () => void }> = ({ label, active, onClick }) => (
-  <button 
+  <button type="button" 
     onClick={onClick}
     className={`text-[9px] uppercase font-bold py-2 border rounded transition-all ${active ? 'bg-[#F5C400] text-black border-[#F5C400]' : 'text-white/40 border-white/10 hover:border-white/40'}`}
   >

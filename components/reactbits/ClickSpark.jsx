@@ -132,6 +132,7 @@ const ClickSpark = ({
   };
 
   return (
+    // biome-ignore lint/a11y/useKeyWithClickEvents: decorative spark layer; the click is a passthrough visual on top of already-interactive children
     <div
       style={{
         position: 'relative',

@@ -75,15 +75,15 @@ const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate }
           transition={{ duration: 0.2 }}
         >
           {/* scrim only for the emergent popup — in split mode the galaxy stays live */}
-          <button
+          <button type="button"
             aria-label={content.ui.close}
             onClick={onClose}
             className="absolute inset-0 bg-[var(--scrim)] backdrop-blur-[3px] lg:hidden"
           />
 
-          <motion.div
+          {/* biome-ignore lint/a11y/useSemanticElements: ARIA APG dialog pattern — native <dialog> conflicts with framer-motion exit + the split (non-modal) mode */}
+          <motion.div role="dialog"
             ref={panelRef}
-            role="dialog"
             aria-modal={split ? undefined : true}
             aria-label={titleFor(nodeId, content)}
             tabIndex={-1}
@@ -102,7 +102,7 @@ const Popup: React.FC<Props> = ({ nodeId, anchor, content, onClose, onNavigate }
                 <span className="tag-n">{NUM[nodeId]}</span>
                 <span className="tag">{titleFor(nodeId, content)}</span>
               </div>
-              <button
+              <button type="button"
                 onClick={onClose}
                 className="-mr-1 -mt-1 flex items-center gap-2 p-1 font-[var(--font-display)] text-[11px] font-semibold uppercase tracking-[0.2em] text-fgdim transition-colors hover:text-accentink"
               >

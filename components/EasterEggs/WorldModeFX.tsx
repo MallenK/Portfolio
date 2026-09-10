@@ -25,7 +25,7 @@ const WorldModeFX: React.FC = () => {
       <div className="absolute top-6 left-6 font-mono text-white/80 text-[10px] uppercase tracking-widest border border-white/20 p-4 bg-black/50 backdrop-blur-sm pointer-events-auto">
         <h3 className="text-[#F5C400] mb-2 font-bold">World Mode Active</h3>
         <p className="mb-1 text-white/40">Flashlight Focus Only</p>
-        <button 
+        <button type="button" 
           onClick={() => setMode('normal')}
           className="mt-4 px-3 py-1 bg-white/10 hover:bg-[#F5C400] hover:text-black transition-colors w-full text-center border border-white/10"
         >

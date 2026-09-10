@@ -218,6 +218,7 @@ const Constellation: React.FC<{
       )}
 
       {data.interactive && (
+        // biome-ignore lint/a11y/useKeyWithClickEvents: react-three-fiber raycaster event on a 3D mesh, not a DOM click — keyboard nav is the HUD / NavMap
         <mesh
           position={center}
           onPointerOver={(e) => {

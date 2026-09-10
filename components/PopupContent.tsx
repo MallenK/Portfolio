@@ -26,7 +26,7 @@ const Core: React.FC<Props> = ({ content, onNavigate }) => (
       <ul className="border-t border-hair">
         {NODES.map((id, i) => (
           <li key={id}>
-            <button
+            <button type="button"
               onClick={() => onNavigate(id)}
               className="group flex w-full items-baseline justify-between border-b border-hair py-4 text-left"
             >
@@ -288,6 +288,7 @@ const Field: React.FC<{
   const move = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     onValue?.(e.target.value);
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: the control is nested below (conditional textarea/input) — implicit association, biome can't see it
     <label className="relative block">
       {area ? (
         <textarea
@@ -380,7 +381,7 @@ const Contacto: React.FC<Props> = ({ content }) => {
           >
             <ShinyText text={SOCIAL_LINKS.email} color="#8a8a8a" shineColor="#fde100" speed={4} />
           </a>
-          <button
+          <button type="button"
             onClick={() => copy(SOCIAL_LINKS.email)}
             className="mt-3 inline-flex items-center gap-2 border border-hair px-3 py-1.5 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.18em] text-fgdim transition-colors hover:border-accent hover:text-accentink"
           >
@@ -433,7 +434,7 @@ const Contacto: React.FC<Props> = ({ content }) => {
               </span>
               <p className="text-[16px] font-medium text-fg">{ui.sent}</p>
               <p className="text-[13px] text-fgdim">{contact.line}</p>
-              <button
+              <button type="button"
                 onClick={() => setStatus('idle')}
                 className="mt-1 inline-flex items-center gap-1.5 font-[var(--font-display)] text-[10px] font-semibold uppercase tracking-[0.2em] text-fgdim transition-colors hover:text-accentink"
               >
@@ -465,7 +466,7 @@ const Contacto: React.FC<Props> = ({ content }) => {
               </button>
 
               {status === 'error' && (
-                <p role="status" className="text-[13px] text-[#e0857a]">
+                <p aria-live="polite" aria-atomic="true" className="text-[13px] text-[#e0857a]">
                   {ui.error}
                 </p>
               )}
