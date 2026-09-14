@@ -1,111 +1,385 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sergi Mallén | Full Stack Developer</title>
-    <meta name="description" content="Portfolio de Sergi Mallén, Full Stack Developer especializado en React, PHP e integración de IA. Descubre proyectos, experiencia y stack técnico." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>Sergi Mallén — Full Stack Developer · Barcelona</title>
+    <meta name="description" content="Full Stack Developer con 4+ años en producción. Llevo cada feature de punta a punta: datos, API, interfaz y deploy. Backend y automatización con IA." />
+    <meta name="author" content="Sergi Mallén López" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="canonical" href="https://mallenk.github.io/Portfolio/" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4f3ee" media="(prefers-color-scheme: light)" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Sergi Mallén — Portfolio" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale:alternate" content="ca_ES" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://mallenk.github.io/Portfolio/" />
-    <meta property="og:title" content="Sergi Mallén | Full Stack Developer" />
-    <meta property="og:description" content="Portfolio de Sergi Mallén, Full Stack Developer especializado en React, PHP e integración de IA. Descubre proyectos, experiencia y stack técnico." />
+    <meta property="og:title" content="Sergi Mallén — Full Stack Developer" />
+    <meta property="og:description" content="4+ años en producción. De la base de datos al deploy: backend y automatización con IA. Barcelona." />
     <meta property="og:image" content="https://mallenk.github.io/Portfolio/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sergi Mallén — Full Stack Developer. Backend y automatización con IA. Barcelona." />
+    <meta property="profile:first_name" content="Sergi" />
+    <meta property="profile:last_name" content="Mallén López" />
+    <meta property="profile:username" content="MallenK" />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sergi Mallén | Full Stack Developer" />
-    <meta name="twitter:description" content="Portfolio de Sergi Mallén, Full Stack Developer especializado en React, PHP e integración de IA. Descubre proyectos, experiencia y stack técnico." />
+    <meta name="twitter:title" content="Sergi Mallén — Full Stack Developer" />
+    <meta name="twitter:description" content="4+ años en producción. De la base de datos al deploy: backend y automatización con IA." />
     <meta name="twitter:image" content="https://mallenk.github.io/Portfolio/og-image.png" />
+    <meta name="twitter:image:alt" content="Sergi Mallén — Full Stack Developer. Barcelona." />
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="icon" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/laptop.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23FDE100'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23FDE100' stroke-opacity='0.45'/%3E%3C/svg%3E">
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-K4M4Q6RX');</script>
-    <!-- End Google Tag Manager -->
-
-    <style>
-      :root {
-        --bg-color: #0B0B0B;
-        --accent-color: #F5C400;
-        --text-color: #FFFFFF;
-      }
-
-      * {
-        cursor: none !important;
-        box-sizing: border-box;
-      }
-
-      body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        overflow-x: hidden;
-      }
-
-      h1, h2, h3, .font-heading {
-        font-family: 'Outfit', sans-serif;
-      }
-
-      ::-webkit-scrollbar {
-        display: none;
-      }
-
-      .noise {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        pointer-events: none;
-        opacity: 0.04;
-        background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      }
-
-      .text-yellow { color: var(--accent-color); }
-      .bg-yellow { background-color: var(--accent-color); }
-      .border-yellow { border-color: var(--accent-color); }
-
-      .reveal-mask {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-      }
-    </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BGKJGJPGGZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-BGKJGJPGGZ');
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://mallenk.github.io/Portfolio/#person",
+          "name": "Sergi Mallén López",
+          "alternateName": "MallenK",
+          "jobTitle": "Full Stack Developer",
+          "description": "Full Stack Developer con más de 4 años en producción. Backend-leaning, con automatización e IA. Lleva cada feature de punta a punta: modelo de datos, API, interfaz y despliegue.",
+          "url": "https://mallenk.github.io/Portfolio/",
+          "image": "https://mallenk.github.io/Portfolio/og-image.png",
+          "email": "sergimallenweb@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Colònia Güell",
+            "addressRegion": "Barcelona",
+            "addressCountry": "ES"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/sergi-mallen",
+            "https://github.com/MallenK",
+            "https://instagram.com/mallenk18"
+          ],
+          "knowsLanguage": [
+            { "@type": "Language", "name": "Spanish" },
+            { "@type": "Language", "name": "Catalan" },
+            { "@type": "Language", "name": "English" }
+          ],
+          "knowsAbout": [
+            "PHP", "CodeIgniter", "Symfony", "Node.js", "MySQL", "REST API",
+            "React", "TypeScript", "JavaScript", "Docker", "CI/CD", "SEO",
+            "Automatización con IA", "NFC"
+          ],
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Escola d'Art i Superior de Disseny Llotja"
+          },
+          "worksFor": { "@type": "Organization", "name": "Freelance" },
+          "workLocation": { "@type": "Place", "name": "Barcelona, España" }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mallenk.github.io/Portfolio/#website",
+          "url": "https://mallenk.github.io/Portfolio/",
+          "name": "Sergi Mallén — Portfolio",
+          "inLanguage": ["es", "ca", "en"],
+          "about": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "author": { "@id": "https://mallenk.github.io/Portfolio/#person" }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://mallenk.github.io/Portfolio/#profilepage",
+          "url": "https://mallenk.github.io/Portfolio/",
+          "name": "Sergi Mallén — Full Stack Developer",
+          "isPartOf": { "@id": "https://mallenk.github.io/Portfolio/#website" },
+          "mainEntity": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "inLanguage": "es"
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://www.jppreparation.com/#project",
+          "name": "JP Preparation",
+          "url": "https://www.jppreparation.com/",
+          "image": "https://mallenk.github.io/Portfolio/shots/jpprep.jpg",
+          "dateCreated": "2026",
+          "creator": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "keywords": ["PHP 8.2", "CodeIgniter 4", "MySQL", "Docker", "PHPUnit", "React", "TypeScript", "Tailwind"]
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://www.croandtxet.cat/#project",
+          "name": "Cro&Txet",
+          "url": "https://www.croandtxet.cat/",
+          "image": "https://mallenk.github.io/Portfolio/shots/crotxet.jpg",
+          "dateCreated": "2025",
+          "creator": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "keywords": ["React", "TypeScript", "Tailwind", "Vercel", "EmailJS", "i18n", "SEO"]
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://ateneuuniorestaurant.com/#project",
+          "name": "Ateneu Unió",
+          "url": "https://ateneuuniorestaurant.com/",
+          "image": "https://mallenk.github.io/Portfolio/shots/ateneu.jpg",
+          "dateCreated": "2025",
+          "creator": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "keywords": ["React", "Node.js", "Tailwind"]
+        },
+        {
+          "@type": "CreativeWork",
+          "@id": "https://mykeracademy.com/#project",
+          "name": "Myker Academy",
+          "url": "https://mykeracademy.com/",
+          "image": "https://mallenk.github.io/Portfolio/shots/myker.jpg",
+          "dateCreated": "2025",
+          "creator": { "@id": "https://mallenk.github.io/Portfolio/#person" },
+          "keywords": ["React", "TypeScript", "Tailwind", "SEO"]
+        }
+      ]
+    }
     </script>
-    <script type="module" crossorigin src="/Portfolio/assets/index-BxtrBzyT.js"></script>
-    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-CPLT1pfS.css">
+
+    <script>
+      try {
+        var t = localStorage.getItem('portfolio-theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+
+    <!-- Google Tag Manager + GA4 — deferred until after load so first paint
+         and hydration never compete with analytics bootstrap. -->
+    <script>
+      window.addEventListener('load', function () {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-K4M4Q6RX');
+
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-BGKJGJPGGZ';
+        document.head.appendChild(gtagScript);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BGKJGJPGGZ');
+      });
+    </script>
+
+    <!-- pre-hydration fallback: the real content, in the DOM for crawlers,
+         screen readers, ATS and no-JS clients. React (createRoot) clears
+         #root on mount, so this never coexists with the interactive app. -->
+    <style>
+      /* only while the pre-hydration fallback is mounted — drops the moment React clears #root */
+      html:has(#ssr-fallback) { background: #000; }
+      body:has(#ssr-fallback) { margin: 0; }
+      #ssr-fallback {
+        max-width: 760px; margin: 0 auto; padding: 52px 24px 80px;
+        color: #f2f2f2; background: #000;
+        font: 15px/1.65 "Montserrat", "Segoe UI", system-ui, sans-serif;
+      }
+      #ssr-fallback a { color: #fde100; text-decoration: none; }
+      #ssr-fallback a:hover { text-decoration: underline; }
+      #ssr-fallback h1 { font-size: 34px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; margin: 0 0 6px; }
+      #ssr-fallback .kicker { font-size: 12px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: #9a9a9a; margin: 0 0 20px; }
+      #ssr-fallback .role { color: #fde100; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; margin: 0 0 4px; }
+      #ssr-fallback h2 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.28em; color: #9a9a9a; margin: 46px 0 16px; padding-bottom: 10px; border-bottom: 1px solid #222; }
+      #ssr-fallback h3 { font-size: 17px; font-weight: 700; margin: 24px 0 2px; }
+      #ssr-fallback p { margin: 0 0 12px; }
+      #ssr-fallback .muted { color: #9a9a9a; }
+      #ssr-fallback ul { margin: 0 0 14px; padding-left: 18px; }
+      #ssr-fallback li { margin: 0 0 7px; }
+      #ssr-fallback nav a { display: inline-block; margin: 0 16px 8px 0; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+      #ssr-fallback .stack { font-size: 13px; color: #9a9a9a; }
+    </style>
+    <script type="module" crossorigin src="/Portfolio/assets/index-BXxDLIRU.js"></script>
+    <link rel="modulepreload" crossorigin href="/Portfolio/assets/motion-BzkPJqul.js">
+    <link rel="modulepreload" crossorigin href="/Portfolio/assets/three-DJmBAEpP.js">
+    <link rel="modulepreload" crossorigin href="/Portfolio/assets/r3f-dEjvY_vp.js">
+    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-BauHhS91.css">
   </head>
 
   <body>
+    <!--
+    IMPECCABLE DIRECTION CONTRACT — brief-pinned (structure from option B; palette Borussia
+    Dortmund; type Montserrat)
+    THESIS: The portfolio is one full-screen map — no scroll, no sections. Every piece of
+      information lives on a node; clicking a node opens its pop-up with the full content.
+      The interface is the map. Refuses the landing page with linked sections.
+    OWN-WORLD: Pure black ground (#000000 / #0C0C0C), bone text (#F2F2F2 / dim #9A9A9A), one
+      accent — BVB yellow #FDE100 — rationed to the active node, its lit edges, live markers,
+      focus and hover. Hairlines (#222) divide. Montserrat throughout: 700/800 uppercase and
+      tracked for the wordmark, node labels and pop-up headers; 400/500 for body. A denser,
+      higher-contrast starfield is the visible atmosphere the map floats in. Light theme keeps
+      the yellow as fills/markers only, with a readable gold for accent text.
+    STORY: A recruiter, a client and a developer open the same screen. They read the map,
+      tap MallenK (manifesto), Perfil, Proyectos, Experiencia, Servicios, Contacto — each a
+      pop-up carrying that section's full content. Contact's pop-up has the form. Easter eggs
+      hide in the map.
+    FIRST VIEWPORT (mobile-first): full-bleed black with a bright starfield. A compact
+      constellation in the upper-middle; nodes differ in size/weight/state (core largest with
+      a yellow ring; live nodes carry a marker). "SERGI MALLÉN" set below in tracked Montserrat
+      caps with role + tagline. Wordmark top-left; lang + theme + CV as small HUD corners.
+      One hint line: tap a node.
+    FORM: full-screen node map with per-element modals. Structure carried from the option-B
+      direction; palette and type replaced per the user's brief. 2D canvas, no three.js.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+    -->
 
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4M4Q6RX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
-    <div id="root"></div>
-    <div class="noise"></div>
-
+    <div id="root"><main id="ssr-fallback">
+      <p class="kicker">MallenK</p>
+      <h1>Sergi Mallén</h1>
+      <p class="role">Full Stack Developer · Backend &amp; Automatización</p>
+      <p class="muted">De la base de datos al deploy. Sin que nadie tape huecos. · Colònia Güell, Barcelona</p>
+      <nav>
+        <a href="#perfil">Perfil</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#formacion">Formación</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
 
+      <section id="perfil">
+        <h2>Perfil</h2>
+        <p>Sergi Mallén — Full Stack Developer con 4+ años en producción. Cojo una feature y la llevo de punta a punta: modelo de datos, API, interfaz y deploy. Peso en backend, sin descuidar el producto. Lo que entrego se queda en producción y se mantiene.</p>
+        <p>Cuatro años construyendo aplicaciones web y sitios corporativos para clientes y equipos de producto — de la base de datos al deploy. Trabajo el backend y el frontend con la misma exigencia, con más soltura en el backend: modelo de datos, APIs, autenticación, infraestructura. También automatizo procesos con IA y trabajo con NFC para llevar esas automatizaciones al mundo físico.</p>
+        <h3>Stack</h3>
+        <ul>
+          <li><strong>Backend:</strong> PHP, CodeIgniter, Symfony, Node.js, MySQL, API REST, Docker</li>
+          <li><strong>Frontend:</strong> JavaScript, TypeScript, React, HTML, CSS / SASS, Tailwind</li>
+          <li><strong>Tooling:</strong> Git, Docker, Vite, CI/CD, Linux, WordPress</li>
+          <li><strong>Marketing &amp; Data:</strong> SEO, Google Analytics &amp; GTM, CRO</li>
+        </ul>
+      </section>
+
+      <section id="proyectos">
+        <h2>Proyectos — cuatro proyectos reales, en producción</h2>
+
+        <h3>JP Preparation <span class="muted">· 2026</span></h3>
+        <p class="role">Plataforma de gestión · Deporte — Full-Stack</p>
+        <p>La academia funcionaba con WhatsApp y hojas de Excel: sin saber cuántos alumnos activos tenía, qué clases había cada día ni quién asistía. Construí en solitario, de punta a punta, la aplicación que lo sustituye — a la vez back-office de la academia y portal del alumno.</p>
+        <ul>
+          <li>Modelo de datos en MySQL (~65 migraciones versionadas). El núcleo es el ciclo bono → sesión → asistencia: al marcar «presente» se descuenta una sesión y, si la clase se cancela, se devuelve al bono exacto del que salió.</li>
+          <li>Autenticación propia, sin librería: login en tiempo constante, sesiones con timeout configurable, autorización por rol en cada ruta y anti-fuerza-bruta persistente por cuenta e IP.</li>
+          <li>Concurrencia sin locks: el descuento de bono es un compare-and-set de fila dentro de transacción, así dos gestores a la vez nunca restan dos sesiones por la misma clase.</li>
+          <li>Una imagen Docker, tres entornos (local, pre-producción, producción) y ~165 tests que pasan antes de cada release.</li>
+          <li>En producción desde el 1 de septiembre de 2026. Primeras dos semanas: 97 alumnos activos, 11 entrenadores.</li>
+        </ul>
+        <p class="stack">Stack: PHP 8.2, CodeIgniter 4, MySQL, Docker, PHPUnit, React, TypeScript, Tailwind · <a href="https://www.jppreparation.com/" rel="noopener">jppreparation.com</a></p>
+
+        <h3>Cro&amp;Txet <span class="muted">· 2025</span></h3>
+        <p class="role">E-commerce · Artesanía — Full-Stack</p>
+        <p>Tienda online de bolsos hechos a mano. Catálogo visual, tres idiomas (catalán, español, inglés), SEO técnico y una experiencia de compra cuidada, con los pedidos gestionados por formulario. La construí entera: diseño, front, internacionalización y despliegue.</p>
+        <p class="stack">Stack: React, TypeScript, Tailwind, Vercel, EmailJS, i18n, SEO · <a href="https://www.croandtxet.cat/" rel="noopener">croandtxet.cat</a></p>
+
+        <h3>Ateneu Unió <span class="muted">· 2025</span></h3>
+        <p class="role">Web · Restauración — Full-Stack</p>
+        <p>Web para el restaurante Ateneu Unió: carta, información práctica y presencia de marca. De la primera maqueta a producción en dos semanas, yo solo.</p>
+        <p class="stack">Stack: React, Node.js, Tailwind · <a href="https://ateneuuniorestaurant.com/" rel="noopener">ateneuuniorestaurant.com</a></p>
+
+        <h3>Myker Academy <span class="muted">· 2025</span></h3>
+        <p class="role">Web corporativa · EdTech — Desarrollador único</p>
+        <p>Web de una escuela de idiomas centrada en captación de leads y marca. Único desarrollador: diseño (a partir de una base generada con IA), desarrollo, SEO y un sistema para que la academia gestione su propio contenido sin tocar código.</p>
+        <p class="stack">Stack: React, TypeScript, Tailwind, SEO · <a href="https://mykeracademy.com/" rel="noopener">mykeracademy.com</a></p>
+      </section>
+
+      <section id="experiencia">
+        <h2>Experiencia</h2>
+
+        <h3>Freelance — Full-Stack &amp; Automatización</h3>
+        <p class="muted">2026 – actualidad</p>
+        <ul>
+          <li>Aplicaciones web a medida y automatización de procesos con IA para negocios pequeños</li>
+          <li>Integración de LLMs y APIs externas en flujos de trabajo internos</li>
+          <li>Python, React, Node.js, OpenAI API, NFC</li>
+        </ul>
+
+        <h3>Tempel Group — Full Stack Developer</h3>
+        <p class="muted">2026</p>
+        <ul>
+          <li>Responsable de todo el ecosistema web internacional de una multinacional: coherencia de marca, rendimiento y escalabilidad de las plataformas</li>
+          <li>Landing pages y sitios corporativos optimizados para la conversión de campañas y lanzamientos</li>
+          <li>Aplicaciones web internas a medida, desde cero, con backend eficiente</li>
+          <li>WordPress, PHP, MySQL, JavaScript, Tailwind CSS, REST API, Git</li>
+        </ul>
+
+        <h3>Devinet — Full Stack Developer</h3>
+        <p class="muted">2024 – 2026</p>
+        <ul>
+          <li>Encargado de punta a punta de una aplicación para una multinacional que controlaba todo el sistema de producción de armarios, incluido el control de calidad</li>
+          <li>Nuevas funcionalidades en backend y frontend, optimización de consultas y automatización de procesos internos</li>
+          <li>Diseño de soluciones completas junto al equipo, con componentes reutilizables e integración de APIs</li>
+          <li>CodeIgniter, MySQL, AWS, API REST, jQuery</li>
+        </ul>
+
+        <h3>Tenea — Backend Developer</h3>
+        <p class="muted">2023 – 2024</p>
+        <ul>
+          <li>Mantenimiento y mejora de sistemas backend para clientes enterprise</li>
+          <li>Refactorización, optimización de endpoints y resolución de incidencias en producción</li>
+          <li>Symfony, Node.js, RxJS, MySQL, React</li>
+        </ul>
+
+        <h3>Vilax — Prácticas de desarrollo web</h3>
+        <p class="muted">2023</p>
+        <ul>
+          <li>Webs corporativas y de e-commerce para clientes, de Figma a producción</li>
+          <li>Gestión de catálogo multiplataforma e implementación de SEO</li>
+          <li>WordPress, PHP, Tailwind CSS, SEO, Figma, Google Analytics</li>
+        </ul>
+      </section>
+
+      <section id="formacion">
+        <h2>Formación</h2>
+        <ul>
+          <li>Curso de Python — Fundación General · Universidad de Salamanca · 2026 (en curso)</li>
+          <li>Curso avanzado para desarrolladores Full Stack — Fundación General · Universidad de Salamanca · 2025</li>
+          <li>Programación en JavaScript, MySQL y PHP — Fundación General · Universidad de Salamanca · 2024</li>
+          <li>Certificados de PHP y JavaScript — OpenBootcamp · 2022 – 2023</li>
+          <li>Grado Superior en Gráfica Interactiva — Escola La Llotja, Barcelona · 2019 – 2022</li>
+        </ul>
+        <h3 id="idiomas">Idiomas</h3>
+        <ul>
+          <li>Español — nativo</li>
+          <li>Catalán — nativo</li>
+          <li>Inglés — profesional</li>
+        </ul>
+      </section>
+
+      <section id="servicios">
+        <h2>Servicios — freelance o para tu equipo</h2>
+        <ul>
+          <li><strong>Plataformas de gestión a medida.</strong> Aplicaciones para academias y negocios: calendario, roles, bonos, control de asistencia. Como JP Preparation.</li>
+          <li><strong>Webs corporativas y e-commerce.</strong> Sitios orientados a conversión, con SEO técnico y multi-idioma.</li>
+          <li><strong>Automatización con IA.</strong> Flujos que integran LLMs y APIs externas. Entre ellos, generación automatizada de vídeo corto.</li>
+          <li><strong>NFC.</strong> Automatizaciones que conectan el mundo físico con el sistema.</li>
+          <li><strong>Formación individual en IA.</strong> Sesiones prácticas para aprender a trabajar con IA en tu día a día.</li>
+        </ul>
+      </section>
+
+      <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Cuéntame qué quieres construir. Disponible para proyectos freelance y para incorporarme a un equipo de producto.</p>
+        <p>Email: <a href="mailto:sergimallenweb@gmail.com">sergimallenweb@gmail.com</a></p>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/sergi-mallen" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/MallenK" rel="noopener">GitHub</a></li>
+          <li><a href="https://instagram.com/mallenk18" rel="noopener">Instagram</a></li>
+        </ul>
+        <p><a href="cv.pdf">Descargar CV (PDF)</a></p>
+      </section>
+
+      <p class="muted" style="margin-top:44px">Sergi Mallén López · Full Stack Developer · Colònia Güell, Barcelona</p>
+    </main></div>
   </body>
 </html>
