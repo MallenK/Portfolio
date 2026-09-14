@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { PortfolioContent } from '../types';
+import type { PortfolioContent } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 import { Reveal, useCopy } from './ui';
 import ShinyText from './reactbits/ShinyText';
@@ -76,9 +77,9 @@ const Perfil: React.FC<Props> = ({ content }) => {
         <div data-anchor="formacion">
           <p className="tag mb-3">{a.educationTag}</p>
           <ul className="border-t border-hair">
-            {a.education.map((e, i) => (
+            {a.education.map((e) => (
               <li
-                key={i}
+                key={`${e.title}-${e.period}`}
                 className="grid gap-1 border-b border-hair px-2 py-3.5 sm:grid-cols-[7rem_1fr] sm:gap-6"
               >
                 <span className="tag-n">{e.period}</span>
@@ -96,8 +97,8 @@ const Perfil: React.FC<Props> = ({ content }) => {
         <div data-anchor="idiomas">
           <p className="tag mb-3">{a.languagesTag}</p>
           <ul className="flex flex-wrap gap-x-8 gap-y-2 border-t border-hair pt-4">
-            {a.languages.map((l, i) => (
-              <li key={i} className="text-[13px] text-fgdim">
+            {a.languages.map((l) => (
+              <li key={l.name} className="text-[13px] text-fgdim">
                 <span className="text-fg">{l.name}</span> · {l.level}
               </li>
             ))}
@@ -145,7 +146,7 @@ const Proyectos: React.FC<Props> = ({ content }) => {
                 <span className="mt-3.5 block max-w-[420px] overflow-hidden border border-hair">
                   <img
                     src={p.image}
-                    alt={`${p.title} — captura del sitio`}
+                    alt={`${p.title} — ${p.category} — ${ui.screenshotAlt}`}
                     loading="lazy"
                     width={1280}
                     height={800}
@@ -158,8 +159,8 @@ const Proyectos: React.FC<Props> = ({ content }) => {
               </p>
               {p.highlights && p.highlights.length > 0 && (
                 <ul className="mt-3 max-w-[60ch] space-y-2 border-l border-hair pl-4">
-                  {p.highlights.map((h, k) => (
-                    <li key={k} className="flex gap-2.5 text-[12.5px] leading-relaxed text-fgdim">
+                  {p.highlights.map((h) => (
+                    <li key={h} className="flex gap-2.5 text-[12.5px] leading-relaxed text-fgdim">
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
                       <span>{h}</span>
                     </li>
@@ -200,8 +201,8 @@ const Experiencia: React.FC<Props> = ({ content }) => {
                   {e.role} <span className="text-fgdim">· {e.company}</span>
                 </h3>
                 <ul className="mt-3 space-y-2">
-                  {e.achievements.map((x, k) => (
-                    <li key={k} className="flex gap-2.5 text-[13px] leading-relaxed text-fgdim">
+                  {e.achievements.map((x) => (
+                    <li key={x} className="flex gap-2.5 text-[13px] leading-relaxed text-fgdim">
                       <span className="mt-1 select-none text-[10px] text-accentink">—</span>
                       <span>{x}</span>
                     </li>
@@ -507,7 +508,7 @@ const PopupContent: React.FC<Props> = (props) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!props.anchor) return;
-    const sel = `[data-anchor="${(window as any).CSS?.escape ? CSS.escape(props.anchor) : props.anchor}"]`;
+    const sel = `[data-anchor="${typeof CSS !== 'undefined' && typeof CSS.escape === 'function' ? CSS.escape(props.anchor) : props.anchor}"]`;
     const t = setTimeout(() => {
       const el = ref.current?.querySelector(sel) as HTMLElement | null;
       if (!el) return;

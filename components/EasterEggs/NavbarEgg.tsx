@@ -1,5 +1,6 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import type React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const GIF_SRC = '/assets/easter-egg-navbar.gif';

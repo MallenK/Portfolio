@@ -68,6 +68,7 @@ export interface PortfolioContent {
     open: string;
     live: string;
     roleLabel: string;
+    screenshotAlt: string;
     copy: string;
     copied: string;
     send: string;

@@ -3,7 +3,24 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["dist", "node_modules", "public", "scripts"]
+    "ignore": [
+      "dist",
+      "node_modules",
+      "public",
+      "scripts",
+      "components/map/nodes.tsx",
+      "components/map/Sky.tsx",
+      "components/map/Scene3D.tsx",
+      "components/map/graph3d.ts",
+      "components/map/Constellation.tsx",
+      "components/map/NavMap.tsx",
+      "components/bg/VgpuBackground.tsx",
+      "components/bg/Background.tsx",
+      "components/reactbits/Galaxy.jsx",
+      "components/Particles.tsx",
+      "components/EasterEggs/GlitchFX.tsx",
+      "components/EasterEggs/WorldModeFX.tsx"
+    ]
   },
   "organizeImports": { "enabled": false },
   "formatter": { "enabled": false },

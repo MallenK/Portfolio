@@ -104,7 +104,8 @@ export function iconTexture(path: string, key: string): THREE.Texture {
   const pad = 30;
   const c = document.createElement('canvas');
   c.width = c.height = S;
-  const ctx = c.getContext('2d')!;
+  const ctx = c.getContext('2d');
+  if (!ctx) return new THREE.CanvasTexture(c);
   ctx.translate(pad, pad);
   ctx.scale((S - pad * 2) / 24, (S - pad * 2) / 24);
   ctx.fillStyle = '#ffffff';

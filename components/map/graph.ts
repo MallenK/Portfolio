@@ -1,4 +1,4 @@
-import { PortfolioContent } from '../../types';
+import type { PortfolioContent } from '../../types';
 import { PERFIL_OUTER } from './techIcons';
 
 export type NodeKind = 'core' | 'primary' | 'satellite';
@@ -74,7 +74,7 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
     { id: 'servicios', label: c.nav.servicios, count: c.services.items.length },
     { id: 'contacto', label: c.nav.contacto }
   ];
-  primaries.forEach((p) => {
+  for (const p of primaries) {
     const n = mk(p.id, p.label, 'primary', p.id);
     n.count = p.count;
     const [px, py] = PRIMARY_POS[p.id];
@@ -82,14 +82,15 @@ export function buildGraph(c: PortfolioContent, small: boolean): { nodes: GNode[
     n.hy = py * (small ? 0.82 : 1);
     nodes.push(n);
     edges.push({ a: 'core', b: p.id });
-  });
+  }
 
   const addSats = (
     pid: string,
     items: { label: string; live?: boolean; rScale?: number; distScale?: number }[],
     scale = 1
   ) => {
-    const p = nodes.find((n) => n.id === pid)!;
+    const p = nodes.find((n) => n.id === pid);
+    if (!p) throw new Error(`buildGraph: unknown parent node "${pid}"`);
     const base = Math.atan2(p.hy - core.hy, p.hx - core.hx);
     const spread = Math.min(1.15, 0.5 + items.length * 0.13);
     items.forEach((it, i) => {

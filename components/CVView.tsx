@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import type React from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PortfolioContent } from '../types';
+import type { PortfolioContent } from '../types';
 import { SOCIAL_LINKS } from '../constants';
 
 type Lang = 'es' | 'en' | 'cat';
@@ -143,8 +144,8 @@ const CVView: React.FC<Props> = ({ open, lang, content, onClose }) => {
                       <p className="cv-dim mt-1 max-w-[68ch] text-[12.5px] leading-[1.6] text-fgdim">{p.description}</p>
                       {p.highlights && p.highlights.length > 0 && (
                         <ul className="mt-1.5 max-w-[68ch] list-disc space-y-1 pl-5">
-                          {p.highlights.map((h, k) => (
-                            <li key={k} className="cv-dim text-[12px] leading-[1.55] text-fgdim">{h}</li>
+                          {p.highlights.map((h) => (
+                            <li key={h} className="cv-dim text-[12px] leading-[1.55] text-fgdim">{h}</li>
                           ))}
                         </ul>
                       )}
@@ -180,8 +181,8 @@ const CVView: React.FC<Props> = ({ open, lang, content, onClose }) => {
                           {e.role} <span className="cv-dim font-medium text-fgdim">· {e.company}</span>
                         </h3>
                         <ul className="mt-1.5 list-disc space-y-1 pl-5">
-                          {e.achievements.map((x, k) => (
-                            <li key={k} className="cv-dim text-[12px] leading-[1.55] text-fgdim">{x}</li>
+                          {e.achievements.map((x) => (
+                            <li key={x} className="cv-dim text-[12px] leading-[1.55] text-fgdim">{x}</li>
                           ))}
                         </ul>
                       </div>
@@ -196,8 +197,8 @@ const CVView: React.FC<Props> = ({ open, lang, content, onClose }) => {
               <section>
                 <SectionTitle>{about.educationTag}</SectionTitle>
                 <div className="mt-3 space-y-2.5">
-                  {about.education.map((ed, i) => (
-                    <div key={i} className="grid gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-5">
+                  {about.education.map((ed) => (
+                    <div key={`${ed.title}-${ed.period}`} className="grid gap-0.5 sm:grid-cols-[7rem_1fr] sm:gap-5">
                       <span className="cv-dim font-[var(--font-display)] text-[11px] font-semibold tracking-[0.06em] text-fgfaint">
                         {ed.period}
                       </span>
@@ -212,8 +213,8 @@ const CVView: React.FC<Props> = ({ open, lang, content, onClose }) => {
                   {about.languagesTag}
                 </p>
                 <p className="cv-dim mt-2 flex flex-wrap gap-x-6 gap-y-1 text-[12.5px] text-fgdim">
-                  {about.languages.map((l, i) => (
-                    <span key={i}>
+                  {about.languages.map((l) => (
+                    <span key={l.name}>
                       <span className="cv-ink text-fg">{l.name}</span> · {l.level}
                     </span>
                   ))}

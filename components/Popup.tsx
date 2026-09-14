@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PortfolioContent } from '../types';
+import type { PortfolioContent } from '../types';
 import { useMediaQuery } from '../hooks/useApp';
 import PopupContent from './PopupContent';
 import AnimatedContent from './reactbits/AnimatedContent';

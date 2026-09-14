@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  # Known limitation: headless Linux almost certainly can't do WebGPU, so
+  # Background.tsx's own fallback chain (WebGPU -> WebGL Galaxy -> CSS
+  # gradient) will exercise the WebGL/CSS path here, not the real vgpu
+  # nebula. Good enough for a console-error smoke check; continue-on-error
+  # until proven stable, since it's not testing the full experience.
+  visual-smoke:
+    runs-on: ubuntu-latest
+    needs: quality
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+
+      - run: npm run preview -- --port 3000 &
+      - run: npx wait-on http://localhost:3000/Portfolio/
+
+      - run: node scripts/shots.mjs
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          URL: http://localhost:3000/Portfolio/
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visual-smoke-shots
+          path: .impeccable/review/

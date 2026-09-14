@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /* Reveal on mount (used inside popups) */
 export const Reveal: React.FC<{
@@ -14,7 +15,7 @@ export const Reveal: React.FC<{
     const id = requestAnimationFrame(() => el.classList.add('in'));
     return () => cancelAnimationFrame(id);
   }, []);
-  const Tag = as as any;
+  const Tag = as as React.ElementType;
   return (
     <Tag ref={ref} className={`reveal ${className}`} style={{ ['--d' as string]: `${delay}ms` }}>
       {children}

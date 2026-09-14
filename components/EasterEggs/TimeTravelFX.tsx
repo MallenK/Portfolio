@@ -1,5 +1,5 @@
 
-import React from 'react';
+import type React from 'react';
 import { useCheats } from '../../context/CheatContext';
 import { motion } from 'framer-motion';
 

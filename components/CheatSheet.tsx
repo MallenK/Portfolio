@@ -1,8 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCheats, PortfolioMode } from '../context/CheatContext';
+import { useCheats, type PortfolioMode } from '../context/CheatContext';
 
 const CheatSheet: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

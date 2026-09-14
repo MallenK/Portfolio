@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer-core';
 import fs from 'fs';
 
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const URL = process.env.URL || 'http://localhost:3000/';
 const OUT = '.impeccable/review';
 fs.mkdirSync(OUT, { recursive: true });
@@ -13,6 +13,7 @@ const targets = [
 ];
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] });
+let totalErrors = 0;
 
 for (const t of targets) {
   const page = await browser.newPage();
@@ -51,8 +52,10 @@ for (const t of targets) {
 
   fs.writeFileSync(`${OUT}/${t.name}.errors.txt`, errs.join('\n') || 'none');
   console.log(t.name, 'done — errors:', errs.length);
+  totalErrors += errs.length;
   await page.close();
 }
 
 await browser.close();
-console.log('shots complete');
+console.log('shots complete —', totalErrors, 'total console/page errors');
+if (totalErrors > 0) process.exitCode = 1;

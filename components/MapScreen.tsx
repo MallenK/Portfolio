@@ -1,5 +1,6 @@
-import React, { Suspense, lazy, useState } from 'react';
-import { PortfolioContent } from '../types';
+import type React from 'react';
+import { Suspense, lazy, useState } from 'react';
+import type { PortfolioContent } from '../types';
 import Background from './bg/Background';
 import Constellation from './map/Constellation';
 import NavMap from './map/NavMap';

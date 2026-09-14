@@ -19,20 +19,20 @@ Personal portfolio of Sergi Mallén ("MallenK"), Full Stack Engineer with 4+ yea
 
 ## Positioning
 
-Full Stack engineer who ships scalable products in real corporate production (Schneider Electric, Tempel Group, international web ecosystems) AND builds brand-focused client sites and AI tools. The combination — enterprise backend discipline + conversion frontend + AI/automation — is the differentiator. Based in Colònia Güell, Barcelona.
+Full Stack engineer who ships scalable products in real corporate production (Tempel Group, international web ecosystems) AND builds brand-focused client sites and AI tools. The combination — enterprise backend discipline + conversion frontend + AI/automation — is the differentiator. Based in Colònia Güell, Barcelona.
 
 ## Operating Context
 
-Single-page scrolling site. Sections: Perfil, Proyectos, Experiencia, Servicios, Contacto.
-- Trilingual: es / cat (default) / en. Language persists to localStorage.
+Single-page site navigated through a 3D node-map (not a scroll layout). Sections: Perfil, Proyectos, Experiencia, Servicios, Contacto.
+- Trilingual: es (default) / cat / en. Default matches the crawlable HTML in `index.html` (`lang="es"`, its meta/JSON-LD are Spanish-only) — kept in sync deliberately for SEO. Language persists to localStorage.
 - Contact form via EmailJS.
-- CV = downloadable PDF at `public/cv.pdf`.
+- CV = downloadable PDF at `public/cv.pdf`, plus a "vista rápida" one-page print/PDF-style view (`components/CVView.tsx`) for anyone who wants a fast, non-3D scan.
 - Deployed to GitHub Pages (`npm run deploy`; base path `/Portfolio/`). Vite + React 18 + TS + Tailwind v4.
-- An AI chatbox is reachable from the page and from a Services item (`action: 'open-ai-chat'`).
+- Navigation is a HUD-driven 3D scene (`components/map/Scene3D.tsx` + `NavMap.tsx`); the earlier AI chatbox was removed and replaced by this nav console.
 
 ## Capabilities and Constraints
 
-- Stack fixed: React 18, TypeScript, Vite 6, Tailwind v4, GSAP + ScrollTrigger, Framer Motion, @emailjs/browser, gh-pages.
+- Stack fixed: React 18, TypeScript, Vite 6, Tailwind v4, Three.js + @react-three/fiber (3D node-map), `vgpu`/`ogl` (WebGPU/WebGL background), GSAP + ScrollTrigger, Framer Motion, @emailjs/browser, gh-pages.
 - All copy lives in `constants.tsx` (`TRANSLATIONS`, es/cat/en) typed by `types.ts` (`PortfolioContent`). All three locales ship together.
 - Must build static under a GitHub Pages sub-path (`import.meta.env.BASE_URL`).
 - Custom cursor is desktop / fine-pointer only.
@@ -47,8 +47,8 @@ Single-page scrolling site. Sections: Perfil, Proyectos, Experiencia, Servicios,
 ## Evidence on Hand
 
 - Real employment: Tempel Group, Devinet, Tenea, Vilax, Farmacia y Salud Digital (`constants.tsx` → experience).
-- Real projects with live URLs: Schneider Electric, Myker Academy (mykeracademy.com), Project Architecture Planner (GPT), Cro&Txet (croandtxet.cat), JP Preparation (jppreparation.com).
-- Project images are generic Unsplash stock — no real screenshots on hand; do not present stock as real client work without noting it.
+- Real projects with live URLs: JP Preparation (jppreparation.com), Cro&Txet (croandtxet.cat), Ateneu Unió, Myker Academy (mykeracademy.com).
+- Project images are real screenshots (`public/shots/*.jpg`), not stock.
 - Contact: sergimallenweb@gmail.com, GitHub (MallenK), LinkedIn, Instagram (mallenk18), WhatsApp (+34 670 248 461). CV at `public/cv.pdf`.
 - No testimonials / metrics / press — do not fabricate.
 

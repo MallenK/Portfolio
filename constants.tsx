@@ -1,4 +1,4 @@
-import { PortfolioContent } from './types';
+import type { PortfolioContent } from './types';
 
 // real screenshots of the live sites (public/shots/*, captured 2026-09-10)
 const shot = (name: string) => `${import.meta.env.BASE_URL}shots/${name}.jpg`;
@@ -93,6 +93,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       open: 'Abrir',
       live: 'En producción',
       roleLabel: 'Rol',
+      screenshotAlt: 'Captura de pantalla del sitio',
       copy: 'Copiar',
       copied: 'Copiado',
       send: 'Enviar mensaje',
@@ -230,7 +231,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       items: [
         { title: 'Plataformas de gestión a medida', desc: 'Aplicaciones para academias y negocios: calendario, roles, bonos, control de asistencia. Como JP Preparation.', url: 'https://www.jppreparation.com/' },
         { title: 'Webs corporativas y e-commerce', desc: 'Sitios orientados a conversión, con SEO técnico y multi-idioma.', url: 'https://mykeracademy.com/' },
-        { title: 'Automatización con IA', desc: 'Flujos que integran LLMs y APIs externas. Entre ellos, generación automatizada de vídeo corto.' },
+        { title: 'Automatización con IA', desc: 'Flujos que integran LLMs y APIs externas — incluyendo, en desarrollo, generación automatizada de vídeo corto.' },
         { title: 'NFC', desc: 'Automatizaciones que conectan el mundo físico con el sistema.' },
         { title: 'Formación individual en IA', desc: 'Sesiones prácticas para aprender a trabajar con IA en tu día a día.' }
       ]
@@ -274,6 +275,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       open: 'Obrir',
       live: 'En producció',
       roleLabel: 'Rol',
+      screenshotAlt: 'Captura de pantalla del lloc',
       copy: 'Copiar',
       copied: 'Copiat',
       send: 'Enviar missatge',
@@ -411,7 +413,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       items: [
         { title: 'Plataformes de gestió a mida', desc: 'Aplicacions per a acadèmies i negocis: calendari, rols, bons, control d’assistència. Com JP Preparation.', url: 'https://www.jppreparation.com/' },
         { title: 'Webs corporatives i e-commerce', desc: 'Llocs orientats a conversió, amb SEO tècnic i multi-idioma.', url: 'https://mykeracademy.com/' },
-        { title: 'Automatització amb IA', desc: 'Fluxos que integren LLMs i APIs externes. Entre ells, generació automatitzada de vídeo curt.' },
+        { title: 'Automatització amb IA', desc: 'Fluxos que integren LLMs i APIs externes — incloent-hi, en desenvolupament, generació automatitzada de vídeo curt.' },
         { title: 'NFC', desc: 'Automatitzacions que connecten el món físic amb el sistema.' },
         { title: 'Formació individual en IA', desc: 'Sessions pràctiques per aprendre a treballar amb IA en el teu dia a dia.' }
       ]
@@ -455,6 +457,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       open: 'Open',
       live: 'In production',
       roleLabel: 'Role',
+      screenshotAlt: 'Website screenshot',
       copy: 'Copy',
       copied: 'Copied',
       send: 'Send message',
@@ -592,7 +595,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
       items: [
         { title: 'Custom management platforms', desc: 'Apps for academies and businesses: calendar, roles, passes, attendance tracking. Like JP Preparation.', url: 'https://www.jppreparation.com/' },
         { title: 'Corporate web & e-commerce', desc: 'Conversion-focused sites, with technical SEO and multi-language.', url: 'https://mykeracademy.com/' },
-        { title: 'AI automation', desc: 'Workflows that integrate LLMs and external APIs. Among them, automated short-form video generation.' },
+        { title: 'AI automation', desc: 'Workflows that integrate LLMs and external APIs — including, in development, automated short-form video generation.' },
         { title: 'NFC', desc: 'Automations that connect the physical world to the system.' },
         { title: 'One-to-one AI mentoring', desc: 'Hands-on sessions to learn to work with AI in your day to day.' }
       ]

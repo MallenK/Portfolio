@@ -136,8 +136,20 @@ Trilingual es / cat / en. EmailJS. GitHub Pages base path. The full easter-egg l
 ## Known residual polish
 
 - Node labels graze their satellite clusters at the default camera angle (orbiting separates
-  them); could add a small billboard offset.
+  them); could add a small billboard offset. Left untouched — inside the 3D visual system,
+  which is intentionally off-limits to automated edits (see below).
 - `three` is pinned to 0.171 (not vgpu's optional peer 0.180) so `@react-three/postprocessing`
-  2.x still builds; the peer mismatch is a harmless npm warning.
-- CheatSheet / Chatbox panels still carry old zinc styling inside; only the FABs are rethemed.
+  2.x still builds. Accepted constraint, not a TODO: the peer mismatch is a harmless npm
+  warning (resolved via `.npmrc`'s `legacy-peer-deps=true`), and bumping `three` carries more
+  supply-chain risk than the mismatch itself.
+- CheatSheet still carries its own fixed-dark "console" styling (`bg-zinc-900`, raw white/
+  opacity utilities) rather than the app's semantic surface tokens — deliberate for its
+  hacker-terminal feel, not swapped blind without a visual check. (There is no separate
+  Chatbox anymore; it was removed and replaced by the nav console — see Preserved above.)
 - First interactive paint of the 3D scene waits on ~300 KB gz of GPU libs behind the loader.
+
+**Lint scope:** `biome.json` excludes the 3D visual system (`components/map/{nodes,Sky,
+Scene3D,graph3d,Constellation,NavMap}.tsx/ts`, `components/bg/{VgpuBackground,Background}.tsx`,
+`components/reactbits/Galaxy.jsx`, `components/Particles.tsx`, `components/EasterEggs/
+{GlitchFX,WorldModeFX}.tsx`) from `npm run lint`. This code is hand-tuned and intentionally
+not touched by automated cleanups; the rest of the codebase is lint-clean and CI-checked.

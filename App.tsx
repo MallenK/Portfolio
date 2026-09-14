@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { TRANSLATIONS } from './constants';
@@ -27,8 +28,9 @@ const AppContent: React.FC = () => {
   const [focus, setFocus] = useState<string | null>(null);
   const [cvOpen, setCvOpen] = useState(false);
   const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === 'undefined') return 'cat';
-    return (localStorage.getItem('portfolio-lang') as Lang) || 'cat';
+    // default matches the crawlable HTML in index.html (lang="es") — see PRODUCT.md
+    if (typeof window === 'undefined') return 'es';
+    return (localStorage.getItem('portfolio-lang') as Lang) || 'es';
   });
 
   const content = useMemo(() => TRANSLATIONS[lang], [lang]);

@@ -9,9 +9,9 @@ export const useSoundEngine = () => {
   const gainNodesRef = useRef<GainNode[]>([]);
 
   const stopSound = () => {
-    oscillatorsRef.current.forEach(osc => {
+    for (const osc of oscillatorsRef.current) {
       try { osc.stop(); osc.disconnect(); } catch (e) {}
-    });
+    }
     oscillatorsRef.current = [];
     gainNodesRef.current = [];
     if (audioCtxRef.current?.state !== 'closed') {
@@ -54,7 +54,8 @@ export const useSoundEngine = () => {
 
   const startSound = () => {
     if (audioCtxRef.current) return;
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass =
+      window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     audioCtxRef.current = new AudioContextClass();
 
     if (soundTheme === 'fantasy') {
