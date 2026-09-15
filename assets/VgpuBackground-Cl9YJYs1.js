@@ -1,4 +1,4 @@
-import{_ as y}from"./r3f-dEjvY_vp.js";import{a as i,j as z}from"./motion-BzkPJqul.js";import{c as r}from"./index-BXxDLIRU.js";import"./three-DJmBAEpP.js";const k=`
+import{_ as y}from"./r3f-dEjvY_vp.js";import{a as i,j as z}from"./motion-BzkPJqul.js";import{c as r}from"./index-CgRItQ6w.js";import"./three-DJmBAEpP.js";const k=`
 struct Params {
   time: f32,
   aspect: f32,
