@@ -6,7 +6,8 @@ const IMAGES = {
   myker: shot('myker'),
   jpprep: shot('jpprep'),
   crotxet: shot('crotxet'),
-  ateneu: shot('ateneu')
+  ateneu: shot('ateneu'),
+  futbolrpg: shot('futbolrpg')
 };
 
 export const SOCIAL_LINKS = {
@@ -60,6 +61,25 @@ const projectBase = [
     image: IMAGES.myker,
     live: true,
     stack: ['React', 'TypeScript', 'Tailwind', 'SEO']
+  },
+  {
+    id: '05',
+    title: 'FutbolRPG',
+    year: '2026',
+    url: 'https://futbolrpg.vercel.app/',
+    image: IMAGES.futbolrpg,
+    live: true,
+    stack: [
+      'Next.js 15',
+      'React 19',
+      'TypeScript',
+      'Drizzle ORM',
+      'PostgreSQL (Neon)',
+      'Better Auth',
+      'react-three-fiber',
+      'Tailwind',
+      'Vitest + Playwright'
+    ]
   }
 ];
 
@@ -127,7 +147,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
     },
     projects: {
       tag: 'Proyectos',
-      title: 'Cuatro proyectos reales, en producción.',
+      title: 'Cinco proyectos reales, en producción.',
       items: merge([
         {
           category: 'Plataforma de gestión · Deporte',
@@ -159,6 +179,20 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           role: 'Desarrollador único',
           description:
             'Web de una escuela de idiomas centrada en captación de leads y marca. Único desarrollador: diseño (a partir de una base generada con IA), desarrollo, SEO y un sistema para que la academia gestione su propio contenido sin tocar código.'
+        },
+        {
+          category: 'Simulador de carrera · RPG narrativo',
+          role: 'Full-Stack',
+          description:
+            'Simulador de carrera futbolística: el jugador crea un futbolista, toma decisiones turno a turno en cada partido (dado d20 + rasgos) y gestiona temporadas completas —ascensos, copas, selección nacional— a lo largo de varias campañas. El reto técnico central fue resolver partidos y mercado de fichajes entre usuarios reales sin simulación en tiempo real ni websockets: todo se resuelve de forma asíncrona, por fórmula y por oferta que cada jugador acepta al visitar la página. Construido en solitario en unas 6 semanas, con un informe de fallos vivo (6 rondas de auditoría contra la base de datos real) que documenta y corrige errores no triviales — historial de calidad verificable, no solo funcionalidades declaradas.',
+          highlights: [
+            'Esquema de 11 tablas en Drizzle sobre Postgres (Neon), con el estado completo de la partida (calendario, copas, selección, contrato) en un único campo JSONB por velocidad de iteración — decisión documentada como tal en un informe de fallos propio, no un descuido.',
+            'Motor de partido por turnos (~2.300 líneas): entre 2 y 6 decisiones por partido, cada una resuelta con dado d20 + bonificaciones por rasgo + fatiga + forma + presión, sobre una escala 0-100 con 5 bandas de resultado.',
+            'Sistema de temporadas completo: pirámide de 5 divisiones con ascenso/descenso, Copa a 5 rondas eliminatorias, competición europea, selección nacional con Eurocopa/Mundial alternos, y una puntuación unificada de «Gloria» ponderada por división.',
+            'Mercado de fichajes real entre usuarios, resuelto de forma completamente asíncrona —sin cron ni websockets—: cada oferta se acepta o rechaza manualmente al visitar la página.',
+            'Narrativa con Gemini 1.5 Flash como capa opcional sobre una base pregenerada (el motor funciona igual sin API key) + loaders animados con Remotion, prerrenderizados a vídeo en vez de en runtime.',
+            '136 tests unitarios con Vitest + un e2e con Playwright que registra una cuenta real, simula una temporada completa (~250 llamadas encadenadas) y termina borrando la cuenta.'
+          ]
         }
       ])
     },
@@ -309,7 +343,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
     },
     projects: {
       tag: 'Projectes',
-      title: 'Quatre projectes reals, en producció.',
+      title: 'Cinc projectes reals, en producció.',
       items: merge([
         {
           category: 'Plataforma de gestió · Esport',
@@ -341,6 +375,20 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           role: 'Desenvolupador únic',
           description:
             'Web d’una escola d’idiomes centrada en la captació de leads i marca. Únic desenvolupador: disseny (a partir d’una base generada amb IA), desenvolupament, SEO i un sistema perquè l’acadèmia gestioni el seu propi contingut sense tocar codi.'
+        },
+        {
+          category: 'Simulador de carrera · RPG narratiu',
+          role: 'Full-Stack',
+          description:
+            'Simulador de carrera futbolística: el jugador crea un futbolista, pren decisions torn a torn a cada partit (dau d20 + trets) i gestiona temporades completes —ascensos, copes, selecció nacional— al llarg de diverses campanyes. El repte tècnic central va ser resoldre partits i mercat de fitxatges entre usuaris reals sense simulació en temps real ni websockets: tot es resol de forma asíncrona, per fórmula i per oferta que cada jugador accepta en visitar la pàgina. Construït en solitari en unes 6 setmanes, amb un informe d’errors viu (6 rondes d’auditoria contra la base de dades real) que documenta i corregeix errors no trivials — historial de qualitat verificable, no només funcionalitats declarades.',
+          highlights: [
+            'Esquema d’11 taules a Drizzle sobre Postgres (Neon), amb l’estat complet de la partida (calendari, copes, selecció, contracte) en un únic camp JSONB per velocitat d’iteració — decisió documentada com a tal en un informe d’errors propi, no un descuit.',
+            'Motor de partit per torns (~2.300 línies): entre 2 i 6 decisions per partit, cadascuna resolta amb dau d20 + bonificacions per tret + fatiga + forma + pressió, sobre una escala 0-100 amb 5 bandes de resultat.',
+            'Sistema de temporades complet: piràmide de 5 divisions amb ascens/descens, Copa a 5 rondes eliminatòries, competició europea, selecció nacional amb Eurocopa/Mundial alterns, i una puntuació unificada de «Glòria» ponderada per divisió.',
+            'Mercat de fitxatges real entre usuaris, resolt de forma completament asíncrona —sense cron ni websockets—: cada oferta s’accepta o es rebutja manualment en visitar la pàgina.',
+            'Narrativa amb Gemini 1.5 Flash com a capa opcional sobre una base pregenerada (el motor funciona igual sense API key) + loaders animats amb Remotion, prerenderitzats a vídeo en lloc de en runtime.',
+            '136 tests unitaris amb Vitest + un e2e amb Playwright que registra un compte real, simula una temporada completa (~250 crides encadenades) i acaba esborrant el compte.'
+          ]
         }
       ])
     },
@@ -491,7 +539,7 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
     },
     projects: {
       tag: 'Work',
-      title: 'Four real projects, live in production.',
+      title: 'Five real projects, live in production.',
       items: merge([
         {
           category: 'Management platform · Sports',
@@ -523,6 +571,20 @@ export const TRANSLATIONS: Record<'es' | 'en' | 'cat', PortfolioContent> = {
           role: 'Sole developer',
           description:
             'Corporate website for a language school, focused on lead generation and brand. Sole developer: design (from an AI-generated base), development, SEO and a system for the academy to manage its own content without touching code.'
+        },
+        {
+          category: 'Career sim · Narrative RPG',
+          role: 'Full-Stack',
+          description:
+            'A football career simulator: the player creates a footballer, makes turn-by-turn decisions in every match (d20 roll + traits) and manages full seasons — promotion/relegation, cups, national team — across several campaigns. The core technical challenge was resolving matches and a real-user transfer market without real-time simulation or websockets: everything resolves asynchronously, by formula and by offer that each player accepts on visiting the page. Built solo in about 6 weeks, with a living bug report (6 audit rounds against the real database) that documents and fixes non-trivial errors — a verifiable quality trail, not just declared features.',
+          highlights: [
+            '11-table Drizzle schema on Postgres (Neon), with the full game state (calendar, cups, national team, contract) in a single JSONB column for iteration speed — a decision documented as such in its own bug report, not an oversight.',
+            'Turn-based match engine (~2,300 lines): 2 to 6 decisions per match, each resolved with a d20 roll + trait bonuses + fatigue + form + pressure, on a 0-100 scale with 5 outcome bands.',
+            'Full season system: a 5-division pyramid with promotion/relegation, a 5-round knockout cup, European competition, a national team with alternating Euros/World Cup, and a unified "Glory" score weighted by division.',
+            'A real transfer market between users, resolved fully asynchronously — no cron, no websockets: each offer is manually accepted or declined on visiting the page.',
+            'Gemini 1.5 Flash narrative as an optional layer over a pre-generated base (the engine works the same without an API key) + Remotion-animated loaders, pre-rendered to video instead of at runtime.',
+            '136 unit tests with Vitest + a Playwright e2e that signs up a real account, simulates a full season (~250 chained calls) and ends by deleting the account.'
+          ]
         }
       ])
     },
